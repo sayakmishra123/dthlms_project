@@ -11,6 +11,7 @@ import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
 import 'package:dthlms/pages/dashboard.dart';
 import 'package:dthlms/url/api_url.dart';
 import 'package:dthlms/utils/loader.dart';
+import 'package:dthlms/utils/packages.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
@@ -93,7 +94,7 @@ Future loginApi(
     Get.back();
     Get.to(() => Platform.isWindows
         ? PackageDashboard(jsondata['result']['token'])
-        : const MobileHomepage());
+        : PackageDashboardMobile(jsondata['result']['token']));
 
     // showDialog(
     //     context: context,

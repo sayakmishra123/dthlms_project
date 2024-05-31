@@ -1,14 +1,16 @@
-// ignore: file_names
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dthlms/android/Drawer/Mobiledrawer.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+// import 'package:dthlms/android/PackageDashboard/PackageDashboard.dart';
 import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/utils/packages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MobileHomepage extends StatefulWidget {
+  
   const MobileHomepage({super.key});
 
   @override
@@ -18,17 +20,25 @@ class MobileHomepage extends StatefulWidget {
 class _MobileHomepageState extends State<MobileHomepage> {
   final CarouselController carouselController = CarouselController();
   int currentIndex = 0;
-  List imageList = [
-    {"id": 1, "image_path": 'assets/p1.png'},
-    {"id": 2, "image_path": 'assets/p2.jpg'},
-    {"id": 3, "image_path": 'assets/p3.jpg'},
-    {"id": 4, "image_path": 'assets/p4.png'},
-    {"id": 5, "image_path": 'assets/p5.jpg'}
+
+  final List<Map<String, String>> imageList = [
+    {"id": "1", "image_path": 'assets/android/p1.jpg'},
+    {"id": "2", "image_path": 'assets/android/p3.jpg'},
+    {"id": "3", "image_path": 'assets/android/p2.jpg'},
+    {"id": "4", "image_path": 'assets/android/p4.avif'},
+    {"id": "5", "image_path": 'assets/android/p3.jpg'},
   ];
-  Getx get = Get.put(Getx());
-  late double elemenContainerWidth = MediaQuery.of(context).size.width / 3.2;
-  late double screenwidth = MediaQuery.of(context).size.width;
-  double? size = 80;
+
+  final Getx get = Get.put(Getx());
+  late final double elemenContainerWidth = screenwidth / 3.2;
+  late final double screenwidth = MediaQuery.of(context).size.width;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  static const double iconSize = 80;
 
   @override
   Widget build(BuildContext context) {
@@ -38,32 +48,15 @@ class _MobileHomepageState extends State<MobileHomepage> {
         appBar: AppBar(
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: PopupMenuButton<String>(
+              padding: const EdgeInsets.only(right: 10),
+              child: IconButton(
                 icon: const Icon(
                   Icons.more_vert_rounded,
                   size: 30,
                   color: ColorPage.colorblack,
                 ),
-                onSelected: (String value) {
-                  // Handle menu selection here
-                  print(value);
-                },
-                itemBuilder: (BuildContext context) {
-                  return [
-                    const PopupMenuItem<String>(
-                      value: 'Option 1',
-                      child: Text('Option 1'),
-                    ),
-                    const PopupMenuItem<String>(
-                      value: 'Option 2',
-                      child: Text('Option 2'),
-                    ),
-                    const PopupMenuItem<String>(
-                      value: 'Option 3',
-                      child: Text('Option 3'),
-                    ),
-                  ];
+                onPressed: () {
+                  _showPopupMenu(context);
                 },
               ),
             ),
@@ -83,7 +76,6 @@ class _MobileHomepageState extends State<MobileHomepage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -117,28 +109,38 @@ class _MobileHomepageState extends State<MobileHomepage> {
                     buildRow(
                       context,
                       [
-                        buildContainer(
-                          context,
-                          'assets/online-learning.png',
-                          'My Courses',
-                          const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(61, 140, 229, 1),
-                              Color.fromRGBO(0, 234, 255, 1)
-                            ],
-                            end: Alignment.bottomRight,
+                        InkWell(
+                          onTap: () {
+                            Get.to(() =>const PackageDashboardMobile(''));
+                          },
+                          child: buildContainer(
+                            context,
+                            'assets/online-learning.png',
+                            'My Courses',
+                            const LinearGradient(
+                              colors: [
+                                Color.fromRGBO(61, 140, 229, 1),
+                                Color.fromRGBO(0, 234, 255, 1)
+                              ],
+                              end: Alignment.bottomRight,
+                            ),
                           ),
                         ),
-                        buildContainer(
-                          context,
-                          'assets/book.png',
-                          'Study Material',
-                          const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(247, 97, 161, 1),
-                              Color.fromRGBO(140, 27, 71, 1)
-                            ],
-                            end: Alignment.bottomRight,
+                        InkWell(
+                          onTap: (){
+                          Get.to(()=>PackageDashboardMobile(''));
+                          },
+                          child: buildContainer(
+                            context,
+                            'assets/book.png',
+                            'Study Material',
+                            const LinearGradient(
+                              colors: [
+                                Color.fromRGBO(247, 97, 161, 1),
+                                Color.fromRGBO(140, 27, 71, 1)
+                              ],
+                              end: Alignment.bottomRight,
+                            ),
                           ),
                         ),
                         buildContainer(
@@ -227,12 +229,12 @@ class _MobileHomepageState extends State<MobileHomepage> {
                         ),
                         Container(
                           width: elemenContainerWidth,
-                        )
+                        ),
                       ],
                     ),
                     const SizedBox(height: 20),
                     Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Stack(children: [
                         InkWell(
                           child: CarouselSlider(
@@ -245,7 +247,7 @@ class _MobileHomepageState extends State<MobileHomepage> {
                                         borderRadius: BorderRadius.circular(20),
                                         image: DecorationImage(
                                           image: AssetImage(
-                                            item['image_path'],
+                                            item['image_path']!,
                                           ),
                                           fit: BoxFit.cover,
                                         ),
@@ -270,7 +272,6 @@ class _MobileHomepageState extends State<MobileHomepage> {
                           ),
                         ),
                         Positioned(
-                          // top: 0,
                           bottom: 5,
                           left: 0,
                           right: 0,
@@ -289,7 +290,7 @@ class _MobileHomepageState extends State<MobileHomepage> {
                                       borderRadius: BorderRadius.circular(10),
                                       color: currentIndex == entry.key
                                           ? ColorPage.appbarcolor
-                                          : ColorPage.brownshade),
+                                          : ColorPage.white),
                                 ),
                               );
                             }).toList(),
@@ -304,6 +305,40 @@ class _MobileHomepageState extends State<MobileHomepage> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showPopupMenu(BuildContext context) {
+    showMenu(
+      context: context,
+      position: RelativeRect.fromLTRB(
+          1000, 100, 10, 100), // Adjust these values as needed
+      items: [
+        PopupMenuItem<String>(
+          value: 'Profile',
+          child: TextButton.icon(
+            icon: Icon(Icons.person),
+            onPressed: () {},
+            label: Text("Profile"),
+          ),
+        ),
+        PopupMenuItem<String>(
+          value: 'Logout',
+          child: TextButton.icon(
+            icon: Icon(Icons.logout),
+            onPressed: () {},
+            label: Text("Logout"),
+          ),
+        ),
+        PopupMenuItem<String>(
+          value: 'Support',
+          child: TextButton.icon(
+            icon: Icon(Icons.support_agent),
+            onPressed: () {},
+            label: Text("Support"),
+          ),
+        ),
+      ],
     );
   }
 
@@ -334,7 +369,7 @@ class _MobileHomepageState extends State<MobileHomepage> {
             ),
             child: Image.asset(
               assetPath,
-              width: size,
+              width: iconSize,
               scale: 12,
               color: ColorPage.white,
             ),

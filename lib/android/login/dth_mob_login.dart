@@ -8,6 +8,7 @@ import 'package:dthlms/ThemeData/font/font_family.dart';
 
 import 'package:dthlms/getx/getxcontroller.dart';
 import 'package:dthlms/login/login_api.dart';
+// import 'package:dthlms/utils/getpackagebyid.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,7 +37,8 @@ class _MobileloginState extends State<Mobilelogin> {
   // final GlobalKey<FormState> desktop_key = GlobalKey();
 
   // ignore: non_constant_identifier_names
-  final GlobalKey<FormState> mobile_key = GlobalKey();
+  final GlobalKey<FormState> mobile_key_login = GlobalKey();
+    final GlobalKey<FormState> mobile_key_signup = GlobalKey();
   late double formfieldsize = MediaQuery.of(context).size.width - 60;
   late double fontsize = ClsFontsize.ExtraLarge + 2;
   Getx getxController = Get.put(Getx());
@@ -139,18 +141,18 @@ class _MobileloginState extends State<Mobilelogin> {
                                 ? Form(
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
-                                    key: mobile_key,
+                                    key: mobile_key_signup,
                                     child: Column(
                                       children: [
-                                        Row(
+                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
                                             SizedBox(
                                               width: formfieldsize,
                                               child: Text(
-                                                'User name',
-                                                style: FontFamily.font,
+                                                'User Name',
+                                                style: FontFamily.mobilefont,
                                               ),
                                             )
                                           ],
@@ -165,8 +167,6 @@ class _MobileloginState extends State<Mobilelogin> {
                                                   autovalidateMode:
                                                       AutovalidateMode
                                                           .onUserInteraction,
-                                                  textInputAction:
-                                                      TextInputAction.next,
                                                   validator: (value) {
                                                     if (value!.isEmpty) {
                                                       return 'Cannot blank';
@@ -180,7 +180,7 @@ class _MobileloginState extends State<Mobilelogin> {
                                                   decoration: InputDecoration(
                                                       enabledBorder: border,
                                                       focusedBorder: border,
-                                                      hintText: 'User name'),
+                                                      hintText: 'Your Name'),
                                                 ))
                                           ],
                                         ),
@@ -410,13 +410,13 @@ class _MobileloginState extends State<Mobilelogin> {
                                                         .symmetric(vertical: 5),
                                                     color: ColorPage.colorgrey,
                                                     onPressed: () {
-                                                      if (mobile_key
+                                                      if (mobile_key_signup
                                                               .currentState!
                                                               .validate() &
                                                           GetUtils.isEmail(
                                                               signupemail
                                                                   .text)) {
-                                                        mobile_key.currentState!
+                                                        mobile_key_signup.currentState!
                                                             .save();
                                                         Get.to(
                                                             () =>
@@ -496,7 +496,7 @@ class _MobileloginState extends State<Mobilelogin> {
                                     ),
                                   )
                                 : Form(
-                                    key: mobile_key,
+                                    key: mobile_key_login,
                                     child: Column(
                                       children: [
                                         Row(
@@ -666,17 +666,18 @@ class _MobileloginState extends State<Mobilelogin> {
                                                         vertical: 10),
                                                     color: ColorPage.colorgrey,
                                                     onPressed: () async {
-                                                      if (mobile_key
+                                                      if (mobile_key_login
                                                           .currentState!
                                                           .validate()) {
-                                                        mobile_key.currentState!
+                                                        mobile_key_login.currentState!
                                                             .save();
+    //                                                         final package = await getPackageDtails(context,0,'Structure');
+    // print('Package data: $package');
                                                         await loginApi(
-                                                          context,
-                                                          loginemail.text,
-                                                          loginpassword.text,
-                                                          loginotp.text,
-                                                        );
+                                                            context,
+                                                            loginemail.text,
+                                                            loginpassword.text,
+                                                            loginotp.text);
                                                       }
                                                     },
                                                     child: Text(
