@@ -818,6 +818,116 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                 fontSize:
                                                                     ClsFontsize
                                                                         .ExtraSmall),
+                                                          )
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          SizedBox(
+                                                              width:
+                                                                  formfieldsize,
+                                                              child:
+                                                                  MaterialButton(
+                                                                shape: ContinuousRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            20)),
+
+                                                                // color: ColorPage.colorgrey,
+                                                                onPressed:
+                                                                    () {},
+                                                                child: Text(
+                                                                  'Login',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        ClsFontsize
+                                                                            .ExtraSmall,
+                                                                  ),
+                                                                ),
+                                                              ))
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              : Form(
+                                                  key: desktop_key2,
+                                                  child: Column(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          SizedBox(
+                                                            width:
+                                                                formfieldsize,
+                                                            child: Text(
+                                                              'Email',
+                                                              style: FontFamily
+                                                                  .font,
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          SizedBox(
+                                                              width:
+                                                                  formfieldsize,
+                                                              child:
+                                                                  TextFormField(
+                                                                autovalidateMode:
+                                                                    AutovalidateMode
+                                                                        .onUserInteraction,
+                                                                textInputAction:
+                                                                    TextInputAction
+                                                                        .next,
+                                                                validator:
+                                                                    (value) {
+                                                                  if (value!
+                                                                      .isEmpty) {
+                                                                    return 'Cannot blank';
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                                controller:
+                                                                    loginemail,
+                                                                keyboardType:
+                                                                    TextInputType
+                                                                        .emailAddress,
+                                                                // controller: ,
+                                                                decoration: InputDecoration(
+                                                                    enabledBorder:
+                                                                        border,
+                                                                    focusedBorder:
+                                                                        border,
+                                                                    hintText:
+                                                                        'hello@gmail.com'),
+                                                              ))
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          //sayak mishra
+                                                          SizedBox(
+                                                            width:
+                                                                formfieldsize,
+                                                            child: Text(
+                                                              'Password',
+                                                              style: FontFamily
+                                                                  .font,
+                                                            ),
                                                           ),
                                                         ))
                                                   ],
