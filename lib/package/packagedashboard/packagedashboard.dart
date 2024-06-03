@@ -71,13 +71,50 @@ class PackageFind {
   });
 }
 
+class MyPackageDetails {
+  int studentPackageID;
+  String userID;
+  String packageID;
+  DateTime activationDate;
+  DateTime validityDate;
+  int validityDays;
+  bool isActive;
+  bool isBlocked;
+  DateTime createdOn;
+  String createdBy;
+  DateTime modifiedOn;
+  String modifiedBy;
+  String createdIP;
+  String modifiedIP;
+
+  MyPackageDetails({
+    required this.studentPackageID,
+    required this.userID,
+    required this.packageID,
+    required this.activationDate,
+    required this.validityDate,
+    required this.validityDays,
+    required this.isActive,
+    required this.isBlocked,
+    required this.createdOn,
+    required this.createdBy,
+    required this.modifiedOn,
+    required this.modifiedBy,
+    required this.createdIP,
+    required this.modifiedIP,
+  });
+}
+
 class _PackageDashboardState extends State<PackageDashboard> {
   Getx getxController = Get.put(Getx());
 
-  List<AllPackage> package = [];
-  Map<String, List<PackageFind>> nestedData = {};
+  List<AllPackage> allpackage = [];
+  Map<String, List<PackageFind>> allnestedData = {};
 
-  Future mypackage(String token) async {
+  List<MyPackageDetails> mypackage = [];
+  // Map<String, List<MyPackage>> mynestedData = {};
+
+  Future fnusermypackage(String token) async {
     Map data = {
       "tblStudentPackage": {"UserID": "1234567890"}
     };
@@ -91,66 +128,70 @@ class _PackageDashboardState extends State<PackageDashboard> {
       },
     );
     var jsondata = json.decode(response.body);
+    print(jsondata);
+    print('sayak');
     if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
       var jsonData = json.decode(jsondata['result']);
       print(jsonData);
-      package.clear();
+      mypackage.clear();
       for (int i = 0; i < jsonData.length; i++) {
-        // final data = AllPackage(
-        //   courseId: jsonData[i]['CourseId'].toString(),
-        //   courseName: jsonData[i]['CourseName'].toString(),
-        //   termId: jsonData[i]['TermId'].toString(),
-        //   termName: jsonData[i]['TermName'].toString(),
-        //   packageId: jsonData[i]['PackageId'].toString(),
-        //   isActive: jsonData[i]['IsActive'].toString(),
-        //   packageName: jsonData[i]['PackageName'].toString(),
-        //   packageDisplayName: jsonData[i]['PackageDisplayName'].toString(),
-        //   srNo: jsonData[i]['SrNo'].toString(),
-        //   sortedOrder: jsonData[i]['SortedOrder'].toString(),
-        // );
-        // package.add(data);
+        final data = MyPackageDetails(
+            studentPackageID: jsondata['result']['UserID'],
+            userID: jsondata['result']['StudentPackageID'],
+            activationDate: jsondata['result']['StudentPackageID'],
+            createdBy: jsondata['result']['StudentPackageID'],
+            createdIP: jsondata['result']['StudentPackageID'],
+            createdOn: jsondata['result']['StudentPackageID'],
+            isActive: jsondata['result']['StudentPackageID'],
+            validityDate: jsondata['result']['StudentPackageID'],
+            isBlocked: jsondata['result']['StudentPackageID'],
+            modifiedBy: jsondata['result']['StudentPackageID'],
+            modifiedIP: jsondata['result']['StudentPackageID'],
+            modifiedOn: jsondata['result']['StudentPackageID'],
+            packageID: jsondata['result']['StudentPackageID'],
+            validityDays: jsondata['result']['StudentPackageID']);
+        mypackage.add(data);
       }
       setState(() {});
     }
   }
 
-  // Future<void> fnfindallpackage(String token) async {
-  //   // loader(context);
-  //   Map data = {
-  //     "tblPackage": {"PackageId": "0"}
-  //   };
-
-  //   final response = await http.post(
-  //     Uri.https(ClsUrlApi.mainurl, ClsUrlApi.allpackage),
-  //     body: json.encode(data),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer $token',
-  //     },
-  //   );
-  //   var jsondata = json.decode(response.body);
-  //   print(jsondata);
-  //   if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
-  //     var jsonData = json.decode(jsondata['result']);
-  //     package.clear();
-  //     for (int i = 0; i < jsonData.length; i++) {
-  //       final data = AllPackage(
-  //         courseId: jsonData[i]['CourseId'].toString(),
-  //         courseName: jsonData[i]['CourseName'].toString(),
-  //         termId: jsonData[i]['TermId'].toString(),
-  //         termName: jsonData[i]['TermName'].toString(),
-  //         packageId: jsonData[i]['PackageId'].toString(),
-  //         isActive: jsonData[i]['IsActive'].toString(),
-  //         packageName: jsonData[i]['PackageName'].toString(),
-  //         packageDisplayName: jsonData[i]['PackageDisplayName'].toString(),
-  //         srNo: jsonData[i]['SrNo'].toString(),
-  //         sortedOrder: jsonData[i]['SortedOrder'].toString(),
-  //       );
-  //       package.add(data);
-  //     }
-  //     setState(() {});
-  //   }
-  // }
+  Future<void> fnfindallpackage(String token) async {
+    // loader(context);
+    Map data = {
+      "tblPackage": {"PackageId": "0"}
+    };
+    final response = await http.post(
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.allpackage),
+      body: json.encode(data),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    var jsondata = json.decode(response.body);
+    print(jsondata);
+    if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
+      var jsonData = json.decode(jsondata['result']);
+      allpackage.clear();
+      for (int i = 0; i < jsonData.length; i++) {
+        final data = AllPackage(
+          courseId: jsonData[i]['CourseId'].toString(),
+          courseName: jsonData[i]['CourseName'].toString(),
+          termId: jsonData[i]['TermId'].toString(),
+          termName: jsonData[i]['TermName'].toString(),
+          packageId: jsonData[i]['PackageId'].toString(),
+          isActive: jsonData[i]['IsActive'].toString(),
+          packageName: jsonData[i]['PackageName'].toString(),
+          packageDisplayName: jsonData[i]['PackageDisplayName'].toString(),
+          srNo: jsonData[i]['SrNo'].toString(),
+          sortedOrder: jsonData[i]['SortedOrder'].toString(),
+        );
+        allpackage.add(data);
+      }
+      setState(() {});
+    }
+  }
 
   Future<void> fnfindpackage(String token, String id) async {
     Map data = {
@@ -190,15 +231,15 @@ class _PackageDashboardState extends State<PackageDashboard> {
         packagefind.add(data);
       }
       setState(() {
-        nestedData[id] = packagefind;
+        allnestedData[id] = packagefind;
       });
     }
   }
 
   @override
   void initState() {
-    mypackage(widget.token);
-    // fnfindallpackage(widget.token);
+    // fnusermypackage(widget.token);
+    fnfindallpackage(widget.token);
     super.initState();
   }
 
@@ -240,6 +281,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
                             ButtonBarEntry(
                                 onTap: () {
                                   getxController.packageshow.value = false;
+                                  fnfindallpackage(widget.token);
                                 },
                                 child: Text(
                                   'All Package',
@@ -249,39 +291,143 @@ class _PackageDashboardState extends State<PackageDashboard> {
                         ),
                         getxController.packageshow.value
                             ? Expanded(
+                                child: false
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        // itemCount: 5,
+                                        itemCount: allpackage.length,
+                                        itemBuilder: (context, index) {
+                                          return ExpansionTile(
+                                            // shape:
+                                            //     Border.all(color: Colors.transparent),
+                                            // trailing: ,
+                                            leading: Text(
+                                                allpackage[index].packageId),
+                                            title: Text(
+                                              allpackage[index].packageName,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            onExpansionChanged: (value) {
+                                              if (value &&
+                                                  !allnestedData.containsKey(
+                                                      allpackage[index]
+                                                          .packageId)) {
+                                                fnfindpackage(
+                                                    widget.token,
+                                                    allpackage[index]
+                                                        .packageId);
+                                              }
+                                            },
+                                            children: [
+                                              allnestedData.containsKey(
+                                                      allpackage[index]
+                                                          .packageId)
+                                                  ? ListView.builder(
+                                                      shrinkWrap: true,
+                                                      itemCount: 1,
+                                                      itemBuilder:
+                                                          (context, subIndex) {
+                                                        var subItem = allnestedData[
+                                                                allpackage[
+                                                                        index]
+                                                                    .packageId]![
+                                                            subIndex];
+                                                        return ExpansionTile(
+                                                          leading: Text(
+                                                              subItem.courseId),
+                                                          title: Text(subItem
+                                                              .courseName),
+                                                          subtitle: Text(
+                                                              subItem.termName),
+                                                          onExpansionChanged:
+                                                              (value) {
+                                                            if (value &&
+                                                                !allnestedData
+                                                                    .containsKey(
+                                                                        subItem
+                                                                            .packageId)) {
+                                                              fnfindpackage(
+                                                                  widget.token,
+                                                                  subItem
+                                                                      .packageId);
+                                                            }
+                                                          },
+                                                          children: [
+                                                            allnestedData
+                                                                    .containsKey(
+                                                                        subItem
+                                                                            .packageId)
+                                                                ? ListView
+                                                                    .builder(
+                                                                    shrinkWrap:
+                                                                        true,
+                                                                    itemCount:
+                                                                        1,
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            subSubIndex) {
+                                                                      var subSubItem =
+                                                                          allnestedData[subItem.packageId]![
+                                                                              subSubIndex];
+                                                                      return ListTile(
+                                                                        leading:
+                                                                            Text(subSubItem.courseId),
+                                                                        title: Text(
+                                                                            subItem.termName),
+                                                                        subtitle:
+                                                                            Text(subSubItem.packageDisplayName),
+                                                                      );
+                                                                    },
+                                                                  )
+                                                                : CircularProgressIndicator(),
+                                                          ],
+                                                        );
+                                                      },
+                                                    )
+                                                  : CircularProgressIndicator()
+                                            ],
+                                          );
+                                        },
+                                      )
+                                    : Center(
+                                        child: Text('No Package'),
+                                      ))
+                            : Expanded(
                                 child: ListView.builder(
                                   shrinkWrap: true,
                                   // itemCount: 5,
-                                  itemCount: package.length,
+                                  itemCount: allpackage.length,
                                   itemBuilder: (context, index) {
                                     return ExpansionTile(
                                       // shape:
                                       //     Border.all(color: Colors.transparent),
                                       // trailing: ,
-                                      leading: Text(package[index].packageId),
+                                      leading:
+                                          Text(allpackage[index].packageId),
                                       title: Text(
-                                        package[index].packageName,
+                                        allpackage[index].packageName,
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
                                       onExpansionChanged: (value) {
                                         if (value &&
-                                            !nestedData.containsKey(
-                                                package[index].packageId)) {
+                                            !allnestedData.containsKey(
+                                                allpackage[index].packageId)) {
                                           fnfindpackage(widget.token,
-                                              package[index].packageId);
+                                              allpackage[index].packageId);
                                         }
                                       },
                                       children: [
-                                        nestedData.containsKey(
-                                                package[index].packageId)
+                                        allnestedData.containsKey(
+                                                allpackage[index].packageId)
                                             ? ListView.builder(
                                                 shrinkWrap: true,
                                                 itemCount: 1,
                                                 itemBuilder:
                                                     (context, subIndex) {
-                                                  var subItem = nestedData[
-                                                          package[index]
+                                                  var subItem = allnestedData[
+                                                          allpackage[index]
                                                               .packageId]![
                                                       subIndex];
                                                   return ExpansionTile(
@@ -294,8 +440,8 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                                     onExpansionChanged:
                                                         (value) {
                                                       if (value &&
-                                                          !nestedData.containsKey(
-                                                              subItem
+                                                          !allnestedData
+                                                              .containsKey(subItem
                                                                   .packageId)) {
                                                         fnfindpackage(
                                                             widget.token,
@@ -303,7 +449,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                                       }
                                                     },
                                                     children: [
-                                                      nestedData.containsKey(
+                                                      allnestedData.containsKey(
                                                               subItem.packageId)
                                                           ? ListView.builder(
                                                               shrinkWrap: true,
@@ -311,8 +457,8 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                                               itemBuilder: (context,
                                                                   subSubIndex) {
                                                                 var subSubItem =
-                                                                    nestedData[subItem
-                                                                            .packageId]![
+                                                                    allnestedData[
+                                                                            subItem.packageId]![
                                                                         subSubIndex];
                                                                 return ListTile(
                                                                   leading: Text(
@@ -337,8 +483,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                     );
                                   },
                                 ),
-                              )
-                            : CircularProgressIndicator(),
+                              ),
                       ],
                     ),
                   ),
