@@ -5,6 +5,7 @@ import 'package:dthlms/android/login/dth_mob_login.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/forgotpassword/forgetscreen.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../getx/getxcontroller.dart';
 import 'package:dthlms/login/login_api.dart';
@@ -30,6 +31,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
   TextEditingController loginemail = TextEditingController();
   TextEditingController loginpassword = TextEditingController();
   TextEditingController loginotp = TextEditingController();
+  FocusNode focusNode = FocusNode();
 
   // ignore: non_constant_identifier_names
   final GlobalKey<FormState> desktop_key1 = GlobalKey();
@@ -379,41 +381,14 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                 .center,
                                                         children: [
                                                           SizedBox(
-                                                              width:
-                                                                  formfieldsize,
-                                                              child:
-                                                                  TextFormField(
-                                                                autovalidateMode:
-                                                                    AutovalidateMode
-                                                                        .onUserInteraction,
-                                                                textInputAction:
-                                                                    TextInputAction
-                                                                        .next,
-                                                                validator:
-                                                                    (value) {
-                                                                  if (value!
-                                                                      .isEmpty) {
-                                                                    return 'Cannot blank';
-                                                                  } else {
-                                                                    return null;
-                                                                  }
-                                                                },
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .phone,
-                                                                controller:
-                                                                    signupphno,
-                                                                decoration: InputDecoration(
-                                                                    prefixIcon:
-                                                                        const Icon(Icons
-                                                                            .phone),
-                                                                    enabledBorder:
-                                                                        border,
-                                                                    focusedBorder:
-                                                                        border,
-                                                                    hintText:
-                                                                        '9000000000'),
-                                                              ))
+                                                            width:
+                                                                formfieldsize,
+                                                            child: 
+                                                            
+                                                                IntlPhoneField(showCountryFlag: true,
+                                                             disableLengthCheck:false ,
+                                                                ),
+                                                          )
                                                         ],
                                                       ),
                                                       Row(
@@ -443,6 +418,35 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                     formfieldsize,
                                                                 child:
                                                                     TextFormField(
+                                                                      onFieldSubmitted: (Value){
+                                                                         if (desktop_key1
+                                                                            .currentState!
+                                                                            .validate() &
+                                                                        GetUtils.isEmail(
+                                                                            signupemail.text)) {
+                                                                      desktop_key1
+                                                                          .currentState!
+                                                                          .save();
+                                                                      Get.to(
+                                                                          () =>
+                                                                              OTPScreen(
+                                                                                signupuser.text,
+                                                                                signupname.text,
+                                                                                signupemail.text,
+                                                                                signuppassword.text,
+                                                                                signupphno.text,
+                                                                              ),
+                                                                          transition:
+                                                                              Transition.leftToRight);
+                                                                    } else {
+                                                                      Get.snackbar(
+                                                                          "Error",
+                                                                          "Please enter valid details",
+                                                                          colorText:
+                                                                              ColorPage.white);
+                                                                    }
+
+                                                                      },
                                                                   obscureText: getx
                                                                       .signuppasswordshow
                                                                       .value,
@@ -705,6 +709,25 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                               child: Obx(
                                                                 () =>
                                                                     TextFormField(
+                                                                      onFieldSubmitted: (Value)async{
+                                                                        if (desktop_key2
+                                                                        .currentState!
+                                                                        .validate()) {
+                                                                      desktop_key2
+                                                                          .currentState!
+                                                                          .save();
+                                                                      await loginApi(
+                                                                        context,
+                                                                        loginemail
+                                                                            .text,
+                                                                        loginpassword
+                                                                            .text,
+                                                                        loginotp
+                                                                            .text,
+                                                                      );
+                                                                        }
+                                                                      },
+                                                                      
                                                                   obscureText: getx
                                                                       .loginpasswordshow
                                                                       .value,

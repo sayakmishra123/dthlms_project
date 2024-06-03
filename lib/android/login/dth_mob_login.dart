@@ -12,6 +12,7 @@ import 'package:dthlms/login/login_api.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../phone/siminformation.dart';
 
@@ -35,6 +36,8 @@ class _MobileloginState extends State<Mobilelogin> {
 
   // ignore: non_constant_identifier_names
   // final GlobalKey<FormState> desktop_key = GlobalKey();
+FocusNode focusNode = FocusNode();
+
 
   // ignore: non_constant_identifier_names
   final GlobalKey<FormState> mobile_key_login = GlobalKey();
@@ -139,8 +142,8 @@ class _MobileloginState extends State<Mobilelogin> {
                             ),
                             getxController.show.value
                                 ? Form(
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
+                                    // autovalidateMode:
+                                    //     AutovalidateMode.onUserInteraction,
                                     key: mobile_key_signup,
                                     child: Column(
                                       children: [
@@ -284,8 +287,15 @@ class _MobileloginState extends State<Mobilelogin> {
                                           children: [
                                             SizedBox(
                                                 width: formfieldsize,
-                                                child: TextFormField(
-                                                  onTap: () async {
+                                                child: IntlPhoneField(
+                                                  focusNode: focusNode,
+                                                 
+                                                 
+                                                  
+                                                  controller: signupphno,
+                                                  style: FontFamily.font6,
+                                                  onTap: () async{
+                                                    
                                                     await ClsSimInfo()
                                                         .printSimCardsData(
                                                             context)
@@ -312,10 +322,10 @@ class _MobileloginState extends State<Mobilelogin> {
                                                                             i++)
                                                                           ElevatedButton(
                                                                               onPressed: () {
-                                                                                signupphno.text = getx.simCardinfo[i].phoneNumber.toString();
+                                                                                signupphno.text = getx.simCardinfo[i].phoneNumber.toString().substring(3);
                                                                                 Get.back();
                                                                               },
-                                                                              child: Text(getx.simCardinfo[i].phoneNumber.toString())),
+                                                                              child: Text(getx.simCardinfo[i].phoneNumber.toString().substring(3))),
                                                                       ],
                                                                     ),
                                                                   ),
@@ -325,24 +335,15 @@ class _MobileloginState extends State<Mobilelogin> {
                                                       });
                                                     });
                                                   },
-                                                  autovalidateMode:
-                                                      AutovalidateMode
-                                                          .onUserInteraction,
-                                                  validator: (value) {
-                                                    if (value!.isEmpty) {
-                                                      return 'Cannot blank';
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
-                                                  keyboardType:
-                                                      TextInputType.phone,
-                                                  controller: signupphno,
-                                                  decoration: InputDecoration(
-                                                      enabledBorder: border,
-                                                      focusedBorder: border,
-                                                      hintText: '900000000'),
-                                                ))
+                                                  languageCode: "en",
+                  onChanged: (phone) {
+                    print(phone.completeNumber);
+                  },
+                  onCountryChanged: (country) {
+                    print('Country changed to: ' + country.name);
+                  },
+                                                )
+                                                  )
                                           ],
                                         ),
                                         Row(

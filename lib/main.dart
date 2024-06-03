@@ -2,13 +2,20 @@ import 'dart:io';
 import 'package:dthlms/db/copydbfun.dart';
 import 'package:dthlms/db/dbfunction/dbfunction.dart';
 import 'package:dthlms/login/dth_login.dart';
+import 'package:dthlms/utils/networkContrller.dart';
+// import 'package:dthlms/utils/dependency_injection.dart';
+// import 'package:dthlms/utils/dependency_injection.dart';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-//sayak mishra
+//SAYAK
+import 'connectivity_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+ 
+  // dependencyInjection.init();
   // await Firebase.initializeApp();
 // ...
 
@@ -17,6 +24,7 @@ void main() async {
 
     databaseFactory = databaseFactoryFfi;
   }
+  
   String path = "assets/copydb/databases/sayakdb.db";
   if (!await DbHandler().doesDatabaseExist('sayakdb.db')) {
     await copyDatabase(path, 'sayakdb.db');
@@ -54,4 +62,7 @@ class _MyAppState extends State<MyApp> {
         ),
         home: const DthLmsLogin());
   }
+
+
+  
 }

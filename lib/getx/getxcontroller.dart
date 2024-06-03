@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dthlms/package/packagescreen.dart';
 import 'package:get/get.dart';
 import 'package:simnumber/siminfo.dart';
@@ -35,4 +38,16 @@ class Getx extends GetxController {
   RxList<AllPackage> package = <AllPackage>[].obs;
   RxList<PackageFind> packagefind = <PackageFind>[].obs;
   RxBool packageshow = true.obs;
+
+@override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    
+  }
+ 
+
+
 }
+
+
