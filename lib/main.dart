@@ -3,22 +3,14 @@ import 'package:dthlms/db/copydbfun.dart';
 import 'package:dthlms/db/dbfunction/dbfunction.dart';
 import 'package:dthlms/forgotpassword/forgetscreen.dart';
 import 'package:dthlms/login/dth_login.dart';
-
-// import 'package:dthlms/utils/dependency_injection.dart';
-// import 'package:dthlms/utils/dependency_injection.dart';
 import 'package:dthlms/pages/dashboard.dart';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 //sayak mishra
 void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   // await Firebase.initializeApp();
-// // ...
-
   runApp(
     const MyApp(),
   );
@@ -51,7 +43,4 @@ class _MyAppState extends State<MyApp> {
         ),
         home: const DthLmsLogin());
   }
-
-
-  
 }
