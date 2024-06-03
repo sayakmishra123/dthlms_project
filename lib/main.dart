@@ -1,34 +1,23 @@
 import 'dart:io';
 import 'package:dthlms/db/copydbfun.dart';
 import 'package:dthlms/db/dbfunction/dbfunction.dart';
+import 'package:dthlms/forgotpassword/forgetscreen.dart';
 import 'package:dthlms/login/dth_login.dart';
-import 'package:dthlms/utils/networkContrller.dart';
+
 // import 'package:dthlms/utils/dependency_injection.dart';
 // import 'package:dthlms/utils/dependency_injection.dart';
+import 'package:dthlms/pages/dashboard.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-//SAYAK
-import 'connectivity_service.dart';
+
+//sayak mishra
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
- 
-  // dependencyInjection.init();
-  // await Firebase.initializeApp();
-// ...
-
-  if (Platform.isWindows) {
-    sqfliteFfiInit();
-
-    databaseFactory = databaseFactoryFfi;
-  }
-  
-  String path = "assets/copydb/databases/sayakdb.db";
-  if (!await DbHandler().doesDatabaseExist('sayakdb.db')) {
-    await copyDatabase(path, 'sayakdb.db');
-  }
+//   WidgetsFlutterBinding.ensureInitialized();
+//   // await Firebase.initializeApp();
+// // ...
 
   runApp(
     const MyApp(),

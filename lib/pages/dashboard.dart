@@ -4,6 +4,7 @@ import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/home/homepage.dart';
 import 'package:dthlms/pages/utctime.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import '../widget/drawerWidget.dart';
@@ -70,7 +71,7 @@ class _DashboardState extends State<Dashboard> {
           ),
           titleTextStyle: FontFamily.font2,
         ),
-        body: const Row(
+        body: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // DrawerWidget(),

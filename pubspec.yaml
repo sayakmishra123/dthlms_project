@@ -62,10 +62,10 @@ dependencies:
   carousel_slider: ^4.2.1
   flutter_spinkit: ^5.2.1
   flutter_rounded_progress_bar: ^0.3.2
-  
+  connectivity_plus: ^6.0.3
   typewritertext: ^3.0.5
   # abhoy
-  connectivity_plus: ^6.0.3
+  # connectivity_plus: ^6.0.3
   intl_phone_field: ^3.1.0
  
 
