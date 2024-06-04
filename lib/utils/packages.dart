@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
+
 import 'dart:convert';
 
 import 'package:animated_button_bar/animated_button_bar.dart';
@@ -137,6 +139,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
       var jsonData = json.decode(jsondata['result']);
       List<PackageFind> packagefind = [];
       packagefind.clear();
+      // ignore: avoid_print
       print(response.body);
 
       for (int i = 0; i < jsonData.length; i++) {

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +46,7 @@ class ClsSimInfo {
       });
     } on Exception catch (e) {
       Get.back();
-      print("error! code: ${e} - message: ${e}");
+      print("error! code: $e - message: $e");
       return e;
     }
   }

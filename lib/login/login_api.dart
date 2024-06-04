@@ -1,6 +1,8 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, avoid_print, use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:io';
-import 'package:dthlms/android/Homepage/MobileHomepage.dart';
+
 import 'package:dthlms/configaration/device/device_info.dart';
 import 'package:dthlms/errormsg/errorhandling.dart';
 import 'package:dthlms/getx/getxcontroller.dart';
@@ -8,7 +10,7 @@ import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/login/loginmodel.dart';
 import 'package:dthlms/map/apiobject.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
-import 'package:dthlms/pages/dashboard.dart';
+
 import 'package:dthlms/url/api_url.dart';
 import 'package:dthlms/utils/loader.dart';
 import 'package:dthlms/utils/packages.dart';
@@ -17,9 +19,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:get/get.dart';
 import "package:http/http.dart" as http;
-import "package:dthlms/db/dbfunction/dbfunction.dart";
 
-import '../package/packagescreen.dart';
+
 
 Future loginApi(
   BuildContext context,
@@ -83,6 +84,7 @@ Future loginApi(
         phoneNumber: jsondata['result']['phoneNumber'],
         token: jsondata['result']['token']);
     getObj.loginuserdata.add(userdata);
+    // ignore: unused_local_variable
     List dbdata = [];
 
     // await DbHandler()
@@ -175,7 +177,7 @@ Future signupApi(BuildContext context, String signupuser, String signupname,
     Getx getxController = Get.put(Getx());
     if (CustomButton.positiveButton == result) {
       getxController.show.value = false;
-      Get.to(() => DthLmsLogin());
+      Get.to(() =>const DthLmsLogin());
     } else {}
   } else {
     Get.back();

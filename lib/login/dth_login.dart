@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
@@ -33,7 +35,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
   TextEditingController loginotp = TextEditingController();
   FocusNode focusNode = FocusNode();
 
-  // ignore: non_constant_identifier_names
+
   final GlobalKey<FormState> desktop_key1 = GlobalKey();
   final GlobalKey<FormState> desktop_key2 = GlobalKey();
 
@@ -46,6 +48,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
   @override
   void initState() {
     // print(widget.info);
+    // ignore: avoid_print
     print('logindth');
     formfieldsize = Platform.isAndroid ? 300 : formfieldsize;
     super.initState();
@@ -413,6 +416,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                               child:
                                                                   TextFormField(
                                                                 onFieldSubmitted:
+                                                                    // ignore: avoid_types_as_parameter_names
                                                                     (Value) {
                                                                   if (desktop_key1
                                                                           .currentState!
@@ -536,20 +540,20 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                       GetUtils.isEmail(
                                                                           signupemail
                                                                               .text)) {
-                                                                    desktop_key1
-                                                                        .currentState!
-                                                                        .save();
-                                                                    Get.to(
-                                                                        () =>
-                                                                            OTPScreen(
-                                                                              signupuser.text,
-                                                                              signupname.text,
-                                                                              signupemail.text,
-                                                                              signuppassword.text,
-                                                                              signupphno.text,
-                                                                            ),
-                                                                        transition:
-                                                                            Transition.leftToRight);
+                                                                    // desktop_key1
+                                                                    //     .currentState!
+                                                                    //     .save();
+                                                                    // Get.to(
+                                                                    //     () =>
+                                                                    //         OTPScreen(
+                                                                    //           signupuser.text,
+                                                                    //           signupname.text,
+                                                                    //           signupemail.text,
+                                                                    //           signuppassword.text,
+                                                                    //           signupphno.text,
+                                                                    //         ),
+                                                                    //     transition:
+                                                                    //         Transition.leftToRight);
                                                                   } else {
                                                                     Get.snackbar(
                                                                         "Error",
@@ -702,6 +706,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                               () =>
                                                                   TextFormField(
                                                                 onFieldSubmitted:
+                                                                    // ignore: avoid_types_as_parameter_names
                                                                     (Value) async {
                                                                   if (desktop_key2
                                                                       .currentState!

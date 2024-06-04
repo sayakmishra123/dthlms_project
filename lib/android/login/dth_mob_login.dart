@@ -41,6 +41,7 @@ FocusNode focusNode = FocusNode();
 
   // ignore: non_constant_identifier_names
   final GlobalKey<FormState> mobile_key_login = GlobalKey();
+    // ignore: non_constant_identifier_names
     final GlobalKey<FormState> mobile_key_signup = GlobalKey();
   late double formfieldsize = MediaQuery.of(context).size.width - 60;
   late double fontsize = ClsFontsize.ExtraLarge + 2;
@@ -290,9 +291,10 @@ FocusNode focusNode = FocusNode();
                                                 child: IntlPhoneField(
                                                   autovalidateMode: AutovalidateMode.onUserInteraction,
                                                   validator: (value) {
-                                                    if(value!.toString().length>10){
+                                                    if(value.toString().length>10){
                                                       return "number may not be";
                                                     }
+                                                    return null;
                                                     
                                                   },
                                                   disableLengthCheck:true,
@@ -348,6 +350,7 @@ FocusNode focusNode = FocusNode();
                     print(phone.completeNumber);
                   },
                   onCountryChanged: (country) {
+                    // ignore: avoid_print, prefer_interpolation_to_compose_strings
                     print('Country changed to: ' + country.name);
                   },
                                                 )

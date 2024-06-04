@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, must_be_immutable, no_leading_underscores_for_local_identifiers
+// ignore_for_file: file_names, must_be_immutable, no_leading_underscores_for_local_identifiers, avoid_print, use_build_context_synchronously
 
 import 'dart:io';
 import 'dart:typed_data';
@@ -233,6 +233,7 @@ class _StudyMaterialPdfState extends State<StudyMaterialPdf> {
 
     Uint8List encdata = await readData("${d.path}/$filename");
     decryptedPdfData = await decryptPdf(encdata);
+    // ignore: unused_local_variable
     String p = await writedata(decryptedPdfData, "${d.path}/decrypt.pdf");
 
     print('file decrypted successfully.......$decryptedPdfData ');

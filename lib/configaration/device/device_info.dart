@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'package:advertising_id/advertising_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';

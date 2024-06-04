@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import, unnecessary_overrides
+
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';

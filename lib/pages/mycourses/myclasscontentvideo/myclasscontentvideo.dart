@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import, no_leading_underscores_for_local_identifiers, avoid_print, use_build_context_synchronously
+
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.dart';

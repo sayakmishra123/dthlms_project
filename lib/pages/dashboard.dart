@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_import, prefer_typing_uninitialized_variables, prefer_const_constructors_in_immutables, prefer_const_constructors
+
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
@@ -5,9 +7,7 @@ import 'package:dthlms/home/homepage.dart';
 import 'package:dthlms/pages/utctime.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 
-import '../widget/drawerWidget.dart';
 
 class Dashboard extends StatefulWidget {
   late final dbdata;

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, non_constant_identifier_names
+
 import 'dart:async';
 import 'dart:io';
 
@@ -14,6 +16,7 @@ class DbHandler {
   Future<Database?> get fninitializeDB async {
     String path = await fndbpath();
 
+    // ignore: prefer_interpolation_to_compose_strings
     print(path + "/sayakdb.db");
     _database = await openDatabase(
       join(path, 'sayakdb.db'),

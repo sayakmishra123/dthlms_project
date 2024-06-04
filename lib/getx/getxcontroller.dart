@@ -46,6 +46,7 @@ class Getx extends GetxController {
 
   @override
   void onInit() {
+    // ignore: unused_local_variable
     StreamSubscription<List<ConnectivityResult>> subscription = Connectivity()
         .onConnectivityChanged
         .listen((List<ConnectivityResult> result) {
@@ -61,7 +62,7 @@ class Getx extends GetxController {
     if (result == ConnectivityResult.none) {
       Get.showSnackbar(GetSnackBar(
           shouldIconPulse: true,
-          icon: Icon(
+          icon: const Icon(
             Icons.wifi_off,
             color: Colors.white,
           ),
@@ -72,7 +73,7 @@ class Getx extends GetxController {
             onPressed: () {
               Get.back();
             },
-            child: Text(
+            child:  const Text(
               'Ok',
               style: TextStyle(color: Colors.white),
             ),

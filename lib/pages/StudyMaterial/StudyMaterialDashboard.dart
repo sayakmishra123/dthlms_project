@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables
+
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/pages/StudyMaterial/StudyMaterial.dart';
 import 'package:dthlms/pages/utctime.dart';

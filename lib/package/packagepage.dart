@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_build_context_synchronously, prefer_const_constructors
+
 import 'dart:convert';
 
 import 'package:dthlms/package/packagescreen.dart';
@@ -6,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class PackagePage extends StatefulWidget {
   String courseName = '';
   String packageId = '';

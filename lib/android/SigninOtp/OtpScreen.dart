@@ -1,10 +1,10 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: camel_case_types
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.dart';
-import 'package:dthlms/login/dth_login.dart';
+
 import 'package:dthlms/login/login_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
+// ignore: must_be_immutable
 class signInOtpScreen extends StatefulWidget {
   String signupuser;
   String signupname;
@@ -28,7 +29,7 @@ class signInOtpScreen extends StatefulWidget {
   State<signInOtpScreen> createState() => _signInOtpScreenState();
 }
 
-// ignore: camel_case_types
+
 class _signInOtpScreenState extends State<signInOtpScreen> {
   late double screenwidth = MediaQuery.of(context).size.width;
   late double spaceBetweenOtpAndText = MediaQuery.of(context).size.width / 22;

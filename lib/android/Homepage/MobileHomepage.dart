@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dthlms/android/Drawer/Mobiledrawer.dart';
@@ -128,7 +130,7 @@ class _MobileHomepageState extends State<MobileHomepage> {
                         ),
                         InkWell(
                           onTap: (){
-                          Get.to(()=>PackageDashboardMobile(''));
+                          Get.to(()=> const PackageDashboardMobile(''));
                           },
                           child: buildContainer(
                             context,
@@ -311,31 +313,31 @@ class _MobileHomepageState extends State<MobileHomepage> {
   void _showPopupMenu(BuildContext context) {
     showMenu(
       context: context,
-      position: RelativeRect.fromLTRB(
+      position: const RelativeRect.fromLTRB(
           1000, 100, 10, 100), // Adjust these values as needed
       items: [
         PopupMenuItem<String>(
           value: 'Profile',
           child: TextButton.icon(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person),
             onPressed: () {},
-            label: Text("Profile"),
+            label: const Text("Profile"),
           ),
         ),
         PopupMenuItem<String>(
           value: 'Logout',
           child: TextButton.icon(
-            icon: Icon(Icons.logout),
+            icon: const Icon(Icons.logout),
             onPressed: () {},
-            label: Text("Logout"),
+            label: const Text("Logout"),
           ),
         ),
         PopupMenuItem<String>(
           value: 'Support',
           child: TextButton.icon(
-            icon: Icon(Icons.support_agent),
+            icon: const Icon(Icons.support_agent),
             onPressed: () {},
-            label: Text("Support"),
+            label: const Text("Support"),
           ),
         ),
       ],

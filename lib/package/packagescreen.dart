@@ -1,11 +1,10 @@
+// ignore_for_file: no_logic_in_create_state, prefer_const_constructors_in_immutables, avoid_print, prefer_const_constructors
+
 import 'dart:convert';
-import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/url/api_url.dart';
-import 'package:dthlms/utils/loader.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class PackageScreen extends StatefulWidget {

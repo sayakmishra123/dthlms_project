@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, dead_code, unnecessary_import, avoid_print, avoid_unnecessary_containers
+
 import 'dart:convert';
 
 import 'package:animated_button_bar/animated_button_bar.dart';
@@ -269,7 +271,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
         children: [
           Container(
             child: Expanded(
-                child: Container(
+                child:Container(
                     child: Column(
               children: [
                 Flexible(
@@ -432,6 +434,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                                         );
                                                       },
                                                     )
+                                                  
                                                   : CircularProgressIndicator()
                                             ],
                                           );
