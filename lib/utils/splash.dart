@@ -1,12 +1,11 @@
+// ignore_for_file: avoid_print
+
 import 'package:dthlms/configaration/device/device_info.dart';
 import 'package:dthlms/db/copydbfun.dart';
 import 'package:dthlms/db/dbfunction/dbfunction.dart';
 import 'package:dthlms/login/dth_login.dart';
-import 'package:dthlms/pages/dashboard.dart';
-import 'package:dthlms/utils/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -37,12 +36,12 @@ class _SplashScreenState extends State<SplashScreen> {
         print(logintablerow);
         // if (logintablerow.isNotEmpty) {
         Get.back();
-        Get.to(() => DthLmsLogin());
+        Get.to(() =>const  DthLmsLogin());
         // }
       } else {
         await copyDatabase('assets/copydb/databases/sayakdb.db', 'sayakdb.db');
         Get.back();
-        Get.to(() => DthLmsLogin());
+        Get.to(() =>const  DthLmsLogin());
       }
     } catch (e) {
       print(e);
