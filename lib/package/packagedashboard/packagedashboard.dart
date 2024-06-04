@@ -114,8 +114,8 @@ class _PackageDashboardState extends State<PackageDashboard> {
   Map<String, List<PackageFind>> allnestedData = {};
 
   List<MyPackageDetails> mypackage = [];
-    List<AllPackage> filteredPackage = [];
-  
+  List<AllPackage> filteredPackage = [];
+
   // Map<String, List<MyPackage>> mynestedData = {};
 
   Future fnusermypackage(String token) async {
@@ -193,7 +193,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
         );
         allpackage.add(data);
       }
-      filteredPackage=List.from(allpackage);
+      filteredPackage = List.from(allpackage);
       setState(() {});
     }
   }
@@ -240,20 +240,22 @@ class _PackageDashboardState extends State<PackageDashboard> {
       });
     }
   }
-  void setFilterData(){
-      filteredPackage = allpackage
-          .where((p) =>
-              p.packageName.toLowerCase().contains(searchController.text.toLowerCase()) ||
-              p.packageDisplayName.toLowerCase().contains(searchController.text.toLowerCase()))
-          .toList();
-          setState(() {
-            
-          });
+
+  void setFilterData() {
+    filteredPackage = allpackage
+        .where((p) =>
+            p.packageName
+                .toLowerCase()
+                .contains(searchController.text.toLowerCase()) ||
+            p.packageDisplayName
+                .toLowerCase()
+                .contains(searchController.text.toLowerCase()))
+        .toList();
+    setState(() {});
   }
 
   @override
   void initState() {
-    
     // fnusermypackage(widget.token);
     fnfindallpackage(widget.token);
     super.initState();
@@ -274,33 +276,35 @@ class _PackageDashboardState extends State<PackageDashboard> {
                   child: Obx(
                     () => Column(
                       children: [
-                        SizedBox(height: 20,),
-                         Container(
-                          margin: EdgeInsets.symmetric(horizontal: 20),
-                    height: 60,
-                    width: MediaQuery.of(context).size.width,
-                    child: TextFormField(
-                      onChanged: (value) {
-                        setFilterData();
-                      },
-                      controller: searchController,
-                      decoration: InputDecoration(
-                        hintStyle: TextStyle(
-                            color: ColorPage.brownshade300,
-                            fontSize: ClsFontsize.ExtraSmall - 1),
-                        hintText: 'Search',
-                        fillColor: ColorPage.white,
-                        filled: true,
-                        suffixIcon: const Icon(
-                          Icons.search,
-                          color: ColorPage.blue,
+                        SizedBox(
+                          height: 20,
                         ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none),
-                      ),
-                    ),
-                  ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          height: 60,
+                          width: MediaQuery.of(context).size.width,
+                          child: TextFormField(
+                            onChanged: (value) {
+                              setFilterData();
+                            },
+                            controller: searchController,
+                            decoration: InputDecoration(
+                              hintStyle: TextStyle(
+                                  color: ColorPage.brownshade300,
+                                  fontSize: ClsFontsize.ExtraSmall - 1),
+                              hintText: 'Search',
+                              fillColor: ColorPage.white,
+                              filled: true,
+                              suffixIcon: const Icon(
+                                Icons.search,
+                                color: ColorPage.blue,
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: BorderSide.none),
+                            ),
+                          ),
+                        ),
                         AnimatedButtonBar(
                           controller: AnimatedButtonController()..setIndex(0),
                           radius: 32.0,
@@ -437,96 +441,112 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                         child: Text('No Package'),
                                       ))
                             : Expanded(
-                                child: filteredPackage.isNotEmpty? ListView.builder(
-                                  shrinkWrap: true,
-                                  // itemCount: 5,
-                                  itemCount: filteredPackage.length,
-                                  itemBuilder: (context, index) {
-                                    return ExpansionTile(
-                                      // shape:
-                                      //     Border.all(color: Colors.transparent),
-                                      // trailing: ,
-                                      leading:
-                                          Text(filteredPackage[index].packageId),
-                                      title: Text(
-                                        filteredPackage[index].packageName,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      onExpansionChanged: (value) {
-                                        if (value &&
-                                            !allnestedData.containsKey(
-                                                filteredPackage[index].packageId)) {
-                                          fnfindpackage(widget.token,
-                                              filteredPackage[index].packageId);
-                                        }
-                                      },
-                                      children: [
-                                        allnestedData.containsKey(
-                                                filteredPackage[index].packageId)
-                                            ? ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount: 1,
-                                                itemBuilder:
-                                                    (context, subIndex) {
-                                                  var subItem = allnestedData[
-                                                          filteredPackage[index]
-                                                              .packageId]![
-                                                      subIndex];
-                                                  return ExpansionTile(
-                                                    leading:
-                                                        Text(subItem.courseId),
-                                                    title: Text(
-                                                        subItem.courseName),
-                                                    subtitle:
-                                                        Text(subItem.termName),
-                                                    onExpansionChanged:
-                                                        (value) {
-                                                      if (value &&
-                                                          !allnestedData
-                                                              .containsKey(subItem
-                                                                  .packageId)) {
-                                                        fnfindpackage(
-                                                            widget.token,
-                                                            subItem.packageId);
-                                                      }
-                                                    },
-                                                    children: [
-                                                      allnestedData.containsKey(
-                                                              subItem.packageId)
-                                                          ? ListView.builder(
-                                                              shrinkWrap: true,
-                                                              itemCount: 1,
-                                                              itemBuilder: (context,
-                                                                  subSubIndex) {
-                                                                var subSubItem =
-                                                                    allnestedData[
-                                                                            subItem.packageId]![
-                                                                        subSubIndex];
-                                                                return ListTile(
-                                                                  leading: Text(
-                                                                      subSubItem
-                                                                          .courseId),
-                                                                  title: Text(
-                                                                      subItem
-                                                                          .termName),
-                                                                  subtitle: Text(
-                                                                      subSubItem
-                                                                          .packageDisplayName),
-                                                                );
-                                                              },
-                                                            )
-                                                          : CircularProgressIndicator(),
-                                                    ],
-                                                  );
-                                                },
-                                              )
-                                            : Center(child: CircularProgressIndicator(),)
-                                      ],
-                                    );
-                                  },
-                                ):Center(child: CircularProgressIndicator(),)
-                              ),
+                                child: filteredPackage.isNotEmpty
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        // itemCount: 5,
+                                        itemCount: filteredPackage.length,
+                                        itemBuilder: (context, index) {
+                                          return ExpansionTile(
+                                            // shape:
+                                            //     Border.all(color: Colors.transparent),
+                                            // trailing: ,
+                                            leading: Text(filteredPackage[index]
+                                                .packageId),
+                                            title: Text(
+                                              filteredPackage[index]
+                                                  .packageName,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            onExpansionChanged: (value) {
+                                              if (value &&
+                                                  !allnestedData.containsKey(
+                                                      filteredPackage[index]
+                                                          .packageId)) {
+                                                fnfindpackage(
+                                                    widget.token,
+                                                    filteredPackage[index]
+                                                        .packageId);
+                                              }
+                                            },
+                                            children: [
+                                              allnestedData.containsKey(
+                                                      filteredPackage[index]
+                                                          .packageId)
+                                                  ? ListView.builder(
+                                                      shrinkWrap: true,
+                                                      itemCount: 1,
+                                                      itemBuilder:
+                                                          (context, subIndex) {
+                                                        var subItem = allnestedData[
+                                                                filteredPackage[
+                                                                        index]
+                                                                    .packageId]![
+                                                            subIndex];
+                                                        return ExpansionTile(
+                                                          leading: Text(
+                                                              subItem.courseId),
+                                                          title: Text(subItem
+                                                              .courseName),
+                                                          subtitle: Text(
+                                                              subItem.termName),
+                                                          onExpansionChanged:
+                                                              (value) {
+                                                            if (value &&
+                                                                !allnestedData
+                                                                    .containsKey(
+                                                                        subItem
+                                                                            .packageId)) {
+                                                              fnfindpackage(
+                                                                  widget.token,
+                                                                  subItem
+                                                                      .packageId);
+                                                            }
+                                                          },
+                                                          children: [
+                                                            allnestedData
+                                                                    .containsKey(
+                                                                        subItem
+                                                                            .packageId)
+                                                                ? ListView
+                                                                    .builder(
+                                                                    shrinkWrap:
+                                                                        true,
+                                                                    itemCount:
+                                                                        1,
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            subSubIndex) {
+                                                                      var subSubItem =
+                                                                          allnestedData[subItem.packageId]![
+                                                                              subSubIndex];
+                                                                      return ListTile(
+                                                                        leading:
+                                                                            Text(subSubItem.courseId),
+                                                                        title: Text(
+                                                                            subItem.termName),
+                                                                        subtitle:
+                                                                            Text(subSubItem.packageDisplayName),
+                                                                      );
+                                                                    },
+                                                                  )
+                                                                : CircularProgressIndicator(),
+                                                          ],
+                                                        );
+                                                      },
+                                                    )
+                                                  : Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    )
+                                            ],
+                                          );
+                                        },
+                                      )
+                                    : Center(
+                                        child: CircularProgressIndicator(),
+                                      )),
                       ],
                     ),
                   ),
