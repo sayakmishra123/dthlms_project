@@ -92,5 +92,5 @@ class Getx extends GetxController {
     }
   }
 }
-
+  
 

@@ -288,6 +288,14 @@ FocusNode focusNode = FocusNode();
                                             SizedBox(
                                                 width: formfieldsize,
                                                 child: IntlPhoneField(
+                                                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                                                  validator: (value) {
+                                                    if(value!.toString().length>10){
+                                                      return "number may not be";
+                                                    }
+                                                    
+                                                  },
+                                                  disableLengthCheck:true,
                                                   focusNode: focusNode,
                                                  
                                                  
