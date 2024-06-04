@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:animated_button_bar/animated_button_bar.dart';
+import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.dart';
@@ -107,11 +108,14 @@ class MyPackageDetails {
 
 class _PackageDashboardState extends State<PackageDashboard> {
   Getx getxController = Get.put(Getx());
+  TextEditingController searchController = TextEditingController();
 
   List<AllPackage> allpackage = [];
   Map<String, List<PackageFind>> allnestedData = {};
 
   List<MyPackageDetails> mypackage = [];
+    List<AllPackage> filteredPackage = [];
+  
   // Map<String, List<MyPackage>> mynestedData = {};
 
   Future fnusermypackage(String token) async {
@@ -189,6 +193,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
         );
         allpackage.add(data);
       }
+      filteredPackage=List.from(allpackage);
       setState(() {});
     }
   }
@@ -235,9 +240,20 @@ class _PackageDashboardState extends State<PackageDashboard> {
       });
     }
   }
+  void setFilterData(){
+      filteredPackage = allpackage
+          .where((p) =>
+              p.packageName.toLowerCase().contains(searchController.text.toLowerCase()) ||
+              p.packageDisplayName.toLowerCase().contains(searchController.text.toLowerCase()))
+          .toList();
+          setState(() {
+            
+          });
+  }
 
   @override
   void initState() {
+    
     // fnusermypackage(widget.token);
     fnfindallpackage(widget.token);
     super.initState();
@@ -258,6 +274,33 @@ class _PackageDashboardState extends State<PackageDashboard> {
                   child: Obx(
                     () => Column(
                       children: [
+                        SizedBox(height: 20,),
+                         Container(
+                          margin: EdgeInsets.symmetric(horizontal: 20),
+                    height: 60,
+                    width: MediaQuery.of(context).size.width,
+                    child: TextFormField(
+                      onChanged: (value) {
+                        setFilterData();
+                      },
+                      controller: searchController,
+                      decoration: InputDecoration(
+                        hintStyle: TextStyle(
+                            color: ColorPage.brownshade300,
+                            fontSize: ClsFontsize.ExtraSmall - 1),
+                        hintText: 'Search',
+                        fillColor: ColorPage.white,
+                        filled: true,
+                        suffixIcon: const Icon(
+                          Icons.search,
+                          color: ColorPage.blue,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30),
+                            borderSide: BorderSide.none),
+                      ),
+                    ),
+                  ),
                         AnimatedButtonBar(
                           controller: AnimatedButtonController()..setIndex(0),
                           radius: 32.0,
@@ -394,40 +437,40 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                         child: Text('No Package'),
                                       ))
                             : Expanded(
-                                child: ListView.builder(
+                                child: filteredPackage.isNotEmpty? ListView.builder(
                                   shrinkWrap: true,
                                   // itemCount: 5,
-                                  itemCount: allpackage.length,
+                                  itemCount: filteredPackage.length,
                                   itemBuilder: (context, index) {
                                     return ExpansionTile(
                                       // shape:
                                       //     Border.all(color: Colors.transparent),
                                       // trailing: ,
                                       leading:
-                                          Text(allpackage[index].packageId),
+                                          Text(filteredPackage[index].packageId),
                                       title: Text(
-                                        allpackage[index].packageName,
+                                        filteredPackage[index].packageName,
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
                                       onExpansionChanged: (value) {
                                         if (value &&
                                             !allnestedData.containsKey(
-                                                allpackage[index].packageId)) {
+                                                filteredPackage[index].packageId)) {
                                           fnfindpackage(widget.token,
-                                              allpackage[index].packageId);
+                                              filteredPackage[index].packageId);
                                         }
                                       },
                                       children: [
                                         allnestedData.containsKey(
-                                                allpackage[index].packageId)
+                                                filteredPackage[index].packageId)
                                             ? ListView.builder(
                                                 shrinkWrap: true,
                                                 itemCount: 1,
                                                 itemBuilder:
                                                     (context, subIndex) {
                                                   var subItem = allnestedData[
-                                                          allpackage[index]
+                                                          filteredPackage[index]
                                                               .packageId]![
                                                       subIndex];
                                                   return ExpansionTile(
@@ -478,11 +521,11 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                                   );
                                                 },
                                               )
-                                            : CircularProgressIndicator()
+                                            : Center(child: CircularProgressIndicator(),)
                                       ],
                                     );
                                   },
-                                ),
+                                ):Center(child: CircularProgressIndicator(),)
                               ),
                       ],
                     ),

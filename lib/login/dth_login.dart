@@ -385,7 +385,9 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                 formfieldsize,
                                                             child: 
                                                             
-                                                                IntlPhoneField(showCountryFlag: true,
+                                                                IntlPhoneField(
+                                                                  controller: signupphno,
+                                                                  showCountryFlag: true,
                                                              disableLengthCheck:false ,
                                                                 ),
                                                           )
