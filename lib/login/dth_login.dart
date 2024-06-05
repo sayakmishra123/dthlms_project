@@ -485,29 +485,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                         )
                                                       ],
                                                     ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Container(
-                                                          alignment: Alignment
-                                                              .topRight,
-                                                          width: formfieldsize,
-                                                          child: TextButton(
-                                                            onPressed: () {
-                                                              Get.to(() =>
-                                                                  const ForgotScreen());
-                                                            },
-                                                            child: Text(
-                                                              'Forget password',
-                                                              style: FontFamily
-                                                                  .mobilefont,
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                    
                                                     Padding(
                                                       padding: const EdgeInsets
                                                           .symmetric(
@@ -762,10 +740,34 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                             ))
                                                       ],
                                                     ),
+                                                 
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Container(
+                                                          alignment: Alignment
+                                                              .topRight,
+                                                          width: formfieldsize,
+                                                          child: TextButton(
+                                                            onPressed: () {
+                                                              Get.to(() =>
+                                                                  const ForgotScreen());
+                                                            },
+                                                            child: Text(
+                                                              'Forget password',
+                                                              style: FontFamily
+                                                                  .mobilefont,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                     Padding(
                                                       padding: const EdgeInsets
                                                           .symmetric(
-                                                          vertical: 20),
+                                                          vertical: 10),
                                                       child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
