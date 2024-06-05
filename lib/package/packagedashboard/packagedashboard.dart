@@ -579,7 +579,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                     style: FontFamily.font2,
                                     repeat: true,
                                     duration: const Duration(milliseconds: 50),
-                                  ))
+                                  ),),
                             ]),
                           ],
                         ),

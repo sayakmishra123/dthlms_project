@@ -79,7 +79,8 @@ class FontFamily {
   static var font7 = GoogleFonts.outfit(
       textStyle:
           TextStyle(color: ColorPage.white, fontSize: ClsFontsize.Large - 2));
-  //not in use
+  // used in
+  // PackageDashboardMobile
 
   // ignore: non_constant_identifier_names
   static var ResendOtpfont = GoogleFonts.outfit(

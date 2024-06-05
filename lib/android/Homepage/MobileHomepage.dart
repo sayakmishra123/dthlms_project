@@ -28,7 +28,7 @@ class _MobileHomepageState extends State<MobileHomepage> {
     {"id": "2", "image_path": 'assets/android/p3.jpg'},
     {"id": "3", "image_path": 'assets/android/p2.jpg'},
     {"id": "4", "image_path": 'assets/android/p4.avif'},
-    {"id": "5", "image_path": 'assets/android/p3.jpg'},
+    {"id": "5", "image_path": 'assets/android/p2.jpg'},
   ];
 
   final Getx get = Get.put(Getx());

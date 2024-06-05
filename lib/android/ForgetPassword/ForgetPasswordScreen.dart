@@ -12,14 +12,14 @@ import 'package:open_mail_app/open_mail_app.dart';
 
 
 
-class forgetPasswordMobile extends StatefulWidget {
-  const forgetPasswordMobile({super.key});
+class ForgetPasswordMobile extends StatefulWidget {
+  const ForgetPasswordMobile({super.key});
 
   @override
-  State<forgetPasswordMobile> createState() => _forgetPasswordMobileState();
+  State<ForgetPasswordMobile> createState() => _forgetPasswordMobileState();
 }
 
-class _forgetPasswordMobileState extends State<forgetPasswordMobile> {
+class _forgetPasswordMobileState extends State<ForgetPasswordMobile> {
   late double screenwidth = MediaQuery.of(context).size.width;
   late double spaceAroundForgetpassword =
       MediaQuery.of(context).size.width / 12;
