@@ -8,17 +8,18 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:open_mail_app/open_mail_app.dart';
 
-class forgetPasswordMobile extends StatefulWidget {
-  const forgetPasswordMobile({super.key});
+
+
+class ForgetPasswordMobile extends StatefulWidget {
+  const ForgetPasswordMobile({super.key});
 
   @override
-  State<forgetPasswordMobile> createState() => _forgetPasswordMobileState();
+  State<ForgetPasswordMobile> createState() => _forgetPasswordMobileState();
 }
 
-class _forgetPasswordMobileState extends State<forgetPasswordMobile> {
+class _forgetPasswordMobileState extends State<ForgetPasswordMobile> {
   late double screenwidth = MediaQuery.of(context).size.width;
   late double spaceAroundForgetpassword =
       MediaQuery.of(context).size.width / 12;
@@ -346,21 +347,44 @@ class _forgetPasswordMobileState extends State<forgetPasswordMobile> {
                                   padding: MaterialStatePropertyAll(
                                       EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 50))),
-                              onPressed: () {
-                                void openEmailClient() async {
-                                  final Uri emailLaunchUri = Uri(
-                                    scheme: 'mailto',
-                                    path: '',
-                                  );
-                                  if (await canLaunchUrlString(
-                                      emailLaunchUri.toString())) {
-                                    await launchUrl(emailLaunchUri);
-                                  } else {
-                                    throw 'Could not launch email';
-                                  }
-                                }
+                              onPressed: ()async {
+                               EmailContent email = EmailContent(
+                  
+                );
 
-                                openEmailClient();
+                OpenMailAppResult result =
+                    await OpenMailApp.composeNewEmailInMailApp(
+                        nativePickerTitle: 'Select email app to compose',
+                        emailContent: email);
+                if (!result.didOpen && !result.canOpen) {
+                     showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Open Mail App"),
+          content: Text("No mail apps installed"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        );
+      },
+    );
+
+                } else if (!result.didOpen && result.canOpen) {
+                  showDialog(
+                    context: context,
+                    builder: (_) => MailAppPickerDialog(
+                      mailApps: result.options,
+                      emailContent: email,
+                    ),
+                  );
+                }
+                            
                               },
                               icon: Image.asset(
                                 'assets/email.png',
@@ -384,4 +408,5 @@ class _forgetPasswordMobileState extends State<forgetPasswordMobile> {
       ),
     );
   }
+  
 }

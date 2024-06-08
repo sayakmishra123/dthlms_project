@@ -601,7 +601,7 @@ FocusNode focusNode = FocusNode();
                                               child: TextButton(
                                                 onPressed: () {
                                                   Get.to(() =>
-                                                      const forgetPasswordMobile());
+                                                      const ForgetPasswordMobile());
                                                 },
                                                 child: Text(
                                                   'Forget password',
@@ -678,19 +678,23 @@ FocusNode focusNode = FocusNode();
                                                         vertical: 10),
                                                     color: ColorPage.colorgrey,
                                                     onPressed: () async {
+                                                     
                                                       if (mobile_key_login
                                                           .currentState!
                                                           .validate()) {
                                                         mobile_key_login.currentState!
                                                             .save();
-    //                                                         final package = await getPackageDtails(context,0,'Structure');
-    // print('Package data: $package');
+   
                                                         await loginApi(
                                                             context,
                                                             loginemail.text,
                                                             loginpassword.text,
                                                             loginotp.text);
                                                       }
+    
+
+
+
                                                     },
                                                     child: Text(
                                                       'Login',

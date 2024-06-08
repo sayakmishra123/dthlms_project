@@ -11,10 +11,12 @@ import 'package:dthlms/login/loginmodel.dart';
 import 'package:dthlms/map/apiobject.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
 
+
 import 'package:dthlms/url/api_url.dart';
 import 'package:dthlms/utils/loader.dart';
 import 'package:dthlms/utils/packages.dart';
-// import 'package:flutter/foundation.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:get/get.dart';
@@ -92,8 +94,11 @@ Future loginApi(
     // await DbHandler().createMyPackagetable();
     //  await insertMyPackageData();
     // dbdata = await DbHandler().readData();
-
+// String tk=jsondata['result']['token'];
     Get.back();
+   
+
+
     Get.to(() => Platform.isWindows
         ? PackageDashboard(jsondata['result']['token'])
         : PackageDashboardMobile(jsondata['result']['token']));

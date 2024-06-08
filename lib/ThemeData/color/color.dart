@@ -51,9 +51,11 @@ class ColorPage {
 
   static const hovercolor = Color.fromRGBO(15, 28, 243, 1);
   //not in use
+
   static const focuscolor = Color.fromRGBO(15, 28, 243, 1);
   //used in
   //MyClassDashboard
+
   static const bgcolor = Color.fromARGB(255, 208, 225, 238);
   //used in
   //signInOtpScreen

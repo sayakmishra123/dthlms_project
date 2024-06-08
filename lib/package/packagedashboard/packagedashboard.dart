@@ -271,7 +271,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
         children: [
           Container(
             child: Expanded(
-                child:Container(
+                child: Container(
                     child: Column(
               children: [
                 Flexible(
@@ -434,15 +434,14 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                                         );
                                                       },
                                                     )
-                                                  
                                                   : CircularProgressIndicator()
                                             ],
                                           );
                                         },
                                       )
                                     : Center(
-                                        child: Text('No Package'),
-                                      ))
+                                        child: Image.asset(
+                                            'assets/android/nodatafound.png')))
                             : Expanded(
                                 child: filteredPackage.isNotEmpty
                                     ? ListView.builder(
@@ -450,106 +449,132 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                         // itemCount: 5,
                                         itemCount: filteredPackage.length,
                                         itemBuilder: (context, index) {
-                                          return ExpansionTile(
-                                            // shape:
-                                            //     Border.all(color: Colors.transparent),
-                                            // trailing: ,
-                                            leading: Text(filteredPackage[index]
-                                                .packageId),
-                                            title: Text(
-                                              filteredPackage[index]
-                                                  .packageName,
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold),
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(10),
+                                              ),
+                                              color: ColorPage.white,
                                             ),
-                                            onExpansionChanged: (value) {
-                                              if (value &&
-                                                  !allnestedData.containsKey(
+                                            margin: EdgeInsets.all(10),
+                                            child: ExpansionTile(
+                                              shape: Border.all(
+                                                  color: Colors.transparent),
+                                              // leading: Text(
+                                              //     filteredPackage[index]
+                                              //         .packageId),
+                                              title: Text(
+                                                filteredPackage[index]
+                                                    .packageName,
+                                                style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              onExpansionChanged: (value) {
+                                                if (value &&
+                                                    !allnestedData.containsKey(
+                                                        filteredPackage[index]
+                                                            .packageId)) {
+                                                  fnfindpackage(
+                                                      widget.token,
                                                       filteredPackage[index]
-                                                          .packageId)) {
-                                                fnfindpackage(
-                                                    widget.token,
-                                                    filteredPackage[index]
-                                                        .packageId);
-                                              }
-                                            },
-                                            children: [
-                                              allnestedData.containsKey(
-                                                      filteredPackage[index]
-                                                          .packageId)
-                                                  ? ListView.builder(
-                                                      shrinkWrap: true,
-                                                      itemCount: 1,
-                                                      itemBuilder:
-                                                          (context, subIndex) {
-                                                        var subItem = allnestedData[
-                                                                filteredPackage[
-                                                                        index]
-                                                                    .packageId]![
-                                                            subIndex];
-                                                        return ExpansionTile(
-                                                          leading: Text(
-                                                              subItem.courseId),
-                                                          title: Text(subItem
-                                                              .courseName),
-                                                          subtitle: Text(
-                                                              subItem.termName),
-                                                          onExpansionChanged:
-                                                              (value) {
-                                                            if (value &&
-                                                                !allnestedData
-                                                                    .containsKey(
-                                                                        subItem
-                                                                            .packageId)) {
-                                                              fnfindpackage(
-                                                                  widget.token,
+                                                          .packageId);
+                                                }
+                                              },
+                                              children: [
+                                                allnestedData.containsKey(
+                                                        filteredPackage[index]
+                                                            .packageId)
+                                                    ? ListView.builder(
+                                                        shrinkWrap: true,
+                                                        itemCount: 1,
+                                                        itemBuilder: (context,
+                                                            subIndex) {
+                                                          var subItem = allnestedData[
+                                                                  filteredPackage[
+                                                                          index]
+                                                                      .packageId]![
+                                                              subIndex];
+                                                          return Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border: Border(
+                                                                top: BorderSide(
+                                                                    color: ColorPage
+                                                                        .colorblack,
+                                                                    width: 1),
+                                                              ),
+                                                            ),
+                                                            child:
+                                                                ExpansionTile(
+                                                              shape: Border.all(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                              // leading: Text(
+                                                              //     subItem
+                                                              //         .courseId),
+                                                              title: Text(subItem
+                                                                  .courseName),
+                                                              subtitle: Text(
                                                                   subItem
-                                                                      .packageId);
-                                                            }
-                                                          },
-                                                          children: [
-                                                            allnestedData
-                                                                    .containsKey(
+                                                                      .termName),
+                                                              onExpansionChanged:
+                                                                  (value) {
+                                                                if (value &&
+                                                                    !allnestedData
+                                                                        .containsKey(
+                                                                            subItem.packageId)) {
+                                                                  fnfindpackage(
+                                                                      widget
+                                                                          .token,
+                                                                      subItem
+                                                                          .packageId);
+                                                                }
+                                                              },
+                                                              children: [
+                                                                allnestedData.containsKey(
                                                                         subItem
                                                                             .packageId)
-                                                                ? ListView
-                                                                    .builder(
-                                                                    shrinkWrap:
-                                                                        true,
-                                                                    itemCount:
-                                                                        1,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            subSubIndex) {
-                                                                      var subSubItem =
-                                                                          allnestedData[subItem.packageId]![
-                                                                              subSubIndex];
-                                                                      return ListTile(
-                                                                        leading:
-                                                                            Text(subSubItem.courseId),
-                                                                        title: Text(
-                                                                            subItem.termName),
-                                                                        subtitle:
-                                                                            Text(subSubItem.packageDisplayName),
-                                                                      );
-                                                                    },
-                                                                  )
-                                                                : CircularProgressIndicator(),
-                                                          ],
-                                                        );
-                                                      },
-                                                    )
-                                                  : Center(
-                                                      child:
-                                                          CircularProgressIndicator(),
-                                                    )
-                                            ],
+                                                                    ? ListView
+                                                                        .builder(
+                                                                        shrinkWrap:
+                                                                            true,
+                                                                        itemCount:
+                                                                            1,
+                                                                        itemBuilder:
+                                                                            (context,
+                                                                                subSubIndex) {
+                                                                          var subSubItem =
+                                                                              allnestedData[subItem.packageId]![subSubIndex];
+                                                                          return Container(
+                                                                            decoration:
+                                                                                BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
+                                                                            child:
+                                                                                ListTile(
+                                                                              title: Text(subItem.termName),
+                                                                              subtitle: Text(subSubItem.packageDisplayName),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      )
+                                                                    : CircularProgressIndicator(),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                      )
+                                                    : Center(
+                                                        child:
+                                                            CircularProgressIndicator(),
+                                                      )
+                                              ],
+                                            ),
                                           );
                                         },
                                       )
                                     : Center(
-                                        child: CircularProgressIndicator(),
-                                      )),
+                                        child: Image.asset(
+                                            'assets/android/nodatafound.png'))),
                       ],
                     ),
                   ),
@@ -572,14 +597,15 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                 height: MediaQuery.sizeOf(context).height,
                               ),
                               Positioned(
-                                  bottom: 500,
-                                  left: 300,
-                                  child: TypeWriter.text(
-                                    'lorem ipsum dolot sit amet ...',
-                                    style: FontFamily.font2,
-                                    repeat: true,
-                                    duration: const Duration(milliseconds: 50),
-                                  ))
+                                bottom: 500,
+                                left: 300,
+                                child: TypeWriter.text(
+                                  'lorem ipsum dolot sit amet ...',
+                                  style: FontFamily.font2,
+                                  repeat: true,
+                                  duration: const Duration(milliseconds: 50),
+                                ),
+                              ),
                             ]),
                           ],
                         ),
