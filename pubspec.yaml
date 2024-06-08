@@ -84,7 +84,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/applogo.png"
+  image_path: "assets/dth-class-logo_prev_ui-new.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   # web:
   #   generate: true
@@ -93,7 +93,7 @@ flutter_launcher_icons:
   #   theme_color: "#hexcode"
   windows:
     generate: true
-    image_path: "assets/applogo.png"
+    image_path: "assets/dth-class-logo_prev_ui-new.png"
     icon_size: 48 # min:48, max:256, default: 48
   # macos:
   #   generate: true
