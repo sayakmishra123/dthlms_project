@@ -40,7 +40,8 @@ class ClassAllVideos {
   });
 }
 
-class _VideoDashboardState extends State<VideoDashboard> {
+class _VideoDashboardState extends State<VideoDashboard>
+    with TickerProviderStateMixin {
   String token;
   _VideoDashboardState(this.token);
 
@@ -91,25 +92,13 @@ class _VideoDashboardState extends State<VideoDashboard> {
     Get.back();
   }
 
-  String? selectedValue = 'Choose any one';
-  final _dropdownFormKey = GlobalKey<FormState>();
-
-  List<DropdownMenuItem<String>> get dropdownItems {
-    List<DropdownMenuItem<String>> menuItems = [
-      DropdownMenuItem(
-        child: Text("Choose any one"),
-        value: "Choose any one",
-        enabled: false,
-      ),
-      DropdownMenuItem(child: Text("Video"), value: "Video"),
-      DropdownMenuItem(child: Text("Live"), value: "Live"),
-      DropdownMenuItem(child: Text("Backup"), value: "Backup"),
-    ];
-    return menuItems;
-  }
-
   @override
   void initState() {
+    _motionTabBarController = MotionTabBarController(
+      initialIndex: 0,
+      length: 3,
+      vsync: this,
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) =>
         ShowCaseWidget.of(context)
             .startShowCase([showcase_one, showcase_searchkey]));
@@ -122,10 +111,11 @@ class _VideoDashboardState extends State<VideoDashboard> {
     "LIVE",
     "BACKUP",
   ];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 4,
+        length: 3,
         child: Scaffold(
           backgroundColor: ColorPage.bgcolor,
           appBar: AppBar(
@@ -142,10 +132,13 @@ class _VideoDashboardState extends State<VideoDashboard> {
                   Icons.picture_as_pdf,
                   Icons.question_answer,
                   Icons.tag,
-                  Icons.reviews
                 ],
 
-                badges: [null, null, null, null],
+                badges: [
+                  null,
+                  null,
+                  null,
+                ],
 
                 tabSize: 50,
                 tabBarHeight: 55,
