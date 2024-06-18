@@ -65,6 +65,11 @@ dependencies:
   flutter_rounded_progress_bar: ^0.3.2
   connectivity_plus: ^6.0.3
   typewritertext: ^3.0.5
+  motion_tab_bar: ^2.0.4
+  pdfrx: ^1.0.67
+  showcaseview: ^3.0.0
+  cool_stepper_custom: ^1.2.1 
+  awesome_dialog: ^3.2.1
   # abhoy
   window_manager:
     git:

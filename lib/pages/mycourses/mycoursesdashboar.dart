@@ -96,7 +96,7 @@ class _MyClassContentState extends State<MyClassContent>
               SizedBox(
                   width: MediaQuery.sizeOf(context).width - 1150,
                   // height: 1000,
-                  child: const MyClassVideoContent()),
+                  child: MyClassVideoContent('', '')),
               Expanded(
                 child: Container(
                   color: ColorPage.colorblack,

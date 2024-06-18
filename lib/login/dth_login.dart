@@ -35,7 +35,6 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
   TextEditingController loginotp = TextEditingController();
   FocusNode focusNode = FocusNode();
 
-
   final GlobalKey<FormState> desktop_key1 = GlobalKey();
   final GlobalKey<FormState> desktop_key2 = GlobalKey();
 
@@ -379,6 +378,8 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                         SizedBox(
                                                           width: formfieldsize,
                                                           child: IntlPhoneField(
+                                                            initialCountryCode:
+                                                                'IN',
                                                             controller:
                                                                 signupphno,
                                                             showCountryFlag:
@@ -485,7 +486,6 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                         )
                                                       ],
                                                     ),
-                                                    
                                                     Padding(
                                                       padding: const EdgeInsets
                                                           .symmetric(
@@ -740,7 +740,6 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                             ))
                                                       ],
                                                     ),
-                                                 
                                                     Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment

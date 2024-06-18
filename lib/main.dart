@@ -1,6 +1,4 @@
 import 'package:dthlms/login/dth_login.dart';
-import 'package:dthlms/package/packagevideo.dart/videodashboard.dart';
-import 'package:dthlms/pages/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 
