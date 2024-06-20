@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dthlms/errormsg/errorhandling.dart';
 import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/map/apiobject.dart';
 import 'package:dthlms/url/api_url.dart';
 import 'package:dthlms/utils/loader.dart';
@@ -12,6 +13,7 @@ import 'package:http/http.dart' as http;
 
 Future forgetgenerateCode(
     BuildContext context, String signupphno, String signupemail) async {
+  Getx getx = Get.put(Getx());
   loader(context);
   Map body = ClsMap().objSignupconfirmation(signupphno, signupemail);
   var res = await http.post(
@@ -26,7 +28,7 @@ Future forgetgenerateCode(
   print('object');
   Get.back();
   if (jsondata['statusCode'] == 201 && jsondata['isSuccess'] == true) {
-    Getx().forgetpasswordemailcode.value = true;
+    getx.forgetpasswordemailcode.value = true;
     return jsondata['result'].toString();
   } else {
     return jsondata['errorMessages'];
@@ -39,6 +41,8 @@ Future forgetPassword(BuildContext context, String signupemail, String key,
     String otpcode) async {
   // try {
   loader(context);
+  Getx getx = Get.put(Getx());
+  print('forgetpassword');
   Map body = ClsMap().objforgetPassword(signupemail, otpcode);
   final client = HttpClient();
 
@@ -55,14 +59,17 @@ Future forgetPassword(BuildContext context, String signupemail, String key,
 
   if (json['isSuccess'] == true && json['statusCode'] == 303) {
     print(json['isSuccess']);
+
     Get.back();
-    resetPassword(
-        context,
-        json['result']['email'],
-        json['result']['phoneNumber'],
-        'SayakMishra1234@',
-        'SayakMishra1234@',
-        json['result']['token']);
+    getx.forgetpageshow.value = true;
+    return json['result']['token'];
+    // resetPassword(
+    //     context,
+    //     json['result']['email'],
+    //     json['result']['phoneNumber'],
+    //     'SayakMishra1234@',
+    //     'SayakMishra1234@',
+    //     json['result']['token']);
   } else {
     Get.back();
     ClsErrorMsg.fnErrorDialog(context, json['errorMessages'], responseBody);
@@ -73,6 +80,7 @@ Future resetPassword(BuildContext context, String email, String ph, String pass,
     String confirmpass, String code) async {
   loader(context);
   Map body = ClsMap().objresetPassword(email, ph, pass, confirmpass);
+  print(body.toString() + code);
   final client = HttpClient();
   final request = await client
       .postUrl(Uri.https(ClsUrlApi.mainurl, '${ClsUrlApi.resetPassword}$code'));
@@ -88,8 +96,10 @@ Future resetPassword(BuildContext context, String email, String ph, String pass,
   var json = jsonDecode(responseBody);
   if (json['statusCode'] == 200 && json['isSuccess'] == true) {
     Get.back();
+
     ClsErrorMsg.fnErrorDialog(
         context, 'Password reset successfully', responseBody);
+    Get.to(() => DthLmsLogin());
   }
 
   {

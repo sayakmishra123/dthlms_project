@@ -6,7 +6,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus
   flutter_platform_alert
   permission_handler_windows
-  rive_common
   screen_retriever
   syncfusion_pdfviewer_windows
   url_launcher_windows

@@ -25,7 +25,8 @@ class Mobilelogin extends StatefulWidget {
 
 class _MobileloginState extends State<Mobilelogin> {
   TextEditingController signupuser = TextEditingController();
-  TextEditingController signupname = TextEditingController();
+  TextEditingController signupfirstname = TextEditingController();
+    TextEditingController signuplastname = TextEditingController();
   TextEditingController signupemail = TextEditingController();
   TextEditingController signupphno = TextEditingController();
   TextEditingController signuppassword = TextEditingController();
@@ -188,47 +189,115 @@ FocusNode focusNode = FocusNode();
                                                 ))
                                           ],
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SizedBox(
-                                              width: formfieldsize,
-                                              child: Text(
-                                                'Full Name',
-                                                style: FontFamily.mobilefont,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SizedBox(
-                                                width: formfieldsize,
-                                                child: TextFormField(
-                                                  autovalidateMode:
-                                                      AutovalidateMode
-                                                          .onUserInteraction,
-                                                  validator: (value) {
-                                                    if (value!.isEmpty) {
-                                                      return 'Cannot blank';
-                                                    } else {
-                                                      return null;
-                                                    }
-                                                  },
-                                                  keyboardType:
-                                                      TextInputType.name,
-                                                  controller: signupname,
-                                                  decoration: InputDecoration(
-                                                      enabledBorder: border,
-                                                      focusedBorder: border,
-                                                      hintText: 'Your Name'),
-                                                ))
-                                          ],
-                                        ),
-                                        Row(
+                                         SizedBox(height: 10,),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        SizedBox(
+                                                          width: formfieldsize/2,
+                                                          child: Text(
+                                                            'First Name',
+                                                            style:
+                                                                FontFamily.font,
+                                                          ),
+                                                        ),
+                                                        SizedBox(width: 20,),
+                                                        SizedBox(
+                                                          width: formfieldsize/2.2,
+                                                          child: Text(
+                                                            'Last Name',
+                                                            style:
+                                                                FontFamily.font,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        SizedBox(
+                                                            width:
+                                                                formfieldsize/2.2,
+                                                            child:
+                                                                TextFormField(
+                                                              autovalidateMode:
+                                                                  AutovalidateMode
+                                                                      .onUserInteraction,
+                                                              textInputAction:
+                                                                  TextInputAction
+                                                                      .next,
+                                                              validator:
+                                                                  (value) {
+                                                                if (value!
+                                                                    .isEmpty) {
+                                                                  return 'Cannot blank';
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .name,
+                                                              controller:
+                                                                  signupfirstname,
+                                                              decoration: InputDecoration(
+                                                                  prefixIcon:
+                                                                      const Icon(
+                                                                          Icons
+                                                                              .person),
+                                                                  enabledBorder:
+                                                                      border,
+                                                                  focusedBorder:
+                                                                      border,
+                                                                  hintText:
+                                                                      'First Name'),
+                                                            )),
+                                                            SizedBox(width: 30,),
+
+                                                            SizedBox(
+                                                            width:
+                                                                formfieldsize/2,
+                                                            child:
+                                                                TextFormField(
+                                                              autovalidateMode:
+                                                                  AutovalidateMode
+                                                                      .onUserInteraction,
+                                                              textInputAction:
+                                                                  TextInputAction
+                                                                      .next,
+                                                              validator:
+                                                                  (value) {
+                                                                if (value!
+                                                                    .isEmpty) {
+                                                                  return 'Cannot blank';
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .name,
+                                                              controller:
+                                                                  signuplastname,
+                                                              decoration: InputDecoration(
+                                                                  prefixIcon:
+                                                                      const Icon(
+                                                                          Icons
+                                                                              .person),
+                                                                  enabledBorder:
+                                                                      border,
+                                                                  focusedBorder:
+                                                                      border,
+                                                                  hintText:
+                                                                      'Last Name'),
+                                                            ))
+                                                      ],
+                                                    ),
+                                                   Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
@@ -435,7 +504,9 @@ FocusNode focusNode = FocusNode();
                                                                 signInOtpScreen(
                                                                   signupuser
                                                                       .text,
-                                                                  signupname
+                                                                  signupfirstname
+                                                                      .text,
+                                                                      signuplastname
                                                                       .text,
                                                                   signupemail
                                                                       .text,

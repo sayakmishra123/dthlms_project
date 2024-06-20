@@ -44,6 +44,7 @@ class Getx extends GetxController {
   RxList<PackageFind> packagefind = <PackageFind>[].obs;
   RxBool packageshow = true.obs;
   RxBool forgetpasswordemailcode = false.obs;
+  RxBool forgetpageshow = false.obs;
   @override
   void onInit() {
     // ignore: unused_local_variable

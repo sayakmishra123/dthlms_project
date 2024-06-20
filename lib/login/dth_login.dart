@@ -25,7 +25,8 @@ class DthLmsLogin extends StatefulWidget {
 
 class _DthLmsLoginState extends State<DthLmsLogin> {
   TextEditingController signupuser = TextEditingController();
-  TextEditingController signupname = TextEditingController();
+  TextEditingController signupfirstname = TextEditingController();
+  TextEditingController signuplastname = TextEditingController();
   TextEditingController signupemail = TextEditingController();
   TextEditingController signupphno = TextEditingController();
   TextEditingController signuppassword = TextEditingController();
@@ -237,15 +238,31 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                             ))
                                                       ],
                                                     ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
                                                     Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .center,
                                                       children: [
                                                         SizedBox(
-                                                          width: formfieldsize,
+                                                          width: formfieldsize /
+                                                              2.1,
                                                           child: Text(
-                                                            'Full Name',
+                                                            'First Name',
+                                                            style:
+                                                                FontFamily.font,
+                                                          ),
+                                                        ),
+                                                        SizedBox(
+                                                          width: 20,
+                                                        ),
+                                                        SizedBox(
+                                                          width:
+                                                              formfieldsize / 2,
+                                                          child: Text(
+                                                            'Last Name',
                                                             style:
                                                                 FontFamily.font,
                                                           ),
@@ -259,7 +276,8 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                       children: [
                                                         SizedBox(
                                                             width:
-                                                                formfieldsize,
+                                                                formfieldsize /
+                                                                    2.2,
                                                             child:
                                                                 TextFormField(
                                                               autovalidateMode:
@@ -281,7 +299,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                   TextInputType
                                                                       .name,
                                                               controller:
-                                                                  signupname,
+                                                                  signupfirstname,
                                                               decoration: InputDecoration(
                                                                   prefixIcon:
                                                                       const Icon(
@@ -292,7 +310,44 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                   focusedBorder:
                                                                       border,
                                                                   hintText:
-                                                                      'Your Name'),
+                                                                      'First Name'),
+                                                            )),
+                                                        SizedBox(
+                                                          width: 30,
+                                                        ),
+                                                        SizedBox(
+                                                            width:
+                                                                formfieldsize /
+                                                                    2,
+                                                            child:
+                                                                TextFormField(
+                                                              autovalidateMode:
+                                                                  AutovalidateMode
+                                                                      .onUserInteraction,
+                                                              textInputAction:
+                                                                  TextInputAction
+                                                                      .next,
+                                                              validator:
+                                                                  (value) {
+                                                                if (value!
+                                                                    .isEmpty) {
+                                                                  return 'Cannot blank';
+                                                                } else {
+                                                                  return null;
+                                                                }
+                                                              },
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .name,
+                                                              controller:
+                                                                  signuplastname,
+                                                              decoration: InputDecoration(
+                                                                  enabledBorder:
+                                                                      border,
+                                                                  focusedBorder:
+                                                                      border,
+                                                                  hintText:
+                                                                      'Last Name'),
                                                             ))
                                                       ],
                                                     ),
@@ -432,7 +487,8 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                         () =>
                                                                             OTPScreen(
                                                                               signupuser.text,
-                                                                              signupname.text,
+                                                                              signupfirstname.text,
+                                                                              signuplastname.text,
                                                                               signupemail.text,
                                                                               signuppassword.text,
                                                                               signupphno.text,
@@ -518,14 +574,15 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                       GetUtils.isEmail(
                                                                           signupemail
                                                                               .text)) {
-                                                                    // desktop_key1
-                                                                    //     .currentState!
-                                                                    //     .save();
+                                                                    desktop_key1
+                                                                        .currentState!
+                                                                        .save();
                                                                     Get.to(
                                                                         () =>
                                                                             OTPScreen(
                                                                               signupuser.text,
-                                                                              signupname.text,
+                                                                              signupfirstname.text,
+                                                                              signuplastname.text,
                                                                               signupemail.text,
                                                                               signuppassword.text,
                                                                               signupphno.text,

@@ -121,7 +121,7 @@ Future loginApi(
   }
 }
 
-Future signupApi(BuildContext context, String signupuser, String signupname,
+Future signupApi(BuildContext context, String signupuser, String signupfirstname, String signuplastname,
     signupemail, signuppassword, signupphno, key, otp) async {
   // try {
   final getObj = Get.put(Getx());
@@ -141,7 +141,8 @@ Future signupApi(BuildContext context, String signupuser, String signupname,
 
   var signupdata = ClsMap().objSignupApi(
     signupuser,
-    signupname,
+  signupfirstname,
+  signuplastname,
     signupemail,
     signuppassword,
     signupphno,

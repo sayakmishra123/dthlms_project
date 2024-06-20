@@ -14,7 +14,8 @@ class ClsMap {
 
   Map objSignupApi(
       String signupuser,
-      String signupname,
+      String signupfirstname,
+      String signuplastname,
       signupemail,
       signuppassword,
       signupphno,
@@ -29,8 +30,8 @@ class ClsMap {
       'password': signuppassword,
       'franchiseId': 1,
       'phoneNumber': signupphno,
-      'firstName': signupname,
-      'lastName': 'x',
+      'firstName': signupfirstname,
+      'lastName': signuplastname,
       'email': signupemail,
       'emailCode': otp,
       'phoneNumberCode': null,
