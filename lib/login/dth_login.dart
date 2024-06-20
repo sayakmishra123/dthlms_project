@@ -80,6 +80,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
+                                 
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -92,9 +93,11 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                       ),
                                     ],
                                   ),
+                                  
                                 ],
                               ),
                             ),
+                            
                           ],
                         ),
                       ),
@@ -106,6 +109,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                               Card(
                                 elevation: 80,
                                 child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 30),
                                   width: 500,
                                   decoration: BoxDecoration(
                                       color: ColorPage.white,
@@ -116,6 +120,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
+                                    
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -158,19 +163,19 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                   ButtonBarEntry(
                                                       onTap: () {
                                                         getxController
-                                                            .show.value = true;
+                                                            .show.value = false;
                                                       },
                                                       child: Text(
-                                                        'Sign Up',
+                                                        'Log in',
                                                         style: FontFamily.font,
                                                       )),
                                                   ButtonBarEntry(
                                                       onTap: () {
                                                         getxController
-                                                            .show.value = false;
+                                                            .show.value = true;
                                                       },
                                                       child: Text(
-                                                        'Log in',
+                                                        'Sign up',
                                                         style: FontFamily.font,
                                                       )),
                                                 ],
@@ -178,8 +183,8 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                             ),
                                           ],
                                         ),
-                                        getxController.show.value
-                                            ? Form(
+                                        getxController.show.value  
+                                            ? getxController.isSignup.value? Form(
                                                 key: desktop_key1,
                                                 child: Column(
                                                   children: [
@@ -562,9 +567,9 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                             20)),
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .symmetric(
-                                                                        vertical:
-                                                                            10),
+                                                                        .only(
+                                                                        bottom:
+                                                                            20),
                                                                 color: ColorPage
                                                                     .colorgrey,
                                                                 onPressed: () {
@@ -654,7 +659,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                     ),
                                                   ],
                                                 ),
-                                              )
+                                              ):Container(child: Text("Sign up is Disable by Admin!"),)
                                             : Form(
                                                 key: desktop_key2,
                                                 child: Column(
@@ -667,7 +672,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                         SizedBox(
                                                           width: formfieldsize,
                                                           child: Text(
-                                                            'Email',
+                                                            'Email/Phone',
                                                             style:
                                                                 FontFamily.font,
                                                           ),
@@ -710,7 +715,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                   focusedBorder:
                                                                       border,
                                                                   hintText:
-                                                                      'hello@gmail.com'),
+                                                                      'Enter Your Email / Phone'),
                                                             ))
                                                       ],
                                                     ),
@@ -834,15 +839,16 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                   formfieldsize,
                                                               child:
                                                                   MaterialButton(
+                                                                    
                                                                 shape: ContinuousRectangleBorder(
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             20)),
                                                                 padding:
                                                                     const EdgeInsets
-                                                                        .symmetric(
-                                                                        vertical:
-                                                                            10),
+                                                                        .only(
+                                                                        bottom:
+                                                                            18),
                                                                 color: ColorPage
                                                                     .colorgrey,
                                                                 onPressed:
