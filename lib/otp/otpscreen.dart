@@ -17,11 +17,13 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: must_be_immutable
 class OTPScreen extends StatefulWidget {
   String signupuser;
-  String signupname;
+  String signupfirstname;
+  String signuplastname;
+
   String signupemail;
   String signuppassword;
   String signupphno;
-  OTPScreen(this.signupuser, this.signupname, this.signupemail,
+  OTPScreen(this.signupuser, this.signupfirstname,this.signuplastname, this.signupemail,
       this.signuppassword, this.signupphno,
       {super.key});
   // OTPScreen({super.key});
@@ -211,7 +213,8 @@ class _OTPScreenState extends State<OTPScreen> {
                                       signupApi(
                                           context,
                                           widget.signupuser,
-                                          widget.signupname,
+                                          widget.signupfirstname,
+                                          widget.signuplastname,
                                           widget.signupemail,
                                           widget.signuppassword,
                                           widget.signupphno,

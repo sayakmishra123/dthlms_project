@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:dthlms/login/dth_login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -33,6 +34,13 @@ class _MyAppState extends State<MyApp> {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: DthLmsLogin());
+        home: AnimatedSplashScreen(
+          splash: "assets/splash6.gif",
+          splashIconSize: 6000,
+          centered: true,
+          nextScreen: DthLmsLogin(),
+          backgroundColor: Color.fromRGBO(255, 255, 255, 0.907),
+          duration: 3500,
+        ));
   }
 }

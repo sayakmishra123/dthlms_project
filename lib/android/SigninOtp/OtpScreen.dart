@@ -15,11 +15,12 @@ import 'package:google_fonts/google_fonts.dart';
 // ignore: must_be_immutable
 class signInOtpScreen extends StatefulWidget {
   String signupuser;
-  String signupname;
+  String signupfirstname;
+  String signuplastname;
   String signupemail;
   String signuppassword;
   String signupphno;
-  signInOtpScreen(this.signupuser, this.signupname, this.signupemail,
+  signInOtpScreen(this.signupuser, this.signupfirstname,this.signuplastname, this.signupemail,
       this.signuppassword, this.signupphno,
       {super.key});
 
@@ -236,7 +237,9 @@ class _signInOtpScreenState extends State<signInOtpScreen> {
                                   signupApi(
                                       context,
                                       widget.signupuser,
-                                      widget.signupname,
+                                      widget.signupfirstname,
+                                      widget.signuplastname,
+
                                       widget.signupemail,
                                       widget.signuppassword,
                                       widget.signupphno,
