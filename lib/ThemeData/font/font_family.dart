@@ -90,4 +90,10 @@ class FontFamily {
           fontWeight: FontWeight.bold));
   //used in -->
   //signInOtpScreen
+
+
+  
+  static var font8 = GoogleFonts.outfit(
+      textStyle:
+          TextStyle(color: ColorPage.white, fontSize: ClsFontsize.DoubleExtraSmall - 2));
 }

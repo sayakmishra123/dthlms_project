@@ -9,6 +9,7 @@ import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.dart';
 import 'package:dthlms/package/packagevideo.dart/videodashboard.dart';
 import 'package:dthlms/url/api_url.dart';
+import 'package:dthlms/utils/enebelActivationcode.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
@@ -269,7 +270,8 @@ class _PackageDashboardState extends State<PackageDashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorPage.bgcolor,
-      body: Row(
+      body:Stack(children: <Widget>[
+         Row(
         children: [
           Container(
             child: Expanded(
@@ -341,7 +343,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                     )),
                               ],
                             ),
-                            getxController.packageshow.value
+                           getxController.packageshow.value
                                 ? Expanded(
                                     child: false
                                         ? ListView.builder(
@@ -585,6 +587,8 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                         : Center(
                                             child: Image.asset(
                                                 'assets/android/nodatafound.png'))),
+                          
+                         
                           ],
                         ),
                       ),
@@ -626,6 +630,8 @@ class _PackageDashboardState extends State<PackageDashboard> {
                   )))
         ],
       ),
+        GlobalDialog()
+      ],)
     );
   }
 }

@@ -5,7 +5,10 @@ import 'dart:convert';
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
 import 'package:dthlms/package/packagevideo.dart/videorelatetedPage.dart';
+import 'package:dthlms/url/api_url.dart';
 import 'package:dthlms/utils/loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +21,7 @@ import 'package:motion_tab_bar/MotionBadgeWidget.dart';
 import 'package:motion_tab_bar/MotionTabBar.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
 import 'package:showcaseview/showcaseview.dart';
+import 'package:typewritertext/v3/typewriter.dart';
 
 class VideoDashboard extends StatefulWidget {
   String token;
@@ -47,6 +51,16 @@ class _VideoDashboardState extends State<VideoDashboard>
 
   GlobalKey showcase_one = GlobalKey();
   GlobalKey showcase_searchkey = GlobalKey();
+    TextEditingController searchController = TextEditingController();
+  bool subvideos = false;
+
+  List<AllPackage> allpackage = [];
+  Map<String, List<PackageFind>> allnestedData = {};
+
+  List<MyPackageDetails> mypackage = [];
+  List<AllPackage> filteredPackage = [];
+
+  Getx getxController = Get.put(Getx());
 
   List<ClassAllVideos> x1 = [];
   var data1;
@@ -91,13 +105,19 @@ class _VideoDashboardState extends State<VideoDashboard>
 
     Get.back();
   }
+  
 
   @override
   void initState() {
+    fnfindallpackage(widget.token);
     _motionTabBarController = MotionTabBarController(
       initialIndex: 0,
       length: 3,
       vsync: this,
+      
+  
+
+     
     );
     WidgetsBinding.instance.addPostFrameCallback((_) =>
         ShowCaseWidget.of(context)
@@ -114,314 +134,340 @@ class _VideoDashboardState extends State<VideoDashboard>
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          backgroundColor: ColorPage.bgcolor,
-          appBar: AppBar(
-            iconTheme: IconThemeData(color: ColorPage.white),
-            backgroundColor: ColorPage.appbarcolor,
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(80),
-              child: MotionTabBar(
-                controller:
-                    _motionTabBarController, // ADD THIS if you need to change your tab programmatically
-                initialSelectedTab: "VIDEO",
-                labels: tabfield,
-                icons: const [
-                  Icons.picture_as_pdf,
-                  Icons.question_answer,
-                  Icons.tag,
-                ],
+    return Row(
+      children: [
+        Container(
+          child: Expanded(
+            child: DefaultTabController(
+                length: 3,
+                child: Scaffold(
+                  backgroundColor: ColorPage.bgcolor,
+                  appBar: AppBar(
+                    iconTheme: IconThemeData(color: ColorPage.white),
+                    backgroundColor: ColorPage.appbarcolor,
+                    bottom: PreferredSize(
+                      preferredSize: Size.fromHeight(80),
+                      child: MotionTabBar(
+                        controller:
+                            _motionTabBarController, // ADD THIS if you need to change your tab programmatically
+                        initialSelectedTab: "VIDEO",
+                        labels: tabfield,
+                        icons: const [
+                          Icons.video_library_rounded,
+                          Icons.wifi_tethering,
+                          Icons.wifi_protected_setup_outlined,
+                        ],
 
-                badges: [
-                  null,
-                  null,
-                  null,
-                ],
+                        badges: [
+                          null,
+                          null,
+                          null,
+                        ],
 
-                tabSize: 50,
-                tabBarHeight: 55,
-                textStyle: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                ),
+                        tabSize: 50,
+                        tabBarHeight: 55,
+                        textStyle: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
 
-                tabIconColor: Colors.blue[600],
-                tabIconSize: 28.0,
-                tabIconSelectedSize: 26.0,
-                tabSelectedColor: Colors.blue[900],
-                tabIconSelectedColor: Colors.white,
-                // tabBarColor: Color.fromARGB(255, 64, 41, 231),
-                onTabItemSelected: (int value) {
-                  setState(() {
-                    // _motionTabBarController!.index = value;
-                  });
-                },
-              ),
-            ),
+                        tabIconColor: Colors.blue[600],
+                        tabIconSize: 28.0,
+                        tabIconSelectedSize: 26.0,
+                        tabSelectedColor: Colors.blue[900],
+                        tabIconSelectedColor: Colors.white,
+                        // tabBarColor: Color.fromARGB(255, 64, 41, 231),
+                        onTabItemSelected: (int value) {
+                          setState(() {
+                            // _motionTabBarController!.index = value;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  body: TabBarView(
+                      physics:
+                          NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
+
+                      controller: _motionTabBarController,
+                      children: [
+                        Container(
+                                child: filteredPackage.isNotEmpty
+                                    ? ListView.builder(
+                                        shrinkWrap: true,
+                                        // itemCount: 5,
+                                        itemCount: filteredPackage.length,
+                                        itemBuilder: (context, index) {
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(10),
+                                              ),
+                                              color: ColorPage.white,
+                                            ),
+                                            margin: EdgeInsets.all(10),
+                                            child: ExpansionTile(
+                                              shape: Border.all(
+                                                  color: Colors.transparent),
+                                              // leading: Text(
+                                              //     filteredPackage[index]
+                                              //         .packageId),
+                                              title: Text(
+                                                filteredPackage[index]
+                                                    .packageName,
+                                                style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              onExpansionChanged: (value) {
+                                                if (value &&
+                                                    !allnestedData.containsKey(
+                                                        filteredPackage[index]
+                                                            .packageId)) {
+                                                  fnfindpackage(
+                                                      widget.token,
+                                                      filteredPackage[index]
+                                                          .packageId);
+                                                }
+                                              },
+                                              children: [
+                                                allnestedData.containsKey(
+                                                        filteredPackage[index]
+                                                            .packageId)
+                                                    ? ListView.builder(
+                                                        shrinkWrap: true,
+                                                        itemCount: 1,
+                                                        itemBuilder: (context,
+                                                            subIndex) {
+                                                          var subItem = allnestedData[
+                                                                  filteredPackage[
+                                                                          index]
+                                                                      .packageId]![
+                                                              subIndex];
+                                                          return Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              border: Border(
+                                                                top: BorderSide(
+                                                                    color: ColorPage
+                                                                        .colorblack,
+                                                                    width: 1),
+                                                              ),
+                                                            ),
+                                                            child:
+                                                                ExpansionTile(
+                                                              shape: Border.all(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                              // leading: Text(
+                                                              //     subItem
+                                                              //         .courseId),
+                                                              title: Text(subItem
+                                                                  .courseName),
+                                                              subtitle: Text(
+                                                                  subItem
+                                                                      .termName),
+                                                              onExpansionChanged:
+                                                                  (value) {
+                                                                if (value &&
+                                                                    !allnestedData
+                                                                        .containsKey(
+                                                                            subItem.packageId)) {
+                                                                  fnfindpackage(
+                                                                      widget
+                                                                          .token,
+                                                                      subItem
+                                                                          .packageId);
+                                                                }
+                                                              },
+                                                              children: [
+                                                                allnestedData.containsKey(
+                                                                        subItem
+                                                                            .packageId)
+                                                                    ? ListView
+                                                                        .builder(
+                                                                        shrinkWrap:
+                                                                            true,
+                                                                        itemCount:
+                                                                            1,
+                                                                        itemBuilder:
+                                                                            (context,
+                                                                                subSubIndex) {
+                                                                          var subSubItem =
+                                                                              allnestedData[subItem.packageId]![subSubIndex];
+                                                                          return Container(
+                                                                            decoration:
+                                                                                BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
+                                                                            child:
+                                                                                ListTile(
+                                                                              onTap: () {
+                                                                                Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                              },
+                                                                              title: Text(subItem.termName),
+                                                                              subtitle: Text(subSubItem.packageDisplayName),
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      )
+                                                                    : CircularProgressIndicator(),
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                      )
+                                                    : Center(
+                                                        child:
+                                                            CircularProgressIndicator(),
+                                                      )
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : Center(
+                                        child: Image.asset(
+                                            'assets/android/nodatafound.png'),
+                                      ),
+                              ),
+                        Container(),
+                        Container(),
+                      ]),
+                )),
           ),
-
-          // appBar: AppBar(
-          //   backgroundColor: ColorPage.appbarcolor,
-          //   title: Showcase(
-          //     title: 'Please one option',
-          //     key: showcase_one,
-          //     blurValue: 5,
-          //     titleTextStyle: FontFamily.font4,
-          //     description: '',
-          //     child: SizedBox(
-          //         width: 200,
-          //         child: DropdownButtonFormField(
-          //             borderRadius: BorderRadius.circular(20),
-          //             style: TextStyle(color: ColorPage.white),
-          //             decoration: InputDecoration(
-          //               border: OutlineInputBorder(
-          //                 borderSide: BorderSide.none,
-          //                 borderRadius: BorderRadius.circular(20),
-          //               ),
-          //             ),
-          //             dropdownColor: ColorPage.appbarcolor,
-          //             value: selectedValue,
-          //             onChanged: (String? newValue) async {
-          //               setState(() {
-          //                 selectedValue = newValue!;
-          //               });
-          //               await fngetvideoApi(selectedValue);
-          //             },
-          //             items: dropdownItems)),
-          //   ),
-          // ),
-
-          body: TabBarView(
-              physics:
-                  NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
-
-              controller: _motionTabBarController,
-              children: [
-                Container(),
-                Container(),
-                Container(),
-              ]),
-          //  Row(
-          //   children: [
-          //     Expanded(
-          //       child: Column(
-          //         children: [
-          //           Padding(
-          //             padding: const EdgeInsets.symmetric(
-          //                 horizontal: 10, vertical: 10),
-          //             child: Row(
-          //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //               children: [
-          //                 Expanded(
-          //                   child: Showcase(
-          //                     description: '',
-          //                     title: 'Search your video,live,backup list',
-          //                     blurValue: 5,
-          //                     titleTextStyle: FontFamily.font4,
-          //                     key: showcase_searchkey,
-          //                     child: TextFormField(
-          //                       decoration: InputDecoration(
-          //                           hintStyle: TextStyle(
-          //                               color: ColorPage.brownshade300,
-          //                               fontSize: ClsFontsize.ExtraSmall - 1),
-          //                           hintText: 'Search',
-          //                           fillColor: ColorPage.white,
-          //                           filled: true,
-          //                           suffixIcon: const Icon(
-          //                             Icons.search,
-          //                             color: ColorPage.blue,
-          //                           ),
-          //                           border: OutlineInputBorder(
-          //                               borderRadius:
-          //                                   BorderRadius.circular(30),
-          //                               borderSide: BorderSide.none)),
-          //                     ),
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
-          //           ),
-          //           Expanded(
-          //             child: SingleChildScrollView(
-          //               child: Column(
-          //                 mainAxisSize: MainAxisSize.max,
-          //                 mainAxisAlignment: MainAxisAlignment.center,
-          //                 crossAxisAlignment: CrossAxisAlignment.center,
-          //                 children: [
-          //                   // TabBarView(
-          //                   //     physics:
-          //                   //         NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
-
-          //                   //     controller: _motionTabBarController,
-          //                   //     children: []),
-
-          //                   // x1.isNotEmpty
-          //                   //     ? Container(
-          //                   //         height: MediaQuery.sizeOf(context).height,
-          //                   //         child: ListView.builder(
-          //                   //             shrinkWrap: true,
-          //                   //             itemCount: x1.length,
-          //                   //             itemBuilder: (context, index) {
-          //                   //               return Padding(
-          //                   //                 padding:
-          //                   //                     const EdgeInsets.symmetric(
-          //                   //                         horizontal: 10),
-          //                   //                 child: Card(
-          //                   //                   elevation: 50,
-
-          //                   //                   color: ColorPage.white,
-          //                   //                   surfaceTintColor:
-          //                   //                       ColorPage.white,
-          //                   //                   // shape:
-          //                   //                   //     ContinuousRectangleBorder(
-          //                   //                   //         borderRadius:
-          //                   //                   //             BorderRadius
-          //                   //                   //                 .circular(15)),
-          //                   //                   // elevation: 0,
-          //                   //                   child: ListTile(
-          //                   //                     onTap: () {
-          //                   //                       print('sss');
-          //                   //                       Get.to(() => VideoDetails(
-          //                   //                           x1[index].videoname,
-          //                   //                           token));
-          //                   //                     },
-          //                   //                     leading: CircleAvatar(
-          //                   //                         foregroundColor:
-          //                   //                             ColorPage.white,
-          //                   //                         backgroundColor:
-          //                   //                             ColorPage.blue,
-          //                   //                         child:
-          //                   //                             Icon(Icons.videocam)),
-          //                   //                     title: Text(
-          //                   //                       x1[index].videoname,
-          //                   //                       overflow:
-          //                   //                           TextOverflow.ellipsis,
-          //                   //                       style: GoogleFonts.kadwa(
-          //                   //                           textStyle:
-          //                   //                               FontFamily.font),
-          //                   //                     ),
-          //                   //                     trailing: Text(
-          //                   //                         x1[index].chapterName,
-          //                   //                         style: GoogleFonts.kadwa(
-          //                   //                             textStyle: TextStyle(
-          //                   //                                 fontSize:
-          //                   //                                     ClsFontsize
-          //                   //                                             .Small -
-          //                   //                                         5))),
-          //                   //                     subtitle: Column(
-          //                   //                       mainAxisSize:
-          //                   //                           MainAxisSize.min,
-          //                   //                       // mainAxisAlignment: MainAxisAlignment.start,
-          //                   //                       crossAxisAlignment:
-          //                   //                           CrossAxisAlignment
-          //                   //                               .start,
-          //                   //                       children: [
-          //                   //                         Text(
-          //                   //                             'Video Description: ' +
-          //                   //                                 x1[index]
-          //                   //                                     .videoDescription,
-          //                   //                             style: GoogleFonts.kadwa(
-          //                   //                                 textStyle: TextStyle(
-          //                   //                                     color: ColorPage
-          //                   //                                         .blue))),
-          //                   //                         Text(
-          //                   //                             'Video Duration: ' +
-          //                   //                                 x1[index]
-          //                   //                                     .videoDuration
-          //                   //                                     .toString(),
-          //                   //                             style: GoogleFonts.kadwa(
-          //                   //                                 textStyle: TextStyle(
-          //                   //                                     color: ColorPage
-          //                   //                                         .bluegrey300))),
-          //                   //                       ],
-          //                   //                     ),
-          //                   //                   ),
-          //                   //                 ),
-          //                   //               );
-          //                   //             }),
-          //                   //       )
-          //                   //     : Center(
-          //                   //         child: Image.asset(
-          //                   //         'assets/android/nodatafound.png',
-          //                   //         color: ColorPage.appbarcolor,
-          //                   //       )),
-          //                 ],
-          //               ),
-          //             ),
-          //           )
-          //         ],
-          //       ),
-          //     ),
-          //     Expanded(
-          //       child: Container(
-          //         color: Colors.black,
-          //         child: Image.asset(
-          //           fit: BoxFit.fitHeight,
-          //           'assets/wallpaperflare.com_wallpaper.jpg',
-          //           height: MediaQuery.sizeOf(context).height,
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-          // )
-
-          //  x1.isNotEmpty
-          //     ? ListView.builder(
-          //         itemCount: x1.length,
-          //         itemBuilder: (context, index) {
-          //           return ListTile(
-          //             onTap: () {
-          //               Get.to(() => VideoDetails(x1[index].videoname, token));
-          //             },
-          //             title: Text(x1[index].videoname),
-          //             trailing: Text('Chapter name: ' + x1[index].chapterName),
-          // subtitle: Column(
-          //   mainAxisSize: MainAxisSize.min,
-          //   // mainAxisAlignment: MainAxisAlignment.start,
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     Text(
-          //         'Video Description: ' + x1[index].videoDescription),
-          //     Text('Video Duration: ' +
-          //         x1[index].videoDuration.toString()),
-          //   ],
-          // ),
-          //           );
-          //         })
-          //     : Center(
-          //         child: Text(
-          //         'Empty',
-          //         textScaler: TextScaler.linear(2),
-          //       )),
-
-          // body:
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.center,
-          //   children: [
-          //     Expanded(
-          //       child: Container(
-          //         child: Expanded(
-          //           child: Column(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [Text(x1.toString())],
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //     Expanded(
-          //       child: Container(
-          //         child: Expanded(
-          //           child: Column(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             children: [Text(data2.toString())],
-          //           ),
-          //         ),
-          //       ),
-          //     ),
-          //   ],
-        ));
+        ),
+        Expanded(
+            child: Container(
+                color: Colors.black,
+                child: Column(
+                  children: [
+                    Flexible(
+                      child: Column(
+                        children: [
+                          Stack(children: [
+                            Image.asset(
+                              fit: BoxFit.fitHeight,
+                              'assets/wallpaperflare.com_wallpaper.jpg',
+                              height: MediaQuery.sizeOf(context).height,
+                            ),
+                            // Positioned(
+                            //   bottom: 500,
+                            //   left: 300,
+                            //   child: TypeWriter.text(
+                            //     'lorem ipsum dolot sit amet ...',
+                            //     style: FontFamily.font2,
+                            //     repeat: true,
+                            //     duration: const Duration(milliseconds: 50),
+                            //   ),
+                            // ),
+                          ]),
+                        ],
+                      ),
+                    ),
+                  ],
+                )))
+      ],
+    );
   }
+
+  Future<void> fnfindpackage(String token, String id) async {
+    Map data = {
+      "tblPackage": {"PackageId": id}
+    };
+
+    final response = await http.post(
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.allpackage),
+      body: json.encode(data),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    var jsondata = json.decode(response.body);
+
+    if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
+      var jsonData = json.decode(jsondata['result']);
+      List<PackageFind> packagefind = [];
+      packagefind.clear();
+      print(response.body);
+
+      for (int i = 0; i < jsonData.length; i++) {
+        final data = PackageFind(
+          courseId: jsonData['CourseId'].toString(),
+          courseName: jsonData['CourseName'].toString(),
+          termId: jsonData['TermId'].toString(),
+          termName: jsonData['TermName'].toString(),
+          packageId: jsonData['PackageId'].toString(),
+          isActive: jsonData['IsActive'].toString(),
+          packageName: jsonData['PackageName'].toString(),
+          packageDisplayName: jsonData['PackageDisplayName'].toString(),
+          srNo: jsonData['SrNo'].toString(),
+          sortedOrder: jsonData['SortedOrder'].toString(),
+        );
+        packagefind.add(data);
+      }
+      setState(() {
+        allnestedData[id] = packagefind;
+      });
+    }
+
+
+
+  }
+
+
+
+   Future<void> fnfindallpackage(String token) async {
+    // loader(context);
+    Map data = {
+      "tblPackage": {"PackageId": "0"}
+    };
+    final response = await http.post(
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.allpackage),
+      body: json.encode(data),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    var jsondata = json.decode(response.body);
+    print(jsondata);
+    if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
+      var jsonData = json.decode(jsondata['result']);
+      allpackage.clear();
+      for (int i = 0; i < jsonData.length; i++) {
+        final data = AllPackage(
+          courseId: jsonData[i]['CourseId'].toString(),
+          courseName: jsonData[i]['CourseName'].toString(),
+          termId: jsonData[i]['TermId'].toString(),
+          termName: jsonData[i]['TermName'].toString(),
+          packageId: jsonData[i]['PackageId'].toString(),
+          isActive: jsonData[i]['IsActive'].toString(),
+          packageName: jsonData[i]['PackageName'].toString(),
+          packageDisplayName: jsonData[i]['PackageDisplayName'].toString(),
+          srNo: jsonData[i]['SrNo'].toString(),
+          sortedOrder: jsonData[i]['SortedOrder'].toString(),
+        );
+        allpackage.add(data);
+      }
+      filteredPackage = List.from(allpackage);
+      setState(() {});
+    }
+  }
+
+
+    void setFilterData() {
+    filteredPackage = allpackage
+        .where((p) =>
+            p.packageName
+                .toLowerCase()
+                .contains(searchController.text.toLowerCase()) ||
+            p.packageDisplayName
+                .toLowerCase()
+                .contains(searchController.text.toLowerCase()))
+        .toList();
+    setState(() {});
+  }
+
 }
