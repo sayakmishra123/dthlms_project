@@ -26,7 +26,7 @@ class DthLmsLogin extends StatefulWidget {
 class _DthLmsLoginState extends State<DthLmsLogin> {
   TextEditingController signupuser = TextEditingController();
   TextEditingController signupfirstname = TextEditingController();
-    TextEditingController signuplastname = TextEditingController();
+  TextEditingController signuplastname = TextEditingController();
   TextEditingController signupemail = TextEditingController();
   TextEditingController signupphno = TextEditingController();
   TextEditingController signuppassword = TextEditingController();
@@ -238,23 +238,29 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                             ))
                                                       ],
                                                     ),
-                                                    SizedBox(height: 10,),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
                                                     Row(
                                                       mainAxisAlignment:
                                                           MainAxisAlignment
                                                               .center,
                                                       children: [
                                                         SizedBox(
-                                                          width: formfieldsize/2.1,
+                                                          width: formfieldsize /
+                                                              2.1,
                                                           child: Text(
                                                             'First Name',
                                                             style:
                                                                 FontFamily.font,
                                                           ),
                                                         ),
-                                                        SizedBox(width: 20,),
                                                         SizedBox(
-                                                          width: formfieldsize/2,
+                                                          width: 20,
+                                                        ),
+                                                        SizedBox(
+                                                          width:
+                                                              formfieldsize / 2,
                                                           child: Text(
                                                             'Last Name',
                                                             style:
@@ -270,7 +276,8 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                       children: [
                                                         SizedBox(
                                                             width:
-                                                                formfieldsize/2.2,
+                                                                formfieldsize /
+                                                                    2.2,
                                                             child:
                                                                 TextFormField(
                                                               autovalidateMode:
@@ -305,11 +312,13 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                   hintText:
                                                                       'First Name'),
                                                             )),
-                                                            SizedBox(width: 30,),
-
-                                                            SizedBox(
+                                                        SizedBox(
+                                                          width: 30,
+                                                        ),
+                                                        SizedBox(
                                                             width:
-                                                                formfieldsize/2,
+                                                                formfieldsize /
+                                                                    2,
                                                             child:
                                                                 TextFormField(
                                                               autovalidateMode:
@@ -333,7 +342,6 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                               controller:
                                                                   signuplastname,
                                                               decoration: InputDecoration(
-                                                                 
                                                                   enabledBorder:
                                                                       border,
                                                                   focusedBorder:

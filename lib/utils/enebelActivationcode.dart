@@ -1,6 +1,8 @@
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/utils/activationcode.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class GlobalDialog extends StatefulWidget {
   @override
@@ -77,20 +79,28 @@ class CustomMessageBubble extends StatelessWidget {
           bottomRight: Radius.circular(0),
         ),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: Colors.white,
-            size: 20.0,
-          ),
-          SizedBox(width: 8.0), // space between icon and text
-          Text(
-            text,
-            style: textStyle,
-          ),
-        ],
+      child: InkWell(
+        onTap: (){
+          Get.to(()=>ActivationCodePage());
+
+          
+
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              color: Colors.white,
+              size: 20.0,
+            ),
+            SizedBox(width: 8.0), // space between icon and text
+            Text(
+              text,
+              style: textStyle,
+            ),
+          ],
+        ),
       ),
     );
   }

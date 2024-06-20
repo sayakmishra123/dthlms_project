@@ -7,7 +7,7 @@ import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
 import 'package:dthlms/pages/dashboard.dart';
 import 'package:dthlms/pages/study/studydashboard.dart';
-import 'package:dthlms/utils/packages.dart';
+import 'package:dthlms/android/packagemobile/packages.dart';
 // import 'package:dthlms/showpdf/showpdf.dart';
 import 'package:get/get.dart';
 
@@ -34,26 +34,20 @@ class pageRouter {
       page: () => const MobileHomepage(),
     ),
     GetPage(
-      name: '/Mobilepackagedashboard',
-      page: () {
-        final token = Get.parameters['token'];// not useble for any page.
-        return PackageDashboardMobile(token!
-          
-        );
-      }),
-    
+        name: '/Mobilepackagedashboard',
+        page: () {
+          final token = Get.parameters['token']; // not useble for any page.
+          return PackageDashboardMobile(token!);
+        }),
     GetPage(
       name: '/Mobileforgetpassword',
       page: () => ForgetPasswordMobile(),
     ),
     GetPage(
-      name: "/Packagedashboard",
-       page: () {
-        final token = Get.parameters['token']; // not useble for any page
-        return PackageDashboard(token!
-          
-        );
-      }
-    ),
+        name: "/Packagedashboard",
+        page: () {
+          final token = Get.parameters['token']; // not useble for any page
+          return PackageDashboard(token!);
+        }),
   ];
 }

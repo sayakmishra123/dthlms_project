@@ -43,7 +43,8 @@ class Getx extends GetxController {
   RxList<AllPackage> package = <AllPackage>[].obs;
   RxList<PackageFind> packagefind = <PackageFind>[].obs;
   RxBool packageshow = true.obs;
-
+  RxBool forgetpasswordemailcode = false.obs;
+  RxBool forgetpageshow = false.obs;
   @override
   void onInit() {
     // ignore: unused_local_variable
@@ -73,7 +74,7 @@ class Getx extends GetxController {
             onPressed: () {
               Get.back();
             },
-            child:  const Text(
+            child: const Text(
               'Ok',
               style: TextStyle(color: Colors.white),
             ),
@@ -93,5 +94,3 @@ class Getx extends GetxController {
     }
   }
 }
-  
-
