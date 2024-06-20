@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
 //abhoymallik
 class PackageDashboardMobile extends StatefulWidget {
   final String token;
@@ -174,8 +175,12 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
     setState(() {
       filteredPackage = package
           .where((p) =>
-              p.packageName.toLowerCase().contains(searchController.text.toLowerCase()) ||
-              p.packageDisplayName.toLowerCase().contains(searchController.text.toLowerCase()))
+              p.packageName
+                  .toLowerCase()
+                  .contains(searchController.text.toLowerCase()) ||
+              p.packageDisplayName
+                  .toLowerCase()
+                  .contains(searchController.text.toLowerCase()))
           .toList();
     });
   }
@@ -196,7 +201,8 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
               padding: const EdgeInsets.only(right: 10),
               child: IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.more_vert_rounded, color: Colors.white, size: 30),
+                icon: Icon(Icons.more_vert_rounded,
+                    color: Colors.white, size: 30),
               ),
             )
           ],
@@ -274,11 +280,13 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                 return Container(
                                   margin: EdgeInsets.all(10),
                                   width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(color: ColorPage.white,
-                                  borderRadius: BorderRadius.all(Radius.circular(10))),
+                                  decoration: BoxDecoration(
+                                      color: ColorPage.white,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10))),
                                   child: ExpansionTile(
-                                    shape: Border.all(color:Colors.transparent),
-                                   
+                                    shape:
+                                        Border.all(color: Colors.transparent),
                                     title: Text(
                                       filteredPackage[index].packageName,
                                       style: const TextStyle(
@@ -287,7 +295,8 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                     onExpansionChanged: (value) {
                                       if (value &&
                                           !nestedData.containsKey(
-                                              filteredPackage[index].packageId)) {
+                                              filteredPackage[index]
+                                                  .packageId)) {
                                         fnfindpackage(widget.token,
                                             filteredPackage[index].packageId);
                                       }
@@ -297,22 +306,26 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                               filteredPackage[index].packageId)
                                           ? ListView.builder(
                                               shrinkWrap: true,
-                                              itemCount:1,
+                                              itemCount: 1,
                                               itemBuilder: (context, subIndex) {
                                                 var subItem = nestedData[
-                                                        filteredPackage[index]
-                                                            .packageId]![
-                                                    subIndex];
+                                                    filteredPackage[index]
+                                                        .packageId]![subIndex];
                                                 return ExpansionTile(
-                                                  shape: Border.all(color: Colors.transparent),
-                                                 
-                                                  title: Text(subItem.courseName),
-                                                  subtitle: Text(subItem.termName),
+                                                  shape: Border.all(
+                                                      color:
+                                                          Colors.transparent),
+                                                  title:
+                                                      Text(subItem.courseName),
+                                                  subtitle:
+                                                      Text(subItem.termName),
                                                   onExpansionChanged: (value) {
                                                     if (value &&
                                                         !nestedData.containsKey(
-                                                            subItem.packageId)) {
-                                                      fnfindpackage(widget.token,
+                                                            subItem
+                                                                .packageId)) {
+                                                      fnfindpackage(
+                                                          widget.token,
                                                           subItem.packageId);
                                                     }
                                                   },
@@ -321,8 +334,8 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                             subItem.packageId)
                                                         ? ListView.builder(
                                                             shrinkWrap: true,
-                                                            itemCount:1,
-                                                            
+                                                            itemCount: 1,
+
                                                             //  nestedData[
                                                             //         subItem
                                                             //             .packageId]!
@@ -330,12 +343,10 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                             itemBuilder: (context,
                                                                 subSubIndex) {
                                                               var subSubItem =
-                                                                  nestedData[
-                                                                          subItem
-                                                                              .packageId]![
+                                                                  nestedData[subItem
+                                                                          .packageId]![
                                                                       subSubIndex];
                                                               return ListTile(
-                                                                
                                                                 title: Text(subItem
                                                                     .termName),
                                                                 subtitle: Text(
@@ -356,8 +367,8 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                               },
                             )
                           : Center(
-                              child: Image.asset('assets/android/nodatafound.png')
-                            )
+                              child:
+                                  Image.asset('assets/android/nodatafound.png'))
                       : CircularProgressIndicator(),
                 ],
               ),

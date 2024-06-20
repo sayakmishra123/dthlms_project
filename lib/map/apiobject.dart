@@ -1,5 +1,5 @@
 class ClsMap {
-  static Map objLoginApi(String loginemail, String password, String otp,
+  Map objLoginApi(String loginemail, String password, String otp,
       String device1, String device2, String type, String configaration) {
     return {
       'userName': loginemail,
@@ -12,7 +12,7 @@ class ClsMap {
     };
   }
 
-  static Map objSignupApi(
+  Map objSignupApi(
       String signupuser,
       String signupname,
       signupemail,
@@ -37,7 +37,7 @@ class ClsMap {
     };
   }
 
-  static Map objSignupconfirmation(
+  Map objSignupconfirmation(
     String signupphno,
     String signupemail,
   ) {
@@ -47,6 +47,20 @@ class ClsMap {
       "franchiseId": 1,
       'captchaId': null,
       'userEnteredCaptchaCode': 'abcd'
+    };
+  }
+
+  Map objforgetPassword(String signupemail, String code) {
+    return {"user": signupemail, "code": code};
+  }
+
+  Map objresetPassword(
+      String signupemail, String ph, String pass, String confirmpass) {
+    return {
+      "email": signupemail,
+      "phoneNumber": ph,
+      "password": pass,
+      "confirmPassword": confirmpass
     };
   }
 }

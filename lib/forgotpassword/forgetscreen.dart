@@ -1,10 +1,14 @@
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/apiHandleing/apifetchall.dart';
 import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -18,6 +22,9 @@ class ForgotScreen extends StatefulWidget {
 
 class _ForgotScreenState extends State<ForgotScreen> {
   GlobalKey<FormState> key = GlobalKey();
+  TextEditingController emailcode = TextEditingController();
+  TextEditingController phno = TextEditingController();
+  TextEditingController emailid = TextEditingController();
   Getx getx = Get.put(Getx());
   final email = InputDecoration(
       hintText: 'solution@gmail.com',
@@ -35,6 +42,15 @@ class _ForgotScreenState extends State<ForgotScreen> {
       enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: ColorPage.color1),
           borderRadius: BorderRadius.circular(10)));
+
+  String forgetkey = " ";
+  @override
+  void initState() {
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+
+    // });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -275,6 +291,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                             SizedBox(
                                                 width: 300,
                                                 child: TextFormField(
+                                                    controller: emailid,
                                                     textInputAction:
                                                         TextInputAction.next,
                                                     style: const TextStyle(),
@@ -294,6 +311,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                               width: 300,
                                               child: Obx(
                                                 () => TextFormField(
+                                                    controller: phno,
                                                     obscureText: getx
                                                         .forgetpassword1.value,
                                                     textInputAction:
@@ -304,8 +322,8 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                                                 .colorgrey),
                                                         labelStyle: GoogleFonts
                                                             .outfit(),
-                                                        hintText: 'Password',
-                                                        labelText: 'Password',
+                                                        // hintText: '',
+                                                        labelText: 'Phone no',
                                                         suffixIcon: IconButton(
                                                             onPressed: () {
                                                               getx.forgetpassword1
@@ -351,78 +369,76 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                         ],
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                              width: 300,
-                                              child: Obx(
-                                                () => TextFormField(
-                                                  obscureText: getx
-                                                      .forgetpassword2.value,
-                                                  textInputAction:
-                                                      TextInputAction.next,
-                                                  style: const TextStyle(),
-                                                  decoration: InputDecoration(
-                                                      labelStyle:
-                                                          GoogleFonts.outfit(),
-                                                      hintStyle: const TextStyle(
-                                                          color: ColorPage
-                                                              .colorgrey),
-                                                      hintText:
-                                                          'Confirm Password',
-                                                      labelText:
-                                                          'Confirm Password',
-                                                      suffixIcon: IconButton(
-                                                          onPressed: () {
-                                                            getx.forgetpassword2
-                                                                    .value =
-                                                                !getx
-                                                                    .forgetpassword2
-                                                                    .value;
-                                                          },
-                                                          icon: getx
-                                                                  .forgetpassword2
-                                                                  .value
-                                                              ? const Icon(
-                                                                  Icons
-                                                                      .visibility,
-                                                                )
-                                                              : const Icon(
-                                                                  Icons
-                                                                      .visibility_off,
-                                                                )),
-                                                      border:
-                                                          OutlineInputBorder(
-                                                              borderSide:
-                                                                  const BorderSide(
-                                                                      color: ColorPage
-                                                                          .color1),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                10,
-                                                              )),
-                                                      focusedBorder: OutlineInputBorder(
-                                                          borderSide:
-                                                              const BorderSide(
-                                                                  color: ColorPage
-                                                                      .color1),
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                  10)),
-                                                      enabledBorder: OutlineInputBorder(
-                                                          borderSide:
-                                                              const BorderSide(
-                                                                  color: ColorPage.color1),
-                                                          borderRadius: BorderRadius.circular(10))),
-                                                ),
-                                              ))
-                                        ],
+                                    Obx(
+                                      () => Visibility(
+                                        visible:
+                                            getx.forgetpasswordemailcode.value,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              SizedBox(
+                                                  width: 300,
+                                                  child: Obx(
+                                                    () => TextFormField(
+                                                        controller: phno,
+                                                        obscureText: getx
+                                                            .forgetpassword1
+                                                            .value,
+                                                        textInputAction:
+                                                            TextInputAction
+                                                                .next,
+                                                        decoration:
+                                                            InputDecoration(
+                                                                hintStyle: const TextStyle(
+                                                                    color: ColorPage
+                                                                        .colorgrey),
+                                                                labelStyle: GoogleFonts
+                                                                    .outfit(),
+                                                                // hintText: '',
+                                                                labelText:
+                                                                    'Phone no',
+                                                                suffixIcon:
+                                                                    IconButton(
+                                                                        onPressed:
+                                                                            () {
+                                                                          getx.forgetpassword1.value = !getx
+                                                                              .forgetpassword1
+                                                                              .value;
+                                                                        },
+                                                                        icon: getx
+                                                                                .forgetpassword1.value
+                                                                            ? const Icon(
+                                                                                Icons.visibility,
+                                                                              )
+                                                                            : const Icon(
+                                                                                Icons.visibility_off,
+                                                                              )),
+                                                                border:
+                                                                    OutlineInputBorder(
+                                                                        borderSide: const BorderSide(
+                                                                            color: ColorPage
+                                                                                .color1),
+                                                                        borderRadius: BorderRadius
+                                                                            .circular(
+                                                                          10,
+                                                                        )),
+                                                                focusedBorder: OutlineInputBorder(
+                                                                    borderSide: const BorderSide(
+                                                                        color: ColorPage
+                                                                            .color1),
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            10)),
+                                                                enabledBorder:
+                                                                    OutlineInputBorder(borderSide: const BorderSide(color: ColorPage.color1), borderRadius: BorderRadius.circular(10)))),
+                                                  ))
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ),
                                     Padding(
@@ -432,38 +448,6 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 0),
-                                            child: OutlinedButton(
-                                                style: ButtonStyle(
-                                                    padding:
-                                                        const MaterialStatePropertyAll(
-                                                            EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        50,
-                                                                    vertical:
-                                                                        15)),
-                                                    shape: MaterialStatePropertyAll(
-                                                        ContinuousRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        20)))),
-                                                onPressed: () {},
-                                                child: Text(
-                                                  'Cancel',
-                                                  style: GoogleFonts.outfit(
-                                                      textStyle:
-                                                          const TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              color: ColorPage
-                                                                  .colorblack)),
-                                                )),
-                                          ),
                                           Padding(
                                             padding:
                                                 const EdgeInsets.only(left: 5),
@@ -486,9 +470,28 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                                                 BorderRadius
                                                                     .circular(
                                                                         20)))),
-                                                onPressed: () {},
+                                                onPressed: () async {
+                                                  print(forgetkey);
+                                                  forgetgenerateCode(
+                                                          context,
+                                                          phno.text,
+                                                          emailid.text)
+                                                      .then((value) =>
+                                                          forgetkey = value);
+                                                  forgetPassword(
+                                                      context,
+                                                      emailid.text,
+                                                      forgetkey,
+                                                      emailcode.text);
+
+                                                  // await forgetPassword(
+                                                  //     context,
+                                                  //     'abhoymallik7364@gmail.com',
+                                                  //     forgetkey,
+                                                  //     emailcode.text);
+                                                },
                                                 child: Text(
-                                                  'Save',
+                                                  'Submit',
                                                   style: FontFamily.font3,
                                                 )),
                                           )

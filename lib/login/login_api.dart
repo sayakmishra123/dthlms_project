@@ -11,18 +11,14 @@ import 'package:dthlms/login/loginmodel.dart';
 import 'package:dthlms/map/apiobject.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
 
-
 import 'package:dthlms/url/api_url.dart';
 import 'package:dthlms/utils/loader.dart';
-import 'package:dthlms/utils/packages.dart';
-
+import 'package:dthlms/android/packagemobile/packages.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:get/get.dart';
 import "package:http/http.dart" as http;
-
-
 
 Future loginApi(
   BuildContext context,
@@ -49,7 +45,7 @@ Future loginApi(
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   }
   if (Platform.isAndroid) {
-    logindata = ClsMap.objLoginApi(
+    logindata = ClsMap().objLoginApi(
       loginemail,
       password,
       otp,
@@ -60,7 +56,7 @@ Future loginApi(
     );
     print(logindata);
   } else if (Platform.isWindows) {
-    logindata = ClsMap.objLoginApi(
+    logindata = ClsMap().objLoginApi(
       loginemail,
       password,
       otp,
@@ -96,8 +92,6 @@ Future loginApi(
     // dbdata = await DbHandler().readData();
 // String tk=jsondata['result']['token'];
     Get.back();
-   
-
 
     Get.to(() => Platform.isWindows
         ? PackageDashboard(jsondata['result']['token'])
@@ -145,7 +139,7 @@ Future signupApi(BuildContext context, String signupuser, String signupname,
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   }
 
-  var signupdata = ClsMap.objSignupApi(
+  var signupdata = ClsMap().objSignupApi(
     signupuser,
     signupname,
     signupemail,
@@ -182,7 +176,7 @@ Future signupApi(BuildContext context, String signupuser, String signupname,
     Getx getxController = Get.put(Getx());
     if (CustomButton.positiveButton == result) {
       getxController.show.value = false;
-      Get.to(() =>const DthLmsLogin());
+      Get.to(() => const DthLmsLogin());
     } else {}
   } else {
     Get.back();
@@ -204,12 +198,13 @@ Future signupcodegenerate(
   loader(context);
   var response = await http.get(
       Uri.https(ClsUrlApi.mainurl, ClsUrlApi.getUserConfirmationTypeEndpoint));
+
   var json = jsonDecode(response.body);
   print('mishra');
   print(response.request);
 
   if (response.statusCode == 200 && json['isSuccess'] == true) {
-    var datacode = ClsMap.objSignupconfirmation(
+    var datacode = ClsMap().objSignupconfirmation(
       signupphno,
       signupemail,
     );

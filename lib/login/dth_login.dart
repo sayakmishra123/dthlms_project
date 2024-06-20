@@ -521,17 +521,17 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                     // desktop_key1
                                                                     //     .currentState!
                                                                     //     .save();
-                                                                    // Get.to(
-                                                                    //     () =>
-                                                                    //         OTPScreen(
-                                                                    //           signupuser.text,
-                                                                    //           signupname.text,
-                                                                    //           signupemail.text,
-                                                                    //           signuppassword.text,
-                                                                    //           signupphno.text,
-                                                                    //         ),
-                                                                    //     transition:
-                                                                    //         Transition.leftToRight);
+                                                                    Get.to(
+                                                                        () =>
+                                                                            OTPScreen(
+                                                                              signupuser.text,
+                                                                              signupname.text,
+                                                                              signupemail.text,
+                                                                              signuppassword.text,
+                                                                              signupphno.text,
+                                                                            ),
+                                                                        transition:
+                                                                            Transition.leftToRight);
                                                                   } else {
                                                                     Get.snackbar(
                                                                         "Error",
