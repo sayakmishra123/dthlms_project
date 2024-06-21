@@ -12,6 +12,7 @@ import 'package:dthlms/login/login_api.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../phone/siminformation.dart';
@@ -34,6 +35,8 @@ class _MobileloginState extends State<Mobilelogin> {
   TextEditingController loginemail = TextEditingController();
   TextEditingController loginpassword = TextEditingController();
   TextEditingController loginotp = TextEditingController();
+
+  int controllerIndex=0;
 
   // ignore: non_constant_identifier_names
   // final GlobalKey<FormState> desktop_key = GlobalKey();
@@ -78,6 +81,7 @@ FocusNode focusNode = FocusNode();
                   Card(
                     elevation: 80,
                     child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 30),
                       width: 400,
                       // height: MediaQuery.sizeOf(context).height - 200,
                       decoration: BoxDecoration(
@@ -109,8 +113,9 @@ FocusNode focusNode = FocusNode();
                                 SizedBox(
                                   width: 300,
                                   child: AnimatedButtonBar(
+                                    
                                     controller: AnimatedButtonController()
-                                      ..setIndex(1),
+                                      ..setIndex(getxController.ButtonControllerIndex.value),
                                     radius: 32.0,
                                     padding: const EdgeInsets.all(16.0),
                                     backgroundColor: Colors.blueGrey.shade800,
@@ -122,19 +127,28 @@ FocusNode focusNode = FocusNode();
                                     innerVerticalPadding: 16,
                                     children: [
                                       ButtonBarEntry(
-                                          onTap: () {
-                                            getxController.show.value = true;
-                                          },
-                                          child: Text(
-                                            'Sign Up',
-                                            style: FontFamily.font,
-                                          )),
-                                      ButtonBarEntry(
+
+
+
                                           onTap: () {
                                             getxController.show.value = false;
+                                            getxController.ButtonControllerIndex.value=0;
+                                            print(getxController.ButtonControllerIndex.value.toString());
                                           },
                                           child: Text(
                                             'Log in',
+                                            style: FontFamily.font,
+                                          )),
+                                      ButtonBarEntry(
+
+                                          onTap: () {
+                                           
+                                            getxController.show.value = true;
+                                            getxController.ButtonControllerIndex.value=1;
+                                             print(getxController.ButtonControllerIndex.value.toString());
+                                          },
+                                          child: Text(
+                                            'Sign up',
                                             style: FontFamily.font,
                                           )),
                                     ],
@@ -358,6 +372,7 @@ FocusNode focusNode = FocusNode();
                                             SizedBox(
                                                 width: formfieldsize,
                                                 child: IntlPhoneField(
+                                                  initialCountryCode: 'IN',
                                                   autovalidateMode: AutovalidateMode.onUserInteraction,
                                                   validator: (value) {
                                                     if(value.toString().length>10){
@@ -535,46 +550,64 @@ FocusNode focusNode = FocusNode();
                                             ],
                                           ),
                                         ),
+                                        SizedBox(height: 10,),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'Already a member ?',
+                                              'Already a member? ',
                                               style: TextStyle(
                                                 fontSize:
                                                     ClsFontsize.ExtraSmall,
                                               ),
-                                            )
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SizedBox(
-                                                width: formfieldsize,
-                                                // height: 10,
-                                                child: MaterialButton(
-                                                  shape:
-                                                      ContinuousRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      20)),
 
-                                                  // color: ColorPage.colorgrey,
-                                                  onPressed: () {},
-                                                  child: Text(
-                                                    'Login',
-                                                    style: TextStyle(
-                                                      fontSize: ClsFontsize
-                                                          .DoubleExtraSmall,
-                                                    ),
-                                                  ),
-                                                ))
+                                              
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                getxController.show.value = false;
+                                                getxController.ButtonControllerIndex.value=0;
+                                                print(getxController.ButtonControllerIndex.value.toString());
+                                               
+                                              },
+                                              child: Text(
+                                                'LOGIN',
+                                                style: TextStyle(
+                                                  fontSize:
+                                                      ClsFontsize.ExtraSmall,
+                                                      color: ColorPage.red
+                                                ),),
+                                            ),
                                           ],
                                         ),
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.center,
+                                        //   children: [
+                                        //     SizedBox(
+                                        //         width: formfieldsize,
+                                        //         // height: 10,
+                                        //         child: MaterialButton(
+                                        //           shape:
+                                        //               ContinuousRectangleBorder(
+                                        //                   borderRadius:
+                                        //                       BorderRadius
+                                        //                           .circular(
+                                        //                               20)),
+
+                                        //           // color: ColorPage.colorgrey,
+                                        //           onPressed: () {},
+                                        //           child: Text(
+                                        //             'Login',
+                                        //             style: TextStyle(
+                                        //               fontSize: ClsFontsize
+                                        //                   .DoubleExtraSmall,
+                                        //             ),
+                                        //           ),
+                                        //         ))
+                                        //   ],
+                                        // ),
                                       ],
                                     ),
                                   )

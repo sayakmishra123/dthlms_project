@@ -14,6 +14,7 @@ import '../login/loginmodel.dart';
 
 class Getx extends GetxController {
   RxBool show = false.obs;
+  RxInt ButtonControllerIndex=0.obs;
   RxBool hide = true.obs;
   // ignore: non_constant_identifier_names
   RxInt page_index = 0.obs;
