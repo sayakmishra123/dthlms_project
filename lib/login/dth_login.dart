@@ -445,16 +445,6 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                   formfieldsize,
                                                               child:
                                                                   IntlPhoneField(
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  border:
-                                                                      UnderlineInputBorder(
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                            color:
-                                                                                ColorPage.colorblack),
-                                                                  ),
-                                                                ),
                                                                 initialCountryCode:
                                                                     'IN',
                                                                 controller:

@@ -41,8 +41,6 @@ class _ActivationCodePageState extends State<ActivationCodePage> {
                 // height: 300,
                 // color: Colors.red,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

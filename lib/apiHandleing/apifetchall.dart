@@ -63,13 +63,6 @@ Future forgetPassword(BuildContext context, String signupemail, String key,
     Get.back();
     getx.forgetpageshow.value = true;
     return json['result']['token'];
-    // resetPassword(
-    //     context,
-    //     json['result']['email'],
-    //     json['result']['phoneNumber'],
-    //     'SayakMishra1234@',
-    //     'SayakMishra1234@',
-    //     json['result']['token']);
   } else {
     Get.back();
     ClsErrorMsg.fnErrorDialog(context, json['errorMessages'], responseBody);
@@ -101,7 +94,6 @@ Future resetPassword(BuildContext context, String email, String ph, String pass,
         context, 'Password reset successfully', responseBody);
     Get.to(() => DthLmsLogin());
   }
-
   {
     Get.back();
     ClsErrorMsg.fnErrorDialog(context, json['errorMessages'], responseBody);

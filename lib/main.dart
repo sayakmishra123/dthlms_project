@@ -1,4 +1,5 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/utils/activationcode.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  
   @override
   void initState() {
     super.initState();
@@ -38,9 +38,9 @@ class _MyAppState extends State<MyApp> {
           splash: "assets/splash6.gif",
           splashIconSize: 6000,
           centered: true,
-          
-          nextScreen:  DthLmsLogin(),
-          backgroundColor: Color.fromRGBO(255, 255, 255, 0.907),
+          nextScreen: DthLmsLogin(),
+          backgroundColor: ColorPage.bgcolor,
+          splashTransition: SplashTransition.scaleTransition,
           duration: 3500,
         ));
   }
