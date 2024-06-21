@@ -3,14 +3,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
-import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:open_mail_app/open_mail_app.dart';
-
-
 
 class ForgetPasswordMobile extends StatefulWidget {
   const ForgetPasswordMobile({super.key});
@@ -347,44 +345,41 @@ class _forgetPasswordMobileState extends State<ForgetPasswordMobile> {
                                   padding: MaterialStatePropertyAll(
                                       EdgeInsets.symmetric(
                                           vertical: 10, horizontal: 50))),
-                              onPressed: ()async {
-                               EmailContent email = EmailContent(
-                  
-                );
+                              onPressed: () async {
+                                EmailContent email = EmailContent();
 
-                OpenMailAppResult result =
-                    await OpenMailApp.composeNewEmailInMailApp(
-                        nativePickerTitle: 'Select email app to compose',
-                        emailContent: email);
-                if (!result.didOpen && !result.canOpen) {
-                     showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text("Open Mail App"),
-          content: Text("No mail apps installed"),
-          actions: <Widget>[
-            TextButton(
-              child: Text("OK"),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            )
-          ],
-        );
-      },
-    );
-
-                } else if (!result.didOpen && result.canOpen) {
-                  showDialog(
-                    context: context,
-                    builder: (_) => MailAppPickerDialog(
-                      mailApps: result.options,
-                      emailContent: email,
-                    ),
-                  );
-                }
-                            
+                                OpenMailAppResult result =
+                                    await OpenMailApp.composeNewEmailInMailApp(
+                                        nativePickerTitle:
+                                            'Select email app to compose',
+                                        emailContent: email);
+                                if (!result.didOpen && !result.canOpen) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text("Open Mail App"),
+                                        content: Text("No mail apps installed"),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            child: Text("OK"),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  );
+                                } else if (!result.didOpen && result.canOpen) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => MailAppPickerDialog(
+                                      mailApps: result.options,
+                                      emailContent: email,
+                                    ),
+                                  );
+                                }
                               },
                               icon: Image.asset(
                                 'assets/email.png',
@@ -408,5 +403,4 @@ class _forgetPasswordMobileState extends State<ForgetPasswordMobile> {
       ),
     );
   }
-  
 }

@@ -3,7 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
-import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/login/login_api.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,8 +23,8 @@ class OTPScreen extends StatefulWidget {
   String signupemail;
   String signuppassword;
   String signupphno;
-  OTPScreen(this.signupuser, this.signupfirstname,this.signuplastname, this.signupemail,
-      this.signuppassword, this.signupphno,
+  OTPScreen(this.signupuser, this.signupfirstname, this.signuplastname,
+      this.signupemail, this.signuppassword, this.signupphno,
       {super.key});
   // OTPScreen({super.key});
 
@@ -129,7 +129,7 @@ class _OTPScreenState extends State<OTPScreen> {
                             decoration: BoxDecoration(
                                 color: ColorPage.white,
                                 borderRadius: BorderRadius.circular(20)),
-                              
+
                             padding: const EdgeInsets.all(250),
                             // height: 300,
                             //  width: 300,
@@ -153,7 +153,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                       width: 700,
                                       child: AutoSizeText(
                                         'Enter the 7 digit code we sent to  your (${widget.signupemail}) email address to verify you new account',
-                                        style:FontFamily.font4,
+                                        style: FontFamily.font4,
                                         maxLines: 2,
                                       ),
                                     )
@@ -171,18 +171,20 @@ class _OTPScreenState extends State<OTPScreen> {
                                     borderColor: ColorPage.color1,
                                     enabledBorderColor: ColorPage.color1,
                                     focusedBorderColor: ColorPage.blue,
-                              
+
                                     showFieldAsBox: true,
-                              
+
                                     onCodeChanged: (String code) {},
-                              
+
                                     onSubmit: (String verificationCode) {
-                                      get_obj.signupotp.value = verificationCode;
+                                      get_obj.signupotp.value =
+                                          verificationCode;
                                     }, // end onSubmit
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 10),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -207,7 +209,8 @@ class _OTPScreenState extends State<OTPScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 20),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 20),
                                   child: ElevatedButton(
                                     onPressed: () {
                                       signupApi(
@@ -225,12 +228,14 @@ class _OTPScreenState extends State<OTPScreen> {
                                         padding: MaterialStatePropertyAll(
                                             EdgeInsets.symmetric(
                                                 horizontal: 30, vertical: 20)),
-                                        backgroundColor: MaterialStatePropertyAll(
-                                            ColorPage.color1),
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                                ColorPage.color1),
                                         shape: MaterialStatePropertyAll(
                                             ContinuousRectangleBorder(
                                                 borderRadius: BorderRadius.all(
-                                                    Radius.elliptical(15, 15))))),
+                                                    Radius.elliptical(
+                                                        15, 15))))),
                                     child: Text(
                                       'Verify & Continue',
                                       style: FontFamily.font2,
@@ -238,18 +243,21 @@ class _OTPScreenState extends State<OTPScreen> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 0),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 0),
                                   child: TextButton(
                                     onPressed: () {
-                                      Get.offAll(() =>const DthLmsLogin());
+                                      Get.offAll(() => const DthLmsLogin());
                                     },
                                     style: const ButtonStyle(
                                         backgroundColor:
-                                            MaterialStatePropertyAll(ColorPage.red),
+                                            MaterialStatePropertyAll(
+                                                ColorPage.red),
                                         shape: MaterialStatePropertyAll(
                                             ContinuousRectangleBorder(
                                                 borderRadius: BorderRadius.all(
-                                                    Radius.elliptical(15, 15))))),
+                                                    Radius.elliptical(
+                                                        15, 15))))),
                                     child: Text(
                                       'Cancel',
                                       style: FontFamily.font3,

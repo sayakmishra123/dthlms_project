@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:dthlms/errormsg/errorhandling.dart';
-import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/map/apiobject.dart';
 import 'package:dthlms/url/api_url.dart';
@@ -74,19 +74,29 @@ Future resetPassword(BuildContext context, String email, String ph, String pass,
   loader(context);
   Map body = ClsMap().objresetPassword(email, ph, pass, confirmpass);
   print(body.toString() + code);
-  final client = HttpClient();
-  final request = await client
-      .postUrl(Uri.https(ClsUrlApi.mainurl, '${ClsUrlApi.resetPassword}$code'));
-  request.followRedirects = false;
-  request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
+  var responseBody = await http.post(
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.generateCodeEndpoint),
+      headers: {
+        'accept': 'text/plain',
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(body));
+  // var jsondata = jsonDecode(res.body);
 
-  final jsondata = jsonEncode(body);
-  request.add(utf8.encode(jsondata));
-  print(jsondata);
-  final response = await request.close();
-  var responseBody = await response.transform(utf8.decoder).join();
-  print(responseBody);
-  var json = jsonDecode(responseBody);
+  // final client = HttpClient();
+  // final request = await client
+  //     .postUrl(Uri.https(ClsUrlApi.mainurl, '${ClsUrlApi.resetPassword}$code'));
+  // request.followRedirects = false;
+  // request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
+
+  // final jsondata = jsonEncode(body);
+  // request.add(utf8.encode(jsondata));
+  // print(jsondata);
+  // final response = await request.close();
+  // var responseBody = await response.transform(utf8.decoder).join();
+  // print(responseBody);
+  var json = jsonDecode(responseBody.body);
+  print(json);
   if (json['statusCode'] == 200 && json['isSuccess'] == true) {
     Get.back();
 
