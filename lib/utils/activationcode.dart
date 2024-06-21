@@ -3,6 +3,7 @@ import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ActivationCodePage extends StatefulWidget {
   const ActivationCodePage({super.key});
@@ -97,8 +98,11 @@ class _ActivationCodePageState extends State<ActivationCodePage> {
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate() &&
-                              activationfield != '') {}
+                          _onAlertWithStylePressed(context);
+
+
+                          // if (_formKey.currentState!.validate() &&
+                          //     activationfield != '') {}
                         },
                         child: Text(
                           'Submit',
@@ -120,4 +124,86 @@ class _ActivationCodePageState extends State<ActivationCodePage> {
       ),
     );
   }
+
+
+  _onAlertWithStylePressed(context) {
+    // Reusable alert style
+    var alertStyle = AlertStyle(
+        animationType: AnimationType.fromTop,
+        isCloseButton: false,
+        isOverlayTapDismiss: true,
+        alertPadding: EdgeInsets.only(top: 200),
+        descStyle: TextStyle(fontWeight: FontWeight.bold),
+        animationDuration: Duration(milliseconds: 400),
+        alertBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          side: BorderSide(
+            color: Colors.grey,
+          ),
+        ),
+        titleStyle: TextStyle(
+          color: Colors.red,
+        ),
+        constraints: BoxConstraints.expand(width: 500),
+        //First to chars "55" represents transparency of color
+        overlayColor: Color(0x55000000),
+        alertElevation: 0,
+        alertAlignment: Alignment.bottomCenter);
+
+    // Alert dialog using custom alert style
+    Alert(
+      context: context,
+      style: alertStyle,
+      type: AlertType.info,
+      image: Image.asset("assets/splash6.gif"),
+      title: "RFLUTTER ALERT",
+      desc: "Flutter is more awesome with RFlutter Alert.",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "Ok",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: Color.fromRGBO(0, 179, 134, 1.0),
+          radius: BorderRadius.circular(20.0),
+        ),
+      ],
+    ).show();
+  }
+
+
+   _onCustomAnimationAlertPressed(context) {
+    Alert(
+      context: context,
+      title: "RFLUTTER ALERT",
+      desc: "Flutter is more awesome with RFlutter Alert.",
+      alertAnimation: fadeAlertAnimation,
+    ).show();
+  }
+
+  Widget fadeAlertAnimation(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    return Align(
+      child: FadeTransition(
+        opacity: animation,
+        child: child,
+      ),
+    );
+  }
+
+
+    _onAlertWithCustomImagePressed(context) {
+    Alert(
+      context: context,
+      title: "RFLUTTER ALERT",
+      desc: "Flutter is more awesome with RFlutter Alert.",
+      image: Image.asset("assets/splash6.gif"),
+    ).show();
+  }
+
 }

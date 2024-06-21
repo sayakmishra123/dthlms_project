@@ -6,6 +6,7 @@ import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/android/videoPage/studyVideos.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/url/api_url.dart';
 import 'package:flutter/cupertino.dart';
@@ -346,12 +347,17 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                                   nestedData[subItem
                                                                           .packageId]![
                                                                       subSubIndex];
-                                                              return ListTile(
-                                                                title: Text(subItem
-                                                                    .termName),
-                                                                subtitle: Text(
-                                                                    subSubItem
-                                                                        .packageDisplayName),
+                                                              return InkWell(
+                                                                onTap: (){
+                                                                  Get.to(()=>Studyvidos());
+                                                                },
+                                                                child: ListTile(
+                                                                  title: Text(subItem
+                                                                      .termName),
+                                                                  subtitle: Text(
+                                                                      subSubItem
+                                                                          .packageDisplayName),
+                                                                ),
                                                               );
                                                             },
                                                           )
