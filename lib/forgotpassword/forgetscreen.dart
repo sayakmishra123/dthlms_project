@@ -2,13 +2,11 @@ import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/apiHandleing/apifetchall.dart';
-import 'package:dthlms/getx/getxcontroller.getx.dart';
-import 'package:flutter/cupertino.dart';
+import '../getx/getxcontroller.getx.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -47,12 +45,24 @@ class _ForgotScreenState extends State<ForgotScreen> {
       );
 
   String forgetkey = " ";
+  String resetcode = " ";
   @override
   void initState() {
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
 
     // });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    getx.forgetpageshow.close();
+    getx.forgetpassword1.close();
+    getx.forgetpassword2.close();
+    getx.forgetpasswordemailcode.close();
+
+    // TODO: implement dispose
+    super.dispose();
   }
 
   @override
@@ -519,7 +529,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                                                 password.text,
                                                                 confirmpassword
                                                                     .text,
-                                                                forgetkey);
+                                                                resetcode);
                                                           },
                                                           child: Text(
                                                             'Submit',
@@ -733,11 +743,8 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                                                           print(
                                                                               forgetkey);
 
-                                                                          forgetPassword(
-                                                                              context,
-                                                                              emailid.text,
-                                                                              forgetkey,
-                                                                              emailcode.text);
+                                                                          forgetPassword(context, emailid.text, forgetkey, emailcode.text).then((value) =>
+                                                                              resetcode = value);
                                                                         },
                                                                         child: Text(
                                                                           'Submit',

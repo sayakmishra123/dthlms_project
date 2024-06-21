@@ -3,17 +3,28 @@ import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/login/dth_login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:windows_single_instance/windows_single_instance.dart';
 
 //sayak mishra mm
-void main() async {
+void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await WindowsSingleInstance.ensureSingleInstance(args, "custom_identifier",
+      bringWindowToFront: true, onSecondWindow: (args) {
+    print(args);
+  });
   runApp(
     const MyApp(),
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

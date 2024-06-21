@@ -3,6 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/apiHandleing/apifetchall.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/login/login_api.dart';
@@ -69,6 +70,7 @@ class _OTPScreenState extends State<OTPScreen> {
         // backgroundColor: ColorPage.color1,
         body: SingleChildScrollView(
           child: Container(
+            width: MediaQuery.sizeOf(context).width,
             decoration: const BoxDecoration(
                 gradient: SweepGradient(
               colors: [ColorPage.color1, ColorPage.bgcolor],
@@ -195,7 +197,10 @@ class _OTPScreenState extends State<OTPScreen> {
                                       ),
                                       InkWell(
                                         onTap: () {
-                                          // _verifyPhoneNumber();
+                                          forgetgenerateCode(
+                                              context,
+                                              widget.signupemail,
+                                              widget.signupphno);
                                         },
                                         child: Text(
                                           'Resend OTP',
