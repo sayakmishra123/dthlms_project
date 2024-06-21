@@ -45,6 +45,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
   InputBorder border = const UnderlineInputBorder(
       borderSide: BorderSide(color: ColorPage.colorgrey));
   final bool _isVisible = true;
+
   @override
   void initState() {
     // print(widget.info);
@@ -54,6 +55,8 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
     super.initState();
   }
 
+  AnimatedButtonController animatedButtonController =
+      AnimatedButtonController();
   var key = '0';
   Getx getx = Get.put(Getx());
 
@@ -141,8 +144,10 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                               width: 400,
                                               child: AnimatedButtonBar(
                                                 controller:
-                                                    AnimatedButtonController()
-                                                      ..setIndex(0),
+                                                    animatedButtonController
+                                                      ..setIndex(getxController
+                                                          .ButtonControllerIndex
+                                                          .value),
                                                 radius: 32.0,
                                                 padding:
                                                     const EdgeInsets.all(16.0),
@@ -160,6 +165,13 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                       onTap: () {
                                                         getxController
                                                             .show.value = false;
+                                                        getxController
+                                                            .ButtonControllerIndex
+                                                            .value = 0;
+                                                        print(getxController
+                                                            .ButtonControllerIndex
+                                                            .value
+                                                            .toString());
                                                       },
                                                       child: Text(
                                                         'Log in',
@@ -169,6 +181,13 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                       onTap: () {
                                                         getxController
                                                             .show.value = true;
+                                                        getxController
+                                                            .ButtonControllerIndex
+                                                            .value = 1;
+                                                        print(getxController
+                                                            .ButtonControllerIndex
+                                                            .value
+                                                            .toString());
                                                       },
                                                       child: Text(
                                                         'Sign up',
@@ -650,7 +669,19 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
 
                                                                   // color: ColorPage.colorgrey,
                                                                   onPressed:
-                                                                      () {},
+                                                                      () {
+                                                                    getxController
+                                                                            .show
+                                                                            .value =
+                                                                        false;
+                                                                    getxController
+                                                                        .ButtonControllerIndex
+                                                                        .value = 0;
+                                                                    print(getxController
+                                                                        .ButtonControllerIndex
+                                                                        .value
+                                                                        .toString());
+                                                                  },
                                                                   child: Text(
                                                                     'Login',
                                                                     style:

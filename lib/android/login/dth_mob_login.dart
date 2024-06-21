@@ -36,7 +36,7 @@ class _MobileloginState extends State<Mobilelogin> {
   TextEditingController loginpassword = TextEditingController();
   TextEditingController loginotp = TextEditingController();
 
-  int controllerIndex=0;
+  // int controllerIndex = 0;
 
   // ignore: non_constant_identifier_names
   // final GlobalKey<FormState> desktop_key = GlobalKey();
@@ -53,6 +53,9 @@ class _MobileloginState extends State<Mobilelogin> {
       borderSide: BorderSide(color: ColorPage.colorgrey));
   var key = '0';
   Getx getx = Get.put(Getx());
+
+  AnimatedButtonController animatedButtonController =
+      AnimatedButtonController();
 
   @override
   Widget build(BuildContext context) {
@@ -112,9 +115,9 @@ class _MobileloginState extends State<Mobilelogin> {
                                 SizedBox(
                                   width: 300,
                                   child: AnimatedButtonBar(
-                                    
-                                    controller: AnimatedButtonController()
-                                      ..setIndex(getxController.ButtonControllerIndex.value),
+                                    controller: animatedButtonController
+                                      ..setIndex(getxController
+                                          .ButtonControllerIndex.value),
                                     radius: 32.0,
                                     padding: const EdgeInsets.all(16.0),
                                     backgroundColor: Colors.blueGrey.shade800,
@@ -126,25 +129,26 @@ class _MobileloginState extends State<Mobilelogin> {
                                     innerVerticalPadding: 16,
                                     children: [
                                       ButtonBarEntry(
-
-
-
                                           onTap: () {
                                             getxController.show.value = false;
-                                            getxController.ButtonControllerIndex.value=0;
-                                            print(getxController.ButtonControllerIndex.value.toString());
+                                            getxController.ButtonControllerIndex
+                                                .value = 0;
+                                            print(getxController
+                                                .ButtonControllerIndex.value
+                                                .toString());
                                           },
                                           child: Text(
                                             'Log in',
                                             style: FontFamily.font,
                                           )),
                                       ButtonBarEntry(
-
                                           onTap: () {
-                                           
                                             getxController.show.value = true;
-                                            getxController.ButtonControllerIndex.value=1;
-                                             print(getxController.ButtonControllerIndex.value.toString());
+                                            getxController.ButtonControllerIndex
+                                                .value = 1;
+                                            print(getxController
+                                                .ButtonControllerIndex.value
+                                                .toString());
                                           },
                                           child: Text(
                                             'Sign up',
@@ -348,14 +352,9 @@ class _MobileloginState extends State<Mobilelogin> {
                                             SizedBox(
                                                 width: formfieldsize,
                                                 child: IntlPhoneField(
-<<<<<<< HEAD
-                                                  initialCountryCode: 'IN',
-                                                  autovalidateMode: AutovalidateMode.onUserInteraction,
-=======
                                                   autovalidateMode:
                                                       AutovalidateMode
                                                           .onUserInteraction,
->>>>>>> d253fcdd95c183c581413561072f372c4c39f7e4
                                                   validator: (value) {
                                                     if (value
                                                             .toString()
@@ -532,7 +531,9 @@ class _MobileloginState extends State<Mobilelogin> {
                                             ],
                                           ),
                                         ),
-                                        SizedBox(height: 10,),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -543,23 +544,25 @@ class _MobileloginState extends State<Mobilelogin> {
                                                 fontSize:
                                                     ClsFontsize.ExtraSmall,
                                               ),
-
-                                              
                                             ),
                                             InkWell(
                                               onTap: () {
-                                                getxController.show.value = false;
-                                                getxController.ButtonControllerIndex.value=0;
-                                                print(getxController.ButtonControllerIndex.value.toString());
-                                               
+                                                getxController.show.value =
+                                                    false;
+                                                getxController
+                                                    .ButtonControllerIndex
+                                                    .value = 0;
+                                                print(getxController
+                                                    .ButtonControllerIndex.value
+                                                    .toString());
                                               },
                                               child: Text(
                                                 'LOGIN',
                                                 style: TextStyle(
-                                                  fontSize:
-                                                      ClsFontsize.ExtraSmall,
-                                                      color: ColorPage.red
-                                                ),),
+                                                    fontSize:
+                                                        ClsFontsize.ExtraSmall,
+                                                    color: ColorPage.red),
+                                              ),
                                             ),
                                           ],
                                         ),
