@@ -269,7 +269,12 @@ class _PackageDashboardState extends State<PackageDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: ColorPage.appbarcolor,iconTheme: IconThemeData(color: ColorPage.white),),
+      appBar: AppBar(backgroundColor: ColorPage.appbarcolor,iconTheme: IconThemeData(color: ColorPage.white),
+       leading: Row(children: [Padding(
+         padding: const EdgeInsets.only(left: 30.0),
+         child: Icon(Icons.person,color: ColorPage.white,),
+       )],),
+      ),
         backgroundColor: ColorPage.bgcolor,
         body: Stack(
           children: <Widget>[

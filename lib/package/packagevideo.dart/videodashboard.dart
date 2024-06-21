@@ -151,6 +151,7 @@ class _VideoDashboardState extends State<VideoDashboard>
                       child: Scaffold(
                         backgroundColor: ColorPage.bgcolor,
                         appBar: AppBar(
+                          leading: Row(children: [Icon(Icons.person,color: ColorPage.white,)],),
                           iconTheme: IconThemeData(color: ColorPage.white),
                           backgroundColor: ColorPage.appbarcolor,
                           title: TextField(
