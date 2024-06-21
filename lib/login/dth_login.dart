@@ -80,7 +80,6 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                 
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -93,11 +92,9 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                       ),
                                     ],
                                   ),
-                                  
                                 ],
                               ),
                             ),
-                            
                           ],
                         ),
                       ),
@@ -120,7 +117,6 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                    
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -146,7 +142,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                               child: AnimatedButtonBar(
                                                 controller:
                                                     AnimatedButtonController()
-                                                      ..setIndex(1),
+                                                      ..setIndex(0),
                                                 radius: 32.0,
                                                 padding:
                                                     const EdgeInsets.all(16.0),
@@ -183,483 +179,497 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                             ),
                                           ],
                                         ),
-                                        getxController.show.value  
-                                            ? getxController.isSignup.value? Form(
-                                                key: desktop_key1,
-                                                child: Column(
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                        getxController.show.value
+                                            ? getxController.isSignup.value
+                                                ? Form(
+                                                    key: desktop_key1,
+                                                    child: Column(
                                                       children: [
-                                                        SizedBox(
-                                                          width: formfieldsize,
-                                                          child: Text(
-                                                            'User name',
-                                                            style:
-                                                                FontFamily.font,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                            width:
-                                                                formfieldsize,
-                                                            child:
-                                                                TextFormField(
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .onUserInteraction,
-                                                              textInputAction:
-                                                                  TextInputAction
-                                                                      .next,
-                                                              validator:
-                                                                  (value) {
-                                                                if (value!
-                                                                    .isEmpty) {
-                                                                  return 'Cannot blank';
-                                                                } else {
-                                                                  return null;
-                                                                }
-                                                              },
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .name,
-                                                              controller:
-                                                                  signupuser,
-                                                              decoration: InputDecoration(
-                                                                  enabledBorder:
-                                                                      border,
-                                                                  focusedBorder:
-                                                                      border,
-                                                                  hintText:
-                                                                      'User name'),
-                                                            ))
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: formfieldsize /
-                                                              2.1,
-                                                          child: Text(
-                                                            'First Name',
-                                                            style:
-                                                                FontFamily.font,
-                                                          ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width:
+                                                                  formfieldsize,
+                                                              child: Text(
+                                                                'User name',
+                                                                style:
+                                                                    FontFamily
+                                                                        .font,
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                                width:
+                                                                    formfieldsize,
+                                                                child:
+                                                                    TextFormField(
+                                                                  autovalidateMode:
+                                                                      AutovalidateMode
+                                                                          .onUserInteraction,
+                                                                  textInputAction:
+                                                                      TextInputAction
+                                                                          .next,
+                                                                  validator:
+                                                                      (value) {
+                                                                    if (value!
+                                                                        .isEmpty) {
+                                                                      return 'Cannot blank';
+                                                                    } else {
+                                                                      return null;
+                                                                    }
+                                                                  },
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .name,
+                                                                  controller:
+                                                                      signupuser,
+                                                                  decoration: InputDecoration(
+                                                                      enabledBorder:
+                                                                          border,
+                                                                      focusedBorder:
+                                                                          border,
+                                                                      hintText:
+                                                                          'User name'),
+                                                                ))
+                                                          ],
                                                         ),
                                                         SizedBox(
-                                                          width: 20,
+                                                          height: 10,
                                                         ),
-                                                        SizedBox(
-                                                          width:
-                                                              formfieldsize / 2,
-                                                          child: Text(
-                                                            'Last Name',
-                                                            style:
-                                                                FontFamily.font,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                            width:
-                                                                formfieldsize /
-                                                                    2.2,
-                                                            child:
-                                                                TextFormField(
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .onUserInteraction,
-                                                              textInputAction:
-                                                                  TextInputAction
-                                                                      .next,
-                                                              validator:
-                                                                  (value) {
-                                                                if (value!
-                                                                    .isEmpty) {
-                                                                  return 'Cannot blank';
-                                                                } else {
-                                                                  return null;
-                                                                }
-                                                              },
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .name,
-                                                              controller:
-                                                                  signupfirstname,
-                                                              decoration: InputDecoration(
-                                                                  prefixIcon:
-                                                                      const Icon(
-                                                                          Icons
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width:
+                                                                  formfieldsize /
+                                                                      2.1,
+                                                              child: Text(
+                                                                'First Name',
+                                                                style:
+                                                                    FontFamily
+                                                                        .font,
+                                                              ),
+                                                            ),
+                                                            SizedBox(
+                                                              width: 20,
+                                                            ),
+                                                            SizedBox(
+                                                              width:
+                                                                  formfieldsize /
+                                                                      2,
+                                                              child: Text(
+                                                                'Last Name',
+                                                                style:
+                                                                    FontFamily
+                                                                        .font,
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                                width:
+                                                                    formfieldsize /
+                                                                        2.2,
+                                                                child:
+                                                                    TextFormField(
+                                                                  autovalidateMode:
+                                                                      AutovalidateMode
+                                                                          .onUserInteraction,
+                                                                  textInputAction:
+                                                                      TextInputAction
+                                                                          .next,
+                                                                  validator:
+                                                                      (value) {
+                                                                    if (value!
+                                                                        .isEmpty) {
+                                                                      return 'Cannot blank';
+                                                                    } else {
+                                                                      return null;
+                                                                    }
+                                                                  },
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .name,
+                                                                  controller:
+                                                                      signupfirstname,
+                                                                  decoration: InputDecoration(
+                                                                      prefixIcon:
+                                                                          const Icon(Icons
                                                                               .person),
-                                                                  enabledBorder:
-                                                                      border,
-                                                                  focusedBorder:
-                                                                      border,
-                                                                  hintText:
-                                                                      'First Name'),
-                                                            )),
-                                                        SizedBox(
-                                                          width: 30,
+                                                                      enabledBorder:
+                                                                          border,
+                                                                      focusedBorder:
+                                                                          border,
+                                                                      hintText:
+                                                                          'First Name'),
+                                                                )),
+                                                            SizedBox(
+                                                              width: 30,
+                                                            ),
+                                                            SizedBox(
+                                                                width:
+                                                                    formfieldsize /
+                                                                        2,
+                                                                child:
+                                                                    TextFormField(
+                                                                  autovalidateMode:
+                                                                      AutovalidateMode
+                                                                          .onUserInteraction,
+                                                                  textInputAction:
+                                                                      TextInputAction
+                                                                          .next,
+                                                                  validator:
+                                                                      (value) {
+                                                                    if (value!
+                                                                        .isEmpty) {
+                                                                      return 'Cannot blank';
+                                                                    } else {
+                                                                      return null;
+                                                                    }
+                                                                  },
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .name,
+                                                                  controller:
+                                                                      signuplastname,
+                                                                  decoration: InputDecoration(
+                                                                      enabledBorder:
+                                                                          border,
+                                                                      focusedBorder:
+                                                                          border,
+                                                                      hintText:
+                                                                          'Last Name'),
+                                                                ))
+                                                          ],
                                                         ),
-                                                        SizedBox(
-                                                            width:
-                                                                formfieldsize /
-                                                                    2,
-                                                            child:
-                                                                TextFormField(
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .onUserInteraction,
-                                                              textInputAction:
-                                                                  TextInputAction
-                                                                      .next,
-                                                              validator:
-                                                                  (value) {
-                                                                if (value!
-                                                                    .isEmpty) {
-                                                                  return 'Cannot blank';
-                                                                } else {
-                                                                  return null;
-                                                                }
-                                                              },
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .name,
-                                                              controller:
-                                                                  signuplastname,
-                                                              decoration: InputDecoration(
-                                                                  enabledBorder:
-                                                                      border,
-                                                                  focusedBorder:
-                                                                      border,
-                                                                  hintText:
-                                                                      'Last Name'),
-                                                            ))
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: formfieldsize,
-                                                          child: Text(
-                                                            'Email',
-                                                            style:
-                                                                FontFamily.font,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                            width:
-                                                                formfieldsize,
-                                                            child:
-                                                                TextFormField(
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .onUserInteraction,
-                                                              textInputAction:
-                                                                  TextInputAction
-                                                                      .next,
-                                                              validator:
-                                                                  (value) {
-                                                                if (value!
-                                                                    .isEmpty) {
-                                                                  return 'Cannot blank';
-                                                                } else {
-                                                                  return null;
-                                                                }
-                                                              },
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .emailAddress,
-                                                              controller:
-                                                                  signupemail,
-                                                              decoration: InputDecoration(
-                                                                  prefixIcon:
-                                                                      const Icon(
-                                                                          Icons
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width:
+                                                                  formfieldsize,
+                                                              child: Text(
+                                                                'Email',
+                                                                style:
+                                                                    FontFamily
+                                                                        .font,
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                                width:
+                                                                    formfieldsize,
+                                                                child:
+                                                                    TextFormField(
+                                                                  autovalidateMode:
+                                                                      AutovalidateMode
+                                                                          .onUserInteraction,
+                                                                  textInputAction:
+                                                                      TextInputAction
+                                                                          .next,
+                                                                  validator:
+                                                                      (value) {
+                                                                    if (value!
+                                                                        .isEmpty) {
+                                                                      return 'Cannot blank';
+                                                                    } else {
+                                                                      return null;
+                                                                    }
+                                                                  },
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .emailAddress,
+                                                                  controller:
+                                                                      signupemail,
+                                                                  decoration: InputDecoration(
+                                                                      prefixIcon:
+                                                                          const Icon(Icons
                                                                               .email),
-                                                                  enabledBorder:
-                                                                      border,
-                                                                  focusedBorder:
-                                                                      border,
-                                                                  hintText:
-                                                                      'hello@email.com'),
-                                                            ))
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: formfieldsize,
-                                                          child: Text(
-                                                            'Phone Number',
-                                                            style:
-                                                                FontFamily.font,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: formfieldsize,
-                                                          child: IntlPhoneField(
-                                                            initialCountryCode:
-                                                                'IN',
-                                                            controller:
-                                                                signupphno,
-                                                            showCountryFlag:
-                                                                true,
-                                                            disableLengthCheck:
-                                                                false,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: formfieldsize,
-                                                          child: Text(
-                                                            'Password',
-                                                            style:
-                                                                FontFamily.font,
-                                                          ),
+                                                                      enabledBorder:
+                                                                          border,
+                                                                      focusedBorder:
+                                                                          border,
+                                                                      hintText:
+                                                                          'hello@email.com'),
+                                                                ))
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Obx(
-                                                          () => SizedBox(
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width:
+                                                                  formfieldsize,
+                                                              child: Text(
+                                                                'Phone Number',
+                                                                style:
+                                                                    FontFamily
+                                                                        .font,
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
                                                               width:
                                                                   formfieldsize,
                                                               child:
-                                                                  TextFormField(
-                                                                onFieldSubmitted:
-                                                                    // ignore: avoid_types_as_parameter_names
-                                                                    (Value) {
-                                                                  if (desktop_key1
-                                                                          .currentState!
-                                                                          .validate() &
-                                                                      GetUtils.isEmail(
-                                                                          signupemail
-                                                                              .text)) {
-                                                                    desktop_key1
-                                                                        .currentState!
-                                                                        .save();
-                                                                    Get.to(
-                                                                        () =>
-                                                                            OTPScreen(
-                                                                              signupuser.text,
-                                                                              signupfirstname.text,
-                                                                              signuplastname.text,
-                                                                              signupemail.text,
-                                                                              signuppassword.text,
-                                                                              signupphno.text,
-                                                                            ),
-                                                                        transition:
-                                                                            Transition.leftToRight);
-                                                                  } else {
-                                                                    Get.snackbar(
-                                                                        "Error",
-                                                                        "Please enter valid details",
-                                                                        colorText:
-                                                                            ColorPage.white);
-                                                                  }
-                                                                },
-                                                                obscureText: getx
-                                                                    .signuppasswordshow
-                                                                    .value,
-                                                                autovalidateMode:
-                                                                    AutovalidateMode
-                                                                        .onUserInteraction,
-                                                                textInputAction:
-                                                                    TextInputAction
-                                                                        .next,
-                                                                validator:
-                                                                    (value) {
-                                                                  if (value!
-                                                                      .isEmpty) {
-                                                                    return 'Cannot blank';
-                                                                  } else {
-                                                                    return null;
-                                                                  }
-                                                                },
-                                                                keyboardType:
-                                                                    TextInputType
-                                                                        .visiblePassword,
+                                                                  IntlPhoneField(
+                                                                initialCountryCode:
+                                                                    'IN',
                                                                 controller:
-                                                                    signuppassword,
-                                                                decoration: InputDecoration(
-                                                                    prefixIcon: const Icon(Icons.password),
-                                                                    enabledBorder: border,
-                                                                    focusedBorder: border,
-                                                                    suffixIcon: IconButton(
-                                                                        onPressed: () {
-                                                                          getx.signuppasswordshow.value = !getx
-                                                                              .signuppasswordshow
-                                                                              .value;
-                                                                        },
-                                                                        icon: getx.signuppasswordshow.value ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
-                                                                    hintText: 'Password'),
-                                                              )),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 20),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          SizedBox(
+                                                                    signupphno,
+                                                                showCountryFlag:
+                                                                    true,
+                                                                disableLengthCheck:
+                                                                    false,
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
                                                               width:
                                                                   formfieldsize,
-                                                              child:
-                                                                  MaterialButton(
-                                                                shape: ContinuousRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            20)),
-                                                                padding:
-                                                                    const EdgeInsets
+                                                              child: Text(
+                                                                'Password',
+                                                                style:
+                                                                    FontFamily
+                                                                        .font,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Obx(
+                                                              () => SizedBox(
+                                                                  width:
+                                                                      formfieldsize,
+                                                                  child:
+                                                                      TextFormField(
+                                                                    onFieldSubmitted:
+                                                                        // ignore: avoid_types_as_parameter_names
+                                                                        (Value) {
+                                                                      if (desktop_key1
+                                                                              .currentState!
+                                                                              .validate() &
+                                                                          GetUtils.isEmail(
+                                                                              signupemail.text)) {
+                                                                        desktop_key1
+                                                                            .currentState!
+                                                                            .save();
+                                                                        Get.to(
+                                                                            () =>
+                                                                                OTPScreen(
+                                                                                  signupuser.text,
+                                                                                  signupfirstname.text,
+                                                                                  signuplastname.text,
+                                                                                  signupemail.text,
+                                                                                  signuppassword.text,
+                                                                                  signupphno.text,
+                                                                                ),
+                                                                            transition:
+                                                                                Transition.leftToRight);
+                                                                      } else {
+                                                                        Get.snackbar(
+                                                                            "Error",
+                                                                            "Please enter valid details",
+                                                                            colorText:
+                                                                                ColorPage.white);
+                                                                      }
+                                                                    },
+                                                                    obscureText: getx
+                                                                        .signuppasswordshow
+                                                                        .value,
+                                                                    autovalidateMode:
+                                                                        AutovalidateMode
+                                                                            .onUserInteraction,
+                                                                    textInputAction:
+                                                                        TextInputAction
+                                                                            .next,
+                                                                    validator:
+                                                                        (value) {
+                                                                      if (value!
+                                                                          .isEmpty) {
+                                                                        return 'Cannot blank';
+                                                                      } else {
+                                                                        return null;
+                                                                      }
+                                                                    },
+                                                                    keyboardType:
+                                                                        TextInputType
+                                                                            .visiblePassword,
+                                                                    controller:
+                                                                        signuppassword,
+                                                                    decoration: InputDecoration(
+                                                                        prefixIcon: const Icon(Icons.password),
+                                                                        enabledBorder: border,
+                                                                        focusedBorder: border,
+                                                                        suffixIcon: IconButton(
+                                                                            onPressed: () {
+                                                                              getx.signuppasswordshow.value = !getx.signuppasswordshow.value;
+                                                                            },
+                                                                            icon: getx.signuppasswordshow.value ? const Icon(Icons.visibility) : const Icon(Icons.visibility_off)),
+                                                                        hintText: 'Password'),
+                                                                  )),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  vertical: 20),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              SizedBox(
+                                                                  width:
+                                                                      formfieldsize,
+                                                                  child:
+                                                                      MaterialButton(
+                                                                    shape: ContinuousRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(20)),
+                                                                    padding: const EdgeInsets
                                                                         .only(
                                                                         bottom:
                                                                             20),
-                                                                color: ColorPage
-                                                                    .colorgrey,
-                                                                onPressed: () {
-                                                                  if (desktop_key1
-                                                                          .currentState!
-                                                                          .validate() &
-                                                                      GetUtils.isEmail(
-                                                                          signupemail
-                                                                              .text)) {
-                                                                    desktop_key1
-                                                                        .currentState!
-                                                                        .save();
-                                                                    Get.to(
-                                                                        () =>
-                                                                            OTPScreen(
-                                                                              signupuser.text,
-                                                                              signupfirstname.text,
-                                                                              signuplastname.text,
-                                                                              signupemail.text,
-                                                                              signuppassword.text,
-                                                                              signupphno.text,
-                                                                            ),
-                                                                        transition:
-                                                                            Transition.leftToRight);
-                                                                  } else {
-                                                                    Get.snackbar(
-                                                                        "Error",
-                                                                        "Please enter valid details",
-                                                                        colorText:
-                                                                            ColorPage.white);
-                                                                  }
-                                                                },
-                                                                child: Text(
-                                                                  'Sign Up',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          fontsize,
-                                                                      color: ColorPage
-                                                                          .white),
-                                                                ),
-                                                              ))
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          'Already a member ?',
-                                                          style: TextStyle(
-                                                              fontSize: ClsFontsize
-                                                                  .ExtraSmall),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                            width:
-                                                                formfieldsize,
-                                                            child:
-                                                                MaterialButton(
-                                                              shape: ContinuousRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              20)),
-
-                                                              // color: ColorPage.colorgrey,
-                                                              onPressed: () {},
-                                                              child: Text(
-                                                                'Login',
-                                                                style:
-                                                                    TextStyle(
+                                                                    color: ColorPage
+                                                                        .colorgrey,
+                                                                    onPressed:
+                                                                        () {
+                                                                      if (desktop_key1
+                                                                              .currentState!
+                                                                              .validate() &
+                                                                          GetUtils.isEmail(
+                                                                              signupemail.text)) {
+                                                                        desktop_key1
+                                                                            .currentState!
+                                                                            .save();
+                                                                        Get.to(
+                                                                            () =>
+                                                                                OTPScreen(
+                                                                                  signupuser.text,
+                                                                                  signupfirstname.text,
+                                                                                  signuplastname.text,
+                                                                                  signupemail.text,
+                                                                                  signuppassword.text,
+                                                                                  signupphno.text,
+                                                                                ),
+                                                                            transition:
+                                                                                Transition.leftToRight);
+                                                                      } else {
+                                                                        Get.snackbar(
+                                                                            "Error",
+                                                                            "Please enter valid details",
+                                                                            colorText:
+                                                                                ColorPage.white);
+                                                                      }
+                                                                    },
+                                                                    child: Text(
+                                                                      'Sign Up',
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              fontsize,
+                                                                          color:
+                                                                              ColorPage.white),
+                                                                    ),
+                                                                  ))
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              'Already a member ?',
+                                                              style: TextStyle(
                                                                   fontSize:
                                                                       ClsFontsize
-                                                                          .ExtraSmall,
-                                                                ),
-                                                              ),
-                                                            ))
+                                                                          .ExtraSmall),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                                width:
+                                                                    formfieldsize,
+                                                                child:
+                                                                    MaterialButton(
+                                                                  shape: ContinuousRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              20)),
+
+                                                                  // color: ColorPage.colorgrey,
+                                                                  onPressed:
+                                                                      () {},
+                                                                  child: Text(
+                                                                    'Login',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          ClsFontsize
+                                                                              .ExtraSmall,
+                                                                    ),
+                                                                  ),
+                                                                ))
+                                                          ],
+                                                        ),
                                                       ],
                                                     ),
-                                                  ],
-                                                ),
-                                              ):Container(child: Text("Sign up is Disable by Admin!"),)
+                                                  )
+                                                : Container(
+                                                    child: Text(
+                                                        "Sign up is Disable by Admin!"),
+                                                  )
                                             : Form(
                                                 key: desktop_key2,
                                                 child: Column(
@@ -839,7 +849,6 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                   formfieldsize,
                                                               child:
                                                                   MaterialButton(
-                                                                    
                                                                 shape: ContinuousRectangleBorder(
                                                                     borderRadius:
                                                                         BorderRadius.circular(

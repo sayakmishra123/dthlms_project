@@ -30,6 +30,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
 
   Getx getx = Get.put(Getx());
   final email = InputDecoration(
+      prefixIcon: Icon(Icons.email),
       hintText: 'solution@gmail.com',
       hintStyle: const TextStyle(color: ColorPage.colorgrey),
       labelText: 'Email',
@@ -341,6 +342,8 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                                                     .next,
                                                             decoration:
                                                                 InputDecoration(
+                                                              prefixIcon: Icon(
+                                                                  Icons.phone),
                                                               filled: true,
                                                               fillColor: Color
                                                                   .fromARGB(
@@ -616,6 +619,9 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                                                           .next,
                                                                   decoration:
                                                                       InputDecoration(
+                                                                    prefixIcon:
+                                                                        Icon(Icons
+                                                                            .phone),
                                                                     filled:
                                                                         true,
                                                                     fillColor: Color
@@ -713,55 +719,52 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                                         padding:
                                                             const EdgeInsets
                                                                 .only(left: 5),
-                                                        child: getx
-                                                                .forgetpasswordemailcode
-                                                                .value
-                                                            ? MaterialButton(
-                                                                color: ColorPage
-                                                                    .color1,
-                                                                onPressed:
-                                                                    () async {
-                                                                  print(
-                                                                      forgetkey);
+                                                        child:
+                                                            getx.forgetpasswordemailcode
+                                                                    .value
+                                                                ? Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            50),
+                                                                    child: MaterialButton(
+                                                                        color: ColorPage.color1,
+                                                                        onPressed: () async {
+                                                                          print(
+                                                                              forgetkey);
 
-                                                                  forgetPassword(
-                                                                      context,
-                                                                      emailid
-                                                                          .text,
-                                                                      forgetkey,
-                                                                      emailcode
-                                                                          .text);
-                                                                },
-                                                                child: Text(
-                                                                  'Submit',
-                                                                  style:
-                                                                      FontFamily
-                                                                          .font3,
-                                                                ))
-                                                            : MaterialButton(
-                                                                color: ColorPage
-                                                                    .color1,
-                                                                onPressed:
-                                                                    () async {
-                                                                  print(
-                                                                      forgetkey);
+                                                                          forgetPassword(
+                                                                              context,
+                                                                              emailid.text,
+                                                                              forgetkey,
+                                                                              emailcode.text);
+                                                                        },
+                                                                        child: Text(
+                                                                          'Submit',
+                                                                          style:
+                                                                              FontFamily.font3,
+                                                                        )),
+                                                                  )
+                                                                : Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            50),
+                                                                    child: MaterialButton(
+                                                                        color: ColorPage.color1,
+                                                                        onPressed: () async {
+                                                                          print(
+                                                                              forgetkey);
 
-                                                                  forgetgenerateCode(
-                                                                          context,
-                                                                          phno
-                                                                              .text,
-                                                                          emailid
-                                                                              .text)
-                                                                      .then((value) =>
-                                                                          forgetkey =
-                                                                              value);
-                                                                },
-                                                                child: Text(
-                                                                  'Submit',
-                                                                  style:
-                                                                      FontFamily
-                                                                          .font3,
-                                                                )),
+                                                                          forgetgenerateCode(context, phno.text, emailid.text).then((value) =>
+                                                                              forgetkey = value);
+                                                                        },
+                                                                        child: Text(
+                                                                          'Submit',
+                                                                          style:
+                                                                              FontFamily.font3,
+                                                                        )),
+                                                                  ),
                                                       )
                                                     ],
                                                   ),
