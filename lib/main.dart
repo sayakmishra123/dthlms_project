@@ -7,11 +7,14 @@ import 'package:windows_single_instance/windows_single_instance.dart';
 
 //sayak mishra mm
 void main(List<String> args) async {
+  const environment =
+      String.fromEnvironment('environment', defaultValue: 'Testing');
   WidgetsFlutterBinding.ensureInitialized();
   await WindowsSingleInstance.ensureSingleInstance(args, "custom_identifier",
       bringWindowToFront: true, onSecondWindow: (args) {
     print(args);
   });
+  print(args);
   runApp(
     const MyApp(),
   );
@@ -28,7 +31,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        debugShowCheckedModeBanner: false,
+        enableLog: true,
+
+        // debugShowCheckedModeBanner: false,
         title: 'DTH LMS',
         theme: ThemeData(
           colorScheme:

@@ -117,7 +117,7 @@ Future loginApi(
     //     });
   } else {
     Get.back();
-    ClsErrorMsg.fnErrorDialog(context, jsondata['errorMessages'], res);
+    ClsErrorMsg.fnErrorDialog(context, 'Login', jsondata['errorMessages'], res);
   }
 }
 
@@ -192,7 +192,8 @@ Future signupApi(
 
     print(res.statusCode);
 
-    ClsErrorMsg.fnErrorDialog(context, jsondata['errorMessages'], res);
+    ClsErrorMsg.fnErrorDialog(
+        context, 'Sign up', jsondata['errorMessages'], res);
   }
   // } catch (e) {
   //   Get.back();
@@ -239,13 +240,15 @@ Future signupcodegenerate(
       // print(responsecode.body);
 
       Get.back();
-      ClsErrorMsg.fnErrorDialog(context, json['errorMessages'], responsecode);
+      ClsErrorMsg.fnErrorDialog(
+          context, 'Sign up', json['errorMessages'], responsecode);
 
       return 'error';
     }
   } else {
     Get.back();
-    ClsErrorMsg.fnErrorDialog(context, json['errorMessages'], response);
+    ClsErrorMsg.fnErrorDialog(
+        context, 'Sign up', json['errorMessages'], response);
   }
   // } catch (e) {
   //   print(e);

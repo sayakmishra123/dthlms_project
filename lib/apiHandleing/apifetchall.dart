@@ -67,7 +67,8 @@ Future forgetPassword(BuildContext context, String signupemail, String key,
     return json['result']['token'];
   } else {
     Get.back();
-    ClsErrorMsg.fnErrorDialog(context, json['errorMessages'], responseBody);
+    ClsErrorMsg.fnErrorDialog(
+        context, 'Forget Password', json['errorMessages'], responseBody);
   }
 }
 
@@ -97,11 +98,12 @@ Future resetPassword(BuildContext context, String email, String ph, String pass,
     Get.back();
 
     ClsErrorMsg.fnErrorDialog(
-        context, 'Password reset successfully', responseBody);
+        context, 'Password reset', 'Password reset successfully', responseBody);
     Get.to(() => DthLmsLogin());
   }
   {
     Get.back();
-    ClsErrorMsg.fnErrorDialog(context, json['errorMessages'], responseBody);
+    ClsErrorMsg.fnErrorDialog(
+        context, 'Password reset', json['errorMessages'], responseBody);
   }
 }
