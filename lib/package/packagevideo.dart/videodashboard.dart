@@ -111,7 +111,7 @@ class _VideoDashboardState extends State<VideoDashboard>
     fnfindallpackage(widget.token);
     _motionTabBarController = MotionTabBarController(
       initialIndex: 0,
-      length: 3,
+      length: 6,
       vsync: this,
     );
     WidgetsBinding.instance.addPostFrameCallback((_) =>
@@ -124,7 +124,10 @@ class _VideoDashboardState extends State<VideoDashboard>
   List<String> tabfield = const [
     "VIDEO",
     "LIVE",
-    "BACKUP",
+    "STUDY MATERIAL",
+     "TEST SERIES",
+    "MCQ",
+    "OPTION 6",
   ];
 
   @override
@@ -134,7 +137,7 @@ class _VideoDashboardState extends State<VideoDashboard>
         Container(
           child: Expanded(
             child: DefaultTabController(
-                length: 3,
+                length: 6,
                 child: Scaffold(
                   backgroundColor: ColorPage.bgcolor,
                   appBar: AppBar(
@@ -150,11 +153,18 @@ class _VideoDashboardState extends State<VideoDashboard>
                         icons: const [
                           Icons.video_library_rounded,
                           Icons.wifi_tethering,
+                          Icons.menu_book_sharp,
+                           Icons.abc,
                           Icons.wifi_protected_setup_outlined,
+                           Icons.wifi_tethering,
+                         
                         ],
 
                         badges: [
                           null,
+                          null,
+                          null,
+                           null,
                           null,
                           null,
                         ],
@@ -175,15 +185,15 @@ class _VideoDashboardState extends State<VideoDashboard>
                         // tabBarColor: Color.fromARGB(255, 64, 41, 231),
                         onTabItemSelected: (int value) {
                           setState(() {
-                            // _motionTabBarController!.index = value;
+                            _motionTabBarController!.index = value;
                           });
                         },
                       ),
                     ),
                   ),
                   body: TabBarView(
-                      physics:
-                          NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
+                      // physics:
+                          // NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
 
                       controller: _motionTabBarController,
                       children: [
@@ -325,9 +335,15 @@ class _VideoDashboardState extends State<VideoDashboard>
                                       'assets/android/nodatafound.png'),
                                 ),
                         ),
-                        Container(),
-                        Container(),
-                      ]),
+                       
+                        Container(color: Color.fromARGB(255, 249, 24, 204),),
+                        Container(color: ColorPage.blue,),
+                         Container(),
+                         Container(),
+                      
+                         Container(),
+                      
+                      ],),
                 )),
           ),
         ),
