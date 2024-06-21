@@ -40,6 +40,7 @@ class Getx extends GetxController {
   RxBool isSelectXXS = false.obs;
   RxBool isSignup = true.obs;
   RxBool isMypackages = false.obs;
+  RxBool passvisibility=false.obs;
 
   RxList<SimCard> simCardinfo = <SimCard>[].obs;
   RxList<AllPackage> package = <AllPackage>[].obs;
