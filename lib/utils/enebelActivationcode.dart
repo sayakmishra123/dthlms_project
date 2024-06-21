@@ -185,14 +185,13 @@ class CustomMessageBubble extends StatelessWidget {
             color: Colors.grey,
           ),
         ),
-        titleStyle: TextStyle(
-          color: ColorPage.blue,
-        ),
+        titleStyle:
+            TextStyle(color: ColorPage.blue, fontWeight: FontWeight.bold),
         constraints: BoxConstraints.expand(width: 500),
         //First to chars "55" represents transparency of color
         overlayColor: Color(0x55000000),
         alertElevation: 0,
-        alertAlignment: Alignment.bottomCenter);
+        alertAlignment: Alignment.center);
 
     // Alert dialog using custom alert style
     Alert(
@@ -204,8 +203,11 @@ class CustomMessageBubble extends StatelessWidget {
 
       content: Form(
           child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           Row(
             children: [
               Padding(
@@ -218,7 +220,7 @@ class CustomMessageBubble extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: TextFormField(
               // controller: activationfield,
               validator: (value) {
@@ -242,7 +244,7 @@ class CustomMessageBubble extends StatelessWidget {
       )),
       buttons: [
         DialogButton(
-        width: MediaQuery.of(context).size.width/4.5,
+          width: MediaQuery.of(context).size.width / 4.5,
           child: Text(
             "Ok",
             style: TextStyle(color: Colors.white, fontSize: 15),
