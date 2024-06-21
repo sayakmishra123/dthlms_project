@@ -154,8 +154,11 @@ class _VideoDashboardState extends State<VideoDashboard>
                           iconTheme: IconThemeData(color: ColorPage.white),
                           backgroundColor: ColorPage.appbarcolor,
                           title: TextField(
+                            
                             controller: searchController,
                             decoration: InputDecoration(
+                          
+                              
                                         hintStyle: TextStyle(
                                             color: ColorPage.brownshade300,
                                             fontSize:
@@ -174,7 +177,7 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                 BorderRadius.circular(30),
                                             borderSide: BorderSide.none),
                                       ),
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: ColorPage.colorblack),
                             onChanged: (value) {
                               setFilterData();
                             },

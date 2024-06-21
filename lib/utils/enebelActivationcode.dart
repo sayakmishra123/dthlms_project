@@ -1,11 +1,12 @@
 import 'package:dthlms/ThemeData/color/color.dart';
-import 'package:dthlms/ThemeData/font/font_family.dart';
+
 import 'package:dthlms/getx/getxcontroller.getx.dart';
-import 'package:dthlms/utils/activationcode.dart';
+
 import 'package:flutter/material.dart';
+// ignore: unnecessary_import
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class GlobalDialog extends StatefulWidget {
@@ -58,6 +59,7 @@ class _GlobalDialogState extends State<GlobalDialog>
   }
 }
 
+// ignore: must_be_immutable
 class CustomMessageBubble extends StatelessWidget {
   final String text;
   final Color color;

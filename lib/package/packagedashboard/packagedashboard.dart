@@ -269,6 +269,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: ColorPage.appbarcolor,iconTheme: IconThemeData(color: ColorPage.white),),
         backgroundColor: ColorPage.bgcolor,
         body: Stack(
           children: <Widget>[
@@ -556,8 +557,17 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                                                                     return Container(
                                                                                       decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
                                                                                       child: ListTile(
+                                                                                        trailing: Container(
+                                                                                          child: ElevatedButton(
+                                                                                              style: ElevatedButton.styleFrom(backgroundColor: ColorPage.color1,shape: BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)))),
+                                                                                              onPressed: () { Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));},
+                                                                                              child: Text(
+                                                                                                "SHOW",
+                                                                                                style: TextStyle(color: ColorPage.white),
+                                                                                              )),
+                                                                                        ),
                                                                                         onTap: () {
-                                                                                          Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                                          // Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
                                                                                         },
                                                                                         title: Text(subItem.termName),
                                                                                         subtitle: Text(subSubItem.packageDisplayName),
@@ -598,27 +608,29 @@ class _PackageDashboardState extends State<PackageDashboard> {
                         child: Column(
                           children: [
                             Flexible(
-                              child: Column(
-                                children: [
-                                  Stack(children: [
-                                    Image.asset(
-                                      fit: BoxFit.fitHeight,
-                                      'assets/wallpaperflare.com_wallpaper.jpg',
-                                      height: MediaQuery.sizeOf(context).height,
-                                    ),
-                                    Positioned(
-                                      bottom: 500,
-                                      left: 300,
-                                      child: TypeWriter.text(
-                                        'lorem ipsum dolot sit amet ...',
-                                        style: FontFamily.font2,
-                                        repeat: true,
-                                        duration:
-                                            const Duration(milliseconds: 50),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    Stack(children: [
+                                      Image.asset(
+                                        fit: BoxFit.cover,
+                                        'assets/wallpaperflare.com_wallpaper.jpg',
+                                        height: MediaQuery.sizeOf(context).height,
                                       ),
-                                    ),
-                                  ]),
-                                ],
+                                      Positioned(
+                                        bottom: 500,
+                                        left: 300,
+                                        child: TypeWriter.text(
+                                          'lorem ipsum dolot sit amet ...',
+                                          style: FontFamily.font2,
+                                          repeat: true,
+                                          duration:
+                                              const Duration(milliseconds: 50),
+                                        ),
+                                      ),
+                                    ]),
+                                  ],
+                                ),
                               ),
                             ),
                           ],
@@ -629,8 +641,4 @@ class _PackageDashboardState extends State<PackageDashboard> {
           ],
         ));
   }
-
-
-
-  
 }
