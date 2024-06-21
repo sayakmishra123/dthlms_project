@@ -3,7 +3,7 @@
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
-import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/pages/utctime.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

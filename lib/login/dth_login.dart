@@ -9,7 +9,7 @@ import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/forgotpassword/forgetscreen.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
-import '../getx/getxcontroller.dart';
+import '../getx/getxcontroller.getx.dart';
 import 'package:dthlms/login/login_api.dart';
 import 'package:dthlms/otp/otpscreen.dart';
 import 'package:flutter/material.dart';

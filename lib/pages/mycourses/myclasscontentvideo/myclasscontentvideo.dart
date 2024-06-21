@@ -5,7 +5,7 @@ import 'dart:math';
 
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
-import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/package/packagevideo.dart/category/McqCategory.dart';
 import 'package:dthlms/package/packagevideo.dart/category/pdfcategory.dart';
 import 'package:dthlms/utils/loader.dart';

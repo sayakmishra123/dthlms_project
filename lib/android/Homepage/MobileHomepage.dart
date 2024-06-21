@@ -6,7 +6,7 @@ import 'package:dthlms/android/Drawer/Mobiledrawer.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 // import 'package:dthlms/android/PackageDashboard/PackageDashboard.dart';
-import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/android/packagemobile/packages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

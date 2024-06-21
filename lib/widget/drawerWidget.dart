@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:dthlms/ThemeData/color/color.dart';
-import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/pages/StudyMaterial/StudyMaterialDashboard.dart';
 import 'package:dthlms/pages/dashboard.dart';
 import 'package:dthlms/pages/profile/profile.dart';

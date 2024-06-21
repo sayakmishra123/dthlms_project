@@ -9,7 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:simnumber/sim_number.dart';
 import 'package:simnumber/siminfo.dart';
 
-import '../../getx/getxcontroller.dart';
+import '../../getx/getxcontroller.getx.dart';
 
 class ClsSimInfo {
   Future printSimCardsData(BuildContext context) async {

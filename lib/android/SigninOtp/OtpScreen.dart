@@ -3,7 +3,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
-import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 
 import 'package:dthlms/login/login_api.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +20,8 @@ class signInOtpScreen extends StatefulWidget {
   String signupemail;
   String signuppassword;
   String signupphno;
-  signInOtpScreen(this.signupuser, this.signupfirstname,this.signuplastname, this.signupemail,
-      this.signuppassword, this.signupphno,
+  signInOtpScreen(this.signupuser, this.signupfirstname, this.signuplastname,
+      this.signupemail, this.signuppassword, this.signupphno,
       {super.key});
 
   // signInOtpScreen({super.key});
@@ -29,7 +29,6 @@ class signInOtpScreen extends StatefulWidget {
   @override
   State<signInOtpScreen> createState() => _signInOtpScreenState();
 }
-
 
 class _signInOtpScreenState extends State<signInOtpScreen> {
   late double screenwidth = MediaQuery.of(context).size.width;
@@ -239,7 +238,6 @@ class _signInOtpScreenState extends State<signInOtpScreen> {
                                       widget.signupuser,
                                       widget.signupfirstname,
                                       widget.signuplastname,
-
                                       widget.signupemail,
                                       widget.signuppassword,
                                       widget.signupphno,

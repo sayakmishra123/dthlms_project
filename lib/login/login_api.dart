@@ -5,7 +5,7 @@ import 'dart:io';
 
 import 'package:dthlms/configaration/device/device_info.dart';
 import 'package:dthlms/errormsg/errorhandling.dart';
-import 'package:dthlms/getx/getxcontroller.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/login/loginmodel.dart';
 import 'package:dthlms/map/apiobject.dart';
@@ -121,8 +121,16 @@ Future loginApi(
   }
 }
 
-Future signupApi(BuildContext context, String signupuser, String signupfirstname, String signuplastname,
-    signupemail, signuppassword, signupphno, key, otp) async {
+Future signupApi(
+    BuildContext context,
+    String signupuser,
+    String signupfirstname,
+    String signuplastname,
+    signupemail,
+    signuppassword,
+    signupphno,
+    key,
+    otp) async {
   // try {
   final getObj = Get.put(Getx());
   print(getObj);
@@ -141,8 +149,8 @@ Future signupApi(BuildContext context, String signupuser, String signupfirstname
 
   var signupdata = ClsMap().objSignupApi(
     signupuser,
-  signupfirstname,
-  signuplastname,
+    signupfirstname,
+    signuplastname,
     signupemail,
     signuppassword,
     signupphno,
