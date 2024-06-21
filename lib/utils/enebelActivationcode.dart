@@ -1,5 +1,6 @@
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/utils/activationcode.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -70,6 +71,8 @@ class CustomMessageBubble extends StatelessWidget {
     required this.textStyle,
   });
   TextEditingController activationfield = TextEditingController();
+  Getx get_obj=Get.put(Getx());
+  
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +222,7 @@ class CustomMessageBubble extends StatelessWidget {
               ),
             ],
           ),
-          Padding(
+        Obx(() =>   Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: TextFormField(
               // controller: activationfield,
@@ -229,17 +232,22 @@ class CustomMessageBubble extends StatelessWidget {
                 }
                 return null;
               },
+              obscureText: get_obj.passvisibility.value,
+              obscuringCharacter: '*',
               decoration: InputDecoration(
                   // prefixIcon: Icon(Icons.code),
                   suffixIcon: IconButton(
-                      onPressed: () {}, icon: Icon(Icons.visibility)),
+                      onPressed: () {
+                        get_obj.passvisibility.value=!get_obj.passvisibility.value;
+
+                      }, icon: get_obj.passvisibility.value? Icon(Icons.visibility_off):Icon(Icons.visibility)),
                   labelText: 'Enter Activation Code',
                   // hintText: 'Enter Activation Code',
-                  fillColor: ColorPage.bgcolor,
-                  filled: true,
+                  
+                  filled: false,
                   focusColor: ColorPage.white),
             ),
-          )
+          ))
         ],
       )),
       buttons: [

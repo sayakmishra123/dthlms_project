@@ -1,5 +1,4 @@
-// ignore_for_file: must_be_immutable
-
+import 'dart:async'; // Add this import
 import 'dart:convert';
 
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
@@ -22,6 +21,7 @@ import 'package:motion_tab_bar/MotionTabBar.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:typewritertext/v3/typewriter.dart';
+import 'dart:async'; // Add this import
 
 class VideoDashboard extends StatefulWidget {
   String token;
@@ -67,6 +67,8 @@ class _VideoDashboardState extends State<VideoDashboard>
 
   var data2;
 
+  bool _isLoading = true;
+
   Future fngetvideoApi(String? selectedValue) async {
     x1.clear();
     loader(context);
@@ -90,7 +92,6 @@ class _VideoDashboardState extends State<VideoDashboard>
     print(jsondata);
     var data = jsonDecode(jsondata['result']);
     if (data != null) {
-      // data = data1[0]['VideoName'];
       for (int i = 0; i < data.length; i++) {
         final data1 = ClassAllVideos(
             videoname: data[i]['VideoName'] ?? ' ',
@@ -108,6 +109,7 @@ class _VideoDashboardState extends State<VideoDashboard>
 
   @override
   void initState() {
+    super.initState();
     fnfindallpackage(widget.token);
     _motionTabBarController = MotionTabBarController(
       initialIndex: 0,
@@ -117,7 +119,11 @@ class _VideoDashboardState extends State<VideoDashboard>
     WidgetsBinding.instance.addPostFrameCallback((_) =>
         ShowCaseWidget.of(context)
             .startShowCase([showcase_one, showcase_searchkey]));
-    super.initState();
+    Timer(Duration(seconds: 3), () {
+      setState(() {
+        _isLoading = false;
+      });
+    });
   }
 
   MotionTabBarController? _motionTabBarController;
@@ -125,260 +131,269 @@ class _VideoDashboardState extends State<VideoDashboard>
     "VIDEO",
     "LIVE",
     "STUDY MATERIAL",
-     "TEST SERIES",
+    "TEST SERIES",
     "MCQ",
     "OPTION 6",
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          child: Expanded(
-            child: DefaultTabController(
-                length: 6,
-                child: Scaffold(
-                  backgroundColor: ColorPage.bgcolor,
-                  appBar: AppBar(
-                    iconTheme: IconThemeData(color: ColorPage.white),
-                    backgroundColor: ColorPage.appbarcolor,
-                    bottom: PreferredSize(
-                      preferredSize: Size.fromHeight(80),
-                      child: MotionTabBar(
-                        controller:
-                            _motionTabBarController, // ADD THIS if you need to change your tab programmatically
-                        initialSelectedTab: "VIDEO",
-                        labels: tabfield,
-                        icons: const [
-                          Icons.video_library_rounded,
-                          Icons.wifi_tethering,
-                          Icons.menu_book_sharp,
-                           Icons.abc,
-                          Icons.wifi_protected_setup_outlined,
-                           Icons.wifi_tethering,
-                         
-                        ],
-
-                        badges: [
-                          null,
-                          null,
-                          null,
-                           null,
-                          null,
-                          null,
-                        ],
-
-                        tabSize: 50,
-                        tabBarHeight: 55,
-                        textStyle: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-
-                        tabIconColor: Colors.blue[600],
-                        tabIconSize: 28.0,
-                        tabIconSelectedSize: 26.0,
-                        tabSelectedColor: Colors.blue[900],
-                        tabIconSelectedColor: Colors.white,
-                        // tabBarColor: Color.fromARGB(255, 64, 41, 231),
-                        onTabItemSelected: (int value) {
-                          setState(() {
-                            _motionTabBarController!.index = value;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  body: TabBarView(
-                      // physics:
-                          // NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
-
-                      controller: _motionTabBarController,
-                      children: [
-                        Container(
-                          child: filteredPackage.isNotEmpty
-                              ? ListView.builder(
-                                  shrinkWrap: true,
-                                  // itemCount: 5,
-                                  itemCount: filteredPackage.length,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(10),
-                                        ),
-                                        color: ColorPage.white,
+    return _isLoading
+        ? Center(
+            child: CircularProgressIndicator(),
+          )
+        : Row(
+            children: [
+              Container(
+                child: Expanded(
+                  child: DefaultTabController(
+                      length: 6,
+                      child: Scaffold(
+                        backgroundColor: ColorPage.bgcolor,
+                        appBar: AppBar(
+                          iconTheme: IconThemeData(color: ColorPage.white),
+                          backgroundColor: ColorPage.appbarcolor,
+                          title: TextField(
+                            controller: searchController,
+                            decoration: InputDecoration(
+                                        hintStyle: TextStyle(
+                                            color: ColorPage.brownshade300,
+                                            fontSize:
+                                                ClsFontsize.ExtraSmall - 1),
+                                        hintText: 'Search',
+                                        fillColor: ColorPage.white,
+                                        filled: true,
+                                        suffixIcon:  IconButton(
+                              icon: Icon(Icons.search),
+                              onPressed: () {
+                                setFilterData();
+                              },
+                            ),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            borderSide: BorderSide.none),
                                       ),
-                                      margin: EdgeInsets.all(10),
-                                      child: ExpansionTile(
-                                        shape: Border.all(
-                                            color: Colors.transparent),
-                                        // leading: Text(
-                                        //     filteredPackage[index]
-                                        //         .packageId),
-                                        title: Text(
-                                          filteredPackage[index].packageName,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        onExpansionChanged: (value) {
-                                          if (value &&
-                                              !allnestedData.containsKey(
-                                                  filteredPackage[index]
-                                                      .packageId)) {
-                                            fnfindpackage(
-                                                widget.token,
-                                                filteredPackage[index]
-                                                    .packageId);
-                                          }
-                                        },
-                                        children: [
-                                          allnestedData.containsKey(
-                                                  filteredPackage[index]
-                                                      .packageId)
-                                              ? ListView.builder(
-                                                  shrinkWrap: true,
-                                                  itemCount: 1,
-                                                  itemBuilder:
-                                                      (context, subIndex) {
-                                                    var subItem = allnestedData[
-                                                            filteredPackage[
-                                                                    index]
-                                                                .packageId]![
-                                                        subIndex];
-                                                    return Container(
-                                                      decoration: BoxDecoration(
-                                                        border: Border(
-                                                          top: BorderSide(
-                                                              color: ColorPage
-                                                                  .colorblack,
-                                                              width: 1),
-                                                        ),
-                                                      ),
-                                                      child: ExpansionTile(
-                                                        shape: Border.all(
-                                                            color: Colors
-                                                                .transparent),
-                                                        // leading: Text(
-                                                        //     subItem
-                                                        //         .courseId),
-                                                        title: Text(
-                                                            subItem.courseName),
-                                                        subtitle: Text(
-                                                            subItem.termName),
-                                                        onExpansionChanged:
-                                                            (value) {
-                                                          if (value &&
-                                                              !allnestedData
-                                                                  .containsKey(
+                            style: TextStyle(color: Colors.white),
+                            onChanged: (value) {
+                              setFilterData();
+                            },
+                          ),
+                          
+                          bottom: PreferredSize(
+                            preferredSize: Size.fromHeight(80),
+                            child: MotionTabBar(
+                              controller:
+                                  _motionTabBarController,
+                              initialSelectedTab: "VIDEO",
+                              labels: tabfield,
+                              icons: const [
+                                Icons.video_library_rounded,
+                                Icons.wifi_tethering,
+                                Icons.menu_book_sharp,
+                                Icons.abc,
+                                Icons.wifi_protected_setup_outlined,
+                                Icons.wifi_tethering,
+                              ],
+                              badges: [
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                              ],
+                              tabSize: 50,
+                              tabBarHeight: 55,
+                              textStyle: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              tabIconColor: Colors.blue[600],
+                              tabIconSize: 28.0,
+                              tabIconSelectedSize: 26.0,
+                              tabSelectedColor: Colors.blue[900],
+                              tabIconSelectedColor: Colors.white,
+                              onTabItemSelected: (int value) {
+                                setState(() {
+                                  _motionTabBarController!.index = value;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                        body: TabBarView(
+                          controller: _motionTabBarController,
+                          children: [
+                            Container(
+                              child: filteredPackage.isNotEmpty
+                                  ? ListView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: filteredPackage.length,
+                                      itemBuilder: (context, index) {
+                                        return Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(10),
+                                            ),
+                                            color: ColorPage.white,
+                                          ),
+                                          margin: EdgeInsets.all(10),
+                                          child: ExpansionTile(
+                                            shape: Border.all(
+                                                color: Colors.transparent),
+                                            title: Text(
+                                              filteredPackage[index].packageName,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            onExpansionChanged: (value) {
+                                              if (value &&
+                                                  !allnestedData.containsKey(
+                                                      filteredPackage[index]
+                                                          .packageId)) {
+                                                fnfindpackage(
+                                                    widget.token,
+                                                    filteredPackage[index]
+                                                        .packageId);
+                                              }
+                                            },
+                                            children: [
+                                              allnestedData.containsKey(
+                                                      filteredPackage[index]
+                                                          .packageId)
+                                                  ? ListView.builder(
+                                                      shrinkWrap: true,
+                                                      itemCount: 1,
+                                                      itemBuilder:
+                                                          (context, subIndex) {
+                                                        var subItem =
+                                                            allnestedData[
+                                                                    filteredPackage[
+                                                                            index]
+                                                                        .packageId]![
+                                                                subIndex];
+                                                        return Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border(
+                                                              top: BorderSide(
+                                                                  color: ColorPage
+                                                                      .colorblack,
+                                                                  width: 1),
+                                                            ),
+                                                          ),
+                                                          child: ExpansionTile(
+                                                            shape: Border.all(
+                                                                color: Colors
+                                                                    .transparent),
+                                                            title: Text(
+                                                                subItem.courseName),
+                                                            subtitle: Text(
+                                                                subItem.termName),
+                                                            onExpansionChanged:
+                                                                (value) {
+                                                              if (value &&
+                                                                  !allnestedData
+                                                                      .containsKey(
+                                                                          subItem
+                                                                              .packageId)) {
+                                                                fnfindpackage(
+                                                                    widget.token,
+                                                                    subItem
+                                                                        .packageId);
+                                                              }
+                                                            },
+                                                            children: [
+                                                              allnestedData.containsKey(
                                                                       subItem
-                                                                          .packageId)) {
-                                                            fnfindpackage(
-                                                                widget.token,
-                                                                subItem
-                                                                    .packageId);
-                                                          }
-                                                        },
-                                                        children: [
-                                                          allnestedData.containsKey(
-                                                                  subItem
-                                                                      .packageId)
-                                                              ? ListView
-                                                                  .builder(
-                                                                  shrinkWrap:
-                                                                      true,
-                                                                  itemCount: 1,
-                                                                  itemBuilder:
-                                                                      (context,
-                                                                          subSubIndex) {
-                                                                    var subSubItem =
-                                                                        allnestedData[subItem.packageId]![
-                                                                            subSubIndex];
-                                                                    return Container(
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                              border: Border(top: BorderSide(color: ColorPage.colorblack))),
-                                                                      child:
-                                                                          ListTile(
-                                                                        onTap:
-                                                                            () {
-                                                                          Get.to(() =>
-                                                                              ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
-                                                                        },
-                                                                        title: Text(
-                                                                            subItem.termName),
-                                                                        subtitle:
-                                                                            Text(subSubItem.packageDisplayName),
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                )
-                                                              : CircularProgressIndicator(),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  },
-                                                )
-                                              : Center(
-                                                  child:
-                                                      CircularProgressIndicator(),
-                                                )
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                )
-                              : Center(
-                                  child: Image.asset(
-                                      'assets/android/nodatafound.png'),
-                                ),
+                                                                          .packageId)
+                                                                  ? ListView
+                                                                      .builder(
+                                                                      shrinkWrap:
+                                                                          true,
+                                                                      itemCount:
+                                                                          1,
+                                                                      itemBuilder:
+                                                                          (context,
+                                                                              subSubIndex) {
+                                                                        var subSubItem =
+                                                                            allnestedData[subItem.packageId]![
+                                                                                subSubIndex];
+                                                                        return Container(
+                                                                          decoration:
+                                                                              BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
+                                                                          child:
+                                                                              ListTile(
+                                                                            onTap:
+                                                                                () {
+                                                                              Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                            },
+                                                                            title:
+                                                                                Text(subItem.termName),
+                                                                            subtitle: Text(
+                                                                                subSubItem.packageDisplayName),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    )
+                                                                  : CircularProgressIndicator(),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                    )
+                                                  : Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    )
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : Center(
+                                      child: Image.asset(
+                                          'assets/android/nodatafound.png'),
+                                    ),
+                            ),
+                            Container(
+                              color: Color.fromARGB(255, 249, 24, 204),
+                            ),
+                            Container(
+                              color: ColorPage.blue,
+                            ),
+                            Container(),
+                            Container(),
+                            Container(),
+                          ],
                         ),
-                       
-                        Container(color: Color.fromARGB(255, 249, 24, 204),),
-                        Container(color: ColorPage.blue,),
-                         Container(),
-                         Container(),
-                      
-                         Container(),
-                      
-                      ],),
-                )),
-          ),
-        ),
-        Expanded(
-            child: Container(
-                color: Colors.black,
-                child: Column(
-                  children: [
-                    Flexible(
+                      )),
+                ),
+              ),
+              Expanded(
+                  child: Container(
+                      color: Colors.black,
                       child: Column(
                         children: [
-                          Stack(children: [
-                            Image.asset(
-                              fit: BoxFit.fitHeight,
-                              'assets/wallpaperflare.com_wallpaper.jpg',
-                              height: MediaQuery.sizeOf(context).height,
+                          Flexible(
+                            child: Column(
+                              children: [
+                                Stack(children: [
+                                  Image.asset(
+                                    fit: BoxFit.fitHeight,
+                                    'assets/wallpaperflare.com_wallpaper.jpg',
+                                    height: MediaQuery.sizeOf(context).height,
+                                  ),
+                                ]),
+                              ],
                             ),
-                            // Positioned(
-                            //   bottom: 500,
-                            //   left: 300,
-                            //   child: TypeWriter.text(
-                            //     'lorem ipsum dolot sit amet ...',
-                            //     style: FontFamily.font2,
-                            //     repeat: true,
-                            //     duration: const Duration(milliseconds: 50),
-                            //   ),
-                            // ),
-                          ]),
+                          ),
                         ],
-                      ),
-                    ),
-                  ],
-                )))
-      ],
-    );
+                      )))
+            ],
+          );
   }
 
   Future<void> fnfindpackage(String token, String id) async {
@@ -425,7 +440,6 @@ class _VideoDashboardState extends State<VideoDashboard>
   }
 
   Future<void> fnfindallpackage(String token) async {
-    // loader(context);
     Map data = {
       "tblPackage": {"PackageId": "0"}
     };
