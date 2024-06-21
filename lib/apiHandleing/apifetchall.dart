@@ -56,12 +56,14 @@ Future forgetPassword(BuildContext context, String signupemail, String key,
   final response = await request.close();
   var responseBody = await response.transform(utf8.decoder).join();
   var json = jsonDecode(responseBody);
-
+  print(json);
+  print('forgot pass res');
   if (json['isSuccess'] == true && json['statusCode'] == 303) {
     print(json['isSuccess']);
 
     Get.back();
     getx.forgetpageshow.value = true;
+
     return json['result']['token'];
   } else {
     Get.back();
@@ -71,34 +73,27 @@ Future forgetPassword(BuildContext context, String signupemail, String key,
 
 Future resetPassword(BuildContext context, String email, String ph, String pass,
     String confirmpass, String code) async {
+  print(code);
   loader(context);
   Map body = ClsMap().objresetPassword(email, ph, pass, confirmpass);
-  print(body.toString() + code);
-  var responseBody = await http.post(
-      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.generateCodeEndpoint),
-      headers: {
-        'accept': 'text/plain',
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(body));
 
-  // var jsondata = jsonDecode(res.body);
+  final client = HttpClient();
+  final request = await client
+      .postUrl(Uri.https(ClsUrlApi.mainurl, '${ClsUrlApi.resetPassword}$code'));
+  request.followRedirects = false;
+  request.headers.set(
+    HttpHeaders.contentTypeHeader,
+    'application/json',
+  );
 
-  // final client = HttpClient();
-  // final request = await client
-  //     .postUrl(Uri.https(ClsUrlApi.mainurl, '${ClsUrlApi.resetPassword}$code'));
-  // request.followRedirects = false;
-  // request.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
-
-  // final jsondata = jsonEncode(body);
-  // request.add(utf8.encode(jsondata));
-  // print(jsondata);
-  // final response = await request.close();
-  // var responseBody = await response.transform(utf8.decoder).join();
+  final jsondata = jsonEncode(body);
+  request.add(utf8.encode(jsondata));
+  final response = await request.close();
+  var responseBody = await response.transform(utf8.decoder).join();
   // print(responseBody);
-  var json = jsonDecode(responseBody.body);
+  var json = jsonDecode(responseBody);
   print(json);
-  if (json['statusCode'] == 200 && json['isSuccess'] == true) {
+  if (json['statusCode'] == 100 && json['isSuccess'] == true) {
     Get.back();
 
     ClsErrorMsg.fnErrorDialog(
