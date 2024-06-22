@@ -7,8 +7,10 @@ import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/android/Videodashboard/mobileVideoDashboard.dart';
 import 'package:dthlms/android/videoPage/studyVideos.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
+import 'package:dthlms/package/packagevideo.dart/videodashboard.dart';
 import 'package:dthlms/url/api_url.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -16,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:showcaseview/showcaseview.dart';
 
 //abhoymallik
 class PackageDashboardMobile extends StatefulWidget {
@@ -400,6 +403,21 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                                   Get.to(()=>Studyvidos());
                                                                 },
                                                                 child: ListTile(
+                                                                  trailing: ElevatedButton(
+                                                                                              child: Text(
+                                                                                                "Show",
+                                                                                                style: FontFamily.font8,
+                                                                                              ),
+                                                                                              style: ElevatedButton.styleFrom(
+                                                                                                backgroundColor: ColorPage.appbarcolor,
+                                                                                                shape: RoundedRectangleBorder(
+                                                                                                  borderRadius: BorderRadius.all(
+                                                                                                    Radius.circular(10),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              onPressed: () {Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));},
+                                                                                            ),
                                                                   title: Text(subItem
                                                                       .termName),
                                                                   subtitle: Text(

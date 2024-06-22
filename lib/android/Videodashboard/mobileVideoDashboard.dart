@@ -23,12 +23,13 @@ import 'package:showcaseview/showcaseview.dart';
 import 'package:typewritertext/v3/typewriter.dart';
 import 'dart:async'; // Add this import
 
-class VideoDashboard extends StatefulWidget {
+class MobileVideoDashboard extends StatefulWidget {
   String token;
-  VideoDashboard(this.token, {super.key});
+  MobileVideoDashboard(this.token, {super.key});
 
   @override
-  State<VideoDashboard> createState() => _VideoDashboardState(token);
+  State<MobileVideoDashboard> createState() =>
+      _MobileVideoDashboardState(token);
 }
 
 class ClassAllVideos {
@@ -44,10 +45,10 @@ class ClassAllVideos {
   });
 }
 
-class _VideoDashboardState extends State<VideoDashboard>
+class _MobileVideoDashboardState extends State<MobileVideoDashboard>
     with TickerProviderStateMixin {
   String token;
-  _VideoDashboardState(this.token);
+  _MobileVideoDashboardState(this.token);
 
   GlobalKey showcase_one = GlobalKey();
   GlobalKey showcase_searchkey = GlobalKey();
@@ -153,18 +154,18 @@ class _VideoDashboardState extends State<VideoDashboard>
                         appBar: AppBar(
                           iconTheme: IconThemeData(color: ColorPage.white),
                           backgroundColor: ColorPage.appbarcolor,
-                          actions: [IconButton(onPressed: (){}, icon: Icon(Icons.search,color: ColorPage.white,),),],
                           // actions: [
                           //   Center(
                           //     child: Container(
+
                           //       height: 50,
                           //       margin: EdgeInsets.only(top: 10,right: 20),
-                              
-                          //       width: MediaQuery.of(context).size.width/3,
+
+                          //       width: MediaQuery.of(context).size.width/1.5,
                           //       child: Center(
                           //         child: TextFormField(
                           //           controller: searchController,
-                                  
+
                           //           decoration: InputDecoration(
                           //             hintStyle: TextStyle(
                           //                 color: ColorPage.brownshade300,
@@ -191,6 +192,13 @@ class _VideoDashboardState extends State<VideoDashboard>
                           //     ),
                           //   )
                           // ],
+                          actions: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(Icons.search,color: ColorPage.white,),
+                            )
+                          ],
+                          
                           bottom: PreferredSize(
                             preferredSize: Size.fromHeight(90),
                             child: MotionTabBar(
@@ -339,7 +347,7 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                               ListTile(
                                                                             onTap:
                                                                                 () {
-                                                                              Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                              Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));
                                                                             },
                                                                             title:
                                                                                 Text(subItem.termName),
@@ -383,26 +391,26 @@ class _VideoDashboardState extends State<VideoDashboard>
                       )),
                 ),
               ),
-              Expanded(
-                  child: Container(
-                      color: Colors.black,
-                      child: Column(
-                        children: [
-                          Flexible(
-                            child: Column(
-                              children: [
-                                Stack(children: [
-                                  Image.asset(
-                                    fit: BoxFit.fitHeight,
-                                    'assets/wallpaperflare.com_wallpaper.jpg',
-                                    height: MediaQuery.sizeOf(context).height,
-                                  ),
-                                ]),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )))
+              // Expanded(
+              //     child: Container(
+              //         color: Colors.black,
+              //         child: Column(
+              //           children: [
+              //             Flexible(
+              //               child: Column(
+              //                 children: [
+              //                   Stack(children: [
+              //                     Image.asset(
+              //                       fit: BoxFit.fitHeight,
+              //                       'assets/wallpaperflare.com_wallpaper.jpg',
+              //                       height: MediaQuery.sizeOf(context).height,
+              //                     ),
+              //                   ]),
+              //                 ],
+              //               ),
+              //             ),
+              //           ],
+              //         )))
             ],
           );
   }
@@ -500,3 +508,6 @@ class _VideoDashboardState extends State<VideoDashboard>
     setState(() {});
   }
 }
+
+
+
