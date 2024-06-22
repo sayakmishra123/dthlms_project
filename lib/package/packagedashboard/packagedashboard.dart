@@ -269,12 +269,39 @@ class _PackageDashboardState extends State<PackageDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: ColorPage.appbarcolor,iconTheme: IconThemeData(color: ColorPage.white),
-       leading: Row(children: [Padding(
-         padding: const EdgeInsets.only(left: 30.0),
-         child: Icon(Icons.person,color: ColorPage.white,),
-       )],),
-      ),
+        appBar: AppBar(
+          backgroundColor: ColorPage.appbarcolor,
+          iconTheme: IconThemeData(color: ColorPage.white),
+          //  leading: Row(children: [Padding(
+          //    padding: const EdgeInsets.only(left: 30.0),
+          //    child: Icon(Icons.person,color: ColorPage.white,),
+          //  )],),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 12, left: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Sayak Mishra",
+                    style: FontFamily.font9,
+                  ),
+                  Text(
+                    "Sayakmishra@gmail.com",
+                    style: FontFamily.font9,
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 30.0),
+              child: CircleAvatar(
+                backgroundImage: AssetImage("assets/person.png"),
+              ),
+            ),
+          ],
+        ),
         backgroundColor: ColorPage.bgcolor,
         body: Stack(
           children: <Widget>[
@@ -564,8 +591,10 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                                                                       child: ListTile(
                                                                                         trailing: Container(
                                                                                           child: ElevatedButton(
-                                                                                              style: ElevatedButton.styleFrom(backgroundColor: ColorPage.color1,shape: BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)))),
-                                                                                              onPressed: () { Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));},
+                                                                                              style: ElevatedButton.styleFrom(backgroundColor: ColorPage.color1, shape: BeveledRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5)))),
+                                                                                              onPressed: () {
+                                                                                                Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                                              },
                                                                                               child: Text(
                                                                                                 "SHOW",
                                                                                                 style: TextStyle(color: ColorPage.white),
@@ -620,7 +649,8 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                       Image.asset(
                                         fit: BoxFit.cover,
                                         'assets/wallpaperflare.com_wallpaper.jpg',
-                                        height: MediaQuery.sizeOf(context).height,
+                                        height:
+                                            MediaQuery.sizeOf(context).height,
                                       ),
                                       Positioned(
                                         bottom: 500,

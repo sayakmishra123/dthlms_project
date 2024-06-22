@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
         enableLog: true,
 
-        // debugShowCheckedModeBanner: false,
+        debugShowCheckedModeBanner: false,
         title: 'DTH LMS',
         theme: ThemeData(
           colorScheme:
