@@ -14,7 +14,7 @@ import '../login/loginmodel.dart';
 
 class Getx extends GetxController {
   RxBool show = false.obs;
-  RxInt ButtonControllerIndex=0.obs;
+  RxInt ButtonControllerIndex = 0.obs;
   RxBool hide = true.obs;
   // ignore: non_constant_identifier_names
   RxInt page_index = 0.obs;
@@ -40,7 +40,7 @@ class Getx extends GetxController {
   RxBool isSelectXXS = false.obs;
   RxBool isSignup = true.obs;
   RxBool isMypackages = false.obs;
-  RxBool passvisibility=false.obs;
+  RxBool passvisibility = false.obs;
 
   RxList<SimCard> simCardinfo = <SimCard>[].obs;
   RxList<AllPackage> package = <AllPackage>[].obs;
@@ -48,6 +48,7 @@ class Getx extends GetxController {
   RxBool packageshow = true.obs;
   RxBool forgetpasswordemailcode = false.obs;
   RxBool forgetpageshow = false.obs;
+  RxBool loading = true.obs;
   @override
   void onInit() {
     // ignore: unused_local_variable

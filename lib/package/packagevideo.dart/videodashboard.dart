@@ -151,16 +151,43 @@ class _VideoDashboardState extends State<VideoDashboard>
                       child: Scaffold(
                         backgroundColor: ColorPage.bgcolor,
                         appBar: AppBar(
-                         
                           iconTheme: IconThemeData(color: ColorPage.white),
                           backgroundColor: ColorPage.appbarcolor,
-                          
-                          
+                          actions: [
+                            Container(
+                              margin: EdgeInsets.only(top: 15,right: 20,bottom: 5),
+                              width: MediaQuery.of(context).size.width/3,
+                              child: TextFormField(
+                                controller: searchController,
+                              
+                                decoration: InputDecoration(
+                                  hintStyle: TextStyle(
+                                      color: ColorPage.brownshade300,
+                                      fontSize: ClsFontsize.ExtraSmall - 1),
+                                  hintText: 'Search',
+                                  fillColor: ColorPage.white,
+                                  filled: true,
+                                  suffixIcon: IconButton(
+                                    icon: Icon(Icons.search),
+                                    onPressed: () {
+                                      setFilterData();
+                                    },
+                                  ),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                      borderSide: BorderSide.none),
+                                ),
+                                style: TextStyle(color: ColorPage.colorblack),
+                                onChanged: (value) {
+                                  setFilterData();
+                                },
+                              ),
+                            )
+                          ],
                           bottom: PreferredSize(
                             preferredSize: Size.fromHeight(80),
                             child: MotionTabBar(
-                              controller:
-                                  _motionTabBarController,
+                              controller: _motionTabBarController,
                               initialSelectedTab: "VIDEO",
                               labels: tabfield,
                               icons: const [
@@ -220,7 +247,8 @@ class _VideoDashboardState extends State<VideoDashboard>
                                             shape: Border.all(
                                                 color: Colors.transparent),
                                             title: Text(
-                                              filteredPackage[index].packageName,
+                                              filteredPackage[index]
+                                                  .packageName,
                                               style: const TextStyle(
                                                   fontWeight: FontWeight.bold),
                                             ),
@@ -244,12 +272,11 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                       itemCount: 1,
                                                       itemBuilder:
                                                           (context, subIndex) {
-                                                        var subItem =
-                                                            allnestedData[
-                                                                    filteredPackage[
-                                                                            index]
-                                                                        .packageId]![
-                                                                subIndex];
+                                                        var subItem = allnestedData[
+                                                                filteredPackage[
+                                                                        index]
+                                                                    .packageId]![
+                                                            subIndex];
                                                         return Container(
                                                           decoration:
                                                               BoxDecoration(
@@ -264,10 +291,11 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                             shape: Border.all(
                                                                 color: Colors
                                                                     .transparent),
-                                                            title: Text(
-                                                                subItem.courseName),
+                                                            title: Text(subItem
+                                                                .courseName),
                                                             subtitle: Text(
-                                                                subItem.termName),
+                                                                subItem
+                                                                    .termName),
                                                             onExpansionChanged:
                                                                 (value) {
                                                               if (value &&
@@ -276,7 +304,8 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                           subItem
                                                                               .packageId)) {
                                                                 fnfindpackage(
-                                                                    widget.token,
+                                                                    widget
+                                                                        .token,
                                                                     subItem
                                                                         .packageId);
                                                               }
@@ -295,8 +324,7 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                           (context,
                                                                               subSubIndex) {
                                                                         var subSubItem =
-                                                                            allnestedData[subItem.packageId]![
-                                                                                subSubIndex];
+                                                                            allnestedData[subItem.packageId]![subSubIndex];
                                                                         return Container(
                                                                           decoration:
                                                                               BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
@@ -308,8 +336,8 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                             },
                                                                             title:
                                                                                 Text(subItem.termName),
-                                                                            subtitle: Text(
-                                                                                subSubItem.packageDisplayName),
+                                                                            subtitle:
+                                                                                Text(subSubItem.packageDisplayName),
                                                                           ),
                                                                         );
                                                                       },
