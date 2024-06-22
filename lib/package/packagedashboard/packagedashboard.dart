@@ -648,8 +648,6 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                               MediaQuery.sizeOf(context).height,
                                         ),
                                         Positioned(
-                                          bottom: 500,
-                                          left: 300,
                                           child: TypeWriter.text(
                                             'lorem ipsum dolot sit amet ...',
                                             style: FontFamily.font2,

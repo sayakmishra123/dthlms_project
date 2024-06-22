@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/login/dth_login.dart';
+import 'package:dthlms/themechange/themepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:windows_single_instance/windows_single_instance.dart';
@@ -29,23 +30,22 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        enableLog: true,
+      // enableLog: true,
 
-        // debugShowCheckedModeBanner: false,
-        title: 'DTH LMS',
-        theme: ThemeData(
-          colorScheme:
-              ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 90, 7, 233)),
-          useMaterial3: true,
-        ),
-        home: AnimatedSplashScreen(
-          splash: "assets/splash6.gif",
-          splashIconSize: 6000,
-          centered: true,
-          nextScreen: DthLmsLogin(),
-          backgroundColor: ColorPage.bgcolor,
-          splashTransition: SplashTransition.scaleTransition,
-          duration: 3500,
-        ));
+      debugShowCheckedModeBanner: false,
+      title: 'DTH LMS',
+      // theme: ThemeProvider.themeOf(context).data,
+      // home: DthLmsLogin(),
+
+      home: AnimatedSplashScreen(
+        splash: "assets/splash6.gif",
+        splashIconSize: 6000,
+        centered: true,
+        nextScreen: DthLmsLogin(),
+        backgroundColor: ColorPage.bgcolor,
+        splashTransition: SplashTransition.scaleTransition,
+        duration: 3500,
+      ),
+    );
   }
 }
