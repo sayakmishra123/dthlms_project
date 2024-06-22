@@ -227,7 +227,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 30.0),
+              padding: const EdgeInsets.only(right: 15.0),
               child: InkWell(
                 onTap: () {
                   showFullImageDialog();
