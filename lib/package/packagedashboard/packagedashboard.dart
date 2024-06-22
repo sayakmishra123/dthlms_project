@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, dead_code, unnecessary_import, avoid_print, avoid_unnecessary_containers
 
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
@@ -112,7 +113,8 @@ class MyPackageDetails {
   });
 }
 
-class _PackageDashboardState extends State<PackageDashboard> {
+class _PackageDashboardState extends State<PackageDashboard>
+    with TickerProviderStateMixin {
   Getx getxController = Get.put(Getx());
   TextEditingController searchController = TextEditingController();
 
@@ -173,7 +175,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
 
   Future<void> fnfindallpackage(String token) async {
     // loader(context);
-    Future.delayed(Duration(seconds: 5), () async {
+    Future.delayed(Duration(seconds: 3), () async {
       Map data = {
         "tblPackage": {"PackageId": "0"}
       };
@@ -285,17 +287,371 @@ class _PackageDashboardState extends State<PackageDashboard> {
         appBar: AppBar(
           backgroundColor: ColorPage.appbarcolor,
           iconTheme: IconThemeData(color: ColorPage.white),
-          leading: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 30.0),
-                child: Icon(
-                  Icons.person,
-                  color: ColorPage.white,
+          automaticallyImplyLeading: false,
+          //  leading: Row(children: [Padding(
+          //    padding: const EdgeInsets.only(left: 30.0),
+          //    child: Icon(Icons.person,color: ColorPage.white,),
+          //  )],),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 12, left: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Sayak Mishra",
+                    style: FontFamily.font9,
+                  ),
+                  Text(
+                    "Sayakmishra@gmail.com",
+                    style: FontFamily.font9,
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 30.0),
+              child: InkWell(
+                onTap: () {
+                  showFullImageDialog();
+                },
+                child: CircleAvatar(
+                  backgroundColor: const Color.fromARGB(230, 255, 255, 255),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/sorojda.png"),
+                    ),
+                  ),
                 ),
-              )
-            ],
-          ),
+              ),
+            ),
+            IconButton(
+                tooltip: 'Theme',
+                onPressed: () {
+                  themePage() async {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return BottomSheet(
+                              elevation: 20,
+                              enableDrag: true,
+                              animationController:
+                                  AnimationController(vsync: this),
+                              onClosing: () {},
+                              builder: (context) {
+                                return Flexible(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        // border: Border.all(
+                                        //   width: 5,
+                                        //   color: ColorPage.blue,
+                                        // ),
+                                        color: Colors.black),
+                                    // decoration: ,
+                                    // height: 400,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 50),
+                                    child: Column(
+                                      children: [
+                                        AppBar(
+                                          backgroundColor: Colors.black,
+                                          title: Text(
+                                            'App Theme',
+                                            style: FontFamily.font3,
+                                            textScaler: TextScaler.linear(1),
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            InkWell(
+                                              onTap: () {},
+                                              child: Image.asset(
+                                                'assets/sun.png',
+                                                width: 50,
+                                              ),
+                                            ),
+                                            SizedBox(width: 50),
+                                            InkWell(
+                                              onTap: () {},
+                                              child: Image.asset(
+                                                'assets/themes.png',
+                                                width: 50,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Primary Color',
+                                                style: FontFamily.font3,
+                                                textScaler:
+                                                    TextScaler.linear(1),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF87CEEB))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF000080))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF4169E1))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF008080))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF40E0D0))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                    Color(0xFF98FF98),
+                                                  )),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF50C878))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF228B22))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF40E0D0))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFF808000))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFFFFB6C1))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                    Color(0xFFFF69B4),
+                                                  )),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFFFF00FF))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFFDE3163))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              Color(
+                                                                  0xFFAEC6CF))),
+                                                  onPressed: () {},
+                                                  icon: Text('')),
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            Color(0xFFFA8072))),
+                                                onPressed: () {},
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            Color(0xFF800000))),
+                                                onPressed: () {},
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            Color(0xFF800020))),
+                                                onPressed: () {},
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            Color(0xFFB87333))),
+                                                onPressed: () {},
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            Color.fromARGB(255,
+                                                                7, 3, 212))),
+                                                onPressed: () {},
+                                                icon: Text('')),
+                                          ],
+                                        ),
+                                        Spacer(),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 20),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              ElevatedButton(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage.blue),
+                                                      shape: MaterialStatePropertyAll(
+                                                          ContinuousRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          0)))),
+                                                  onPressed: () {},
+                                                  child: Text(
+                                                    'Ok',
+                                                    style: FontFamily.font3,
+                                                  )),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
+                                              ElevatedButton(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage.red),
+                                                      shape: MaterialStatePropertyAll(
+                                                          ContinuousRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          0)))),
+                                                  onPressed: () {
+                                                    Get.back();
+                                                  },
+                                                  child: Text(
+                                                    'Cancel',
+                                                    style: FontFamily.font3,
+                                                  ))
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              });
+                        });
+                  }
+
+                  themePage();
+                },
+                icon: Icon(Icons.theater_comedy))
+          ],
         ),
         backgroundColor: ColorPage.bgcolor,
         body: Obx(
@@ -318,9 +674,19 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                         height: 20,
                                       ),
                                       Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(25)),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: ColorPage.appbarcolor
+                                                      .withOpacity(0.3),
+                                                  blurRadius: 12,
+                                                  spreadRadius: 5)
+                                            ]),
                                         margin: EdgeInsets.symmetric(
                                             horizontal: 20),
-                                        height: 60,
+                                        height: 55,
                                         width:
                                             MediaQuery.of(context).size.width,
                                         child: TextFormField(
@@ -330,16 +696,16 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                           controller: searchController,
                                           decoration: InputDecoration(
                                             hintStyle: TextStyle(
-                                                color: ColorPage.white,
+                                                color: ColorPage.appbarcolor,
                                                 fontSize:
                                                     ClsFontsize.ExtraSmall - 1),
                                             hintText: 'Search',
-                                            fillColor: const Color.fromARGB(
-                                                255, 115, 186, 245),
+                                            fillColor: Color.fromARGB(
+                                                255, 255, 255, 255),
                                             filled: true,
                                             suffixIcon: const Icon(
                                               Icons.search,
-                                              color: ColorPage.white,
+                                              color: ColorPage.appbarcolor,
                                             ),
                                             border: OutlineInputBorder(
                                                 borderRadius:
@@ -580,6 +946,7 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                                                                 Text(subItem.courseName),
                                                                             subtitle:
                                                                                 Text(subItem.termName),
+
                                                                             onExpansionChanged:
                                                                                 (value) {
                                                                               if (value && !allnestedData.containsKey(subItem.packageId)) {
@@ -596,10 +963,25 @@ class _PackageDashboardState extends State<PackageDashboard> {
                                                                                         return Container(
                                                                                           decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
                                                                                           child: ListTile(
-                                                                                            onTap: () {
-                                                                                              Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
-                                                                                            },
+                                                                                            onTap: () {},
                                                                                             title: Text(subItem.termName),
+                                                                                            trailing: ElevatedButton(
+                                                                                              child: Text(
+                                                                                                "Show",
+                                                                                                style: FontFamily.font8,
+                                                                                              ),
+                                                                                              style: ElevatedButton.styleFrom(
+                                                                                                backgroundColor: ColorPage.appbarcolor,
+                                                                                                shape: RoundedRectangleBorder(
+                                                                                                  borderRadius: BorderRadius.all(
+                                                                                                    Radius.circular(10),
+                                                                                                  ),
+                                                                                                ),
+                                                                                              ),
+                                                                                              onPressed: () {
+                                                                                                Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                                              },
+                                                                                            ),
                                                                                             subtitle: Text(subSubItem.packageDisplayName),
                                                                                           ),
                                                                                         );
@@ -638,26 +1020,30 @@ class _PackageDashboardState extends State<PackageDashboard> {
                             child: Column(
                               children: [
                                 Flexible(
-                                  child: Column(
-                                    children: [
-                                      Stack(children: [
-                                        Image.asset(
-                                          fit: BoxFit.fitHeight,
-                                          'assets/wallpaperflare.com_wallpaper.jpg',
-                                          height:
-                                              MediaQuery.sizeOf(context).height,
-                                        ),
-                                        Positioned(
-                                          child: TypeWriter.text(
-                                            'lorem ipsum dolot sit amet ...',
-                                            style: FontFamily.font2,
-                                            repeat: true,
-                                            duration: const Duration(
-                                                milliseconds: 50),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        Stack(children: [
+                                          Image.asset(
+                                            fit: BoxFit.fitHeight,
+                                            'assets/wallpaperflare.com_wallpaper.jpg',
+                                            height: MediaQuery.sizeOf(context)
+                                                .height,
                                           ),
-                                        ),
-                                      ]),
-                                    ],
+                                          Positioned(
+                                            bottom: 500,
+                                            left: 300,
+                                            child: TypeWriter.text(
+                                              'lorem ipsum dolot sit amet ...',
+                                              style: FontFamily.font2,
+                                              repeat: true,
+                                              duration: const Duration(
+                                                  milliseconds: 50),
+                                            ),
+                                          ),
+                                        ]),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],
@@ -669,5 +1055,51 @@ class _PackageDashboardState extends State<PackageDashboard> {
             ),
           ),
         ));
+  }
+
+  void showFullImageDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: Dialog(
+            backgroundColor: Colors.transparent,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: AppBar(
+                    backgroundColor: Colors.transparent,
+                    iconTheme: IconThemeData(color: ColorPage.white),
+                    elevation: 0,
+                  ),
+                ),
+                Container(
+                  // margin: EdgeInsets.symmetric(vertical: 80),
+                  width: MediaQuery.of(context).size.width / 3,
+                  height: MediaQuery.of(context).size.width / 3,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withOpacity(0.1),
+                  ),
+                  child: ClipOval(
+                    child: Image.asset(
+                      "assets/sorojda.png",
+                      fit: BoxFit.cover,
+                    ),
+                    // child: Image.network(
+                    //   MyUrl.fullurl + MyUrl.imageurl + user.Image,
+                    //   fit: BoxFit.cover,
+                    // ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

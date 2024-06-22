@@ -96,4 +96,41 @@ class FontFamily {
   static var font8 = GoogleFonts.outfit(
       textStyle:
           TextStyle(color: ColorPage.white, fontSize: ClsFontsize.DoubleExtraSmall - 2));
+
+          
+  static var font9 = GoogleFonts.outfit(
+      textStyle:
+          TextStyle(color: ColorPage.white, fontSize: ClsFontsize.DoubleExtraSmall,shadows: <Shadow>[
+      Shadow(
+        offset: Offset(0.0, 0.0),
+        blurRadius: 1.0,
+        
+        color: Color.fromARGB(255, 255, 255, 255),
+      ),
+      // Shadow(
+      //   offset: Offset(2.0, 2.0),
+      //   blurRadius: 2.0,
+      //   color: Color.fromARGB(255, 255, 255, 255),
+      // ),
+      // Shadow(
+      //   offset: Offset(2.0, 2.0),
+      //   blurRadius: 3.0,
+      //   color: Color.fromARGB(255, 0, 255, 187),
+      // ),
+      // Shadow(
+      //   offset: Offset(2.0, 2.0),
+      //   blurRadius: 4.0,
+      //   color: Color.fromARGB(255, 255, 0, 128),
+      // ),
+      //  Shadow(
+      //   offset: Offset(2.0, 2.0),
+      //   blurRadius: 5.0,
+      //   color: Color.fromARGB(255, 68, 159, 255),
+      // ),
+      //  Shadow(
+      //   offset: Offset(2.0, 2.0),
+      //   blurRadius: 6.0,
+      //   color: Color.fromARGB(255, 0, 251, 255),
+      // ),
+    ],));
 }

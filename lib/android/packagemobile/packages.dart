@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
 
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
@@ -197,19 +198,54 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: ColorPage.appbarcolor,
+          iconTheme: IconThemeData(color: ColorPage.white),
+          automaticallyImplyLeading: false,
+          //  leading: Row(children: [Padding(
+          //    padding: const EdgeInsets.only(left: 30.0),
+          //    child: Icon(Icons.person,color: ColorPage.white,),
+          //  )],),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.more_vert_rounded,
-                    color: Colors.white, size: 30),
+              padding: const EdgeInsets.only(right: 12, left: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Sayak Mishra",
+                    style: FontFamily.font9,
+                  ),
+                  Text(
+                    "Sayakmishra@gmail.com",
+                    style: FontFamily.font9,
+                  )
+                ],
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 30.0),
+              child: InkWell(
+                onTap: () {
+                  showFullImageDialog();
+                },
+                child: CircleAvatar(
+                
+                  backgroundColor: const Color.fromARGB(230, 255, 255, 255),
+                  
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: CircleAvatar(
+                    
+                      
+                    
+                      backgroundImage: AssetImage("assets/sorojda.png"),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
-          iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: ColorPage.appbarcolor,
-          title: Text("Package Dashboard", style: FontFamily.font7),
         ),
         backgroundColor: ColorPage.bgcolor,
         body: Container(
@@ -218,28 +254,40 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
               child: Column(
                 children: [
                   SizedBox(height: 20),
-                  Container(
-                    height: 60,
-                    width: screenwidth - 30,
-                    child: TextFormField(
-                      controller: searchController,
-                      decoration: InputDecoration(
-                        hintStyle: TextStyle(
-                            color: ColorPage.brownshade300,
-                            fontSize: ClsFontsize.ExtraSmall - 1),
-                        hintText: 'Search',
-                        fillColor: ColorPage.white,
-                        filled: true,
-                        suffixIcon: const Icon(
-                          Icons.search,
-                          color: ColorPage.blue,
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none),
-                      ),
-                    ),
-                  ),
+                   Container(
+                                        
+                                        decoration: BoxDecoration( borderRadius: BorderRadius.all(Radius.circular(25)), boxShadow: [
+                                          BoxShadow(color: ColorPage.appbarcolor.withOpacity(0.3),blurRadius: 12,spreadRadius: 5)
+                                        ]),
+                                        margin: EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        height: 55,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        child: TextFormField(
+                                          // onChanged: (value) {
+                                          //   setFilterData();
+                                          // },
+                                          controller: searchController,
+                                          decoration: InputDecoration(
+                                            hintStyle: TextStyle(
+                                                color: ColorPage.appbarcolor,
+                                                fontSize:
+                                                    ClsFontsize.ExtraSmall - 1),
+                                            hintText: 'Search',
+                                            fillColor: Color.fromARGB(255, 255, 255, 255),
+                                            filled: true,
+                                            suffixIcon: const Icon(
+                                              Icons.search,
+                                              color: ColorPage.appbarcolor,
+                                            ),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(30),
+                                                borderSide: BorderSide.none),
+                                          ),
+                                        ),
+                                      ),
                   SizedBox(height: 10),
                   AnimatedButtonBar(
                     controller: AnimatedButtonController()..setIndex(0),
@@ -382,6 +430,52 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
           ),
         ),
       ),
+    );
+  }
+
+
+  void showFullImageDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+          child: Dialog(
+            backgroundColor: Colors.transparent,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: AppBar(
+                    backgroundColor: Colors.transparent,
+                    iconTheme: IconThemeData(color: ColorPage.white),
+                    elevation: 0,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 150),
+                  width: MediaQuery.of(context).size.width-20,
+                  height: MediaQuery.of(context).size.width-40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withOpacity(0.1),
+                  ),
+                  child: Center(
+                    child: ClipOval(
+                      child:Image.asset("assets/sorojda.png", fit: BoxFit.cover,),
+                      // child: Image.network(
+                      //   MyUrl.fullurl + MyUrl.imageurl + user.Image,
+                      //   fit: BoxFit.cover,
+                      // ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'DTH LMS',
       // theme: ThemeProvider.themeOf(context).data,
-      // home: DthLmsLogin(),
+      // home: ThemePage(),
 
       home: AnimatedSplashScreen(
         splash: "assets/splash6.gif",
