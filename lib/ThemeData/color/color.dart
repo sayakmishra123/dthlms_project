@@ -56,7 +56,7 @@ class ColorPage {
   //used in
   //MyClassDashboard
 
-  static const bgcolor = Color.fromARGB(255, 208, 225, 238);
+  static const bgcolor = Colors.white;
   //used in
   //signInOtpScreen
   //HomePage

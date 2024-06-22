@@ -7,8 +7,6 @@ import 'package:windows_single_instance/windows_single_instance.dart';
 
 //sayak mishra mm
 void main(List<String> args) async {
-  const environment =
-      String.fromEnvironment('environment', defaultValue: 'Testing');
   WidgetsFlutterBinding.ensureInitialized();
   await WindowsSingleInstance.ensureSingleInstance(args, "custom_identifier",
       bringWindowToFront: true, onSecondWindow: (args) {
