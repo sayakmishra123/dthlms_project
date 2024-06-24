@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "94731935670",
+    "project_id": "testchat1-38565",
+    "storage_bucket": "testchat1-38565.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94731935670:android:a0cc66968322174fbdeb17",
+        "android_client_info": {
+          "package_name": "com.test_dth.dthlms"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACNR4fF8vaac6RBUxsesaov2nFI_zrtJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

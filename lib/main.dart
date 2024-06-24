@@ -1,13 +1,20 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
+import 'package:dthlms/firebase_options.dart';
 import 'package:dthlms/login/dth_login.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:windows_single_instance/windows_single_instance.dart';
 
 //sayak mishra mm
 void main(List<String> args) async {
+// ...
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await WindowsSingleInstance.ensureSingleInstance(args, "custom_identifier",
       bringWindowToFront: true, onSecondWindow: (args) {
     print(args);
