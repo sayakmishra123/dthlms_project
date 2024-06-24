@@ -281,780 +281,774 @@ class _PackageDashboardState extends State<PackageDashboard>
     super.initState();
   }
 
+
+  
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          backgroundColor: ColorPage.appbarcolor,
-          iconTheme: IconThemeData(color: ColorPage.white),
-          automaticallyImplyLeading: false,
-          //  leading: Row(children: [Padding(
-          //    padding: const EdgeInsets.only(left: 30.0),
-          //    child: Icon(Icons.person,color: ColorPage.white,),
-          //  )],),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 12, left: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Sayak Mishra",
-                    style: FontFamily.font9,
-                  ),
-                  Text(
-                    "Sayakmishra@gmail.com",
-                    style: FontFamily.font9,
-                  )
-                ],
+    return Obx(()=>
+       Scaffold(
+          appBar: AppBar(
+            backgroundColor:getxController.themecolor.value,
+            iconTheme: IconThemeData(color: ColorPage.white),
+            automaticallyImplyLeading: false,
+            //  leading: Row(children: [Padding(
+            //    padding: const EdgeInsets.only(left: 30.0),
+            //    child: Icon(Icons.person,color: ColorPage.white,),
+            //  )],),
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 12, left: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Sayak Mishra",
+                      style: FontFamily.font9,
+                    ),
+                    Text(
+                      "Sayakmishra@gmail.com",
+                      style: FontFamily.font9,
+                    )
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 30.0),
-              child: InkWell(
-                onTap: () {
-                  showFullImageDialog();
-                },
-                child: CircleAvatar(
-                  backgroundColor: const Color.fromARGB(230, 255, 255, 255),
-                  child: Padding(
-                    padding: const EdgeInsets.all(3.0),
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage("assets/sorojda.png"),
+              Padding(
+                padding: const EdgeInsets.only(right: 30.0),
+                child: InkWell(
+                  onTap: () {
+                    showFullImageDialog();
+                  },
+                  child: CircleAvatar(
+                    backgroundColor: const Color.fromARGB(230, 255, 255, 255),
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage("assets/sorojda.png"),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            IconButton(
-                tooltip: 'Theme',
-                onPressed: () {
-                  themePage() async {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return BottomSheet(
-                              elevation: 20,
-                              enableDrag: true,
-                              animationController:
-                                  AnimationController(vsync: this),
-                              onClosing: () {},
-                              builder: (context) {
-                                return Flexible(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        // border: Border.all(
-                                        //   width: 5,
-                                        //   color: ColorPage.blue,
-                                        // ),
-                                        color: Colors.black),
-                                    // decoration: ,
-                                    // height: 400,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 50),
-                                    child: Column(
-                                      children: [
-                                        AppBar(
-                                          backgroundColor: Colors.black,
-                                          title: Text(
-                                            'App Theme',
-                                            style: FontFamily.font3,
-                                            textScaler: TextScaler.linear(1),
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {},
-                                              child: Image.asset(
-                                                'assets/sun.png',
-                                                width: 50,
-                                              ),
+              IconButton(
+                  tooltip: 'Theme',
+                  onPressed: () {
+                    themePage() async {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return BottomSheet(
+                                elevation: 20,
+                                enableDrag: true,
+                                animationController:
+                                    AnimationController(vsync: this),
+                                onClosing: () {},
+                                builder: (context) {
+                                  return Flexible(
+                                    child: Container(
+                                
+                                      decoration: BoxDecoration(
+                                          // border: Border.all(
+                                          //   width: 5,
+                                          //   color: ColorPage.blue,
+                                          // ),
+                                          color: Colors.black),
+                                      // decoration: ,
+                                      // height: 400,
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 50),
+                                      child: Column(
+                                        children: [
+                                          AppBar(
+                                            backgroundColor: Colors.black,
+                                            title: Text(
+                                              'App Theme',
+                                              style: FontFamily.font3,
+                                              textScaler: TextScaler.linear(1),
                                             ),
-                                            SizedBox(width: 50),
-                                            InkWell(
-                                              onTap: () {},
-                                              child: Image.asset(
-                                                'assets/themes.png',
-                                                width: 50,
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          child: Row(
+                                          ),
+                                          Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              Text(
-                                                'Primary Color',
-                                                style: FontFamily.font3,
-                                                textScaler:
-                                                    TextScaler.linear(1),
+                                              InkWell(
+                                                onTap: () {},
+                                                child: Image.asset(
+                                                  'assets/sun.png',
+                                                  width: 50,
+                                                ),
+                                              ),
+                                              SizedBox(width: 50),
+                                              InkWell(
+                                                onTap: () {},
+                                                child: Image.asset(
+                                                  'assets/themes.png',
+                                                  width: 50,
+                                                ),
                                               )
                                             ],
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFF87CEEB))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFF000080))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFF4169E1))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFF008080))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFF40E0D0))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                    Color(0xFF98FF98),
-                                                  )),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFF50C878))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFF228B22))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFF40E0D0))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFF808000))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFFFFB6C1))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                    Color(0xFFFF69B4),
-                                                  )),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFFFF00FF))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFFDE3163))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              Color(
-                                                                  0xFFAEC6CF))),
-                                                  onPressed: () {},
-                                                  icon: Text('')),
-                                            ],
-                                          ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            IconButton.filled(
-                                                style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStatePropertyAll(
-                                                            Color(0xFFFA8072))),
-                                                onPressed: () {},
-                                                icon: Text('')),
-                                            IconButton.filled(
-                                                style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStatePropertyAll(
-                                                            Color(0xFF800000))),
-                                                onPressed: () {},
-                                                icon: Text('')),
-                                            IconButton.filled(
-                                                style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStatePropertyAll(
-                                                            Color(0xFF800020))),
-                                                onPressed: () {},
-                                                icon: Text('')),
-                                            IconButton.filled(
-                                                style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStatePropertyAll(
-                                                            Color(0xFFB87333))),
-                                                onPressed: () {},
-                                                icon: Text('')),
-                                            IconButton.filled(
-                                                style: ButtonStyle(
-                                                    backgroundColor:
-                                                        MaterialStatePropertyAll(
-                                                            Color.fromARGB(255,
-                                                                7, 3, 212))),
-                                                onPressed: () {},
-                                                icon: Text('')),
-                                          ],
-                                        ),
-                                        Spacer(),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 20),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              ElevatedButton(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage.blue),
-                                                      shape: MaterialStatePropertyAll(
-                                                          ContinuousRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          0)))),
-                                                  onPressed: () {},
-                                                  child: Text(
-                                                    'Ok',
-                                                    style: FontFamily.font3,
-                                                  )),
-                                              SizedBox(
-                                                width: 50,
-                                              ),
-                                              ElevatedButton(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage.red),
-                                                      shape: MaterialStatePropertyAll(
-                                                          ContinuousRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          0)))),
-                                                  onPressed: () {
-                                                    Get.back();
-                                                  },
-                                                  child: Text(
-                                                    'Cancel',
-                                                    style: FontFamily.font3,
-                                                  ))
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              });
-                        });
-                  }
-
-                  themePage();
-                },
-                icon: Icon(Icons.theater_comedy))
-          ],
-        ),
-        backgroundColor: ColorPage.bgcolor,
-        body: Obx(
-          () => Skeletonizer(
-            enabled: getxController.loading.value,
-            child: Stack(
-              children: <Widget>[
-                Row(
-                  children: [
-                    Container(
-                      child: Expanded(
-                        child: Container(
-                          child: Column(
-                            children: [
-                              Flexible(
-                                child: Obx(
-                                  () => Column(
-                                    children: [
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(25)),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  color: ColorPage.appbarcolor
-                                                      .withOpacity(0.3),
-                                                  blurRadius: 12,
-                                                  spreadRadius: 5)
-                                            ]),
-                                        margin: EdgeInsets.symmetric(
-                                            horizontal: 20),
-                                        height: 55,
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: TextFormField(
-                                          onChanged: (value) {
-                                            setFilterData();
-                                          },
-                                          controller: searchController,
-                                          decoration: InputDecoration(
-                                            hintStyle: TextStyle(
-                                                color: ColorPage.appbarcolor,
-                                                fontSize:
-                                                    ClsFontsize.ExtraSmall - 1),
-                                            hintText: 'Search',
-                                            fillColor: Color.fromARGB(
-                                                255, 255, 255, 255),
-                                            filled: true,
-                                            suffixIcon: const Icon(
-                                              Icons.search,
-                                              color: ColorPage.appbarcolor,
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 10),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Primary Color',
+                                                  style: FontFamily.font3,
+                                                  textScaler:
+                                                      TextScaler.linear(1),
+                                                )
+                                              ],
                                             ),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                borderSide: BorderSide.none),
                                           ),
-                                        ),
-                                      ),
-                                      AnimatedButtonBar(
-                                        controller: AnimatedButtonController()
-                                          ..setIndex(1),
-                                        radius: 32.0,
-                                        padding: const EdgeInsets.all(16.0),
-                                        backgroundColor: ColorPage.bluegrey800,
-                                        foregroundColor: ColorPage.bluegrey300,
-                                        elevation: 24,
-                                        curve: Curves.bounceIn,
-                                        borderColor: ColorPage.white,
-                                        borderWidth: 2,
-                                        innerVerticalPadding: 16,
-                                        children: [
-                                          ButtonBarEntry(
-                                              onTap: () {
-                                                getxController
-                                                    .packageshow.value = true;
-                                              },
-                                              child: Text(
-                                                'My Package',
-                                                style: FontFamily.font,
-                                              )),
-                                          ButtonBarEntry(
-                                              onTap: () {
-                                                getxController
-                                                    .packageshow.value = false;
-                                                fnfindallpackage(widget.token);
-                                              },
-                                              child: Text(
-                                                'All Package',
-                                                style: FontFamily.font,
-                                              )),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 5),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                ColorPage.themeColors[0])),
+                                                    onPressed: () {
+                                                     getxController.themecolor.value=ColorPage.themeColors[0];
+                                                    },
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                ColorPage.themeColors[1])),
+                                                    onPressed: () {
+                                                       getxController.themecolor.value=ColorPage.themeColors[1];
+                                                    },
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                ColorPage.themeColors[2])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[2];},
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                ColorPage.themeColors[3])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[3];},
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                ColorPage.themeColors[4])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[4];},
+                                                    icon: Text('')),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 5),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                      ColorPage.themeColors[5],
+                                                    )),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[5];},
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                 ColorPage.themeColors[6])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[6];},
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                 ColorPage.themeColors[7])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[7];},
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                 ColorPage.themeColors[8])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[8];},
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                 ColorPage.themeColors[9])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[9];},
+                                                    icon: Text('')),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 5),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                 ColorPage.themeColors[10])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[10];},
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                       ColorPage.themeColors[11],
+                                                    )),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[11];},
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                 ColorPage.themeColors[12])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[12];},
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                 ColorPage.themeColors[13])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[13];},
+                                                    icon: Text('')),
+                                                IconButton.filled(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                 ColorPage.themeColors[14])),
+                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[14];},
+                                                    icon: Text('')),
+                                              ],
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                               ColorPage.themeColors[15])),
+                                                  onPressed: () {getxController.themecolor.value=ColorPage.themeColors[15];},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                               ColorPage.themeColors[16])),
+                                                  onPressed: () {getxController.themecolor.value=ColorPage.themeColors[16];},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                               ColorPage.themeColors[17])),
+                                                  onPressed: () {getxController.themecolor.value=ColorPage.themeColors[17];},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                               ColorPage.themeColors[18])),
+                                                  onPressed: () {getxController.themecolor.value=ColorPage.themeColors[18];},
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage.themeColors[19])),
+                                                  onPressed: () {getxController.themecolor.value=ColorPage.themeColors[19];},
+                                                  icon: Text('')),
+                                            ],
+                                          ),
+                                          Spacer(),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 5),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                ElevatedButton(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                ColorPage.blue),
+                                                        shape: MaterialStatePropertyAll(
+                                                            ContinuousRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            0)))),
+                                                    onPressed: () {},
+                                                    child: Text(
+                                                      'Ok',
+                                                      style: FontFamily.font3,
+                                                    )),
+                                                SizedBox(
+                                                  width: 50,
+                                                ),
+                                                ElevatedButton(
+                                                    style: ButtonStyle(
+                                                        backgroundColor:
+                                                            MaterialStatePropertyAll(
+                                                                ColorPage.red),
+                                                        shape: MaterialStatePropertyAll(
+                                                            ContinuousRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            0)))),
+                                                    onPressed: () {
+                                                      Get.back();
+                                                    },
+                                                    child: Text(
+                                                      'Cancel',
+                                                      style: FontFamily.font3,
+                                                    ))
+                                              ],
+                                            ),
+                                          )
                                         ],
                                       ),
-                                      getxController.packageshow.value
-                                          ? Expanded(
-                                              child: ListView.builder(
-                                              shrinkWrap: true,
-                                              // itemCount: 5,
-                                              itemCount: mypackage.length == 0
-                                                  ? 10
-                                                  : mypackage.length,
-                                              itemBuilder: (context, index) {
-                                                return ExpansionTile(
-                                                  // shape:
-                                                  //     Border.all(color: Colors.transparent),
-                                                  // trailing: ,
-                                                  leading: Text(
-                                                      mypackage.isEmpty
-                                                          ? '1234'
-                                                          : mypackage[index]
-                                                              .userID),
-                                                  title: Text(
-                                                    mypackage.isEmpty
-                                                        ? '123455454541351'
-                                                        : mypackage[index]
-                                                            .packageID,
-                                                    style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ),
-                                                  onExpansionChanged: (value) {
-                                                    if (value &&
-                                                        !allnestedData
-                                                            .containsKey(
-                                                                allpackage[
-                                                                        index]
-                                                                    .packageId)) {
-                                                      fnfindpackage(
-                                                          widget.token,
-                                                          allpackage[index]
-                                                              .packageId);
-                                                    }
-                                                  },
-                                                  children: [
-                                                    // allnestedData.containsKey(
-                                                    //         allpackage[index]
-                                                    //             .packageId)
-                                                    //     ? ListView.builder(
-                                                    //         shrinkWrap: true,
-                                                    //         itemCount: 1,
-                                                    //         itemBuilder:
-                                                    //             (context,
-                                                    //                 subIndex) {
-                                                    //           var subItem =
-                                                    //               allnestedData[
-                                                    //                       allpackage[index]
-                                                    //                           .packageId]![
-                                                    //                   subIndex];
-                                                    //           return ExpansionTile(
-                                                    //             leading: Text(
-                                                    //                 subItem
-                                                    //                     .courseId),
-                                                    //             title: Text(subItem
-                                                    //                 .courseName),
-                                                    //             subtitle: Text(
-                                                    //                 subItem
-                                                    //                     .termName),
-                                                    //             onExpansionChanged:
-                                                    //                 (value) {
-                                                    //               if (value &&
-                                                    //                   !allnestedData
-                                                    //                       .containsKey(
-                                                    //                           subItem.packageId)) {
-                                                    //                 fnfindpackage(
-                                                    //                     widget
-                                                    //                         .token,
-                                                    //                     subItem
-                                                    //                         .packageId);
-                                                    //               }
-                                                    //             },
-                                                    //             children: [
-                                                    //               allnestedData.containsKey(
-                                                    //                       subItem
-                                                    //                           .packageId)
-                                                    //                   ? ListView
-                                                    //                       .builder(
-                                                    //                       shrinkWrap:
-                                                    //                           true,
-                                                    //                       itemCount:
-                                                    //                           1,
-                                                    //                       itemBuilder:
-                                                    //                           (context, subSubIndex) {
-                                                    //                         var subSubItem =
-                                                    //                             allnestedData[subItem.packageId]![subSubIndex];
-                                                    //                         return ListTile(
-                                                    //                           leading: Text(subSubItem.courseId),
-                                                    //                           title: Text(subItem.termName),
-                                                    //                           subtitle: Text(subSubItem.packageDisplayName),
-                                                    //                         );
-                                                    //                       },
-                                                    //                     )
-                                                    //                   : CircularProgressIndicator(),
-                                                    //             ],
-                                                    //           );
-                                                    //         },
-                                                    //       )
-                                                    //     : CircularProgressIndicator()
-                                                  ],
-                                                );
-                                              },
-                                            ))
-                                          : Expanded(
-                                              child: filteredPackage.isNotEmpty
-                                                  ? ListView.builder(
-                                                      shrinkWrap: true,
-                                                      // itemCount: 5,
-                                                      itemCount: filteredPackage
-                                                          .length,
-                                                      itemBuilder:
-                                                          (context, index) {
-                                                        return Container(
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  10),
-                                                            ),
-                                                            color:
-                                                                ColorPage.white,
-                                                          ),
-                                                          margin:
-                                                              EdgeInsets.all(
-                                                                  10),
-                                                          child: ExpansionTile(
-                                                            shape: Border.all(
-                                                                color: Colors
-                                                                    .transparent),
-                                                            // leading: Text(
-                                                            //     filteredPackage[index]
-                                                            //         .packageId),
-                                                            title: Text(
-                                                              filteredPackage[
-                                                                      index]
-                                                                  .packageName,
-                                                              style: const TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                            onExpansionChanged:
-                                                                (value) {
-                                                              if (value &&
-                                                                  !allnestedData
-                                                                      .containsKey(
-                                                                          filteredPackage[index]
-                                                                              .packageId)) {
-                                                                fnfindpackage(
-                                                                    widget
-                                                                        .token,
-                                                                    filteredPackage[
-                                                                            index]
-                                                                        .packageId);
-                                                              }
-                                                            },
-                                                            children: [
-                                                              allnestedData.containsKey(
-                                                                      filteredPackage[
-                                                                              index]
-                                                                          .packageId)
-                                                                  ? ListView
-                                                                      .builder(
-                                                                      shrinkWrap:
-                                                                          true,
-                                                                      itemCount:
-                                                                          1,
-                                                                      itemBuilder:
-                                                                          (context,
-                                                                              subIndex) {
-                                                                        var subItem =
-                                                                            allnestedData[filteredPackage[index].packageId]![subIndex];
-                                                                        return Container(
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            border:
-                                                                                Border(
-                                                                              top: BorderSide(color: ColorPage.colorblack, width: 1),
-                                                                            ),
-                                                                          ),
-                                                                          child:
-                                                                              ExpansionTile(
-                                                                            shape:
-                                                                                Border.all(color: Colors.transparent),
-                                                                            // leading: Text(
-                                                                            //     subItem
-                                                                            //         .courseId),
-                                                                            title:
-                                                                                Text(subItem.courseName),
-                                                                            subtitle:
-                                                                                Text(subItem.termName),
-
-                                                                            onExpansionChanged:
-                                                                                (value) {
-                                                                              if (value && !allnestedData.containsKey(subItem.packageId)) {
-                                                                                fnfindpackage(widget.token, subItem.packageId);
-                                                                              }
-                                                                            },
-                                                                            children: [
-                                                                              allnestedData.containsKey(subItem.packageId)
-                                                                                  ? ListView.builder(
-                                                                                      shrinkWrap: true,
-                                                                                      itemCount: 1,
-                                                                                      itemBuilder: (context, subSubIndex) {
-                                                                                        var subSubItem = allnestedData[subItem.packageId]![subSubIndex];
-                                                                                        return Container(
-                                                                                          decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
-                                                                                          child: ListTile(
-                                                                                            onTap: () {},
-                                                                                            title: Text(subItem.termName),
-                                                                                            trailing: ElevatedButton(
-                                                                                              child: Text(
-                                                                                                "Show",
-                                                                                                style: FontFamily.font8,
-                                                                                              ),
-                                                                                              style: ElevatedButton.styleFrom(
-                                                                                                backgroundColor: ColorPage.appbarcolor,
-                                                                                                shape: RoundedRectangleBorder(
-                                                                                                  borderRadius: BorderRadius.all(
-                                                                                                    Radius.circular(10),
-                                                                                                  ),
-                                                                                                ),
-                                                                                              ),
-                                                                                              onPressed: () {
-                                                                                                Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
-                                                                                              },
-                                                                                            ),
-                                                                                            subtitle: Text(subSubItem.packageDisplayName),
-                                                                                          ),
-                                                                                        );
-                                                                                      },
-                                                                                    )
-                                                                                  : CircularProgressIndicator(),
-                                                                            ],
-                                                                          ),
-                                                                        );
-                                                                      },
-                                                                    )
-                                                                  : Center(
-                                                                      child:
-                                                                          CircularProgressIndicator(),
-                                                                    )
-                                                            ],
-                                                          ),
-                                                        );
-                                                      },
-                                                    )
-                                                  : Center(
-                                                      child: Image.asset(
-                                                          'assets/android/nodatafound.png'))),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                        child: Container(
-                            color: Colors.black,
+                                    ),
+                                  );
+                                });
+                          });
+                    }
+      
+                    themePage();
+                  },
+                  icon: Icon(Icons.theater_comedy))
+            ],
+          ),
+          backgroundColor: ColorPage.bgcolor,
+          body: Skeletonizer(
+              enabled: getxController.loading.value,
+              child: Stack(
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Container(
+                        child: Expanded(
+                          child: Container(
                             child: Column(
                               children: [
                                 Flexible(
-                                  child: SingleChildScrollView(
-                                    child: Column(
+                                  child: Column(
                                       children: [
-                                        Stack(children: [
-                                          Image.asset(
-                                            fit: BoxFit.fitHeight,
-                                            'assets/wallpaperflare.com_wallpaper.jpg',
-                                            height: MediaQuery.sizeOf(context)
-                                                .height,
-                                          ),
-                                          Positioned(
-                                            bottom: 500,
-                                            left: 300,
-                                            child: TypeWriter.text(
-                                              'lorem ipsum dolot sit amet ...',
-                                              style: FontFamily.font2,
-                                              repeat: true,
-                                              duration: const Duration(
-                                                  milliseconds: 50),
+                                        SizedBox(
+                                          height: 20,
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(25)),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: ColorPage.appbarcolor
+                                                        .withOpacity(0.3),
+                                                    blurRadius: 12,
+                                                    spreadRadius: 5)
+                                              ]),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 20),
+                                          height: 55,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: TextFormField(
+                                            onChanged: (value) {
+                                              setFilterData();
+                                            },
+                                            controller: searchController,
+                                            decoration: InputDecoration(
+                                              hintStyle: TextStyle(
+                                                  color: ColorPage.appbarcolor,
+                                                  fontSize:
+                                                      ClsFontsize.ExtraSmall - 1),
+                                              hintText: 'Search',
+                                              fillColor: Color.fromARGB(
+                                                  255, 255, 255, 255),
+                                              filled: true,
+                                              suffixIcon:  Icon(
+                                                Icons.search,
+                                                color: ColorPage.appbarcolor,
+                                              ),
+                                              border: OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(30),
+                                                  borderSide: BorderSide.none),
                                             ),
                                           ),
-                                        ]),
+                                        ),
+                                        AnimatedButtonBar(
+                                          controller: AnimatedButtonController()
+                                            ..setIndex(1),
+                                          radius: 32.0,
+                                          padding: const EdgeInsets.all(16.0),
+                                          backgroundColor: ColorPage.bluegrey800,
+                                          foregroundColor: ColorPage.bluegrey300,
+                                          elevation: 24,
+                                          curve: Curves.bounceIn,
+                                          borderColor: ColorPage.white,
+                                          borderWidth: 2,
+                                          innerVerticalPadding: 16,
+                                          children: [
+                                            ButtonBarEntry(
+                                                onTap: () {
+                                                  getxController
+                                                      .packageshow.value = true;
+                                                },
+                                                child: Text(
+                                                  'My Package',
+                                                  style: FontFamily.font,
+                                                )),
+                                            ButtonBarEntry(
+                                                onTap: () {
+                                                  getxController
+                                                      .packageshow.value = false;
+                                                  fnfindallpackage(widget.token);
+                                                },
+                                                child: Text(
+                                                  'All Package',
+                                                  style: FontFamily.font,
+                                                )),
+                                          ],
+                                        ),
+                                        getxController.packageshow.value
+                                            ? Expanded(
+                                                child: ListView.builder(
+                                                shrinkWrap: true,
+                                                // itemCount: 5,
+                                                itemCount: mypackage.length == 0
+                                                    ? 10
+                                                    : mypackage.length,
+                                                itemBuilder: (context, index) {
+                                                  return ExpansionTile(
+                                                    // shape:
+                                                    //     Border.all(color: Colors.transparent),
+                                                    // trailing: ,
+                                                    leading: Text(
+                                                        mypackage.isEmpty
+                                                            ? '1234'
+                                                            : mypackage[index]
+                                                                .userID),
+                                                    title: Text(
+                                                      mypackage.isEmpty
+                                                          ? '123455454541351'
+                                                          : mypackage[index]
+                                                              .packageID,
+                                                      style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    onExpansionChanged: (value) {
+                                                      if (value &&
+                                                          !allnestedData
+                                                              .containsKey(
+                                                                  allpackage[
+                                                                          index]
+                                                                      .packageId)) {
+                                                        fnfindpackage(
+                                                            widget.token,
+                                                            allpackage[index]
+                                                                .packageId);
+                                                      }
+                                                    },
+                                                    children: [
+                                                      // allnestedData.containsKey(
+                                                      //         allpackage[index]
+                                                      //             .packageId)
+                                                      //     ? ListView.builder(
+                                                      //         shrinkWrap: true,
+                                                      //         itemCount: 1,
+                                                      //         itemBuilder:
+                                                      //             (context,
+                                                      //                 subIndex) {
+                                                      //           var subItem =
+                                                      //               allnestedData[
+                                                      //                       allpackage[index]
+                                                      //                           .packageId]![
+                                                      //                   subIndex];
+                                                      //           return ExpansionTile(
+                                                      //             leading: Text(
+                                                      //                 subItem
+                                                      //                     .courseId),
+                                                      //             title: Text(subItem
+                                                      //                 .courseName),
+                                                      //             subtitle: Text(
+                                                      //                 subItem
+                                                      //                     .termName),
+                                                      //             onExpansionChanged:
+                                                      //                 (value) {
+                                                      //               if (value &&
+                                                      //                   !allnestedData
+                                                      //                       .containsKey(
+                                                      //                           subItem.packageId)) {
+                                                      //                 fnfindpackage(
+                                                      //                     widget
+                                                      //                         .token,
+                                                      //                     subItem
+                                                      //                         .packageId);
+                                                      //               }
+                                                      //             },
+                                                      //             children: [
+                                                      //               allnestedData.containsKey(
+                                                      //                       subItem
+                                                      //                           .packageId)
+                                                      //                   ? ListView
+                                                      //                       .builder(
+                                                      //                       shrinkWrap:
+                                                      //                           true,
+                                                      //                       itemCount:
+                                                      //                           1,
+                                                      //                       itemBuilder:
+                                                      //                           (context, subSubIndex) {
+                                                      //                         var subSubItem =
+                                                      //                             allnestedData[subItem.packageId]![subSubIndex];
+                                                      //                         return ListTile(
+                                                      //                           leading: Text(subSubItem.courseId),
+                                                      //                           title: Text(subItem.termName),
+                                                      //                           subtitle: Text(subSubItem.packageDisplayName),
+                                                      //                         );
+                                                      //                       },
+                                                      //                     )
+                                                      //                   : CircularProgressIndicator(),
+                                                      //             ],
+                                                      //           );
+                                                      //         },
+                                                      //       )
+                                                      //     : CircularProgressIndicator()
+                                                    ],
+                                                  );
+                                                },
+                                              ))
+                                            : Expanded(
+                                                child: filteredPackage.isNotEmpty
+                                                    ? ListView.builder(
+                                                        shrinkWrap: true,
+                                                        // itemCount: 5,
+                                                        itemCount: filteredPackage
+                                                            .length,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          return Container(
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .all(
+                                                                Radius.circular(
+                                                                    10),
+                                                              ),
+                                                              color:
+                                                                  ColorPage.white,
+                                                            ),
+                                                            margin:
+                                                                EdgeInsets.all(
+                                                                    10),
+                                                            child: ExpansionTile(
+                                                              shape: Border.all(
+                                                                  color: Colors
+                                                                      .transparent),
+                                                              // leading: Text(
+                                                              //     filteredPackage[index]
+                                                              //         .packageId),
+                                                              title: Text(
+                                                                filteredPackage[
+                                                                        index]
+                                                                    .packageName,
+                                                                style: const TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                              ),
+                                                              onExpansionChanged:
+                                                                  (value) {
+                                                                if (value &&
+                                                                    !allnestedData
+                                                                        .containsKey(
+                                                                            filteredPackage[index]
+                                                                                .packageId)) {
+                                                                  fnfindpackage(
+                                                                      widget
+                                                                          .token,
+                                                                      filteredPackage[
+                                                                              index]
+                                                                          .packageId);
+                                                                }
+                                                              },
+                                                              children: [
+                                                                allnestedData.containsKey(
+                                                                        filteredPackage[
+                                                                                index]
+                                                                            .packageId)
+                                                                    ? ListView
+                                                                        .builder(
+                                                                        shrinkWrap:
+                                                                            true,
+                                                                        itemCount:
+                                                                            1,
+                                                                        itemBuilder:
+                                                                            (context,
+                                                                                subIndex) {
+                                                                          var subItem =
+                                                                              allnestedData[filteredPackage[index].packageId]![subIndex];
+                                                                          return Container(
+                                                                            decoration:
+                                                                                BoxDecoration(
+                                                                              border:
+                                                                                  Border(
+                                                                                top: BorderSide(color: ColorPage.colorblack, width: 1),
+                                                                              ),
+                                                                            ),
+                                                                            child:
+                                                                                ExpansionTile(
+                                                                              shape:
+                                                                                  Border.all(color: Colors.transparent),
+                                                                              // leading: Text(
+                                                                              //     subItem
+                                                                              //         .courseId),
+                                                                              title:
+                                                                                  Text(subItem.courseName),
+                                                                              subtitle:
+                                                                                  Text(subItem.termName),
+      
+                                                                              onExpansionChanged:
+                                                                                  (value) {
+                                                                                if (value && !allnestedData.containsKey(subItem.packageId)) {
+                                                                                  fnfindpackage(widget.token, subItem.packageId);
+                                                                                }
+                                                                              },
+                                                                              children: [
+                                                                                allnestedData.containsKey(subItem.packageId)
+                                                                                    ? ListView.builder(
+                                                                                        shrinkWrap: true,
+                                                                                        itemCount: 1,
+                                                                                        itemBuilder: (context, subSubIndex) {
+                                                                                          var subSubItem = allnestedData[subItem.packageId]![subSubIndex];
+                                                                                          return Container(
+                                                                                            decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
+                                                                                            child: ListTile(
+                                                                                              onTap: () {},
+                                                                                              title: Text(subItem.termName),
+                                                                                              trailing: ElevatedButton(
+                                                                                                child: Text(
+                                                                                                  "Show",
+                                                                                                  style: FontFamily.font8,
+                                                                                                ),
+                                                                                                style: ElevatedButton.styleFrom(
+                                                                                                  backgroundColor: ColorPage.appbarcolor,
+                                                                                                  shape: RoundedRectangleBorder(
+                                                                                                    borderRadius: BorderRadius.all(
+                                                                                                      Radius.circular(10),
+                                                                                                    ),
+                                                                                                  ),
+                                                                                                ),
+                                                                                                onPressed: () {
+                                                                                                  Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                                                },
+                                                                                              ),
+                                                                                              subtitle: Text(subSubItem.packageDisplayName),
+                                                                                            ),
+                                                                                          );
+                                                                                        },
+                                                                                      )
+                                                                                    : CircularProgressIndicator(),
+                                                                              ],
+                                                                            ),
+                                                                          );
+                                                                        },
+                                                                      )
+                                                                    : Center(
+                                                                        child:
+                                                                            CircularProgressIndicator(),
+                                                                      )
+                                                              ],
+                                                            ),
+                                                          );
+                                                        },
+                                                      )
+                                                    : Center(
+                                                        child: Image.asset(
+                                                            'assets/android/nodatafound.png'))),
                                       ],
                                     ),
                                   ),
-                                ),
+                                
                               ],
-                            )))
-                  ],
-                ),
-                GlobalDialog()
-              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                          child: Container(
+                              color: Colors.black,
+                              child: Column(
+                                children: [
+                                  Flexible(
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          Stack(children: [
+                                            Image.asset(
+                                              fit: BoxFit.fitHeight,
+                                              'assets/wallpaperflare.com_wallpaper.jpg',
+                                              height: MediaQuery.sizeOf(context)
+                                                  .height,
+                                            ),
+                                            Positioned(
+                                              bottom: 500,
+                                              left: 300,
+                                              child: TypeWriter.text(
+                                                'lorem ipsum dolot sit amet ...',
+                                                style: FontFamily.font2,
+                                                repeat: true,
+                                                duration: const Duration(
+                                                    milliseconds: 50),
+                                              ),
+                                            ),
+                                          ]),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )))
+                    ],
+                  ),
+                  GlobalDialog()
+                ],
+              ),
             ),
           ),
-        ));
+    );
   }
 
   void showFullImageDialog() {

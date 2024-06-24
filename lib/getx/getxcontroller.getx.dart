@@ -2,11 +2,13 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/db/copydbfun.dart';
 import 'package:dthlms/db/dbfunction/dbfunction.dart';
 import 'package:dthlms/package/packagescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/state_manager.dart';
 import 'package:simnumber/siminfo.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -49,6 +51,9 @@ class Getx extends GetxController {
   RxBool forgetpasswordemailcode = false.obs;
   RxBool forgetpageshow = false.obs;
   RxBool loading = true.obs;
+
+  var themecolor = ColorPage.appbarcolor.obs;
+
   @override
   void onInit() {
     // ignore: unused_local_variable
