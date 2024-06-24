@@ -280,7 +280,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                             hintText: 'Search',
                                             fillColor: Color.fromARGB(255, 255, 255, 255),
                                             filled: true,
-                                            suffixIcon: const Icon(
+                                            suffixIcon: Icon(
                                               Icons.search,
                                               color: ColorPage.appbarcolor,
                                             ),

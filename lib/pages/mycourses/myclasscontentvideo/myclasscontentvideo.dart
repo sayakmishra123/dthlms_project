@@ -102,7 +102,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
   @override
   void initState() {
     super.initState();
-     player.open(Media('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'));
+     player.open(Media('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),play: false);
 
     _motionTabBarController = MotionTabBarController(
       initialIndex: 0,

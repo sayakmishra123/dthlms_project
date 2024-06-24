@@ -1,6 +1,28 @@
 import 'package:flutter/material.dart';
 
 class ColorPage {
+ static List<Color> themeColors = [
+    Color(0xFF87CEEB),
+    Color(0xFF000080),
+    Color(0xFF4169E1),
+    Color(0xFF008080),
+    Color(0xFF40E0D0),
+    Color(0xFF98FF98),
+    Color(0xFF50C878),
+    Color(0xFF228B22),
+    Color(0xFF40E0D0),
+    Color(0xFF808000),
+    Color(0xFFFFB6C1),
+    Color(0xFFFF69B4),
+    Color(0xFFFF00FF),
+    Color(0xFFDE3163),
+    Color(0xFFAEC6CF),
+    Color(0xFFFA8072),
+    Color(0xFF800000),
+    Color(0xFF800020),
+    Color(0xFFB87333),
+    Color(0xFF0703D4),
+  ];
   static const colorgrey = Color.fromRGBO(19, 23, 36, 1);
   //colorgrey Used in forgetPasswordMobile,
   //ForgotScreen,
@@ -78,7 +100,7 @@ class ColorPage {
   //StudyMaterialPdf
   //PdfView
 
-  static const appbarcolor = Color.fromARGB(255, 44, 53, 85);
+  static var appbarcolor = Color.fromARGB(255, 44, 53, 85);
   //used in
   //MobileHomepage
   //MyClassDashboard

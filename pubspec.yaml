@@ -77,6 +77,9 @@ dependencies:
   media_kit_video: ^1.2.4
   media_kit: ^1.1.10 
   media_kit_libs_video: ^1.0.4
+  deepgram_speech_to_text: ^2.1.1
+  # flutter_sound: ^9.2.13 # replace with the correct version
+  # flutter_sound_platform_interface: ^9.2.13
  
   # bitsdojo_window: ^0.1.6
   
