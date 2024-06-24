@@ -320,11 +320,32 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                       child:
                                                                           ListTile(
                                                                         onTap:
-                                                                            () {
-                                                                          Get.to(() => MyClassVideoContent(
-                                                                              filteredPackage[index].courseName,
-                                                                              widget.token));
-                                                                        },
+                                                                            () {},
+                                                                        trailing:
+                                                                            ElevatedButton(
+                                                                          child:
+                                                                              Text(
+                                                                            "Show",
+                                                                            style:
+                                                                                FontFamily.font8,
+                                                                          ),
+                                                                          style:
+                                                                              ElevatedButton.styleFrom(
+                                                                            backgroundColor:
+                                                                                ColorPage.appbarcolor,
+                                                                            shape:
+                                                                                RoundedRectangleBorder(
+                                                                              borderRadius: BorderRadius.all(
+                                                                                Radius.circular(10),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          onPressed:
+                                                                              () {
+                                                                            Get.to(() =>
+                                                                                MyClassVideoContent(filteredPackage[index].courseName, widget.token));
+                                                                          },
+                                                                        ),
                                                                         title: Text(
                                                                             subItem.termName),
                                                                         subtitle:

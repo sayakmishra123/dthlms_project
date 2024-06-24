@@ -623,7 +623,7 @@ FocusNode focusNode = FocusNode();
                                             SizedBox(
                                               width: formfieldsize,
                                               child: Text(
-                                                'Email',
+                                                'Email/Phone',
                                                 style: FontFamily.mobilefont,
                                               ),
                                             )
@@ -653,7 +653,7 @@ FocusNode focusNode = FocusNode();
                                                       enabledBorder: border,
                                                       focusedBorder: border,
                                                       hintText:
-                                                          'hello@gmail.com'),
+                                                          'Enter Your Email or Phone'),
                                                 ))
                                           ],
                                         ),

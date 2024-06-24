@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/android/Videodashboard/mobileVideoPlayer.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
 import 'package:dthlms/package/packagevideo.dart/videorelatetedPage.dart';
@@ -347,10 +348,11 @@ class _MobileVideoDashboardState extends State<MobileVideoDashboard>
                                                                               ListTile(
                                                                             onTap:
                                                                                 () {
-                                                                              Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));
+                                                                              Get.to(() => MobileVideoPlayer(filteredPackage[index].courseName,
+                                                                              widget.token));
                                                                             },
                                                                             title:
-                                                                                Text(subItem.termName),
+                                                                                Text(subItem.termName+"Abhi"),
                                                                             subtitle:
                                                                                 Text(subSubItem.packageDisplayName),
                                                                           ),
