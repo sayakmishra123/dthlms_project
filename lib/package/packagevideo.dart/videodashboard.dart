@@ -320,7 +320,11 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                       child:
                                                                           ListTile(
                                                                         onTap:
-                                                                            () {},
+                                                                            () {
+                                                                          Get.to(() => MyClassVideoContent(
+                                                                              filteredPackage[index].courseName,
+                                                                              widget.token));
+                                                                        },
                                                                         title: Text(
                                                                             subItem.termName),
                                                                         subtitle:

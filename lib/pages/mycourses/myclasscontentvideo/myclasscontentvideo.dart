@@ -10,6 +10,7 @@ import 'package:dthlms/package/packagevideo.dart/category/McqCategory.dart';
 import 'package:dthlms/package/packagevideo.dart/category/pdfcategory.dart';
 import 'package:dthlms/utils/loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -102,11 +103,11 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
       length: 4,
       vsync: this,
     );
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      // ShowCaseWidget.of(context).startShowCase([tabbarkey]);
-      // fngetVideodetailsApi(widget.token, tabfield[0]);3
-      fngetVideodetailsApi(widget.token, 'PDF');
-    });
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   // ShowCaseWidget.of(context).startShowCase([tabbarkey]);
+    //   // fngetVideodetailsApi(widget.token, tabfield[0]);3
+    //   fngetVideodetailsApi(widget.token, 'PDF');
+    // });
     permission();
   }
 
@@ -223,7 +224,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
     var jsondata = jsonDecode(res.body);
     print(jsondata);
 
-    final data = jsonDecode(jsondata['result']);
+    final data = jsonDecode(jsondata['result']) ?? [];
     print(data.length);
     setState(() {});
     return data;
@@ -291,19 +292,41 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
           ),
         ),
       ),
-      body: TabBarView(
-          physics:
-              NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
+      body: Row(
+        children: [
+          Expanded(
+            child: SizedBox(
+              width: 400,
+              height: 500,
+              child: Column(
+                children: [
+                  TabBarView(
+                      // physics:
+                      //     NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
 
-          controller: _motionTabBarController,
-          children: [
-            pdflink.isNotEmpty
-                ? PdfCategory(pdflink)
-                : Center(child: CircularProgressIndicator()),
-            mcq.isNotEmpty ? McqCategory() : Container(),
-            PdfCategory(pdflink),
-            PdfCategory(pdflink)
-          ]),
+                      controller: _motionTabBarController,
+                      children: [
+                        pdflink.isNotEmpty
+                            ? PdfCategory(pdflink)
+                            : Center(child: CircularProgressIndicator()),
+                        mcq.isNotEmpty ? McqCategory() : Container(),
+                        PdfCategory(pdflink),
+                        PdfCategory(pdflink)
+                      ]),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: SizedBox(
+              width: 400,
+              child: Column(
+                children: [],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
