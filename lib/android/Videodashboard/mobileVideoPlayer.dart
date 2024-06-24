@@ -44,13 +44,13 @@ import 'package:http/http.dart' as http;
 import 'package:showcaseview/showcaseview.dart';
 import '../../../ThemeData/color/color.dart';
 
-class MyClassVideoContent extends StatefulWidget {
+class MobileVideoPlayer extends StatefulWidget {
   String videoname;
   String token;
-  MyClassVideoContent(this.videoname, this.token, {super.key});
+  MobileVideoPlayer(this.videoname, this.token, {super.key});
 
   @override
-  State<MyClassVideoContent> createState() => _MyClassVideoContentState();
+  State<MobileVideoPlayer> createState() => _MobileVideoPlayerState();
 }
 
 class McqDetails {
@@ -93,7 +93,7 @@ class McqDetails {
   });
 }
 
-class _MyClassVideoContentState extends State<MyClassVideoContent>
+class _MobileVideoPlayerState extends State<MobileVideoPlayer>
     with TickerProviderStateMixin {
   MotionTabBarController? _motionTabBarController;
   late final player = Player();
@@ -239,108 +239,98 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
   // GlobalKey tabbarkey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          child: Expanded(
-            child: DefaultTabController(
-              length: 4,
-              child: Scaffold(
-                backgroundColor: ColorPage.bgcolor,
-                appBar: AppBar(
-                  iconTheme: IconThemeData(color: ColorPage.white),
-                  title: Text(
-                    widget.videoname,
-                    style: FontFamily.font5,
-                  ),
-                  backgroundColor: ColorPage.appbarcolor,
-                  bottom: PreferredSize(
-                    preferredSize: Size.fromHeight(80),
-                    child: MotionTabBar(
-                      controller:
-                          _motionTabBarController, // ADD THIS if you need to change your tab programmatically
-                      initialSelectedTab: "PDF",
-                      labels: tabfield,
-                      icons: const [
-                        Icons.picture_as_pdf,
-                        Icons.question_answer,
-                        Icons.tag,
-                        Icons.reviews
-                      ],
-              
-                      badges: [
-                        MotionBadgeWidget(
-                          text: '604',
-                          textColor: Colors.white, // optional, default to Colors.white
-                          color: Colors.red, // optional, default to Colors.red
-                          size: 18, // optional, default to 18
-                        ),
-                        null,
-                        null,
-                        null,
-                       
-                      ],
-              
-                      tabSize: 50,
-                      tabBarHeight: 55,
-                      textStyle: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),
-              
-                      tabIconColor: Colors.blue[600],
-                      tabIconSize: 28.0,
-                      tabIconSelectedSize: 26.0,
-                      tabSelectedColor: Colors.blue[900],
-                      tabIconSelectedColor: Colors.white,
-                      // tabBarColor: Color.fromARGB(255, 64, 41, 231),
-                      onTabItemSelected: (int value) {
-                        setState(() {
-                          _motionTabBarController!.index = value;
-              
-                          fngetVideodetailsApi(widget.token, tabfield[value]);
-                        });
-                      },
-                    ),
-                  ),
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        backgroundColor: ColorPage.bgcolor,
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: ColorPage.white),
+          title: Text(
+            widget.videoname,
+            style: FontFamily.font5,
+          ),
+          backgroundColor: ColorPage.appbarcolor,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(80),
+            child: MotionTabBar(
+              controller:
+                  _motionTabBarController, // ADD THIS if you need to change your tab programmatically
+              initialSelectedTab: "PDF",
+              labels: tabfield,
+              icons: const [
+                Icons.picture_as_pdf,
+                Icons.question_answer,
+                Icons.tag,
+                Icons.reviews
+              ],
+      
+              badges: [
+                MotionBadgeWidget(
+                  text: '604',
+                  textColor: Colors.white, // optional, default to Colors.white
+                  color: Colors.red, // optional, default to Colors.red
+                  size: 18, // optional, default to 18
                 ),
-                body: TabBarView(
-                    // physics:
-                    //     NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
-                
-                    controller: _motionTabBarController,
-                    children: [
-                     
-                      pdflink.isNotEmpty
-                          ? PdfCategory(pdflink)
-                          : Center(child: CircularProgressIndicator()),
-                      mcq.isNotEmpty ? McqCategory() : Container(),
-                     pdflink.isNotEmpty? PdfCategory(pdflink):CircularProgressIndicator(),
-                       pdflink.isNotEmpty? PdfCategory(pdflink):CircularProgressIndicator(),
-                    ]),
+                null,
+                null,
+                null,
+               
+              ],
+      
+              tabSize: 50,
+              tabBarHeight: 55,
+              textStyle: const TextStyle(
+                fontSize: 12,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
               ),
+      
+              tabIconColor: Colors.blue[600],
+              tabIconSize: 28.0,
+              tabIconSelectedSize: 26.0,
+              tabSelectedColor: Colors.blue[900],
+              tabIconSelectedColor: Colors.white,
+              // tabBarColor: Color.fromARGB(255, 64, 41, 231),
+              onTabItemSelected: (int value) {
+                setState(() {
+                  _motionTabBarController!.index = value;
+      
+                  fngetVideodetailsApi(widget.token, tabfield[value]);
+                });
+              },
             ),
           ),
         ),
-         Expanded(
-              child: Container(
-                  color: Colors.black,
-                  child: Column(
-                    children: [
-                      Flexible(
-                        child: Center(
+        body: TabBarView(
+            // physics:
+            //     NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
+        
+            controller: _motionTabBarController,
+            children: [
+             
+              pdflink.isNotEmpty
+                  ? PdfCategory(pdflink)
+                  : Center(child: CircularProgressIndicator()),
+              mcq.isNotEmpty ? McqCategory() : Container(),
+            Container(
+          color: Colors.black,
+          child: Column(
+            children: [
+              Flexible(
+                child: Center(
       child: SizedBox(
-        // width: MediaQuery.of(context).size.width/2.3,
-        // height: MediaQuery.of(context).size.width * 9.0 / 16.0,
-        // Use [Video] widget to display video output.
-        child: Video(controller: controller),
+      // width: MediaQuery.of(context).size.width/2.3,
+      // height: MediaQuery.of(context).size.width * 9.0 / 16.0,
+      // Use [Video] widget to display video output.
+      child: Video(controller: controller),
       ),
     ),
-                      ),
-                    ],
-                  )))
-      ],
+              ),
+            ],
+          )),
+               Container()
+            ]),
+      ),
     );
   }
 

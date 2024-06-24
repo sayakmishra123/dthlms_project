@@ -310,7 +310,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                           },
                           child: Text(
                             'All Package',
-                            style: FontFamily.font,
+                            style: FontFamily.mobilefont,
                           )),
                       ButtonBarEntry(
                           onTap: () {
@@ -318,7 +318,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                           },
                           child: Text(
                             'My Package',
-                            style: FontFamily.font,
+                            style: FontFamily.mobilefont,
                           )),
                     ],
                   ),
