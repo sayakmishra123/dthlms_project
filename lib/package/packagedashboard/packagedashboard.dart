@@ -374,6 +374,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                               onTap: () {
                                                 getxController.textColor.value=ColorPage.colorblack;
                                                 getxController.backgroundColor.value=ColorPage.white;
+                                                 getxController.listviewtext.value=ColorPage.white;
 
 
                                               },
@@ -385,7 +386,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                             SizedBox(width: 50),
                                             InkWell(
                                               onTap: () {
-
+ getxController.listviewtext.value=ColorPage.colorblack;
 
                                                   getxController.textColor.value=ColorPage.white;
                                                 getxController.backgroundColor.value=ColorPage.colorblack;
@@ -447,6 +448,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             .tooglebuttonFGcolor =
                                                         ColorPage
                                                             .toogleFGButtonColor[0];
+                                                            getxController.activationbuttoncolor.value=ColorPage.themeColors[0];
                                                   },
                                                   icon: Text('')),
                                               IconButton.filled(
@@ -457,6 +459,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                       .themeColors[
                                                                   1])),
                                                   onPressed: () {
+                                                    getxController.activationbuttoncolor.value=ColorPage.themeColors[1];
                                                     getxController.toogleButtontextColor.value=true;
                                                     getxController
                                                             .themecolor.value =
@@ -485,6 +488,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                   2])),
                                                   onPressed: () {
                                                     getxController.toogleButtontextColor.value=true;
+                                                    getxController.activationbuttoncolor.value=ColorPage.themeColors[2];
                                                     getxController.themecolor.value=ColorPage.themeColors[2];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[2];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[2];
@@ -500,6 +504,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                   3])),
                                                   onPressed: () {
                                                     getxController.toogleButtontextColor.value=true;
+                                                    getxController.activationbuttoncolor.value=ColorPage.themeColors[3];
                                                    getxController.themecolor.value=ColorPage.themeColors[3];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[3];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[3];
@@ -516,6 +521,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   onPressed: () {
                                                     int i=4;
                                                     getxController.toogleButtontextColor.value=true;
+                                                    getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
@@ -541,6 +547,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   onPressed: () {
                                                     getxController.toogleButtontextColor.value=false;
                                                        int i=5;
+                                                       getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
@@ -557,6 +564,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   onPressed: () {
                                                         int i=6;
                                                         getxController.toogleButtontextColor.value=false;
+                                                        getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
@@ -574,6 +582,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                     getxController.toogleButtontextColor.value=false;
                                                       int i=7;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
+                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -588,6 +597,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                   8])),
                                                   onPressed: () {
                                                         int i=8;getxController.toogleButtontextColor.value=false;
+                                                        getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
@@ -604,6 +614,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   onPressed: () {
                                                         int i=9;getxController.toogleButtontextColor.value=false;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
+                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -629,6 +640,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   onPressed: () {
                                                        int i=10;getxController.toogleButtontextColor.value=false;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
+                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -658,6 +670,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   onPressed: () {
                                                     int i=12;getxController.toogleButtontextColor.value=false;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
+                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -673,6 +686,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   onPressed: () {
                                                         int i=13;getxController.toogleButtontextColor.value=false;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
+                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -689,6 +703,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                        int i=14;getxController.toogleButtontextColor.value=false;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
                                                   },
@@ -710,7 +725,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                 onPressed: () {
                                                       int i=15;getxController.toogleButtontextColor.value=false;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i]
+
+                                                     ;
+                                                     getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
                                                 },
@@ -725,6 +743,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                 onPressed: () {
                                                      int i=16;getxController.toogleButtontextColor.value=false;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
+                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -740,6 +759,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                 onPressed: () {
                                                      int i=17;getxController.toogleButtontextColor.value=false;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
+                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -755,6 +775,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                 onPressed: () {
                                                       int i=18;getxController.toogleButtontextColor.value=false;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
+                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -770,6 +791,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                 onPressed: () {
                                                      int i=19;getxController.toogleButtontextColor.value=false;
                                                    getxController.themecolor.value=ColorPage.themeColors[i];
+                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                      getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                      getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -1054,7 +1076,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             BorderRadius.all(
                                                           Radius.circular(10),
                                                         ),
-                                                        color: ColorPage.white,
+                                                        color: getxController.backgroundColor.value,
                                                       ),
                                                       margin:
                                                           EdgeInsets.all(10),
@@ -1071,7 +1093,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                           style: TextStyle(
                                                               color:
                                                                   getxController
-                                                                      .listviewtext
+                                                                      .textColor
                                                                       .value,
                                                               fontWeight:
                                                                   FontWeight
@@ -1113,14 +1135,14 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                         border:
                                                                             Border(
                                                                           top: BorderSide(
-                                                                              color: getxController.listviewtext.value,
+                                                                              color: getxController.textColor.value,
                                                                               width: 1),
                                                                         ),
                                                                       ),
                                                                       child:
                                                                           ExpansionTile(
                                                                         iconColor: getxController
-                                                                            .listviewtext
+                                                                            .textColor
                                                                             .value,
                                                                         shape: Border.all(
                                                                             color:
@@ -1133,14 +1155,14 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                           subItem
                                                                               .courseName,
                                                                           style:
-                                                                              TextStyle(color: getxController.listviewtext.value),
+                                                                              TextStyle(color: getxController.textColor.value),
                                                                         ),
                                                                         subtitle:
                                                                             Text(
                                                                           subItem
                                                                               .termName,
                                                                           style:
-                                                                              TextStyle(color: getxController.listviewtext.value),
+                                                                              TextStyle(color: getxController.textColor.value),
                                                                         ),
 
                                                                         onExpansionChanged:
@@ -1159,17 +1181,17 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                                   itemBuilder: (context, subSubIndex) {
                                                                                     var subSubItem = allnestedData[subItem.packageId]![subSubIndex];
                                                                                     return Container(
-                                                                                      decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
+                                                                                      decoration: BoxDecoration(border: Border(top: BorderSide(color: getxController.textColor.value))),
                                                                                       child: ListTile(
                                                                                         onTap: () {},
-                                                                                        title: Text(subItem.termName),
+                                                                                        title: Text(subItem.termName,style: TextStyle(color: getxController.textColor.value),),
                                                                                         trailing: ElevatedButton(
                                                                                           child: Text(
                                                                                             "Show",
-                                                                                            style: FontFamily.font8,
+                                                                                            style: TextStyle(fontSize: ClsFontsize.DoubleExtraSmall,color: getxController.listviewtext.value),
                                                                                           ),
                                                                                           style: ElevatedButton.styleFrom(
-                                                                                            backgroundColor: getxController.elevetedbuttoncolor.value,
+                                                                                            backgroundColor: getxController.textColor.value,
                                                                                             shape: RoundedRectangleBorder(
                                                                                               borderRadius: BorderRadius.all(
                                                                                                 Radius.circular(10),
@@ -1180,7 +1202,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                                             Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
                                                                                           },
                                                                                         ),
-                                                                                        subtitle: Text(subSubItem.packageDisplayName),
+                                                                                        subtitle: Text(subSubItem.packageDisplayName,style: TextStyle(color: getxController.textColor.value),),
                                                                                       ),
                                                                                     );
                                                                                   },

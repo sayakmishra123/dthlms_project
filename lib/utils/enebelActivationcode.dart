@@ -49,7 +49,7 @@ class _GlobalDialogState extends State<GlobalDialog>
         opacity: _animation,
         child: CustomMessageBubble(
         
-          text: 'Enebel Activation Key!',
+          text: 'Enabel Activation Key!',
           color: getxController.activationbuttoncolor.value,
           icon: Icons.info_outline,
         
