@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/package/packagescreen.dart';
 import 'package:dthlms/url/api_url.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class PackagePage extends StatefulWidget {
 
 class _PackagePageState extends State<PackagePage> {
   List<AllPackage> package = [];
+   Getx getx_obj = Get.put(Getx());
 
   Future fnfindallpackage(String token, BuildContext context) async {
     Map data = {
@@ -111,6 +113,8 @@ class _PackagePageState extends State<PackagePage> {
             );
           });
 
+           
+
       // print(jsonEncode(jsondata['result'][0].toString()));
       // var jsonData = json.decode(jsondata['result']);
       // print(jsondata);
@@ -140,6 +144,7 @@ class _PackagePageState extends State<PackagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: getx_obj.buttoncolor.value,
           actions: [
             ElevatedButton(
                 onPressed: () async {

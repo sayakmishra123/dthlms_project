@@ -40,184 +40,187 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Scaffold(
-        appBar: AppBar(
-          actions: [
-            Text(
-              time.utctime(),
+      child: Obx(
+        ()=> Scaffold(
+          appBar: AppBar(
+            
+            actions: [
+              Text(
+                time.utctime(),
+                style: FontFamily.font2,
+              ),
+              TextButton.icon(
+                  onPressed: () {},
+                  icon: Image.asset(
+                    'assets/shutdown.png',
+                    width: 30,
+                  ),
+                  label: Text(
+                    'Log Out',
+                    style: GoogleFonts.kadwa(
+                        textStyle: TextStyle(
+                            fontSize: ClsFontsize.Small,
+                            color: ColorPage.white)), //20
+                  ))
+            ],
+            backgroundColor: get_obj.themecolor.value,
+            title: Text(
+              widget.optionname,
               style: FontFamily.font2,
+              textScaler: const TextScaler.linear(1.5),
             ),
-            TextButton.icon(
-                onPressed: () {},
-                icon: Image.asset(
-                  'assets/shutdown.png',
-                  width: 30,
-                ),
-                label: Text(
-                  'Log Out',
-                  style: GoogleFonts.kadwa(
-                      textStyle: TextStyle(
-                          fontSize: ClsFontsize.Small,
-                          color: ColorPage.white)), //20
-                ))
-          ],
-          backgroundColor: ColorPage.appbarcolor,
-          title: Text(
-            widget.optionname,
-            style: FontFamily.font2,
-            textScaler: const TextScaler.linear(1.5),
           ),
-        ),
-        body: Container(
-          color: ColorPage.bgcolor,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const DrawerWidget(),
-              Expanded(
-                child: Container(
-                  color: ColorPage.color1,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/loginimg2.png',
-                              fit: BoxFit.contain,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+          body: Container(
+            color: ColorPage.bgcolor,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const DrawerWidget(),
+                Expanded(
+                  child: Container(
+                    color: ColorPage.color1,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/loginimg2.png',
+                                fit: BoxFit.contain,
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Container(
-                  alignment: Alignment.center,
-                  height: MediaQuery.sizeOf(context).height,
-                  child: SingleChildScrollView(
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: Form(
-                          child: Card(
-                        elevation: 30,
-                        color: ColorPage.bgcolor,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 40),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Profile',
-                                    style: FontFamily.font,
-                                    textScaler: const TextScaler.linear(1.7),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  CircleAvatar(
-                                    radius: 80,
-                                    child: Image.asset('assets/loginimg2.png'),
-                                  )
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                      width: width,
-                                      child: Text(
-                                        'Name',
-                                        style: FontFamily.font,
-                                      )),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                      width: width,
-                                      child: TextFormField(
-                                        controller: name,
-                                        decoration: InputDecoration(
-                                            suffix: IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(Icons.edit))),
-                                      )),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: width,
-                                    child: Text(
-                                      'Phone no',
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: MediaQuery.sizeOf(context).height,
+                    child: SingleChildScrollView(
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width / 3,
+                        child: Form(
+                            child: Card(
+                          elevation: 30,
+                          color: ColorPage.bgcolor,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 40),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Profile',
                                       style: FontFamily.font,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                      width: width,
-                                      child: TextFormField(
-                                        controller: phoneno,
-                                        decoration: InputDecoration(
-                                            suffix: IconButton(
-                                                onPressed: () {},
-                                                icon: const Icon(Icons.edit))),
-                                      )),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                      width: width,
-                                      child: Text(
-                                        'Email-id',
-                                        style: FontFamily.font,
-                                      )),
-                                ],
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 50),
-                                child: Row(
+                                      textScaler: const TextScaler.linear(1.7),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CircleAvatar(
+                                      radius: 80,
+                                      child: Image.asset('assets/loginimg2.png'),
+                                    )
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                        width: width,
+                                        child: Text(
+                                          'Name',
+                                          style: FontFamily.font,
+                                        )),
+                                  ],
+                                ),
+                                Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     SizedBox(
                                         width: width,
                                         child: TextFormField(
+                                          controller: name,
                                           decoration: InputDecoration(
                                               suffix: IconButton(
                                                   onPressed: () {},
-                                                  icon:
-                                                      const Icon(Icons.edit))),
-                                          controller: email,
+                                                  icon: const Icon(Icons.edit))),
                                         )),
                                   ],
                                 ),
-                              )
-                            ],
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: width,
+                                      child: Text(
+                                        'Phone no',
+                                        style: FontFamily.font,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                        width: width,
+                                        child: TextFormField(
+                                          controller: phoneno,
+                                          decoration: InputDecoration(
+                                              suffix: IconButton(
+                                                  onPressed: () {},
+                                                  icon: const Icon(Icons.edit))),
+                                        )),
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                        width: width,
+                                        child: Text(
+                                          'Email-id',
+                                          style: FontFamily.font,
+                                        )),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 50),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                          width: width,
+                                          child: TextFormField(
+                                            decoration: InputDecoration(
+                                                suffix: IconButton(
+                                                    onPressed: () {},
+                                                    icon:
+                                                        const Icon(Icons.edit))),
+                                            controller: email,
+                                          )),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                      )),
+                        )),
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

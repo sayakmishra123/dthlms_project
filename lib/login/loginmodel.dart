@@ -4,4 +4,6 @@ class DthloginUserDetails {
   String token = "";
   DthloginUserDetails(
       {required this.email, required this.phoneNumber, required this.token});
+
+      
 }

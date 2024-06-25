@@ -18,6 +18,7 @@ class _GlobalDialogState extends State<GlobalDialog>
     with TickerProviderStateMixin {
   late AnimationController _blinkController;
   late Animation<double> _animation;
+  
 
   @override
   void initState() {
@@ -37,6 +38,7 @@ class _GlobalDialogState extends State<GlobalDialog>
     _blinkController.dispose();
     super.dispose();
   }
+   Getx getxController = Get.put(Getx());
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +48,13 @@ class _GlobalDialogState extends State<GlobalDialog>
       child: FadeTransition(
         opacity: _animation,
         child: CustomMessageBubble(
+        
           text: 'Enebel Activation Key!',
-          color: Color(0xFF1B97F3),
+          color: getxController.activationbuttoncolor.value,
           icon: Icons.info_outline,
+        
           textStyle: TextStyle(
-            color: Colors.white,
+            color: getxController.toogleButtontextColor.value? Colors.white:Colors.black,
             fontSize: 16,
           ),
         ),
@@ -101,7 +105,8 @@ class CustomMessageBubble extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: Colors.white,
+              color: get_obj
+              .toogleButtontextColor.value? Colors.white:Colors.black,
               size: 20.0,
             ),
             SizedBox(width: 8.0), // space between icon and text

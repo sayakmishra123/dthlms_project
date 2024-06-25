@@ -44,80 +44,154 @@ class _MobileHomepageState extends State<MobileHomepage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        drawer: const mobileDrawer(),
-        appBar: AppBar(
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: IconButton(
-                icon: const Icon(
-                  Icons.more_vert_rounded,
-                  size: 30,
-                  color: ColorPage.colorblack,
+      child: Obx(
+      ()=> Scaffold(
+          drawer: const mobileDrawer(),
+          appBar: AppBar(
+            backgroundColor: get.themecolor.value,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.more_vert_rounded,
+                    size: 30,
+                    color: ColorPage.colorblack,
+                  ),
+                  onPressed: () {
+                    _showPopupMenu(context);
+                  },
                 ),
-                onPressed: () {
-                  _showPopupMenu(context);
-                },
               ),
+            ],
+            title: Text(
+              "Hi, Sayak Mishra",
+              style: FontFamily.font6,
             ),
-          ],
-          title: Text(
-            "Hi, Sayak Mishra",
-            style: FontFamily.font6,
           ),
-        ),
-        backgroundColor: ColorPage.appbarcolor,
-        body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return <Widget>[
-              SliverToBoxAdapter(
-                child: SizedBox(
-                  height: 160,
+          backgroundColor: ColorPage.appbarcolor,
+          body: NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+              return <Widget>[
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 160,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Hi, Sayak Mishra",
+                              style: FontFamily.font5,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ];
+            },
+            body: Container(
+              padding: const EdgeInsets.only(top: 20),
+              width: screenwidth,
+              decoration: const BoxDecoration(
+                color: ColorPage.bgcolor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(45),
+                  topRight: Radius.circular(45),
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Hi, Sayak Mishra",
-                            style: FontFamily.font5,
+                      buildRow(
+                        context,
+                        [
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => const PackageDashboardMobile(''));
+                            },
+                            child: buildContainer(
+                              context,
+                              'assets/online-learning.png',
+                              'My Courses',
+                              const LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(61, 140, 229, 1),
+                                  Color.fromRGBO(0, 234, 255, 1)
+                                ],
+                                end: Alignment.bottomRight,
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => const PackageDashboardMobile(''));
+                            },
+                            child: buildContainer(
+                              context,
+                              'assets/book.png',
+                              'Study Material',
+                              const LinearGradient(
+                                colors: [
+                                  Color.fromRGBO(247, 97, 161, 1),
+                                  Color.fromRGBO(140, 27, 71, 1)
+                                ],
+                                end: Alignment.bottomRight,
+                              ),
+                            ),
+                          ),
+                          buildContainer(
+                            context,
+                            'assets/instagram-live.png',
+                            'Live',
+                            const LinearGradient(
+                              colors: [
+                                Color.fromRGBO(201, 84, 17, 1),
+                                Color.fromRGBO(228, 10, 2, 1)
+                              ],
+                              end: Alignment.bottomRight,
+                            ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
-                ),
-              ),
-            ];
-          },
-          body: Container(
-            padding: const EdgeInsets.only(top: 20),
-            width: screenwidth,
-            decoration: const BoxDecoration(
-              color: ColorPage.bgcolor,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(45),
-                topRight: Radius.circular(45),
-              ),
-            ),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0),
-                child: Column(
-                  children: [
-                    buildRow(
-                      context,
-                      [
-                        InkWell(
-                          onTap: () {
-                            Get.to(() => const PackageDashboardMobile(''));
-                          },
-                          child: buildContainer(
+                      const SizedBox(height: 20),
+                      buildRow(
+                        context,
+                        [
+                          buildContainer(
                             context,
-                            'assets/online-learning.png',
-                            'My Courses',
+                            'assets/file-upload.png',
+                            'Online Backup',
+                            const LinearGradient(
+                              colors: [
+                                Color.fromRGBO(225, 8, 68, 1),
+                                Color.fromRGBO(255, 177, 153, 1)
+                              ],
+                              end: Alignment.bottomRight,
+                            ),
+                          ),
+                          buildContainer(
+                            context,
+                            'assets/user-avatar.png',
+                            'Profile',
+                            const LinearGradient(
+                              colors: [
+                                Color.fromRGBO(17, 201, 156, 1),
+                                Color.fromRGBO(0, 227, 29, 1)
+                              ],
+                              end: Alignment.bottomRight,
+                            ),
+                          ),
+                          buildContainer(
+                            context,
+                            'assets/exam.png',
+                            'MCQ',
                             const LinearGradient(
                               colors: [
                                 Color.fromRGBO(61, 140, 229, 1),
@@ -126,180 +200,109 @@ class _MobileHomepageState extends State<MobileHomepage> {
                               end: Alignment.bottomRight,
                             ),
                           ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.to(() => const PackageDashboardMobile(''));
-                          },
-                          child: buildContainer(
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      buildRowSpaceEvenly(
+                        context,
+                        [
+                          buildContainer(
                             context,
-                            'assets/book.png',
-                            'Study Material',
+                            'assets/Theory exam.png',
+                            'Theory Exam',
                             const LinearGradient(
                               colors: [
-                                Color.fromRGBO(247, 97, 161, 1),
-                                Color.fromRGBO(140, 27, 71, 1)
+                                Color.fromRGBO(61, 140, 229, 1),
+                                Color.fromRGBO(0, 234, 255, 1)
                               ],
                               end: Alignment.bottomRight,
                             ),
                           ),
-                        ),
-                        buildContainer(
-                          context,
-                          'assets/instagram-live.png',
-                          'Live',
-                          const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(201, 84, 17, 1),
-                              Color.fromRGBO(228, 10, 2, 1)
-                            ],
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    buildRow(
-                      context,
-                      [
-                        buildContainer(
-                          context,
-                          'assets/file-upload.png',
-                          'Online Backup',
-                          const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(225, 8, 68, 1),
-                              Color.fromRGBO(255, 177, 153, 1)
-                            ],
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        buildContainer(
-                          context,
-                          'assets/user-avatar.png',
-                          'Profile',
-                          const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(17, 201, 156, 1),
-                              Color.fromRGBO(0, 227, 29, 1)
-                            ],
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        buildContainer(
-                          context,
-                          'assets/exam.png',
-                          'MCQ',
-                          const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(61, 140, 229, 1),
-                              Color.fromRGBO(0, 234, 255, 1)
-                            ],
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    buildRowSpaceEvenly(
-                      context,
-                      [
-                        buildContainer(
-                          context,
-                          'assets/Theory exam.png',
-                          'Theory Exam',
-                          const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(61, 140, 229, 1),
-                              Color.fromRGBO(0, 234, 255, 1)
-                            ],
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        buildContainer(
-                          context,
-                          'assets/notification.png',
-                          'Notification',
-                          const LinearGradient(
-                            colors: [
-                              Color.fromRGBO(50, 141, 245, 1),
-                              Color.fromRGBO(8, 101, 241, 1)
-                            ],
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        Container(
-                          width: elemenContainerWidth,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Stack(children: [
-                        InkWell(
-                          child: CarouselSlider(
-                            items: imageList
-                                .map(
-                                  (item) => Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                            item['image_path']!,
-                                          ),
-                                          fit: BoxFit.cover,
-                                        ),
-                                        border: Border.all(
-                                            color: ColorPage.appbarcolor,
-                                            width: 2)),
-                                  ),
-                                )
-                                .toList(),
-                            carouselController: carouselController,
-                            options: CarouselOptions(
-                              scrollPhysics: const BouncingScrollPhysics(),
-                              autoPlay: true,
-                              aspectRatio: 2,
-                              viewportFraction: 1,
-                              onPageChanged: (index, reason) {
-                                setState(() {
-                                  currentIndex = index;
-                                });
-                              },
+                          buildContainer(
+                            context,
+                            'assets/notification.png',
+                            'Notification',
+                            const LinearGradient(
+                              colors: [
+                                Color.fromRGBO(50, 141, 245, 1),
+                                Color.fromRGBO(8, 101, 241, 1)
+                              ],
+                              end: Alignment.bottomRight,
                             ),
                           ),
-                        ),
-                        Positioned(
-                          bottom: 5,
-                          left: 0,
-                          right: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: imageList.asMap().entries.map((entry) {
-                              return GestureDetector(
-                                onTap: () =>
-                                    carouselController.animateToPage(entry.key),
-                                child: Container(
-                                  width: currentIndex == entry.key ? 20 : 10,
-                                  height: 10,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 3.0),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: currentIndex == entry.key
-                                          ? ColorPage.appbarcolor
-                                          : ColorPage.white),
-                                ),
-                              );
-                            }).toList(),
+                          Container(
+                            width: elemenContainerWidth,
                           ),
-                        ),
-                      ]),
-                    )
-                  ],
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Stack(children: [
+                          InkWell(
+                            child: CarouselSlider(
+                              items: imageList
+                                  .map(
+                                    (item) => Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                              item['image_path']!,
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                          border: Border.all(
+                                              color: ColorPage.appbarcolor,
+                                              width: 2)),
+                                    ),
+                                  )
+                                  .toList(),
+                              carouselController: carouselController,
+                              options: CarouselOptions(
+                                scrollPhysics: const BouncingScrollPhysics(),
+                                autoPlay: true,
+                                aspectRatio: 2,
+                                viewportFraction: 1,
+                                onPageChanged: (index, reason) {
+                                  setState(() {
+                                    currentIndex = index;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 5,
+                            left: 0,
+                            right: 0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: imageList.asMap().entries.map((entry) {
+                                return GestureDetector(
+                                  onTap: () =>
+                                      carouselController.animateToPage(entry.key),
+                                  child: Container(
+                                    width: currentIndex == entry.key ? 20 : 10,
+                                    height: 10,
+                                    margin: const EdgeInsets.symmetric(
+                                        horizontal: 3.0),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: currentIndex == entry.key
+                                            ? ColorPage.appbarcolor
+                                            : ColorPage.white),
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                        ]),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

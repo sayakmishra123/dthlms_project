@@ -513,9 +513,10 @@ class _ForgotScreenState extends State<ForgotScreen> {
                                                                       vertical:
                                                                           15)),
                                                               backgroundColor:
-                                                                  const MaterialStatePropertyAll(
+                                                                   MaterialStatePropertyAll(
+                                                                    
                                                                       ColorPage
-                                                                          .color1),
+                                                                          .buttonColor),
                                                               shape: MaterialStatePropertyAll(
                                                                   ContinuousRectangleBorder(
                                                                       borderRadius:

@@ -587,7 +587,9 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                       formfieldsize,
                                                                   child:
                                                                       MaterialButton(
+                                                                        
                                                                     shape: ContinuousRectangleBorder(
+                                                                      
                                                                         borderRadius:
                                                                             BorderRadius.circular(20)),
                                                                     padding: const EdgeInsets
@@ -595,7 +597,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                         bottom:
                                                                             20),
                                                                     color: ColorPage
-                                                                        .colorgrey,
+                                                                        .buttonColor,
                                                                     onPressed:
                                                                         () {
                                                                       if (desktop_key1
@@ -662,6 +664,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                     formfieldsize,
                                                                 child:
                                                                     MaterialButton(
+                                                                      color: ColorPage.buttonColor,
                                                                   shape: ContinuousRectangleBorder(
                                                                       borderRadius:
                                                                           BorderRadius.circular(

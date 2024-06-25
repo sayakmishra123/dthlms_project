@@ -44,6 +44,11 @@ class Getx extends GetxController {
   RxBool isMypackages = false.obs;
   RxBool passvisibility = false.obs;
 
+
+  //chat
+RxString email = ''.obs;
+  //chat
+
   RxList<SimCard> simCardinfo = <SimCard>[].obs;
   RxList<AllPackage> package = <AllPackage>[].obs;
   RxList<PackageFind> packagefind = <PackageFind>[].obs;
@@ -52,7 +57,22 @@ class Getx extends GetxController {
   RxBool forgetpageshow = false.obs;
   RxBool loading = true.obs;
 
-  var themecolor = ColorPage.appbarcolor.obs;
+//theme Elements
+var themecolor = ColorPage.appbarcolor.obs;
+var tooglebuttonBGcolor=ColorPage.bluegrey800;
+var tooglebuttonFGcolor=ColorPage.bluegrey300;
+var elevetedbuttoncolor=ColorPage.color1.obs;
+
+var buttoncolor = ColorPage.buttonColor.obs;
+var textColor=ColorPage.colorblack.obs;
+var listviewtext=ColorPage.colorblack.obs;
+RxBool toogleButtontextColor=false.obs;
+var activationbuttoncolor=ColorPage.blue.obs;
+
+var backgroundColor=ColorPage.bgcolor.obs;
+
+
+//Theme Elements
 
   @override
   void onInit() {

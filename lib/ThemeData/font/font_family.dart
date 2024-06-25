@@ -6,7 +6,12 @@ import 'package:google_fonts/google_fonts.dart';
 class FontFamily {
   static var font = GoogleFonts.outfit(
       textStyle: TextStyle(
-          color: ColorPage.colorgrey,
+          color: ColorPage.colorblack,
+          fontSize: ClsFontsize.Small,
+          fontWeight: FontWeight.bold));
+            static var fontWhite = GoogleFonts.outfit(
+      textStyle: TextStyle(
+          color: ColorPage.white,
           fontSize: ClsFontsize.Small,
           fontWeight: FontWeight.bold));
   // used in -->

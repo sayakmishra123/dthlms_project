@@ -3,8 +3,11 @@
 import 'dart:convert';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/url/api_url.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
 
 class PackageScreen extends StatefulWidget {
@@ -76,6 +79,7 @@ class _PackageScreenState extends State<PackageScreen> {
   }
 
   List<AllPackage> package = [];
+   Getx getx_obj = Get.put(Getx());
   Map<String, List<PackageFind>> nestedData = {};
 
   Future<void> fnfindallpackage(String token) async {
@@ -159,184 +163,186 @@ class _PackageScreenState extends State<PackageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorPage.color1,
-      appBar: AppBar(
+    return Obx(
+    ()=> Scaffold(
         backgroundColor: ColorPage.color1,
-        centerTitle: true,
-        title: Text(
-          'Choose your Package',
-          style: FontFamily.font2,
-          textScaler: TextScaler.linear(1.5),
+        appBar: AppBar(
+          backgroundColor: getx_obj.themecolor.value,
+          centerTitle: true,
+          title: Text(
+            'Choose your Package',
+            style: FontFamily.font2,
+            textScaler: TextScaler.linear(1.5),
+          ),
         ),
-      ),
-      body: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 200),
-        decoration: BoxDecoration(
-            // color: ColorPage.bgcolor,
-            // border: Border.all(),
-            ),
-        child: ListView(
-          shrinkWrap: true,
-          children: [
-            Container(
-              color: ColorPage.bgcolor,
-              child: ListTile(
-                title: Text(
-                  'My Package',
-                  style: FontFamily.font,
+        body: Container(
+          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 200),
+          decoration: BoxDecoration(
+              // color: ColorPage.bgcolor,
+              // border: Border.all(),
+              ),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              Container(
+                color: ColorPage.bgcolor,
+                child: ListTile(
+                  title: Text(
+                    'My Package',
+                    style: FontFamily.font,
+                  ),
                 ),
               ),
-            ),
-            Container(
-              color: ColorPage.bgcolor,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: package.length,
-                itemBuilder: (context, index) {
-                  return ExpansionTile(
-                    leading: Text(package[index].packageId),
-                    title: Text(
-                      package[index].packageName,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    onExpansionChanged: (value) {
-                      if (value &&
-                          !nestedData.containsKey(package[index].packageId)) {
-                        fnfindpackage(token, package[index].packageId);
-                      }
-                    },
-                    children: [
-                      nestedData.containsKey(package[index].packageId)
-                          ? ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: 1,
-                              itemBuilder: (context, subIndex) {
-                                var subItem = nestedData[
-                                    package[index].packageId]![subIndex];
-                                return ExpansionTile(
-                                  // leading: Text(subItem.courseId),
-                                  title: Text(subItem.courseName),
-                                  subtitle: Text(subItem.termName),
-                                  onExpansionChanged: (value) {
-                                    if (value &&
-                                        !nestedData
-                                            .containsKey(subItem.packageId)) {
-                                      fnfindpackage(token, subItem.packageId);
-                                    }
-                                  },
-                                  children: [
-                                    nestedData.containsKey(subItem.packageId)
-                                        ? ListView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: 1,
-                                            itemBuilder:
-                                                (context, subSubIndex) {
-                                              var subSubItem = nestedData[
-                                                  subItem
-                                                      .packageId]![subSubIndex];
-                                              return ListTile(
-                                                // leading:
-                                                //     Text(subSubItem.courseId),
-                                                title: Text(
-                                                    subSubItem.packageName),
-                                                subtitle: Text(subSubItem
-                                                    .packageDisplayName),
-                                              );
-                                            },
-                                          )
-                                        : Center(
-                                            child: CircularProgressIndicator()),
-                                  ],
-                                );
-                              },
-                            )
-                          : Center(child: CircularProgressIndicator()),
-                    ],
-                  );
-                },
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 100),
-              color: ColorPage.bgcolor,
-              child: ListTile(
-                title: Text(
-                  'All Package',
-                  style: FontFamily.font,
+              Container(
+                color: ColorPage.bgcolor,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: package.length,
+                  itemBuilder: (context, index) {
+                    return ExpansionTile(
+                      leading: Text(package[index].packageId),
+                      title: Text(
+                        package[index].packageName,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onExpansionChanged: (value) {
+                        if (value &&
+                            !nestedData.containsKey(package[index].packageId)) {
+                          fnfindpackage(token, package[index].packageId);
+                        }
+                      },
+                      children: [
+                        nestedData.containsKey(package[index].packageId)
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: 1,
+                                itemBuilder: (context, subIndex) {
+                                  var subItem = nestedData[
+                                      package[index].packageId]![subIndex];
+                                  return ExpansionTile(
+                                    // leading: Text(subItem.courseId),
+                                    title: Text(subItem.courseName),
+                                    subtitle: Text(subItem.termName),
+                                    onExpansionChanged: (value) {
+                                      if (value &&
+                                          !nestedData
+                                              .containsKey(subItem.packageId)) {
+                                        fnfindpackage(token, subItem.packageId);
+                                      }
+                                    },
+                                    children: [
+                                      nestedData.containsKey(subItem.packageId)
+                                          ? ListView.builder(
+                                              shrinkWrap: true,
+                                              itemCount: 1,
+                                              itemBuilder:
+                                                  (context, subSubIndex) {
+                                                var subSubItem = nestedData[
+                                                    subItem
+                                                        .packageId]![subSubIndex];
+                                                return ListTile(
+                                                  // leading:
+                                                  //     Text(subSubItem.courseId),
+                                                  title: Text(
+                                                      subSubItem.packageName),
+                                                  subtitle: Text(subSubItem
+                                                      .packageDisplayName),
+                                                );
+                                              },
+                                            )
+                                          : Center(
+                                              child: CircularProgressIndicator()),
+                                    ],
+                                  );
+                                },
+                              )
+                            : Center(child: CircularProgressIndicator()),
+                      ],
+                    );
+                  },
                 ),
               ),
-            ),
-            Container(
-              color: ColorPage.bgcolor,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: package.length,
-                itemBuilder: (context, index) {
-                  return ExpansionTile(
-                    leading: Text(package[index].packageId),
-                    title: Text(
-                      package[index].packageName,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    onExpansionChanged: (value) {
-                      if (value &&
-                          !nestedData.containsKey(package[index].packageId)) {
-                        fnfindpackage(token, package[index].packageId);
-                      }
-                    },
-                    children: [
-                      nestedData.containsKey(package[index].packageId)
-                          ? ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: 1,
-                              itemBuilder: (context, subIndex) {
-                                var subItem = nestedData[
-                                    package[index].packageId]![subIndex];
-                                return ExpansionTile(
-                                  // leading: Text(subItem.courseId),
-                                  title: Text(subItem.courseName),
-                                  subtitle: Text(subItem.termName),
-                                  onExpansionChanged: (value) {
-                                    if (value &&
-                                        !nestedData
-                                            .containsKey(subItem.packageId)) {
-                                      fnfindpackage(token, subItem.packageId);
-                                    }
-                                  },
-                                  children: [
-                                    nestedData.containsKey(subItem.packageId)
-                                        ? ListView.builder(
-                                            shrinkWrap: true,
-                                            itemCount: 1,
-                                            itemBuilder:
-                                                (context, subSubIndex) {
-                                              var subSubItem = nestedData[
-                                                  subItem
-                                                      .packageId]![subSubIndex];
-                                              return ListTile(
-                                                // leading:
-                                                //     Text(subSubItem.courseId),
-                                                title: Text(
-                                                    subSubItem.packageName),
-                                                subtitle: Text(subSubItem
-                                                    .packageDisplayName),
-                                              );
-                                            },
-                                          )
-                                        : Center(
-                                            child: CircularProgressIndicator()),
-                                  ],
-                                );
-                              },
-                            )
-                          : Center(child: CircularProgressIndicator()),
-                    ],
-                  );
-                },
+              Container(
+                margin: EdgeInsets.only(top: 100),
+                color: ColorPage.bgcolor,
+                child: ListTile(
+                  title: Text(
+                    'All Package',
+                    style: FontFamily.font,
+                  ),
+                ),
               ),
-            ),
-          ],
+              Container(
+                color: ColorPage.bgcolor,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: package.length,
+                  itemBuilder: (context, index) {
+                    return ExpansionTile(
+                      leading: Text(package[index].packageId),
+                      title: Text(
+                        package[index].packageName,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onExpansionChanged: (value) {
+                        if (value &&
+                            !nestedData.containsKey(package[index].packageId)) {
+                          fnfindpackage(token, package[index].packageId);
+                        }
+                      },
+                      children: [
+                        nestedData.containsKey(package[index].packageId)
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: 1,
+                                itemBuilder: (context, subIndex) {
+                                  var subItem = nestedData[
+                                      package[index].packageId]![subIndex];
+                                  return ExpansionTile(
+                                    // leading: Text(subItem.courseId),
+                                    title: Text(subItem.courseName),
+                                    subtitle: Text(subItem.termName),
+                                    onExpansionChanged: (value) {
+                                      if (value &&
+                                          !nestedData
+                                              .containsKey(subItem.packageId)) {
+                                        fnfindpackage(token, subItem.packageId);
+                                      }
+                                    },
+                                    children: [
+                                      nestedData.containsKey(subItem.packageId)
+                                          ? ListView.builder(
+                                              shrinkWrap: true,
+                                              itemCount: 1,
+                                              itemBuilder:
+                                                  (context, subSubIndex) {
+                                                var subSubItem = nestedData[
+                                                    subItem
+                                                        .packageId]![subSubIndex];
+                                                return ListTile(
+                                                  // leading:
+                                                  //     Text(subSubItem.courseId),
+                                                  title: Text(
+                                                      subSubItem.packageName),
+                                                  subtitle: Text(subSubItem
+                                                      .packageDisplayName),
+                                                );
+                                              },
+                                            )
+                                          : Center(
+                                              child: CircularProgressIndicator()),
+                                    ],
+                                  );
+                                },
+                              )
+                            : Center(child: CircularProgressIndicator()),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

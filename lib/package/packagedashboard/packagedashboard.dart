@@ -281,272 +281,142 @@ class _PackageDashboardState extends State<PackageDashboard>
     super.initState();
   }
 
-
-  
-
   @override
   Widget build(BuildContext context) {
-    return Obx(()=>
-       Scaffold(
-          appBar: AppBar(
-            backgroundColor:getxController.themecolor.value,
-            iconTheme: IconThemeData(color: ColorPage.white),
-            automaticallyImplyLeading: false,
-            //  leading: Row(children: [Padding(
-            //    padding: const EdgeInsets.only(left: 30.0),
-            //    child: Icon(Icons.person,color: ColorPage.white,),
-            //  )],),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 12, left: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Sayak Mishra",
-                      style: FontFamily.font9,
-                    ),
-                    Text(
-                      "Sayakmishra@gmail.com",
-                      style: FontFamily.font9,
-                    )
-                  ],
-                ),
+    return Obx(
+      () => Scaffold(
+
+        
+        appBar: AppBar(
+          backgroundColor: getxController.themecolor.value,
+          iconTheme: IconThemeData(color: ColorPage.white),
+          automaticallyImplyLeading: false,
+          //  leading: Row(children: [Padding(
+          //    padding: const EdgeInsets.only(left: 30.0),
+          //    child: Icon(Icons.person,color: ColorPage.white,),
+          //  )],),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 12, left: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Sayak Mishra",
+                    style: FontFamily.font9,
+                  ),
+                  Text(
+                    "Sayakmishra@gmail.com",
+                    style: FontFamily.font9,
+                  )
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 30.0),
-                child: InkWell(
-                  onTap: () {
-                    showFullImageDialog();
-                  },
-                  child: CircleAvatar(
-                    backgroundColor: const Color.fromARGB(230, 255, 255, 255),
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage("assets/sorojda.png"),
-                      ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 30.0),
+              child: InkWell(
+                onTap: () {
+                  showFullImageDialog();
+                },
+                child: CircleAvatar(
+                  backgroundColor: const Color.fromARGB(230, 255, 255, 255),
+                  child: Padding(
+                    padding: const EdgeInsets.all(3.0),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/sorojda.png"),
                     ),
                   ),
                 ),
               ),
-              IconButton(
-                  tooltip: 'Theme',
-                  onPressed: () {
-                    themePage() async {
-                      showModalBottomSheet(
-                          context: context,
-                          builder: (context) {
-                            return BottomSheet(
-                                elevation: 20,
-                                enableDrag: true,
-                                animationController:
-                                    AnimationController(vsync: this),
-                                onClosing: () {},
-                                builder: (context) {
-                                  return Flexible(
-                                    child: Container(
-                                
-                                      decoration: BoxDecoration(
-                                          // border: Border.all(
-                                          //   width: 5,
-                                          //   color: ColorPage.blue,
-                                          // ),
-                                          color: Colors.black),
-                                      // decoration: ,
-                                      // height: 400,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 50),
-                                      child: Column(
-                                        children: [
-                                          AppBar(
-                                            backgroundColor: Colors.black,
-                                            title: Text(
-                                              'App Theme',
-                                              style: FontFamily.font3,
-                                              textScaler: TextScaler.linear(1),
-                                            ),
+            ),
+            IconButton(
+                tooltip: 'Theme',
+                onPressed: () {
+                  themePage() async {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return BottomSheet(
+                              elevation: 20,
+                              enableDrag: true,
+                              animationController:
+                                  AnimationController(vsync: this),
+                              onClosing: () {},
+                              builder: (context) {
+                                return Flexible(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        // border: Border.all(
+                                        //   width: 5,
+                                        //   color: ColorPage.blue,
+                                        // ),
+                                        color: Colors.black),
+                                    // decoration: ,
+                                    // height: 400,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 50),
+                                    child: Column(
+                                      children: [
+                                        AppBar(
+                                          backgroundColor: Colors.black,
+                                          title: Text(
+                                            'App Theme',
+                                            style: FontFamily.font3,
+                                            textScaler: TextScaler.linear(1),
                                           ),
-                                          Row(
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                getxController.textColor.value=ColorPage.colorblack;
+                                                getxController.backgroundColor.value=ColorPage.white;
+
+
+                                              },
+                                              child: Image.asset(
+                                                'assets/sun.png',
+                                                width: 50,
+                                              ),
+                                            ),
+                                            SizedBox(width: 50),
+                                            InkWell(
+                                              onTap: () {
+
+
+                                                  getxController.textColor.value=ColorPage.white;
+                                                getxController.backgroundColor.value=ColorPage.colorblack;
+                                              },
+                                              child: Image.asset(
+                                                'assets/themes.png',
+                                                width: 50,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10),
+                                          child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              InkWell(
-                                                onTap: () {},
-                                                child: Image.asset(
-                                                  'assets/sun.png',
-                                                  width: 50,
-                                                ),
-                                              ),
-                                              SizedBox(width: 50),
-                                              InkWell(
-                                                onTap: () {},
-                                                child: Image.asset(
-                                                  'assets/themes.png',
-                                                  width: 50,
-                                                ),
+                                              Text(
+                                                'Primary Color',
+                                                style: FontFamily.font3,
+                                                textScaler:
+                                                    TextScaler.linear(1),
                                               )
                                             ],
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 10),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Primary Color',
-                                                  style: FontFamily.font3,
-                                                  textScaler:
-                                                      TextScaler.linear(1),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 5),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                ColorPage.themeColors[0])),
-                                                    onPressed: () {
-                                                     getxController.themecolor.value=ColorPage.themeColors[0];
-                                                    },
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                ColorPage.themeColors[1])),
-                                                    onPressed: () {
-                                                       getxController.themecolor.value=ColorPage.themeColors[1];
-                                                    },
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                ColorPage.themeColors[2])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[2];},
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                ColorPage.themeColors[3])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[3];},
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                ColorPage.themeColors[4])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[4];},
-                                                    icon: Text('')),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 5),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                      ColorPage.themeColors[5],
-                                                    )),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[5];},
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                 ColorPage.themeColors[6])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[6];},
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                 ColorPage.themeColors[7])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[7];},
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                 ColorPage.themeColors[8])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[8];},
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                 ColorPage.themeColors[9])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[9];},
-                                                    icon: Text('')),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 5),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                 ColorPage.themeColors[10])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[10];},
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                       ColorPage.themeColors[11],
-                                                    )),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[11];},
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                 ColorPage.themeColors[12])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[12];},
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                 ColorPage.themeColors[13])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[13];},
-                                                    icon: Text('')),
-                                                IconButton.filled(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                 ColorPage.themeColors[14])),
-                                                    onPressed: () {getxController.themecolor.value=ColorPage.themeColors[14];},
-                                                    icon: Text('')),
-                                              ],
-                                            ),
-                                          ),
-                                          Row(
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5),
+                                          child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceEvenly,
                                             children: [
@@ -554,500 +424,834 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStatePropertyAll(
-                                                               ColorPage.themeColors[15])),
-                                                  onPressed: () {getxController.themecolor.value=ColorPage.themeColors[15];},
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  0])),
+                                                  onPressed: () {
+                                                    getxController.toogleButtontextColor.value=false;
+                                                    getxController.activationbuttoncolor.value= ColorPage
+                                                            .themeColors[0];
+                                                    getxController
+                                                            .themecolor.value =
+                                                        ColorPage
+                                                            .themeColors[0];
+                                                    getxController
+                                                            .buttoncolor.value =
+                                                        ColorPage
+                                                            .themeColors[0];
+                                                    getxController
+                                                            .tooglebuttonBGcolor =
+                                                        ColorPage
+                                                            .toogleBGButtonColor[0];
+                                                    getxController
+                                                            .tooglebuttonFGcolor =
+                                                        ColorPage
+                                                            .toogleFGButtonColor[0];
+                                                  },
                                                   icon: Text('')),
                                               IconButton.filled(
                                                   style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStatePropertyAll(
-                                                               ColorPage.themeColors[16])),
-                                                  onPressed: () {getxController.themecolor.value=ColorPage.themeColors[16];},
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  1])),
+                                                  onPressed: () {
+                                                    getxController.toogleButtontextColor.value=true;
+                                                    getxController
+                                                            .themecolor.value =
+                                                        ColorPage
+                                                            .themeColors[1];
+                                                    getxController
+                                                            .buttoncolor.value =
+                                                        ColorPage
+                                                            .themeColors[1];
+                                                    getxController
+                                                            .tooglebuttonBGcolor =
+                                                        ColorPage
+                                                            .toogleBGButtonColor[1];
+                                                    getxController
+                                                            .tooglebuttonFGcolor =
+                                                        ColorPage
+                                                            .toogleFGButtonColor[1];
+                                                  },
                                                   icon: Text('')),
                                               IconButton.filled(
                                                   style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStatePropertyAll(
-                                                               ColorPage.themeColors[17])),
-                                                  onPressed: () {getxController.themecolor.value=ColorPage.themeColors[17];},
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  2])),
+                                                  onPressed: () {
+                                                    getxController.toogleButtontextColor.value=true;
+                                                    getxController.themecolor.value=ColorPage.themeColors[2];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[2];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[2];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[2];
+                                                  },
                                                   icon: Text('')),
                                               IconButton.filled(
                                                   style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStatePropertyAll(
-                                                               ColorPage.themeColors[18])),
-                                                  onPressed: () {getxController.themecolor.value=ColorPage.themeColors[18];},
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  3])),
+                                                  onPressed: () {
+                                                    getxController.toogleButtontextColor.value=true;
+                                                   getxController.themecolor.value=ColorPage.themeColors[3];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[3];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[3];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[3];
+                                                  },
                                                   icon: Text('')),
                                               IconButton.filled(
                                                   style: ButtonStyle(
                                                       backgroundColor:
                                                           MaterialStatePropertyAll(
-                                                              ColorPage.themeColors[19])),
-                                                  onPressed: () {getxController.themecolor.value=ColorPage.themeColors[19];},
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  4])),
+                                                  onPressed: () {
+                                                    int i=4;
+                                                    getxController.toogleButtontextColor.value=true;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
                                                   icon: Text('')),
                                             ],
                                           ),
-                                          Spacer(),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 5),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                ElevatedButton(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                ColorPage.blue),
-                                                        shape: MaterialStatePropertyAll(
-                                                            ContinuousRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            0)))),
-                                                    onPressed: () {},
-                                                    child: Text(
-                                                      'Ok',
-                                                      style: FontFamily.font3,
-                                                    )),
-                                                SizedBox(
-                                                  width: 50,
-                                                ),
-                                                ElevatedButton(
-                                                    style: ButtonStyle(
-                                                        backgroundColor:
-                                                            MaterialStatePropertyAll(
-                                                                ColorPage.red),
-                                                        shape: MaterialStatePropertyAll(
-                                                            ContinuousRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            0)))),
-                                                    onPressed: () {
-                                                      Get.back();
-                                                    },
-                                                    child: Text(
-                                                      'Cancel',
-                                                      style: FontFamily.font3,
-                                                    ))
-                                              ],
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                });
-                          });
-                    }
-      
-                    themePage();
-                  },
-                  icon: Icon(Icons.theater_comedy))
-            ],
-          ),
-          backgroundColor: ColorPage.bgcolor,
-          body: Skeletonizer(
-              enabled: getxController.loading.value,
-              child: Stack(
-                children: <Widget>[
-                  Row(
-                    children: [
-                      Container(
-                        child: Expanded(
-                          child: Container(
-                            child: Column(
-                              children: [
-                                Flexible(
-                                  child: Column(
-                                      children: [
-                                        SizedBox(
-                                          height: 20,
                                         ),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(25)),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: ColorPage.appbarcolor
-                                                        .withOpacity(0.3),
-                                                    blurRadius: 12,
-                                                    spreadRadius: 5)
-                                              ]),
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          height: 55,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: TextFormField(
-                                            onChanged: (value) {
-                                              setFilterData();
-                                            },
-                                            controller: searchController,
-                                            decoration: InputDecoration(
-                                              hintStyle: TextStyle(
-                                                  color: ColorPage.appbarcolor,
-                                                  fontSize:
-                                                      ClsFontsize.ExtraSmall - 1),
-                                              hintText: 'Search',
-                                              fillColor: Color.fromARGB(
-                                                  255, 255, 255, 255),
-                                              filled: true,
-                                              suffixIcon:  Icon(
-                                                Icons.search,
-                                                color: ColorPage.appbarcolor,
-                                              ),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  borderSide: BorderSide.none),
-                                            ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                    ColorPage.themeColors[5],
+                                                  )),
+                                                  onPressed: () {
+                                                    getxController.toogleButtontextColor.value=false;
+                                                       int i=5;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  6])),
+                                                  onPressed: () {
+                                                        int i=6;
+                                                        getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  7])),
+                                                  onPressed: () {
+                                                    getxController.toogleButtontextColor.value=false;
+                                                      int i=7;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  8])),
+                                                  onPressed: () {
+                                                        int i=8;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  9])),
+                                                  onPressed: () {
+                                                        int i=9;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
+                                                  icon: Text('')),
+                                            ],
                                           ),
                                         ),
-                                        AnimatedButtonBar(
-                                          controller: AnimatedButtonController()
-                                            ..setIndex(1),
-                                          radius: 32.0,
-                                          padding: const EdgeInsets.all(16.0),
-                                          backgroundColor: ColorPage.bluegrey800,
-                                          foregroundColor: ColorPage.bluegrey300,
-                                          elevation: 24,
-                                          curve: Curves.bounceIn,
-                                          borderColor: ColorPage.white,
-                                          borderWidth: 2,
-                                          innerVerticalPadding: 16,
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  10])),
+                                                  onPressed: () {
+                                                       int i=10;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                    ColorPage.themeColors[11],
+                                                  )),
+                                                  onPressed: () {
+                                                      int i=11;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  12])),
+                                                  onPressed: () {
+                                                    int i=12;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  13])),
+                                                  onPressed: () {
+                                                        int i=13;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
+                                                  icon: Text('')),
+                                              IconButton.filled(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage
+                                                                      .themeColors[
+                                                                  14])),
+                                                  onPressed: () {
+                                                       int i=14;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  },
+                                                  icon: Text('')),
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            ButtonBarEntry(
-                                                onTap: () {
-                                                  getxController
-                                                      .packageshow.value = true;
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                15])),
+                                                onPressed: () {
+                                                      int i=15;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
                                                 },
-                                                child: Text(
-                                                  'My Package',
-                                                  style: FontFamily.font,
-                                                )),
-                                            ButtonBarEntry(
-                                                onTap: () {
-                                                  getxController
-                                                      .packageshow.value = false;
-                                                  fnfindallpackage(widget.token);
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                16])),
+                                                onPressed: () {
+                                                     int i=16;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
                                                 },
-                                                child: Text(
-                                                  'All Package',
-                                                  style: FontFamily.font,
-                                                )),
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                17])),
+                                                onPressed: () {
+                                                     int i=17;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                },
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                18])),
+                                                onPressed: () {
+                                                      int i=18;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                },
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                19])),
+                                                onPressed: () {
+                                                     int i=19;getxController.toogleButtontextColor.value=false;
+                                                   getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                },
+                                                icon: Text('')),
                                           ],
                                         ),
-                                        getxController.packageshow.value
-                                            ? Expanded(
-                                                child: ListView.builder(
-                                                shrinkWrap: true,
-                                                // itemCount: 5,
-                                                itemCount: mypackage.length == 0
-                                                    ? 10
-                                                    : mypackage.length,
-                                                itemBuilder: (context, index) {
-                                                  return ExpansionTile(
-                                                    // shape:
-                                                    //     Border.all(color: Colors.transparent),
-                                                    // trailing: ,
-                                                    leading: Text(
-                                                        mypackage.isEmpty
-                                                            ? '1234'
-                                                            : mypackage[index]
-                                                                .userID),
-                                                    title: Text(
-                                                      mypackage.isEmpty
-                                                          ? '123455454541351'
-                                                          : mypackage[index]
-                                                              .packageID,
-                                                      style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                    onExpansionChanged: (value) {
-                                                      if (value &&
-                                                          !allnestedData
-                                                              .containsKey(
-                                                                  allpackage[
-                                                                          index]
-                                                                      .packageId)) {
-                                                        fnfindpackage(
-                                                            widget.token,
-                                                            allpackage[index]
-                                                                .packageId);
-                                                      }
-                                                    },
-                                                    children: [
-                                                      // allnestedData.containsKey(
-                                                      //         allpackage[index]
-                                                      //             .packageId)
-                                                      //     ? ListView.builder(
-                                                      //         shrinkWrap: true,
-                                                      //         itemCount: 1,
-                                                      //         itemBuilder:
-                                                      //             (context,
-                                                      //                 subIndex) {
-                                                      //           var subItem =
-                                                      //               allnestedData[
-                                                      //                       allpackage[index]
-                                                      //                           .packageId]![
-                                                      //                   subIndex];
-                                                      //           return ExpansionTile(
-                                                      //             leading: Text(
-                                                      //                 subItem
-                                                      //                     .courseId),
-                                                      //             title: Text(subItem
-                                                      //                 .courseName),
-                                                      //             subtitle: Text(
-                                                      //                 subItem
-                                                      //                     .termName),
-                                                      //             onExpansionChanged:
-                                                      //                 (value) {
-                                                      //               if (value &&
-                                                      //                   !allnestedData
-                                                      //                       .containsKey(
-                                                      //                           subItem.packageId)) {
-                                                      //                 fnfindpackage(
-                                                      //                     widget
-                                                      //                         .token,
-                                                      //                     subItem
-                                                      //                         .packageId);
-                                                      //               }
-                                                      //             },
-                                                      //             children: [
-                                                      //               allnestedData.containsKey(
-                                                      //                       subItem
-                                                      //                           .packageId)
-                                                      //                   ? ListView
-                                                      //                       .builder(
-                                                      //                       shrinkWrap:
-                                                      //                           true,
-                                                      //                       itemCount:
-                                                      //                           1,
-                                                      //                       itemBuilder:
-                                                      //                           (context, subSubIndex) {
-                                                      //                         var subSubItem =
-                                                      //                             allnestedData[subItem.packageId]![subSubIndex];
-                                                      //                         return ListTile(
-                                                      //                           leading: Text(subSubItem.courseId),
-                                                      //                           title: Text(subItem.termName),
-                                                      //                           subtitle: Text(subSubItem.packageDisplayName),
-                                                      //                         );
-                                                      //                       },
-                                                      //                     )
-                                                      //                   : CircularProgressIndicator(),
-                                                      //             ],
-                                                      //           );
-                                                      //         },
-                                                      //       )
-                                                      //     : CircularProgressIndicator()
-                                                    ],
-                                                  );
-                                                },
-                                              ))
-                                            : Expanded(
-                                                child: filteredPackage.isNotEmpty
-                                                    ? ListView.builder(
-                                                        shrinkWrap: true,
-                                                        // itemCount: 5,
-                                                        itemCount: filteredPackage
-                                                            .length,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return Container(
-                                                            decoration:
-                                                                BoxDecoration(
+                                        Spacer(),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              ElevatedButton(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage.blue),
+                                                      shape: MaterialStatePropertyAll(
+                                                          ContinuousRectangleBorder(
                                                               borderRadius:
                                                                   BorderRadius
-                                                                      .all(
-                                                                Radius.circular(
-                                                                    10),
-                                                              ),
-                                                              color:
-                                                                  ColorPage.white,
-                                                            ),
-                                                            margin:
-                                                                EdgeInsets.all(
-                                                                    10),
-                                                            child: ExpansionTile(
-                                                              shape: Border.all(
-                                                                  color: Colors
-                                                                      .transparent),
-                                                              // leading: Text(
-                                                              //     filteredPackage[index]
-                                                              //         .packageId),
-                                                              title: Text(
-                                                                filteredPackage[
-                                                                        index]
-                                                                    .packageName,
-                                                                style: const TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                              onExpansionChanged:
-                                                                  (value) {
-                                                                if (value &&
-                                                                    !allnestedData
-                                                                        .containsKey(
-                                                                            filteredPackage[index]
-                                                                                .packageId)) {
-                                                                  fnfindpackage(
-                                                                      widget
-                                                                          .token,
-                                                                      filteredPackage[
-                                                                              index]
-                                                                          .packageId);
-                                                                }
-                                                              },
-                                                              children: [
-                                                                allnestedData.containsKey(
-                                                                        filteredPackage[
-                                                                                index]
-                                                                            .packageId)
-                                                                    ? ListView
-                                                                        .builder(
-                                                                        shrinkWrap:
-                                                                            true,
-                                                                        itemCount:
-                                                                            1,
-                                                                        itemBuilder:
-                                                                            (context,
-                                                                                subIndex) {
-                                                                          var subItem =
-                                                                              allnestedData[filteredPackage[index].packageId]![subIndex];
-                                                                          return Container(
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              border:
-                                                                                  Border(
-                                                                                top: BorderSide(color: ColorPage.colorblack, width: 1),
-                                                                              ),
-                                                                            ),
-                                                                            child:
-                                                                                ExpansionTile(
-                                                                              shape:
-                                                                                  Border.all(color: Colors.transparent),
-                                                                              // leading: Text(
-                                                                              //     subItem
-                                                                              //         .courseId),
-                                                                              title:
-                                                                                  Text(subItem.courseName),
-                                                                              subtitle:
-                                                                                  Text(subItem.termName),
-      
-                                                                              onExpansionChanged:
-                                                                                  (value) {
-                                                                                if (value && !allnestedData.containsKey(subItem.packageId)) {
-                                                                                  fnfindpackage(widget.token, subItem.packageId);
-                                                                                }
-                                                                              },
-                                                                              children: [
-                                                                                allnestedData.containsKey(subItem.packageId)
-                                                                                    ? ListView.builder(
-                                                                                        shrinkWrap: true,
-                                                                                        itemCount: 1,
-                                                                                        itemBuilder: (context, subSubIndex) {
-                                                                                          var subSubItem = allnestedData[subItem.packageId]![subSubIndex];
-                                                                                          return Container(
-                                                                                            decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
-                                                                                            child: ListTile(
-                                                                                              onTap: () {},
-                                                                                              title: Text(subItem.termName),
-                                                                                              trailing: ElevatedButton(
-                                                                                                child: Text(
-                                                                                                  "Show",
-                                                                                                  style: FontFamily.font8,
-                                                                                                ),
-                                                                                                style: ElevatedButton.styleFrom(
-                                                                                                  backgroundColor: ColorPage.appbarcolor,
-                                                                                                  shape: RoundedRectangleBorder(
-                                                                                                    borderRadius: BorderRadius.all(
-                                                                                                      Radius.circular(10),
-                                                                                                    ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                                onPressed: () {
-                                                                                                  Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
-                                                                                                },
-                                                                                              ),
-                                                                                              subtitle: Text(subSubItem.packageDisplayName),
-                                                                                            ),
-                                                                                          );
-                                                                                        },
-                                                                                      )
-                                                                                    : CircularProgressIndicator(),
-                                                                              ],
-                                                                            ),
-                                                                          );
-                                                                        },
-                                                                      )
-                                                                    : Center(
-                                                                        child:
-                                                                            CircularProgressIndicator(),
-                                                                      )
-                                                              ],
-                                                            ),
-                                                          );
-                                                        },
-                                                      )
-                                                    : Center(
-                                                        child: Image.asset(
-                                                            'assets/android/nodatafound.png'))),
+                                                                      .circular(
+                                                                          0)))),
+                                                  onPressed: () {},
+                                                  child: Text(
+                                                    'Ok',
+                                                    style: FontFamily.font3,
+                                                  )),
+                                              SizedBox(
+                                                width: 50,
+                                              ),
+                                              ElevatedButton(
+                                                  style: ButtonStyle(
+                                                      backgroundColor:
+                                                          MaterialStatePropertyAll(
+                                                              ColorPage.red),
+                                                      shape: MaterialStatePropertyAll(
+                                                          ContinuousRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          0)))),
+                                                  onPressed: () {
+                                                    Get.back();
+                                                  },
+                                                  child: Text(
+                                                    'Cancel',
+                                                    style: FontFamily.font3,
+                                                  ))
+                                            ],
+                                          ),
+                                        )
                                       ],
                                     ),
                                   ),
-                                
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                          child: Container(
-                              color: Colors.black,
+                                );
+                              });
+                        });
+                  }
+
+                  themePage();
+                },
+                icon: Icon(Icons.theater_comedy))
+          ],
+        ),
+        backgroundColor: getxController.backgroundColor.value,
+        body: Skeletonizer(
+          enabled: getxController.loading.value,
+          child: Stack(
+            children: <Widget>[
+              Row(
+                children: [
+                  Container(
+                    child: Expanded(
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Flexible(
                               child: Column(
                                 children: [
-                                  Flexible(
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        children: [
-                                          Stack(children: [
-                                            Image.asset(
-                                              fit: BoxFit.fitHeight,
-                                              'assets/wallpaperflare.com_wallpaper.jpg',
-                                              height: MediaQuery.sizeOf(context)
-                                                  .height,
-                                            ),
-                                            Positioned(
-                                              bottom: 500,
-                                              left: 300,
-                                              child: TypeWriter.text(
-                                                'lorem ipsum dolot sit amet ...',
-                                                style: FontFamily.font2,
-                                                repeat: true,
-                                                duration: const Duration(
-                                                    milliseconds: 50),
-                                              ),
-                                            ),
-                                          ]),
-                                        ],
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(25)),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: ColorPage.appbarcolor
+                                                  .withOpacity(0.3),
+                                              blurRadius: 12,
+                                              spreadRadius: 5)
+                                        ]),
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 20),
+                                    height: 55,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: TextFormField(
+                                      onChanged: (value) {
+                                        setFilterData();
+                                      },
+                                      controller: searchController,
+                                      decoration: InputDecoration(
+                                        hintStyle: TextStyle(
+                                            color: ColorPage.appbarcolor,
+                                            fontSize:
+                                                ClsFontsize.ExtraSmall - 1),
+                                        hintText: 'Search',
+                                        fillColor:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        filled: true,
+                                        suffixIcon: Icon(
+                                          Icons.search,
+                                          color: ColorPage.appbarcolor,
+                                        ),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            borderSide: BorderSide.none),
                                       ),
                                     ),
                                   ),
+                                  AnimatedButtonBar(
+                                    controller: AnimatedButtonController()
+                                      ..setIndex(1),
+                                    radius: 32.0,
+                                    padding: const EdgeInsets.all(16.0),
+                                    backgroundColor:
+                                        getxController.tooglebuttonBGcolor,
+                                    foregroundColor:
+                                        getxController.tooglebuttonFGcolor,
+                                    // foregroundColor:  Color.fromARGB(255, 37, 233, 135),
+                                    // backgroundColor:Color.fromARGB(255, 97, 228, 162),
+                                    elevation: 24,
+                                    curve: Curves.bounceIn,
+                                    borderColor: ColorPage.white,
+                                    borderWidth: 2,
+                                    innerVerticalPadding: 16,
+                                    children: [
+                                      ButtonBarEntry(
+                                          onTap: () {
+                                            getxController.packageshow.value =
+                                                true;
+                                          },
+                                          child: Text(
+                                            'My Package',
+                                            style: getxController.toogleButtontextColor.value?FontFamily.fontWhite:FontFamily.font,
+                                          )),
+                                      ButtonBarEntry(
+                                          onTap: () {
+                                            getxController.packageshow.value =
+                                                false;
+                                            fnfindallpackage(widget.token);
+                                          },
+                                          child: Text(
+                                            'All Package',
+                                            style: getxController.toogleButtontextColor.value?FontFamily.fontWhite:FontFamily.font,
+                                          )),
+                                    ],
+                                  ),
+                                  getxController.packageshow.value
+                                      ? Expanded(
+                                          child: ListView.builder(
+                                          shrinkWrap: true,
+                                          // itemCount: 5,
+                                          itemCount: mypackage.length == 0
+                                              ? 10
+                                              : mypackage.length,
+                                          itemBuilder: (context, index) {
+                                            return ExpansionTile(
+                                              // shape:
+                                              //     Border.all(color: Colors.transparent),
+                                              // trailing: ,
+                                              leading: Text(mypackage.isEmpty
+                                                  ? '1234'
+                                                  : mypackage[index].userID),
+                                              title: Text(
+                                                mypackage.isEmpty
+                                                    ? '123455454541351'
+                                                    : mypackage[index]
+                                                        .packageID,
+                                                style:  TextStyle(
+                                                  color: getxController.textColor.value,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              onExpansionChanged: (value) {
+                                                if (value &&
+                                                    !allnestedData.containsKey(
+                                                        allpackage[index]
+                                                            .packageId)) {
+                                                  fnfindpackage(
+                                                      widget.token,
+                                                      allpackage[index]
+                                                          .packageId);
+                                                }
+                                              },
+                                              children: [
+                                                // allnestedData.containsKey(
+                                                //         allpackage[index]
+                                                //             .packageId)
+                                                //     ? ListView.builder(
+                                                //         shrinkWrap: true,
+                                                //         itemCount: 1,
+                                                //         itemBuilder:
+                                                //             (context,
+                                                //                 subIndex) {
+                                                //           var subItem =
+                                                //               allnestedData[
+                                                //                       allpackage[index]
+                                                //                           .packageId]![
+                                                //                   subIndex];
+                                                //           return ExpansionTile(
+                                                //             leading: Text(
+                                                //                 subItem
+                                                //                     .courseId),
+                                                //             title: Text(subItem
+                                                //                 .courseName),
+                                                //             subtitle: Text(
+                                                //                 subItem
+                                                //                     .termName),
+                                                //             onExpansionChanged:
+                                                //                 (value) {
+                                                //               if (value &&
+                                                //                   !allnestedData
+                                                //                       .containsKey(
+                                                //                           subItem.packageId)) {
+                                                //                 fnfindpackage(
+                                                //                     widget
+                                                //                         .token,
+                                                //                     subItem
+                                                //                         .packageId);
+                                                //               }
+                                                //             },
+                                                //             children: [
+                                                //               allnestedData.containsKey(
+                                                //                       subItem
+                                                //                           .packageId)
+                                                //                   ? ListView
+                                                //                       .builder(
+                                                //                       shrinkWrap:
+                                                //                           true,
+                                                //                       itemCount:
+                                                //                           1,
+                                                //                       itemBuilder:
+                                                //                           (context, subSubIndex) {
+                                                //                         var subSubItem =
+                                                //                             allnestedData[subItem.packageId]![subSubIndex];
+                                                //                         return ListTile(
+                                                //                           leading: Text(subSubItem.courseId),
+                                                //                           title: Text(subItem.termName),
+                                                //                           subtitle: Text(subSubItem.packageDisplayName),
+                                                //                         );
+                                                //                       },
+                                                //                     )
+                                                //                   : CircularProgressIndicator(),
+                                                //             ],
+                                                //           );
+                                                //         },
+                                                //       )
+                                                //     : CircularProgressIndicator()
+                                              ],
+                                            );
+                                          },
+                                        ))
+                                      : Expanded(
+                                          child: filteredPackage.isNotEmpty
+                                              ? ListView.builder(
+                                                  shrinkWrap: true,
+                                                  // itemCount: 5,
+                                                  itemCount:
+                                                      filteredPackage.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return Container(
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                          Radius.circular(10),
+                                                        ),
+                                                        color: ColorPage.white,
+                                                      ),
+                                                      margin:
+                                                          EdgeInsets.all(10),
+                                                      child: ExpansionTile(
+                                                        shape: Border.all(
+                                                            color: Colors
+                                                                .transparent),
+                                                        // leading: Text(
+                                                        //     filteredPackage[index]
+                                                        //         .packageId),
+                                                        title: Text(
+                                                          filteredPackage[index]
+                                                              .packageName,
+                                                          style: TextStyle(
+                                                              color:
+                                                                  getxController
+                                                                      .listviewtext
+                                                                      .value,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold),
+                                                        ),
+                                                        onExpansionChanged:
+                                                            (value) {
+                                                          if (value &&
+                                                              !allnestedData.containsKey(
+                                                                  filteredPackage[
+                                                                          index]
+                                                                      .packageId)) {
+                                                            fnfindpackage(
+                                                                widget.token,
+                                                                filteredPackage[
+                                                                        index]
+                                                                    .packageId);
+                                                          }
+                                                        },
+                                                        children: [
+                                                          allnestedData.containsKey(
+                                                                  filteredPackage[
+                                                                          index]
+                                                                      .packageId)
+                                                              ? ListView
+                                                                  .builder(
+                                                                  shrinkWrap:
+                                                                      true,
+                                                                  itemCount: 1,
+                                                                  itemBuilder:
+                                                                      (context,
+                                                                          subIndex) {
+                                                                    var subItem =
+                                                                        allnestedData[filteredPackage[index].packageId]![
+                                                                            subIndex];
+                                                                    return Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        border:
+                                                                            Border(
+                                                                          top: BorderSide(
+                                                                              color: getxController.listviewtext.value,
+                                                                              width: 1),
+                                                                        ),
+                                                                      ),
+                                                                      child:
+                                                                          ExpansionTile(
+                                                                        iconColor: getxController
+                                                                            .listviewtext
+                                                                            .value,
+                                                                        shape: Border.all(
+                                                                            color:
+                                                                                Colors.transparent),
+                                                                        // leading: Text(
+                                                                        //     subItem
+                                                                        //         .courseId),
+                                                                        title:
+                                                                            Text(
+                                                                          subItem
+                                                                              .courseName,
+                                                                          style:
+                                                                              TextStyle(color: getxController.listviewtext.value),
+                                                                        ),
+                                                                        subtitle:
+                                                                            Text(
+                                                                          subItem
+                                                                              .termName,
+                                                                          style:
+                                                                              TextStyle(color: getxController.listviewtext.value),
+                                                                        ),
+
+                                                                        onExpansionChanged:
+                                                                            (value) {
+                                                                          if (value &&
+                                                                              !allnestedData.containsKey(subItem.packageId)) {
+                                                                            fnfindpackage(widget.token,
+                                                                                subItem.packageId);
+                                                                          }
+                                                                        },
+                                                                        children: [
+                                                                          allnestedData.containsKey(subItem.packageId)
+                                                                              ? ListView.builder(
+                                                                                  shrinkWrap: true,
+                                                                                  itemCount: 1,
+                                                                                  itemBuilder: (context, subSubIndex) {
+                                                                                    var subSubItem = allnestedData[subItem.packageId]![subSubIndex];
+                                                                                    return Container(
+                                                                                      decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
+                                                                                      child: ListTile(
+                                                                                        onTap: () {},
+                                                                                        title: Text(subItem.termName),
+                                                                                        trailing: ElevatedButton(
+                                                                                          child: Text(
+                                                                                            "Show",
+                                                                                            style: FontFamily.font8,
+                                                                                          ),
+                                                                                          style: ElevatedButton.styleFrom(
+                                                                                            backgroundColor: getxController.elevetedbuttoncolor.value,
+                                                                                            shape: RoundedRectangleBorder(
+                                                                                              borderRadius: BorderRadius.all(
+                                                                                                Radius.circular(10),
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                          onPressed: () {
+                                                                                            Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                                          },
+                                                                                        ),
+                                                                                        subtitle: Text(subSubItem.packageDisplayName),
+                                                                                      ),
+                                                                                    );
+                                                                                  },
+                                                                                )
+                                                                              : CircularProgressIndicator(),
+                                                                        ],
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                )
+                                                              : Center(
+                                                                  child:
+                                                                      CircularProgressIndicator(),
+                                                                )
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                )
+                                              : Center(
+                                                  child: Image.asset(
+                                                      'assets/android/nodatafound.png'))),
                                 ],
-                              )))
-                    ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                  GlobalDialog()
+                  Expanded(
+                      child: Container(
+                          color: Colors.black,
+                          child: Column(
+                            children: [
+                              Flexible(
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      Stack(children: [
+                                        Image.asset(
+                                          fit: BoxFit.fitHeight,
+                                          'assets/wallpaperflare.com_wallpaper.jpg',
+                                          height:
+                                              MediaQuery.sizeOf(context).height,
+                                        ),
+                                        Positioned(
+                                          bottom: 500,
+                                          left: 300,
+                                          child: TypeWriter.text(
+                                            'lorem ipsum dolot sit amet ...',
+                                            style: FontFamily.font2,
+                                            repeat: true,
+                                            duration: const Duration(
+                                                milliseconds: 50),
+                                          ),
+                                        ),
+                                      ]),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )))
                 ],
               ),
-            ),
+              GlobalDialog()
+            ],
           ),
+        ),
+      ),
     );
   }
 
