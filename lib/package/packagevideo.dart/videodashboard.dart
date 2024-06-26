@@ -325,7 +325,12 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                         child:
                                                                             ListTile(
                                                                           onTap:
-                                                                              () {},
+                                                                              () {
+
+
+                                                                                Get.to(() =>
+                                                                                  MyClassVideoContent(filteredPackage[index].courseName, widget.token));
+                                                                              },
                                                                           trailing:
                                                                               ElevatedButton(
                                                                             child:

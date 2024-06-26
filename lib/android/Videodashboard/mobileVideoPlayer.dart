@@ -8,7 +8,9 @@ import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/package/packagevideo.dart/category/McqCategory.dart';
 import 'package:dthlms/package/packagevideo.dart/category/pdfcategory.dart';
+import 'package:dthlms/pages/mycourses/myclasscontentvideo/videoplay.dart';
 import 'package:dthlms/utils/loader.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
@@ -236,103 +238,298 @@ class _MobileVideoPlayerState extends State<MobileVideoPlayer>
     return data;
   }
 
+  final List<double> speeds = [0.5, 1.0, 1.5, 2.0];
+  double selectedSpeed = 1.0;
+
+  late VideoPlayClass videoPlay;
+  int t = 0;
+
   // GlobalKey tabbarkey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 4,
-      child: Obx(
-        ()=> Scaffold(
-          backgroundColor: ColorPage.bgcolor,
-          appBar: AppBar(
-            iconTheme: IconThemeData(color: ColorPage.white),
-            title: Text(
-              widget.videoname,
-              style: FontFamily.font5,
-            ),
-            backgroundColor: ColorPage.appbarcolor,
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(80),
-              child: MotionTabBar(
-                controller:
-                    _motionTabBarController, // ADD THIS if you need to change your tab programmatically
-                initialSelectedTab: "PDF",
-                labels: tabfield,
-                icons: const [
-                  Icons.picture_as_pdf,
-                  Icons.question_answer,
-                  Icons.tag,
-                  Icons.reviews
-                ],
-        
-                badges: [
-                  MotionBadgeWidget(
-                    text: '604',
-                    textColor: Colors.white, // optional, default to Colors.white
-                    color: Colors.red, // optional, default to Colors.red
-                    size: 18, // optional, default to 18
-                  ),
-                  null,
-                  null,
-                  null,
-                 
-                ],
-        
-                tabSize: 50,
-                tabBarHeight: 55,
-                textStyle: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                ),
-        
-                tabIconColor: Colors.blue[600],
-                tabIconSize: 28.0,
-                tabIconSelectedSize: 26.0,
-                tabSelectedColor: Colors.blue[900],
-                tabIconSelectedColor: Colors.white,
-                // tabBarColor: Color.fromARGB(255, 64, 41, 231),
-                onTabItemSelected: (int value) {
-                  setState(() {
-                    _motionTabBarController!.index = value;
-        
-                    fngetVideodetailsApi(widget.token, tabfield[value]);
-                  });
-                },
-              ),
+    return SafeArea(
+      child:
+       MaterialVideoControlsTheme(
+        normal: MaterialVideoControlsThemeData( controlsHoverDuration: Duration(seconds: 15),primaryButtonBar: [ MaterialSkipPreviousButton(
+            iconSize: 80,
+          ),
+          // MaterialDesktopPositionIndicator(),
+          // MaterialSeekBar(),
+          MaterialPlayOrPauseButton(
+            iconSize: 80,
+            // iconColor: ColorPage.blue,
+          )
+        ],
+
+        seekBarThumbColor: Colors.blue,
+        seekBarPositionColor: Colors.blue,
+         bottomButtonBar: [
+          MaterialPlayOrPauseButton(),
+         
+          MaterialPositionIndicator()
+        ],
+         topButtonBar: [
+          Obx(
+            () => MaterialCustomButton(
+              onPressed: () {
+                getx.videoplaylock.value = !getx.videoplaylock.value;
+                print(getx.videoplaylock.value);
+              },
+              icon: getx.videoplaylock.value
+                  ? Icon(Icons.lock)
+                  : Icon(Icons.lock_open),
             ),
           ),
-          body: TabBarView(
-              // physics:
-              //     NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
-          
-              controller: _motionTabBarController,
-              children: [
-               
-                pdflink.isNotEmpty
-                    ? PdfCategory(pdflink)
-                    : Center(child: CircularProgressIndicator()),
-                mcq.isNotEmpty ? McqCategory() : Container(),
-              Container(
-            color: Colors.black,
-            child: Column(
-              children: [
-                Flexible(
-                  child: Center(
-        child: SizedBox(
-        // width: MediaQuery.of(context).size.width/2.3,
-        // height: MediaQuery.of(context).size.width * 9.0 / 16.0,
-        // Use [Video] widget to display video output.
-        child: Video(controller: controller),
-        ),
+          const Spacer(),
+          MaterialCustomButton(
+            onPressed: () {
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      shadowColor: ColorPage.white,
+                      backgroundColor: ColorPage.white,
+                      surfaceTintColor: ColorPage.white,
+                      content: Card(
+                        child: SizedBox(
+                            width: 200,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: 'Typing somthing...'),
+                              maxLines: 5,
+                            )),
+                      ),
+                      title: Text(
+                        'Write your tag',
+                        style: FontFamily.font,
+                      ),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: Text(
+                            'Cancel',
+                            style: FontFamily.font3,
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(ColorPage.red),
+                              shape: MaterialStatePropertyAll(
+                                  ContinuousRectangleBorder())),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: Text(
+                            'Save',
+                            style: FontFamily.font3,
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(ColorPage.color1),
+                              shape: MaterialStatePropertyAll(
+                                  ContinuousRectangleBorder())),
+                        )
+                      ],
+                    );
+                  });
+            },
+            icon: Icon(Icons.edit_note),
+          ),
+          MaterialCustomButton(
+            onPressed: () {
+              showMenu(
+                  context: context,
+                  position: RelativeRect.fromLTRB(10, 0, 0, 10),
+                  items: speeds.map((speed) {
+                    return PopupMenuItem<double>(
+                      value: speed,
+                      child: Row(
+                        children: [
+                          Radio<double>(
+                            value: speed,
+                            groupValue: selectedSpeed,
+                            onChanged: (double? value) {
+                              setState(() {
+                                selectedSpeed = value!;
+
+                                videoPlay.player.setRate(selectedSpeed);
+                                Navigator.pop(context);
+                              });
+                            },
+                          ),
+                          Text('${speed}x'),
+                        ],
+                      ),
+                    );
+                  }).toList());
+            },
+            icon: Icon(Icons.slow_motion_video),
+          ),
+          MaterialCustomButton(
+            onPressed: () {
+              // showDialog(
+              //     context: context,
+              //     builder: (context) {
+              //       return AlertDialog.adaptive(
+              //         actions: [
+              //           ElevatedButton(
+              //             child: Text('Cancel'),
+              //             onPressed: () {
+              //               Get.back();
+              //             },
+              //           ),
+              //           ElevatedButton(
+              //             child: Text('Ok'),
+              //             onPressed: () {
+              //               videoPlay.player.seek(
+              //                   Duration(seconds: int.parse(gototext.text)));
+              //               Get.back();
+              //             },
+              //           )
+              //         ],
+              //         content: SizedBox(
+              //           width: 300,
+              //           child: TextFormField(
+              //             controller: gototext,
+              //           ),
+              //         ),
+              //       );
+              //     });
+
+              // videoPlay.player.seek(Duration(seconds: 30));
+            },
+            icon: Text(
+              'GOTO',
+              style: FontFamily.font3,
             ),
+          ),
+        ],
+      
+       ),
+        fullscreen: const MaterialVideoControlsThemeData(
+    // Modify theme options:
+    // displaySeekBar: false,
+    // automaticallyImplySkipNextButton: false,
+    // automaticallyImplySkipPreviousButton: false,
+  ),
+        child: Column(
+          children: [
+            Container(height: 60,width: MediaQuery.of(context).size.width,color: ColorPage.appbarcolor,),
+             Flexible(
+               child: Container(
+               
+              
+                        color: Colors.black,
+                        child: Column(
+                          children: [
+                            Flexible(
+                              child: Center(
+                    child: SizedBox(
+                      
+                    // width: MediaQuery.of(context).size.width/2.3,
+                    // height: MediaQuery.of(context).size.width * 9.0 / 16.0,
+                    // Use [Video] widget to display video output.
+                    child: Video(controller: controller),
+                    ),
+                        ),
+                            ),
+                          ],
+                        )),
+             ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(top: 10),
+               
+                child: DefaultTabController(
+                  length: 4,
+                  child:  Scaffold(
+              
+                      backgroundColor: ColorPage.bgcolor,
+                      appBar: AppBar(
+                       automaticallyImplyLeading: false,
+                       
+                        backgroundColor: ColorPage.appbarcolor,
+                        bottom: PreferredSize(
+                          preferredSize: Size.fromHeight(40),
+                          child: MotionTabBar(
+                            controller:
+                                _motionTabBarController, // ADD THIS if you need to change your tab programmatically
+                            initialSelectedTab: "PDF",
+                            labels: tabfield,
+                            icons: const [
+                              Icons.picture_as_pdf,
+                              Icons.question_answer,
+                              Icons.tag,
+                              Icons.reviews
+                            ],
+                    
+                            badges: [
+                              MotionBadgeWidget(
+                                text: '604',
+                                textColor: Colors.white, // optional, default to Colors.white
+                                color: Colors.red, // optional, default to Colors.red
+                                size: 18, // optional, default to 18
+                              ),
+                              null,
+                              null,
+                              null,
+                             
+                            ],
+                    
+                            tabSize: 50,
+                            tabBarHeight: 55,
+                            textStyle: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                            ),
+                    
+                            tabIconColor: Colors.blue[600],
+                            tabIconSize: 28.0,
+                            tabIconSelectedSize: 26.0,
+                            tabSelectedColor: Colors.blue[900],
+                            tabIconSelectedColor: Colors.white,
+                            // tabBarColor: Color.fromARGB(255, 64, 41, 231),
+                            onTabItemSelected: (int value) {
+                              setState(() {
+                                _motionTabBarController!.index = value;
+                    
+                                fngetVideodetailsApi(widget.token, tabfield[value]);
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                      body: TabBarView(
+                          // physics:
+                          //     NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
+                      
+                          controller: _motionTabBarController,
+                          children: [
+                           
+                            pdflink.isNotEmpty
+                                ? PdfCategory(pdflink)
+                                : Center(child: CircularProgressIndicator()),
+                            mcq.isNotEmpty ? McqCategory() : Container(),
+                         Container(),
+                             Container(child: ListView.builder( itemCount: 10, itemBuilder: (context,index){
+                              return ListTile(title: Text("data $index"));
+                             }),)
+                          ]),
+                    ),
+                  
                 ),
-              ],
-            )),
-                 Container()
-              ]),
+              ),
+            ),
+          ],
         ),
       ),
+   
     );
   }
 
