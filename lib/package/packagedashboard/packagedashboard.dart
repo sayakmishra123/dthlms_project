@@ -288,7 +288,7 @@ class _PackageDashboardState extends State<PackageDashboard>
 
         
         appBar: AppBar(
-          backgroundColor: getxController.themecolor.value,
+          backgroundColor:ColorPage.appbarcolor,
           iconTheme: IconThemeData(color: ColorPage.white),
           automaticallyImplyLeading: false,
           //  leading: Row(children: [Padding(
@@ -429,10 +429,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                 0])),
                                                 onPressed: () {
                                                
-                                                  getxController
-                                                          .themecolor.value =
-                                                      ColorPage
-                                                          .themeColors[0];
+                                              
                                                 
                                                 },
                                                 icon: Text('')),
@@ -445,10 +442,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                 1])),
                                                 onPressed: () {
                                                 
-                                                  getxController
-                                                          .themecolor.value =
-                                                      ColorPage
-                                                          .themeColors[1];
+                                                
                                                
                                                 },
                                                 icon: Text('')),
@@ -461,7 +455,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                 2])),
                                                 onPressed: () {
                                                  
-                                                  getxController.themecolor.value=ColorPage.themeColors[2];
+                                                
                                                   
                                                 },
                                                 icon: Text('')),
@@ -474,7 +468,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                 3])),
                                                 onPressed: () {
                                              
-                                                 getxController.themecolor.value=ColorPage.themeColors[3];
+                                                 
                                               
                                                 },
                                                 icon: Text('')),
@@ -488,7 +482,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                 onPressed: () {
                                                   int i=4;
                                                 
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                               
                                             
                                                 },
                                                 icon: Text('')),
@@ -510,12 +504,8 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                 )),
                                                 onPressed: () {
                                                   
-                                                     int i=5;
-                                                    //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                  //  getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                  //  getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                  //  getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                   
+                                                 
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -526,13 +516,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 6])),
                                                 onPressed: () {
-                                                      int i=6;
-                                                      // getxController.toogleButtontextColor.value=false;
-                                                      // getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                  //  getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                  //  getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                  //  getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                       
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -543,13 +527,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 7])),
                                                 onPressed: () {
-                                                  // getxController.toogleButtontextColor.value=false;
-                                                    int i=7;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                //    getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                //    getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                //    getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -560,13 +538,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 8])),
                                                 onPressed: () {
-                                                      int i=8;
-                                                      // getxController.toogleButtontextColor.value=false;
-                                                      // getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                  //  getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                  //  getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                  //  getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                     
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -577,12 +549,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 9])),
                                                 onPressed: () {
-                                                      int i=9;getxController.toogleButtontextColor.value=false;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                //    getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                //    getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                //    getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                    
                                                 },
                                                 icon: Text('')),
                                           ],
@@ -603,8 +570,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 10])),
                                                 onPressed: () {
-                                                     int i=10;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                    
                                                 
                                                 },
                                                 icon: Text('')),
@@ -615,8 +581,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   ColorPage.themeColors[11],
                                                 )),
                                                 onPressed: () {
-                                                    int i=11;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                    
                                                   
                                                 },
                                                 icon: Text('')),
@@ -628,8 +593,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 12])),
                                                 onPressed: () {
-                                                  int i=12;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                 
                                                
                                                 },
                                                 icon: Text('')),
@@ -641,8 +605,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 13])),
                                                 onPressed: () {
-                                                      int i=13;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                     
                                                 
                                                 },
                                                 icon: Text('')),
@@ -654,8 +617,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 14])),
                                                 onPressed: () {
-                                                     int i=14;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                    
                                                   
                                                 },
                                                 icon: Text('')),
@@ -674,8 +636,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                   .themeColors[
                                                               15])),
                                               onPressed: () {
-                                                    int i=15;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                   
                                                   
                                               },
                                               icon: Text('')),
@@ -687,8 +648,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                   .themeColors[
                                                               16])),
                                               onPressed: () {
-                                                   int i=16;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  
                                                 
                                               },
                                               icon: Text('')),
@@ -700,8 +660,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                   .themeColors[
                                                               17])),
                                               onPressed: () {
-                                                   int i=17;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  
                                                 
                                               },
                                               icon: Text('')),
@@ -725,8 +684,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                   .themeColors[
                                                               19])),
                                               onPressed: () {
-                                                   int i=19;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  
                                                 
                                               },
                                               icon: Text('')),
@@ -792,7 +750,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                 icon: Icon(Icons.theater_comedy))
           ],
         ),
-        backgroundColor: getxController.backgroundColor.value,
+        // backgroundColor:,
         body: Skeletonizer(
           enabled: getxController.loading.value,
           child: Stack(
@@ -800,6 +758,7 @@ class _PackageDashboardState extends State<PackageDashboard>
               Row(
                 children: [
                   Container(
+                    // color: Colors.,
                     child: Expanded(
                       child: Container(
                         child: Column(
@@ -856,9 +815,9 @@ class _PackageDashboardState extends State<PackageDashboard>
                                     radius: 32.0,
                                     padding: const EdgeInsets.all(16.0),
                                     backgroundColor:
-                                        getxController.tooglebuttonBGcolor,
+                                        ColorPage.bluegrey800,
                                     foregroundColor:
-                                        getxController.tooglebuttonFGcolor,
+                                        ColorPage.bluegrey300,
                                     // foregroundColor:  Color.fromARGB(255, 37, 233, 135),
                                     // backgroundColor:Color.fromARGB(255, 97, 228, 162),
                                     elevation: 24,
@@ -874,7 +833,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                           },
                                           child: Text(
                                             'My Package',
-                                            style: getxController.toogleButtontextColor.value?FontFamily.fontWhite:FontFamily.font,
+                                            style:FontFamily.font,
                                           )),
                                       ButtonBarEntry(
                                           onTap: () {
@@ -884,7 +843,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                           },
                                           child: Text(
                                             'All Package',
-                                            style: getxController.toogleButtontextColor.value?FontFamily.fontWhite:FontFamily.font,
+                                            style: FontFamily.font,
                                           )),
                                     ],
                                   ),
@@ -910,7 +869,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                     : mypackage[index]
                                                         .packageID,
                                                 style:  TextStyle(
-                                                  color: getxController.textColor.value,
+                                                  color: ColorPage.color1,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -1002,154 +961,161 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                       filteredPackage.length,
                                                   itemBuilder:
                                                       (context, index) {
-                                                    return Container(
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                          Radius.circular(10),
-                                                        ),
-                                                        color: getxController.backgroundColor.value,
-                                                      ),
-                                                      margin:
-                                                          EdgeInsets.all(10),
-                                                      child: ExpansionTile(
-                                                        shape: Border.all(
-                                                            color: Colors
-                                                                .transparent),
-                                                        // leading: Text(
-                                                        //     filteredPackage[index]
-                                                        //         .packageId),
-                                                        title: Text(
-                                                          filteredPackage[index]
-                                                              .packageName,
-                                                          style: TextStyle(
-                                                              color:
-                                                                  getxController
-                                                                      .textColor
-                                                                      .value,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        onExpansionChanged:
-                                                            (value) {
-                                                          if (value &&
-                                                              !allnestedData.containsKey(
-                                                                  filteredPackage[
-                                                                          index]
-                                                                      .packageId)) {
-                                                            fnfindpackage(
-                                                                widget.token,
-                                                                filteredPackage[
-                                                                        index]
-                                                                    .packageId);
-                                                          }
-                                                        },
-                                                        children: [
-                                                          allnestedData.containsKey(
-                                                                  filteredPackage[
-                                                                          index]
-                                                                      .packageId)
-                                                              ? ListView
-                                                                  .builder(
-                                                                  shrinkWrap:
-                                                                      true,
-                                                                  itemCount: 1,
-                                                                  itemBuilder:
-                                                                      (context,
-                                                                          subIndex) {
-                                                                    var subItem =
-                                                                        allnestedData[filteredPackage[index].packageId]![
-                                                                            subIndex];
-                                                                    return Container(
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        border:
-                                                                            Border(
-                                                                          top: BorderSide(
-                                                                              color: getxController.textColor.value,
-                                                                              width: 1),
-                                                                        ),
-                                                                      ),
-                                                                      child:
-                                                                          ExpansionTile(
-                                                                        iconColor: getxController
-                                                                            .textColor
-                                                                            .value,
-                                                                        shape: Border.all(
-                                                                            color:
-                                                                                Colors.transparent),
-                                                                        // leading: Text(
-                                                                        //     subItem
-                                                                        //         .courseId),
-                                                                        title:
-                                                                            Text(
-                                                                          subItem
-                                                                              .courseName,
-                                                                          style:
-                                                                              TextStyle(color: getxController.textColor.value),
-                                                                        ),
-                                                                        subtitle:
-                                                                            Text(
-                                                                          subItem
-                                                                              .termName,
-                                                                          style:
-                                                                              TextStyle(color: getxController.textColor.value),
-                                                                        ),
+                                                    return Card(
+                                                      elevation: 4,
+                                                      // surfaceTintColor: const Color.fromARGB(255, 234, 232, 232),
+                                                      // shadowColor: Color.fromARGB(255, 235, 230, 230),
+                                               
+                                                       margin: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                          boxShadow: [                                                            BoxShadow(color:Color.fromARGB(255, 225, 214, 214).withOpacity(0.2), offset: Offset(-10,-10),blurRadius: 10,spreadRadius:-5),
 
-                                                                        onExpansionChanged:
-                                                                            (value) {
-                                                                          if (value &&
-                                                                              !allnestedData.containsKey(subItem.packageId)) {
-                                                                            fnfindpackage(widget.token,
-                                                                                subItem.packageId);
-                                                                          }
-                                                                        },
-                                                                        children: [
-                                                                          allnestedData.containsKey(subItem.packageId)
-                                                                              ? ListView.builder(
-                                                                                  shrinkWrap: true,
-                                                                                  itemCount: 1,
-                                                                                  itemBuilder: (context, subSubIndex) {
-                                                                                    var subSubItem = allnestedData[subItem.packageId]![subSubIndex];
-                                                                                    return Container(
-                                                                                      decoration: BoxDecoration(border: Border(top: BorderSide(color: getxController.textColor.value))),
-                                                                                      child: ListTile(
-                                                                                        onTap: () {  Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));},
-                                                                                        title: Text(subItem.termName,style: TextStyle(color: getxController.textColor.value),),
-                                                                                        trailing: ElevatedButton(
-                                                                                          child: Text(
-                                                                                            "Show",
-                                                                                            style: TextStyle(fontSize: ClsFontsize.DoubleExtraSmall,color: getxController.listviewtext.value),
-                                                                                          ),
-                                                                                          style: ElevatedButton.styleFrom(
-                                                                                            backgroundColor: getxController.textColor.value,
-                                                                                            shape: RoundedRectangleBorder(
-                                                                                              borderRadius: BorderRadius.all(
-                                                                                                Radius.circular(10),
+                                                            BoxShadow(color:Color.fromARGB(255, 225, 214, 214).withOpacity(0.2), offset: Offset(-10,-10),blurRadius: 10,spreadRadius:-5)
+                                                       ,BoxShadow(color:const Color.fromARGB(255, 255, 255, 255), offset: Offset(-10,-10),blurRadius: 10,spreadRadius:5)  , ],
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                            Radius.circular(10),
+                                                          ),
+                                                          color: ColorPage.bgcolor,
+                                                        ),
+                                                        
+                                                        
+                                                        child: ExpansionTile(
+                                                          shape: Border.all(
+                                                              color: Colors
+                                                                  .transparent),
+                                                          // leading: Text(
+                                                          //     filteredPackage[index]
+                                                          //         .packageId),
+                                                          title: Text(
+                                                            filteredPackage[index]
+                                                                .packageName,
+                                                            style: TextStyle(
+                                                                color:
+                                                                  ColorPage.colorblack,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          onExpansionChanged:
+                                                              (value) {
+                                                            if (value &&
+                                                                !allnestedData.containsKey(
+                                                                    filteredPackage[
+                                                                            index]
+                                                                        .packageId)) {
+                                                              fnfindpackage(
+                                                                  widget.token,
+                                                                  filteredPackage[
+                                                                          index]
+                                                                      .packageId);
+                                                            }
+                                                          },
+                                                          children: [
+                                                            allnestedData.containsKey(
+                                                                    filteredPackage[
+                                                                            index]
+                                                                        .packageId)
+                                                                ? ListView
+                                                                    .builder(
+                                                                    shrinkWrap:
+                                                                        true,
+                                                                    itemCount: 1,
+                                                                    itemBuilder:
+                                                                        (context,
+                                                                            subIndex) {
+                                                                      var subItem =
+                                                                          allnestedData[filteredPackage[index].packageId]![
+                                                                              subIndex];
+                                                                      return Container(
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          border:
+                                                                              Border(
+                                                                            top: BorderSide(
+                                                                                color: ColorPage.colorblack,
+                                                                                width: 1),
+                                                                          ),
+                                                                        ),
+                                                                        child:
+                                                                            ExpansionTile(
+                                                                          iconColor: ColorPage.colorblack,
+                                                                          shape: Border.all(
+                                                                              color:
+                                                                                  Colors.transparent),
+                                                                          // leading: Text(
+                                                                          //     subItem
+                                                                          //         .courseId),
+                                                                          title:
+                                                                              Text(
+                                                                            subItem
+                                                                                .courseName,
+                                                                            style:
+                                                                                TextStyle(color: ColorPage.colorblack),
+                                                                          ),
+                                                                          subtitle:
+                                                                              Text(
+                                                                            subItem
+                                                                                .termName,
+                                                                            style:
+                                                                                TextStyle(color: ColorPage.colorblack),
+                                                                          ),
+                                                                      
+                                                                          onExpansionChanged:
+                                                                              (value) {
+                                                                            if (value &&
+                                                                                !allnestedData.containsKey(subItem.packageId)) {
+                                                                              fnfindpackage(widget.token,
+                                                                                  subItem.packageId);
+                                                                            }
+                                                                          },
+                                                                          children: [
+                                                                            allnestedData.containsKey(subItem.packageId)
+                                                                                ? ListView.builder(
+                                                                                    shrinkWrap: true,
+                                                                                    itemCount: 1,
+                                                                                    itemBuilder: (context, subSubIndex) {
+                                                                                      var subSubItem = allnestedData[subItem.packageId]![subSubIndex];
+                                                                                      return Container(
+                                                                                        decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
+                                                                                        child: ListTile(
+                                                                                          onTap: () {  Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));},
+                                                                                          title: Text(subItem.termName,style: TextStyle(color:ColorPage.colorblack),),
+                                                                                          trailing: ElevatedButton(
+                                                                                            child: Text(
+                                                                                              "Show",
+                                                                                              style: TextStyle(fontSize: ClsFontsize.DoubleExtraSmall,color: ColorPage.white),
+                                                                                            ),
+                                                                                            style: ElevatedButton.styleFrom(
+                                                                                              backgroundColor: ColorPage.color1,
+                                                                                              shape: RoundedRectangleBorder(
+                                                                                                borderRadius: BorderRadius.all(
+                                                                                                  Radius.circular(10),
+                                                                                                ),
                                                                                               ),
                                                                                             ),
+                                                                                            onPressed: () {
+                                                                                              Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                                            },
                                                                                           ),
-                                                                                          onPressed: () {
-                                                                                            Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
-                                                                                          },
+                                                                                          subtitle: Text(subSubItem.packageDisplayName,style: TextStyle(color: ColorPage.colorblack),),
                                                                                         ),
-                                                                                        subtitle: Text(subSubItem.packageDisplayName,style: TextStyle(color: getxController.textColor.value),),
-                                                                                      ),
-                                                                                    );
-                                                                                  },
-                                                                                )
-                                                                              : CircularProgressIndicator(),
-                                                                        ],
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                )
-                                                              : Center(
-                                                                  child:
-                                                                      CircularProgressIndicator(),
-                                                                )
-                                                        ],
+                                                                                      );
+                                                                                    },
+                                                                                  )
+                                                                                : CircularProgressIndicator(),
+                                                                          ],
+                                                                        ),
+                                                                      );
+                                                                    },
+                                                                  )
+                                                                : Center(
+                                                                    child:
+                                                                        CircularProgressIndicator(),
+                                                                  )
+                                                          ],
+                                                        ),
                                                       ),
                                                     );
                                                   },

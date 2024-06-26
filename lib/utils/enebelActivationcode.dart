@@ -50,11 +50,11 @@ class _GlobalDialogState extends State<GlobalDialog>
         child: CustomMessageBubble(
         
           text: 'Enabel Activation Key!',
-          color: getxController.activationbuttoncolor.value,
+          color:ColorPage.blue,
           icon: Icons.info_outline,
         
           textStyle: TextStyle(
-            color: getxController.toogleButtontextColor.value? Colors.white:Colors.black,
+            color:  Colors.white,
             fontSize: 16,
           ),
         ),
@@ -105,8 +105,7 @@ class CustomMessageBubble extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: get_obj
-              .toogleButtontextColor.value? Colors.white:Colors.black,
+              color:  Colors.white,
               size: 20.0,
             ),
             SizedBox(width: 8.0), // space between icon and text

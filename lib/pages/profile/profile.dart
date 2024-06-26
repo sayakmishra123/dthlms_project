@@ -63,7 +63,7 @@ class _ProfileState extends State<Profile> {
                             color: ColorPage.white)), //20
                   ))
             ],
-            backgroundColor: get_obj.themecolor.value,
+            backgroundColor:ColorPage.appbarcolor,
             title: Text(
               widget.optionname,
               style: FontFamily.font2,

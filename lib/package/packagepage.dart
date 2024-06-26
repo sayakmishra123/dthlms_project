@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/package/packagescreen.dart';
 import 'package:dthlms/url/api_url.dart';
@@ -144,7 +145,7 @@ class _PackagePageState extends State<PackagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: getx_obj.buttoncolor.value,
+          backgroundColor: ColorPage.appbarcolor,
           actions: [
             ElevatedButton(
                 onPressed: () async {
