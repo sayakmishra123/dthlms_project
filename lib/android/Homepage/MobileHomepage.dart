@@ -45,7 +45,7 @@ class _MobileHomepageState extends State<MobileHomepage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Obx(
-      ()=> Scaffold(
+        () => Scaffold(
           drawer: const mobileDrawer(),
           appBar: AppBar(
             backgroundColor: ColorPage.appbarcolor,
@@ -71,7 +71,8 @@ class _MobileHomepageState extends State<MobileHomepage> {
           ),
           backgroundColor: ColorPage.appbarcolor,
           body: NestedScrollView(
-            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverToBoxAdapter(
                   child: SizedBox(
@@ -247,7 +248,8 @@ class _MobileHomepageState extends State<MobileHomepage> {
                                       margin: const EdgeInsets.symmetric(
                                           horizontal: 5),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           image: DecorationImage(
                                             image: AssetImage(
                                               item['image_path']!,
@@ -282,8 +284,8 @@ class _MobileHomepageState extends State<MobileHomepage> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: imageList.asMap().entries.map((entry) {
                                 return GestureDetector(
-                                  onTap: () =>
-                                      carouselController.animateToPage(entry.key),
+                                  onTap: () => carouselController
+                                      .animateToPage(entry.key),
                                   child: Container(
                                     width: currentIndex == entry.key ? 20 : 10,
                                     height: 10,

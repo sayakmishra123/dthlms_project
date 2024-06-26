@@ -285,10 +285,8 @@ class _PackageDashboardState extends State<PackageDashboard>
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-
-        
         appBar: AppBar(
-          backgroundColor:ColorPage.appbarcolor,
+          backgroundColor: ColorPage.appbarcolor,
           iconTheme: IconThemeData(color: ColorPage.white),
           automaticallyImplyLeading: false,
           //  leading: Row(children: [Padding(
@@ -353,8 +351,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                       color: Colors.black),
                                   // decoration: ,
                                   // height: 400,
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 50),
+                                  padding: EdgeInsets.symmetric(horizontal: 50),
                                   child: Column(
                                     children: [
                                       AppBar(
@@ -374,8 +371,6 @@ class _PackageDashboardState extends State<PackageDashboard>
                                               // getxController.textColor.value=ColorPage.colorblack;
                                               // getxController.backgroundColor.value=ColorPage.white;
                                               //  getxController.listviewtext.value=ColorPage.white;
-                                
-                                
                                             },
                                             child: Image.asset(
                                               'assets/sun.png',
@@ -385,10 +380,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                           SizedBox(width: 50),
                                           InkWell(
                                             onTap: () {
-                                //  getxController.listviewtext.value=ColorPage.colorblack;
-                                
-                                //                                                   getxController.textColor.value=ColorPage.white;
-                                //                                                 getxController.backgroundColor.value=ColorPage.colorblack;
+                                              //  getxController.listviewtext.value=ColorPage.colorblack;
+
+                                              //                                                   getxController.textColor.value=ColorPage.white;
+                                              //                                                 getxController.backgroundColor.value=ColorPage.colorblack;
                                             },
                                             child: Image.asset(
                                               'assets/themes.png',
@@ -407,8 +402,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                             Text(
                                               'Primary Color',
                                               style: FontFamily.font3,
-                                              textScaler:
-                                                  TextScaler.linear(1),
+                                              textScaler: TextScaler.linear(1),
                                             )
                                           ],
                                         ),
@@ -427,11 +421,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 0])),
-                                                onPressed: () {
-                                               
-                                              
-                                                
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -440,11 +430,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 1])),
-                                                onPressed: () {
-                                                
-                                                
-                                               
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -453,11 +439,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 2])),
-                                                onPressed: () {
-                                                 
-                                                
-                                                  
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -466,11 +448,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 3])),
-                                                onPressed: () {
-                                             
-                                                 
-                                              
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -480,10 +458,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 4])),
                                                 onPressed: () {
-                                                  int i=4;
-                                                
-                                               
-                                            
+                                                  int i = 4;
                                                 },
                                                 icon: Text('')),
                                           ],
@@ -502,11 +477,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                         MaterialStatePropertyAll(
                                                   ColorPage.themeColors[5],
                                                 )),
-                                                onPressed: () {
-                                                  
-                                                   
-                                                 
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -515,9 +486,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 6])),
-                                                onPressed: () {
-                                                       
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -526,9 +495,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 7])),
-                                                onPressed: () {
-                                                
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -537,9 +504,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 8])),
-                                                onPressed: () {
-                                                     
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -548,9 +513,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 9])),
-                                                onPressed: () {
-                                                    
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                           ],
                                         ),
@@ -569,10 +532,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 10])),
-                                                onPressed: () {
-                                                    
-                                                
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -580,10 +540,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                         MaterialStatePropertyAll(
                                                   ColorPage.themeColors[11],
                                                 )),
-                                                onPressed: () {
-                                                    
-                                                  
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -592,10 +549,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 12])),
-                                                onPressed: () {
-                                                 
-                                               
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -604,10 +558,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 13])),
-                                                onPressed: () {
-                                                     
-                                                
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                             IconButton.filled(
                                                 style: ButtonStyle(
@@ -616,10 +567,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             ColorPage
                                                                     .themeColors[
                                                                 14])),
-                                                onPressed: () {
-                                                    
-                                                  
-                                                },
+                                                onPressed: () {},
                                                 icon: Text('')),
                                           ],
                                         ),
@@ -632,61 +580,43 @@ class _PackageDashboardState extends State<PackageDashboard>
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                          ColorPage
-                                                                  .themeColors[
+                                                          ColorPage.themeColors[
                                                               15])),
-                                              onPressed: () {
-                                                   
-                                                  
-                                              },
+                                              onPressed: () {},
                                               icon: Text('')),
                                           IconButton.filled(
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                          ColorPage
-                                                                  .themeColors[
+                                                          ColorPage.themeColors[
                                                               16])),
-                                              onPressed: () {
-                                                  
-                                                
-                                              },
+                                              onPressed: () {},
                                               icon: Text('')),
                                           IconButton.filled(
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                          ColorPage
-                                                                  .themeColors[
+                                                          ColorPage.themeColors[
                                                               17])),
-                                              onPressed: () {
-                                                  
-                                                
-                                              },
+                                              onPressed: () {},
                                               icon: Text('')),
                                           IconButton.filled(
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                          ColorPage
-                                                                  .themeColors[
+                                                          ColorPage.themeColors[
                                                               18])),
                                               onPressed: () {
-                                                    int i=18;
-                                               
+                                                int i = 18;
                                               },
                                               icon: Text('')),
                                           IconButton.filled(
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                          ColorPage
-                                                                  .themeColors[
+                                                          ColorPage.themeColors[
                                                               19])),
-                                              onPressed: () {
-                                                  
-                                                
-                                              },
+                                              onPressed: () {},
                                               icon: Text('')),
                                         ],
                                       ),
@@ -814,10 +744,8 @@ class _PackageDashboardState extends State<PackageDashboard>
                                       ..setIndex(1),
                                     radius: 32.0,
                                     padding: const EdgeInsets.all(16.0),
-                                    backgroundColor:
-                                        ColorPage.bluegrey800,
-                                    foregroundColor:
-                                        ColorPage.bluegrey300,
+                                    backgroundColor: ColorPage.bluegrey800,
+                                    foregroundColor: ColorPage.bluegrey300,
                                     // foregroundColor:  Color.fromARGB(255, 37, 233, 135),
                                     // backgroundColor:Color.fromARGB(255, 97, 228, 162),
                                     elevation: 24,
@@ -833,7 +761,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                           },
                                           child: Text(
                                             'My Package',
-                                            style:FontFamily.font,
+                                            style: FontFamily.font,
                                           )),
                                       ButtonBarEntry(
                                           onTap: () {
@@ -868,8 +796,8 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                     ? '123455454541351'
                                                     : mypackage[index]
                                                         .packageID,
-                                                style:  TextStyle(
-                                                  color: ColorPage.color1,
+                                                style: TextStyle(
+                                                    color: ColorPage.color1,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -965,22 +893,63 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                       elevation: 4,
                                                       // surfaceTintColor: const Color.fromARGB(255, 234, 232, 232),
                                                       // shadowColor: Color.fromARGB(255, 235, 230, 230),
-                                               
-                                                       margin: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-                                                      child: Container(
-                                                        decoration: BoxDecoration(
-                                                          boxShadow: [                                                            BoxShadow(color:Color.fromARGB(255, 225, 214, 214).withOpacity(0.2), offset: Offset(-10,-10),blurRadius: 10,spreadRadius:-5),
 
-                                                            BoxShadow(color:Color.fromARGB(255, 225, 214, 214).withOpacity(0.2), offset: Offset(-10,-10),blurRadius: 10,spreadRadius:-5)
-                                                       ,BoxShadow(color:const Color.fromARGB(255, 255, 255, 255), offset: Offset(-10,-10),blurRadius: 10,spreadRadius:5)  , ],
+                                                      margin:
+                                                          EdgeInsets.symmetric(
+                                                              vertical: 10,
+                                                              horizontal: 10),
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                                color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            225,
+                                                                            214,
+                                                                            214)
+                                                                    .withOpacity(
+                                                                        0.2),
+                                                                offset: Offset(
+                                                                    -10, -10),
+                                                                blurRadius: 10,
+                                                                spreadRadius:
+                                                                    -5),
+                                                            BoxShadow(
+                                                                color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            225,
+                                                                            214,
+                                                                            214)
+                                                                    .withOpacity(
+                                                                        0.2),
+                                                                offset: Offset(
+                                                                    -10, -10),
+                                                                blurRadius: 10,
+                                                                spreadRadius:
+                                                                    -5),
+                                                            BoxShadow(
+                                                                color: const Color
+                                                                    .fromARGB(
+                                                                    255,
+                                                                    255,
+                                                                    255,
+                                                                    255),
+                                                                offset: Offset(
+                                                                    -10, -10),
+                                                                blurRadius: 10,
+                                                                spreadRadius:
+                                                                    5),
+                                                          ],
                                                           borderRadius:
                                                               BorderRadius.all(
                                                             Radius.circular(10),
                                                           ),
-                                                          color: ColorPage.bgcolor,
+                                                          color:
+                                                              ColorPage.bgcolor,
                                                         ),
-                                                        
-                                                        
                                                         child: ExpansionTile(
                                                           shape: Border.all(
                                                               color: Colors
@@ -989,11 +958,12 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                           //     filteredPackage[index]
                                                           //         .packageId),
                                                           title: Text(
-                                                            filteredPackage[index]
+                                                            filteredPackage[
+                                                                    index]
                                                                 .packageName,
                                                             style: TextStyle(
-                                                                color:
-                                                                  ColorPage.colorblack,
+                                                                color: ColorPage
+                                                                    .colorblack,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .bold),
@@ -1021,7 +991,8 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .builder(
                                                                     shrinkWrap:
                                                                         true,
-                                                                    itemCount: 1,
+                                                                    itemCount:
+                                                                        1,
                                                                     itemBuilder:
                                                                         (context,
                                                                             subIndex) {
@@ -1033,41 +1004,37 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                             BoxDecoration(
                                                                           border:
                                                                               Border(
-                                                                            top: BorderSide(
-                                                                                color: ColorPage.colorblack,
-                                                                                width: 1),
+                                                                            top:
+                                                                                BorderSide(color: ColorPage.colorblack, width: 1),
                                                                           ),
                                                                         ),
                                                                         child:
                                                                             ExpansionTile(
-                                                                          iconColor: ColorPage.colorblack,
-                                                                          shape: Border.all(
-                                                                              color:
-                                                                                  Colors.transparent),
+                                                                          iconColor:
+                                                                              ColorPage.colorblack,
+                                                                          shape:
+                                                                              Border.all(color: Colors.transparent),
                                                                           // leading: Text(
                                                                           //     subItem
                                                                           //         .courseId),
                                                                           title:
                                                                               Text(
-                                                                            subItem
-                                                                                .courseName,
+                                                                            subItem.courseName,
                                                                             style:
                                                                                 TextStyle(color: ColorPage.colorblack),
                                                                           ),
                                                                           subtitle:
                                                                               Text(
-                                                                            subItem
-                                                                                .termName,
+                                                                            subItem.termName,
                                                                             style:
                                                                                 TextStyle(color: ColorPage.colorblack),
                                                                           ),
-                                                                      
+
                                                                           onExpansionChanged:
                                                                               (value) {
                                                                             if (value &&
                                                                                 !allnestedData.containsKey(subItem.packageId)) {
-                                                                              fnfindpackage(widget.token,
-                                                                                  subItem.packageId);
+                                                                              fnfindpackage(widget.token, subItem.packageId);
                                                                             }
                                                                           },
                                                                           children: [
@@ -1080,12 +1047,17 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                                       return Container(
                                                                                         decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
                                                                                         child: ListTile(
-                                                                                          onTap: () {  Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));},
-                                                                                          title: Text(subItem.termName,style: TextStyle(color:ColorPage.colorblack),),
+                                                                                          onTap: () {
+                                                                                            Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                                          },
+                                                                                          title: Text(
+                                                                                            subItem.termName,
+                                                                                            style: TextStyle(color: ColorPage.colorblack),
+                                                                                          ),
                                                                                           trailing: ElevatedButton(
                                                                                             child: Text(
                                                                                               "Show",
-                                                                                              style: TextStyle(fontSize: ClsFontsize.DoubleExtraSmall,color: ColorPage.white),
+                                                                                              style: TextStyle(fontSize: ClsFontsize.DoubleExtraSmall, color: ColorPage.white),
                                                                                             ),
                                                                                             style: ElevatedButton.styleFrom(
                                                                                               backgroundColor: ColorPage.color1,
@@ -1099,7 +1071,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                                               Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
                                                                                             },
                                                                                           ),
-                                                                                          subtitle: Text(subSubItem.packageDisplayName,style: TextStyle(color: ColorPage.colorblack),),
+                                                                                          subtitle: Text(
+                                                                                            subSubItem.packageDisplayName,
+                                                                                            style: TextStyle(color: ColorPage.colorblack),
+                                                                                          ),
                                                                                         ),
                                                                                       );
                                                                                     },
