@@ -199,8 +199,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Obx(
-        ()=> Scaffold(
+      child:  Scaffold(
           appBar: AppBar(
             backgroundColor: ColorPage.appbarcolor,
             iconTheme: IconThemeData(color: ColorPage.white),
@@ -330,111 +329,174 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                 shrinkWrap: true,
                                 itemCount: filteredPackage.length,
                                 itemBuilder: (context, index) {
-                                  return Container(
-                                    margin: EdgeInsets.all(10),
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        color: ColorPage.white,
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10))),
-                                    child: ExpansionTile(
-                                      shape:
-                                          Border.all(color: Colors.transparent),
-                                      title: Text(
-                                        filteredPackage[index].packageName,
-                                        style: const TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      onExpansionChanged: (value) {
-                                        if (value &&
-                                            !nestedData.containsKey(
-                                                filteredPackage[index]
-                                                    .packageId)) {
-                                          fnfindpackage(widget.token,
-                                              filteredPackage[index].packageId);
-                                        }
-                                      },
-                                      children: [
-                                        nestedData.containsKey(
-                                                filteredPackage[index].packageId)
-                                            ? ListView.builder(
-                                                shrinkWrap: true,
-                                                itemCount: 1,
-                                                itemBuilder: (context, subIndex) {
-                                                  var subItem = nestedData[
-                                                      filteredPackage[index]
-                                                          .packageId]![subIndex];
-                                                  return ExpansionTile(
-                                                    shape: Border.all(
-                                                        color:
-                                                            Colors.transparent),
-                                                    title:
-                                                        Text(subItem.courseName),
-                                                    subtitle:
-                                                        Text(subItem.termName),
-                                                    onExpansionChanged: (value) {
-                                                      if (value &&
-                                                          !nestedData.containsKey(
-                                                              subItem
-                                                                  .packageId)) {
-                                                        fnfindpackage(
-                                                            widget.token,
-                                                            subItem.packageId);
-                                                      }
-                                                    },
-                                                    children: [
-                                                      nestedData.containsKey(
-                                                              subItem.packageId)
-                                                          ? ListView.builder(
-                                                              shrinkWrap: true,
-                                                              itemCount: 1,
-        
-                                                              //  nestedData[
-                                                              //         subItem
-                                                              //             .packageId]!
-                                                              //     .length,
-                                                              itemBuilder: (context,
-                                                                  subSubIndex) {
-                                                                var subSubItem =
-                                                                    nestedData[subItem
-                                                                            .packageId]![
-                                                                        subSubIndex];
-                                                                return InkWell(
-                                                                  onTap: (){
-                                                                    Get.to(()=>Studyvidos());
-                                                                  },
-                                                                  child: ListTile(
-                                                                    trailing: ElevatedButton(
-                                                                                                child: Text(
-                                                                                                  "Show",
-                                                                                                  style: FontFamily.font8,
-                                                                                                ),
-                                                                                                style: ElevatedButton.styleFrom(
-                                                                                                  backgroundColor:ColorPage.color1,
-                                                                                                  shape: RoundedRectangleBorder(
-                                                                                                    borderRadius: BorderRadius.all(
-                                                                                                      Radius.circular(10),
+                                  return Card(
+                                    elevation: 4,
+                                    margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                                    child: Container(
+                                     
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                         boxShadow: [
+                                                              BoxShadow(
+                                                                  color: Color
+                                                                          .fromARGB(
+                                                                              255,
+                                                                              225,
+                                                                              214,
+                                                                              214)
+                                                                      .withOpacity(
+                                                                          0.2),
+                                                                  offset: Offset(
+                                                                      -10, -10),
+                                                                  blurRadius: 10,
+                                                                  spreadRadius:
+                                                                      -5),
+                                                              BoxShadow(
+                                                                  color: Color
+                                                                          .fromARGB(
+                                                                              255,
+                                                                              225,
+                                                                              214,
+                                                                              214)
+                                                                      .withOpacity(
+                                                                          0.2),
+                                                                  offset: Offset(
+                                                                      -10, -10),
+                                                                  blurRadius: 10,
+                                                                  spreadRadius:
+                                                                      -5),
+                                                              BoxShadow(
+                                                                  color: const Color
+                                                                      .fromARGB(
+                                                                      255,
+                                                                      255,
+                                                                      255,
+                                                                      255),
+                                                                  offset: Offset(
+                                                                      -10, -10),
+                                                                  blurRadius: 10,
+                                                                  spreadRadius:
+                                                                      5),
+                                                            ],
+                                          color: ColorPage.white,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10))),
+                                      child: ExpansionTile(
+                                        shape:
+                                            Border.all(color: Colors.transparent),
+                                        title: Text(
+                                          filteredPackage[index].packageName,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        onExpansionChanged: (value) {
+                                          if (value &&
+                                              !nestedData.containsKey(
+                                                  filteredPackage[index]
+                                                      .packageId)) {
+                                            fnfindpackage(widget.token,
+                                                filteredPackage[index].packageId);
+                                          }
+                                        },
+                                        children: [
+                                          nestedData.containsKey(
+                                                  filteredPackage[index].packageId)
+                                              ? ListView.builder(
+                                                  shrinkWrap: true,
+                                                  itemCount: 1,
+                                                  itemBuilder: (context, subIndex) {
+                                                    var subItem = nestedData[
+                                                        filteredPackage[index]
+                                                            .packageId]![subIndex];
+                                                    return Container(
+                                                      decoration: BoxDecoration(  border:
+                                                                              Border(
+                                                                            top:
+                                                                                BorderSide(color: ColorPage.colorblack, width: 1),
+                                                                          ),),
+                                                      child: ExpansionTile(
+                                                        shape: Border.all(
+                                                            color:
+                                                                Colors.transparent),
+                                                        title:
+                                                            Text(subItem.courseName),
+                                                        subtitle:
+                                                            Text(subItem.termName),
+                                                        onExpansionChanged: (value) {
+                                                          if (value &&
+                                                              !nestedData.containsKey(
+                                                                  subItem
+                                                                      .packageId)) {
+                                                            fnfindpackage(
+                                                                widget.token,
+                                                                subItem.packageId);
+                                                          }
+                                                        },
+                                                        children: [
+                                                          nestedData.containsKey(
+                                                                  subItem.packageId)
+                                                              ? ListView.builder(
+                                                                  shrinkWrap: true,
+                                                                  itemCount: 1,
+                                                                                                  
+                                                                  //  nestedData[
+                                                                  //         subItem
+                                                                  //             .packageId]!
+                                                                  //     .length,
+                                                                  itemBuilder: (context,
+                                                                      subSubIndex) {
+                                                                    var subSubItem =
+                                                                        nestedData[subItem
+                                                                                .packageId]![
+                                                                            subSubIndex];
+                                                                    return InkWell(
+                                                                      onTap: (){
+                                                                        Get.to(()=>Studyvidos());
+                                                                      },
+                                                                      child: Container(
+                                                                        decoration: BoxDecoration(  border:
+                                                                              Border(
+                                                                            top:
+                                                                                BorderSide(color: ColorPage.colorblack, width: 1),
+                                                                          ),),
+                                                                        child: ListTile(
+                                                                          onTap: () {
+                                                                            Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));
+                                                                          },
+                                                                          trailing: ElevatedButton(
+                                                                                                      child: Text(
+                                                                                                        "Show",
+                                                                                                        style: FontFamily.font8,
+                                                                                                      ),
+                                                                                                      style: ElevatedButton.styleFrom(
+                                                                                                        backgroundColor:ColorPage.color1,
+                                                                                                        shape: RoundedRectangleBorder(
+                                                                                                          borderRadius: BorderRadius.all(
+                                                                                                            Radius.circular(10),
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                      ),
+                                                                                                      onPressed: () {Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));},
                                                                                                     ),
-                                                                                                  ),
-                                                                                                ),
-                                                                                                onPressed: () {Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));},
-                                                                                              ),
-                                                                    title: Text(subItem
-                                                                        .termName),
-                                                                    subtitle: Text(
-                                                                        subSubItem
-                                                                            .packageDisplayName),
-                                                                  ),
-                                                                );
-                                                              },
-                                                            )
-                                                          : CircularProgressIndicator(),
-                                                    ],
-                                                  );
-                                                },
-                                              )
-                                            : CircularProgressIndicator()
-                                      ],
+                                                                          title: Text(subItem
+                                                                              .termName),
+                                                                          subtitle: Text(
+                                                                              subSubItem
+                                                                                  .packageDisplayName),
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  },
+                                                                )
+                                                              : CircularProgressIndicator(),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  },
+                                                )
+                                              : CircularProgressIndicator()
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },
@@ -449,7 +511,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
             ),
           ),
         ),
-      ),
+     
     );
   }
 
