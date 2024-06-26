@@ -26,7 +26,7 @@ class PackageDashboard extends StatefulWidget {
   const PackageDashboard(this.token, {super.key});
 
   @override
-  State<PackageDashboard> createState() => _PackageDashboardState();
+  State<PackageDashboard> createState() => PackageDashboardState();
 }
 
 class AllPackage {
@@ -113,7 +113,7 @@ class MyPackageDetails {
   });
 }
 
-class _PackageDashboardState extends State<PackageDashboard>
+class PackageDashboardState extends State<PackageDashboard>
     with TickerProviderStateMixin {
   Getx getxController = Get.put(Getx());
   TextEditingController searchController = TextEditingController();

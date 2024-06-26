@@ -419,7 +419,13 @@ class _MobileVideoPlayerState extends State<MobileVideoPlayer>
   ),
         child: Column(
           children: [
-            Container(height: 60,width: MediaQuery.of(context).size.width,color: ColorPage.appbarcolor,),
+            Container(height: 60,width: MediaQuery.of(context).size.width,color: ColorPage.appbarcolor, child: Row(children: [    Padding(
+              padding: const EdgeInsets.only(left: 15),
+              child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,color: ColorPage.white,size: 35,)),
+            ),  Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(widget.videoname,style: FontFamily.font5,),
+            )],),),
              Flexible(
                child: Container(
                
