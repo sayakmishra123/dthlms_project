@@ -10,11 +10,15 @@ import 'package:dthlms/package/packagevideo.dart/category/McqCategory.dart';
 import 'package:dthlms/package/packagevideo.dart/category/pdfcategory.dart';
 import 'package:dthlms/pages/mycourses/myclasscontentvideo/videoplay.dart';
 import 'package:dthlms/utils/loader.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';
+// import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'dart:io';
@@ -25,6 +29,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dthlms/key/key.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
+import 'package:media_kit_video/media_kit_video_controls/src/controls/extensions/duration.dart';
 import 'package:motion_tab_bar/MotionBadgeWidget.dart';
 import 'package:motion_tab_bar/MotionTabBar.dart';
 import 'package:motion_tab_bar/MotionTabBarController.dart';
@@ -98,8 +103,11 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
     with TickerProviderStateMixin {
   MotionTabBarController? _motionTabBarController;
 
-  late VideoPlayClass videoPlay;
+  final List<double> speeds = [0.5, 1.0, 1.5, 2.0];
+  double selectedSpeed = 1.0;
 
+  late VideoPlayClass videoPlay;
+  int t = 0;
   @override
   void initState() {
     
@@ -110,7 +118,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
     super.initState();
     // videoPlay.player.stream.playing.take()
     videoPlay.player.stream.playing.listen((bool playing) {
-      print(videoPlay.totalPlayTime.inSeconds);
+      print("Video total watch: ${videoPlay.totalPlayTime.inSeconds}");
       if (playing) {
         print(videoPlay.controller.player.state.duration.inSeconds);
         videoPlay.startTrackingPlayTime();
@@ -119,6 +127,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
       }
     });
 
+    videoPlay.player.stream.position.listen((position) {});
     _motionTabBarController = MotionTabBarController(
       initialIndex: 0,
       length: 4,
@@ -251,33 +260,171 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
 
   var startseek = 0;
   var endseek = 0;
+  TextEditingController gototext = TextEditingController();
+  // Getx getx = Get.put(Getx());
   // GlobalKey tabbarkey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return MaterialDesktopVideoControlsTheme(
       normal: MaterialDesktopVideoControlsThemeData(
-        // displaySeekBar: true,
+        controlsHoverDuration: Duration(seconds: 15),
+        // shiftSubtitlesOnControlsVisibilityChange: true,
+        primaryButtonBar: [
+          MaterialDesktopSkipPreviousButton(
+            iconSize: 80,
+          ),
+          // MaterialDesktopPositionIndicator(),
+          // MaterialSeekBar(),
+          MaterialDesktopPlayOrPauseButton(
+            iconSize: 80,
+            // iconColor: ColorPage.blue,
+          )
+        ],
 
-        // Modify theme options:
-        // controlsTransitionDuration: Duration.zero,
         seekBarThumbColor: Colors.blue,
         seekBarPositionColor: Colors.blue,
         toggleFullscreenOnDoublePress: false,
         // Modify top button bar:
         topButtonBar: [
+          Obx(
+            () => MaterialDesktopCustomButton(
+              onPressed: () {
+                getx.videoplaylock.value = !getx.videoplaylock.value;
+                print(getx.videoplaylock.value);
+              },
+              icon: getx.videoplaylock.value
+                  ? Icon(Icons.lock)
+                  : Icon(Icons.lock_open),
+            ),
+          ),
           const Spacer(),
           MaterialDesktopCustomButton(
             onPressed: () {
-              debugPrint('Custom "Settings" button pressed.');
+              showDialog(
+                  barrierDismissible: false,
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      shadowColor: ColorPage.white,
+                      backgroundColor: ColorPage.white,
+                      surfaceTintColor: ColorPage.white,
+                      content: Card(
+                        child: SizedBox(
+                            width: 200,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  hintText: 'Typing somthing...'),
+                              maxLines: 5,
+                            )),
+                      ),
+                      title: Text(
+                        'Write your tag',
+                        style: FontFamily.font,
+                      ),
+                      actions: [
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: Text(
+                            'Cancel',
+                            style: FontFamily.font3,
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(ColorPage.red),
+                              shape: MaterialStatePropertyAll(
+                                  ContinuousRectangleBorder())),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          child: Text(
+                            'Save',
+                            style: FontFamily.font3,
+                          ),
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(ColorPage.color1),
+                              shape: MaterialStatePropertyAll(
+                                  ContinuousRectangleBorder())),
+                        )
+                      ],
+                    );
+                  });
+            },
+            icon: Icon(Icons.edit_note),
+          ),
+          MaterialDesktopCustomButton(
+            onPressed: () {
+              showMenu(
+                  context: context,
+                  position: RelativeRect.fromLTRB(10, 0, 0, 10),
+                  items: speeds.map((speed) {
+                    return PopupMenuItem<double>(
+                      value: speed,
+                      child: Row(
+                        children: [
+                          Radio<double>(
+                            value: speed,
+                            groupValue: selectedSpeed,
+                            onChanged: (double? value) {
+                              setState(() {
+                                selectedSpeed = value!;
+
+                                videoPlay.player.setRate(selectedSpeed);
+                                Navigator.pop(context);
+                              });
+                            },
+                          ),
+                          Text('${speed}x'),
+                        ],
+                      ),
+                    );
+                  }).toList());
             },
             icon: const Icon(Icons.settings),
           ),
-        ],
-        // Modify bottom button bar:
-        bottomButtonBar: const [
-          Spacer(),
-          MaterialDesktopPlayOrPauseButton(),
-          Spacer(),
+          MaterialDesktopCustomButton(
+            onPressed: () {
+              // showDialog(
+              //     context: context,
+              //     builder: (context) {
+              //       return AlertDialog.adaptive(
+              //         actions: [
+              //           ElevatedButton(
+              //             child: Text('Cancel'),
+              //             onPressed: () {
+              //               Get.back();
+              //             },
+              //           ),
+              //           ElevatedButton(
+              //             child: Text('Ok'),
+              //             onPressed: () {
+              //               videoPlay.player.seek(
+              //                   Duration(seconds: int.parse(gototext.text)));
+              //               Get.back();
+              //             },
+              //           )
+              //         ],
+              //         content: SizedBox(
+              //           width: 300,
+              //           child: TextFormField(
+              //             controller: gototext,
+              //           ),
+              //         ),
+              //       );
+              //     });
+
+              // videoPlay.player.seek(Duration(seconds: 30));
+            },
+            icon: Text(
+              'GOTO',
+              style: FontFamily.font3,
+            ),
+          ),
         ],
       ),
       fullscreen: const MaterialDesktopVideoControlsThemeData(),
@@ -378,68 +525,11 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                     children: [
                       Flexible(
                         child: Center(
-                          child: SizedBox(
-                            // width: MediaQuery.of(context).size.width/2.3,
-                            // height: MediaQuery.of(context).size.width * 9.0 / 16.0,
-                            // Use [Video] widget to display video output.
-                            child: Video(
-                              pauseUponEnteringBackgroundMode: true,
-                              controller: videoPlay.controller,
-                              // controls: (state) {
-                              //   return Column(
-                              //     children: [
-                              //       Spacer(),
-                              //       Row(
-                              //         mainAxisAlignment: MainAxisAlignment.center,
-                              //         children: [
-                              //           SizedBox(
-                              //             width: 400,
-                              //             child: StreamBuilder(
-                              //                 stream: state.widget.controller
-                              //                     .player.stream.playing,
-                              //                 builder: (context, playing) {
-                              //                   print(playing.data);
-                              //                   // if (playing.data == false)
-                              //                   return MaterialSeekBar();
-                              //                   // else
-                              //                   // return Container();
-                              //                 }),
-                              //           ),
-                              //           // Builder(builder: (context) {
-                              //           //   return Slider.adaptive(
-                              //           //       value: 1, onChanged: (v) {});
-                              //           // })
-                              //         ],
-                              //       ),
-                              //       Row(
-                              //         mainAxisAlignment: MainAxisAlignment.center,
-                              //         children: [
-                              //           IconButton(
-                              //             onPressed: () {
-                              //               state.widget.controller.player
-                              //                   .playOrPause();
-                              //             },
-                              //             icon: StreamBuilder(
-                              //               stream: state.widget.controller.player
-                              //                   .stream.playing,
-                              //               builder: (context, playing) => Icon(
-                              //                 playing.data == true
-                              //                     ? Icons.pause
-                              //                     : Icons.play_arrow,
-                              //                 color: Colors.white,
-                              //               ),
-                              //             ),
-                              //             // It's not necessary to use [StreamBuilder] or to use [Player] & [VideoController] from [state].
-                              //             // [StreamSubscription]s can be made inside [initState] of this widget.
-                              //           ),
-                              //         ],
-                              //       ),
-                              //     ],
-                              //   );
-                              // },
-                            ),
+                            child: SizedBox(
+                          child: Video(
+                            controller: videoPlay.controller,
                           ),
-                        ),
+                        )),
                       ),
                     ],
                   )))

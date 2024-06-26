@@ -43,6 +43,7 @@ class Getx extends GetxController {
   RxBool isSignup = true.obs;
   RxBool isMypackages = false.obs;
   RxBool passvisibility = false.obs;
+  RxBool videoplaylock = false.obs;
 
 
   //chat
