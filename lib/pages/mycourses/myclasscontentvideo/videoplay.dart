@@ -7,19 +7,23 @@ class VideoPlayClass {
   late Duration _totalPlayTime;
   late DateTime _lastPlayTime;
   late bool _isPlaying;
+  late double _lastPlaybackRate;
   VideoPlayClass() {
-    _totalPlayTime = Duration.zero;
-    _lastPlayTime = DateTime.now();
-    _isPlaying = false;
+    try {
+      _totalPlayTime = Duration.zero;
+      _lastPlayTime = DateTime.now();
+      _lastPlaybackRate = 1.0;
+      _isPlaying = false;
 
-    player = Player();
-    controller = VideoController(player);
+      player = Player();
+      controller = VideoController(player);
 
-    player.open(
-      Media(
-          'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
-      play: false,
-    );
+      player.open(
+        Media(
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
+        play: false,
+      );
+    } catch (e) {}
   }
   Future<void> playVideo() async {
     await player.play();
@@ -36,20 +40,23 @@ class VideoPlayClass {
   void startTrackingPlayTime() {
     if (!_isPlaying) {
       _lastPlayTime = DateTime.now();
+      _lastPlaybackRate = player.state.rate;
       _isPlaying = true;
     }
   }
 
   void stopTrackingPlayTime() {
     if (_isPlaying) {
-      _totalPlayTime += DateTime.now().difference(_lastPlayTime);
+      Duration playedTime = DateTime.now().difference(_lastPlayTime);
+      _totalPlayTime += playedTime * _lastPlaybackRate;
       _isPlaying = false;
     }
   }
 
   Duration get totalPlayTime {
     if (_isPlaying) {
-      return _totalPlayTime + DateTime.now().difference(_lastPlayTime);
+      Duration playedTime = DateTime.now().difference(_lastPlayTime);
+      return _totalPlayTime + (playedTime * _lastPlaybackRate);
     }
     return _totalPlayTime;
   }

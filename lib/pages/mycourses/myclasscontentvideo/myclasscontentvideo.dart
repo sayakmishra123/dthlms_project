@@ -504,7 +504,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                         children: [
                           pdflink.isNotEmpty
                               ? PdfCategory(pdflink)
-                              : Center(child: CircularProgressIndicator()),
+                              : Center(child: Image.asset("assets/android/nodatafound.png")),
                           mcq.isNotEmpty ? McqCategory() : Container(),
                           pdflink.isNotEmpty
                               ? PdfCategory(pdflink)
@@ -573,7 +573,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
   }
 
   String url =
-      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
   Future downloadcretevideo(url, Directory d, filename, bool check) async {
     showDialog(
         context: context,

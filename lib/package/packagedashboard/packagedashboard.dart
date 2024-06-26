@@ -1115,7 +1115,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                                     return Container(
                                                                                       decoration: BoxDecoration(border: Border(top: BorderSide(color: getxController.textColor.value))),
                                                                                       child: ListTile(
-                                                                                        onTap: () {},
+                                                                                        onTap: () {  Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));},
                                                                                         title: Text(subItem.termName,style: TextStyle(color: getxController.textColor.value),),
                                                                                         trailing: ElevatedButton(
                                                                                           child: Text(
