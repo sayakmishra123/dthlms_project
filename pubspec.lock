@@ -225,14 +225,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.10"
-  deepgram_speech_to_text:
-    dependency: "direct main"
-    description:
-      name: deepgram_speech_to_text
-      sha256: "0586941c85823649d5b3e301641c73a0246230129b7d61eb0def2a67cb7cc441"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   device_info_plus:
     dependency: "direct main"
     description:
@@ -632,6 +624,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.4"
+  neopop:
+    dependency: "direct main"
+    description:
+      name: neopop
+      sha256: f009b36e803cba5df533a92b567bbd184698fb6b14aca6bcdfb7241da9afb370
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   nested:
     dependency: transitive
     description:
@@ -1157,14 +1157,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.5"
-  universal_file:
-    dependency: transitive
-    description:
-      name: universal_file
-      sha256: d1a957fccaad2a32023b62fe435b273ee47aaf2eb804709795e4bf4afff50960
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   universal_io:
     dependency: transitive
     description:
@@ -1309,22 +1301,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
-  web_socket:
-    dependency: transitive
-    description:
-      name: web_socket
-      sha256: "24301d8c293ce6fe327ffe6f59d8fd8834735f0ec36e4fd383ec7ff8a64aa078"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.5"
-  web_socket_channel:
-    dependency: transitive
-    description:
-      name: web_socket_channel
-      sha256: a2d56211ee4d35d9b344d9d4ce60f362e4f5d1aafb988302906bd732bc731276
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   webview_flutter:
     dependency: "direct main"
     description:

@@ -116,8 +116,8 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
     super.initState();
     // videoPlay.player.stream.playing.take()
     videoPlay.player.stream.playing.listen((bool playing) {
-      if (!mounted) {
-        print(mounted);
+      print(mounted);
+      if (mounted) {
         print("Video total watch: ${videoPlay.totalPlayTime.inSeconds}");
         if (playing) {
           print(videoPlay.controller.player.state.duration.inSeconds);
@@ -285,11 +285,11 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
         seekBarPositionColor: Colors.blue,
         toggleFullscreenOnDoublePress: false,
         // Modify top button bar:
-        bottomButtonBar: [
-          MaterialPlayOrPauseButton(),
-          MaterialDesktopVolumeButton(),
-          MaterialDesktopPositionIndicator()
-        ],
+        // bottomButtonBar: [
+        //   MaterialPlayOrPauseButton(),
+        //   MaterialDesktopVolumeButton(),
+        //   MaterialDesktopPositionIndicator()
+        // ],
         topButtonBar: [
           Obx(
             () => MaterialDesktopCustomButton(
@@ -439,105 +439,101 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
             child: Expanded(
               child: DefaultTabController(
                 length: 4,
-                child:Scaffold(
-                    backgroundColor: ColorPage.bgcolor,
-                    appBar: AppBar(
-                      iconTheme: IconThemeData(color: ColorPage.white),
-                      title: Text(
-                        widget.videoname,
-                        style: FontFamily.font5,
-                      ),
-                      backgroundColor: ColorPage.appbarcolor,
-                      bottom: PreferredSize(
-                        preferredSize: Size.fromHeight(80),
-                        child: MotionTabBar(
-                          controller:
-                              _motionTabBarController, // ADD THIS if you need to change your tab programmatically
-                          initialSelectedTab: "PDF",
-                          labels: tabfield,
-                          icons: const [
-                            Icons.picture_as_pdf,
-                            Icons.question_answer,
-                            Icons.tag,
-                            Icons.reviews
-                          ],
+                child: Scaffold(
+                  backgroundColor: ColorPage.bgcolor,
+                  appBar: AppBar(
+                    iconTheme: IconThemeData(color: ColorPage.white),
+                    title: Text(
+                      widget.videoname,
+                      style: FontFamily.font5,
+                    ),
+                    backgroundColor: ColorPage.appbarcolor,
+                    bottom: PreferredSize(
+                      preferredSize: Size.fromHeight(80),
+                      child: MotionTabBar(
+                        controller:
+                            _motionTabBarController, // ADD THIS if you need to change your tab programmatically
+                        initialSelectedTab: "PDF",
+                        labels: tabfield,
+                        icons: const [
+                          Icons.picture_as_pdf,
+                          Icons.question_answer,
+                          Icons.tag,
+                          Icons.reviews
+                        ],
 
-                          badges: [
-                            MotionBadgeWidget(
-                              text: '604',
-                              textColor: Colors
-                                  .white, // optional, default to Colors.white
-                              color:
-                                  Colors.red, // optional, default to Colors.red
-                              size: 18, // optional, default to 18
-                            ),
-                            null,
-                            null,
-                            null,
-                          ],
-
-                          tabSize: 50,
-                          tabBarHeight: 55,
-                          textStyle: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
+                        badges: [
+                          MotionBadgeWidget(
+                            text: '604',
+                            textColor: Colors
+                                .white, // optional, default to Colors.white
+                            color:
+                                Colors.red, // optional, default to Colors.red
+                            size: 18, // optional, default to 18
                           ),
+                          null,
+                          null,
+                          null,
+                        ],
 
-                          tabIconColor: Colors.blue[600],
-                          tabIconSize: 28.0,
-                          tabIconSelectedSize: 26.0,
-                          tabSelectedColor: Colors.blue[900],
-                          tabIconSelectedColor: Colors.white,
-                          // tabBarColor: Color.fromARGB(255, 64, 41, 231),
-                          onTabItemSelected: (int value) {
-                            setState(() {
-                              _motionTabBarController!.index = value;
-
-                              fngetVideodetailsApi(
-                                  widget.token, tabfield[value]);
-                            });
-                          },
+                        tabSize: 50,
+                        tabBarHeight: 55,
+                        textStyle: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
                         ),
+
+                        tabIconColor: Colors.blue[600],
+                        tabIconSize: 28.0,
+                        tabIconSelectedSize: 26.0,
+                        tabSelectedColor: Colors.blue[900],
+                        tabIconSelectedColor: Colors.white,
+                        // tabBarColor: Color.fromARGB(255, 64, 41, 231),
+                        onTabItemSelected: (int value) {
+                          setState(() {
+                            _motionTabBarController!.index = value;
+
+                            fngetVideodetailsApi(widget.token, tabfield[value]);
+                          });
+                        },
                       ),
                     ),
-                    body: TabBarView(
-                        // physics:
-                        //     NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
-
-                        controller: _motionTabBarController,
-                        children: [
-                          pdflink.isNotEmpty
-                              ? PdfCategory(pdflink)
-                              : Center(
-                                  child: Image.asset(
-                                      "assets/android/nodatafound.png")),
-                          mcq.isNotEmpty ? McqCategory() : Container(),
-                          pdflink.isNotEmpty
-                              ? PdfCategory(pdflink)
-                              : CircularProgressIndicator(),
-                          pdflink.isNotEmpty
-                              ? PdfCategory(pdflink)
-                              : CircularProgressIndicator(),
-                        ]),
                   ),
+                  body: TabBarView(
+                      // physics:
+                      //     NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
+
+                      controller: _motionTabBarController,
+                      children: [
+                        pdflink.isNotEmpty
+                            ? PdfCategory(pdflink)
+                            : Center(
+                                child: Image.asset(
+                                    "assets/android/nodatafound.png")),
+                        mcq.isNotEmpty ? McqCategory() : Container(),
+                        pdflink.isNotEmpty
+                            ? PdfCategory(pdflink)
+                            : CircularProgressIndicator(),
+                        pdflink.isNotEmpty
+                            ? PdfCategory(pdflink)
+                            : CircularProgressIndicator(),
+                      ]),
                 ),
               ),
             ),
-
-          
+          ),
           Expanded(
               child: Container(
                   color: Colors.black,
                   child: Column(
                     children: [
                       Flexible(
-                        child: Center(
-                            child: SizedBox(
+                        child: SizedBox(
                           child: Video(
                             controller: videoPlay.controller,
                           ),
-                        )),
+                        ),
                       ),
                     ],
                   )))
