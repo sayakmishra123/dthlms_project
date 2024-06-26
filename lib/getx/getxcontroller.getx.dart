@@ -59,18 +59,18 @@ RxString email = ''.obs;
   RxBool loading = true.obs;
 
 // theme Elements
-var themecolor = ColorPage.appbarcolor.obs;
-var tooglebuttonBGcolor=ColorPage.bluegrey800;
-var tooglebuttonFGcolor=ColorPage.bluegrey300;
-var elevetedbuttoncolor=ColorPage.color1.obs;
+// var themecolor = ColorPage.appbarcolor.obs;
+// var tooglebuttonBGcolor=ColorPage.bluegrey800;
+// var tooglebuttonFGcolor=ColorPage.bluegrey300;
+// var elevetedbuttoncolor=ColorPage.color1.obs;
 
-var buttoncolor = ColorPage.buttonColor.obs;
-var textColor=ColorPage.colorblack.obs;
-var listviewtext=ColorPage.white.obs;
-RxBool toogleButtontextColor=false.obs;
-var activationbuttoncolor=ColorPage.blue.obs;
+// var buttoncolor = ColorPage.buttonColor.obs;
+// var textColor=ColorPage.colorblack.obs;
+// var listviewtext=ColorPage.white.obs;
+// RxBool toogleButtontextColor=false.obs;
+// var activationbuttoncolor=ColorPage.blue.obs;
 
-var backgroundColor=ColorPage.bgcolor.obs;
+// var backgroundColor=ColorPage.bgcolor.obs;
 
 
 //Theme Elements

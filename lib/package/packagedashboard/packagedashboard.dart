@@ -286,7 +286,7 @@ class _PackageDashboardState extends State<PackageDashboard>
     return Obx(
       () => Scaffold(
         appBar: AppBar(
-          backgroundColor: getxController.themecolor.value,
+          backgroundColor: ColorPage.appbarcolor,
           iconTheme: IconThemeData(color: ColorPage.white),
           automaticallyImplyLeading: false,
           //  leading: Row(children: [Padding(
@@ -796,7 +796,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                 icon: Icon(Icons.theater_comedy))
           ],
         ),
-        backgroundColor: getxController.backgroundColor.value,
+        // backgroundColor:,
         body: Skeletonizer(
           enabled: getxController.loading.value,
           child: Stack(
@@ -804,6 +804,7 @@ class _PackageDashboardState extends State<PackageDashboard>
               Row(
                 children: [
                   Container(
+                    // color: Colors.,
                     child: Expanded(
                       child: Container(
                         child: Column(
@@ -859,10 +860,8 @@ class _PackageDashboardState extends State<PackageDashboard>
                                       ..setIndex(1),
                                     radius: 32.0,
                                     padding: const EdgeInsets.all(16.0),
-                                    backgroundColor:
-                                        getxController.tooglebuttonBGcolor,
-                                    foregroundColor:
-                                        getxController.tooglebuttonFGcolor,
+                                    backgroundColor: ColorPage.bluegrey800,
+                                    foregroundColor: ColorPage.bluegrey300,
                                     // foregroundColor:  Color.fromARGB(255, 37, 233, 135),
                                     // backgroundColor:Color.fromARGB(255, 97, 228, 162),
                                     elevation: 24,

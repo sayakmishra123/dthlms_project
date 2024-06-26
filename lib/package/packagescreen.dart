@@ -167,7 +167,7 @@ class _PackageScreenState extends State<PackageScreen> {
     ()=> Scaffold(
         backgroundColor: ColorPage.color1,
         appBar: AppBar(
-          backgroundColor: getx_obj.themecolor.value,
+          backgroundColor: ColorPage.appbarcolor,
           centerTitle: true,
           title: Text(
             'Choose your Package',

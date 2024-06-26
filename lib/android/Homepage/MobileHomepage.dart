@@ -48,7 +48,7 @@ class _MobileHomepageState extends State<MobileHomepage> {
         () => Scaffold(
           drawer: const mobileDrawer(),
           appBar: AppBar(
-            backgroundColor: get.themecolor.value,
+            backgroundColor: ColorPage.appbarcolor,
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 10),

@@ -23,7 +23,7 @@ class _StudyDashboardState extends State<StudyDashboard> {
       child: Obx(()=>
          Scaffold(
           appBar: AppBar(
-            backgroundColor: getx_obj.themecolor.value,
+            backgroundColor: ColorPage.appbarcolor,
             title: Text(
               'Studty Material',
               style: FontFamily.font2,

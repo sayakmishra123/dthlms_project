@@ -250,7 +250,7 @@ class _MobileVideoPlayerState extends State<MobileVideoPlayer>
               widget.videoname,
               style: FontFamily.font5,
             ),
-            backgroundColor: getx.themecolor.value,
+            backgroundColor: ColorPage.appbarcolor,
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(80),
               child: MotionTabBar(

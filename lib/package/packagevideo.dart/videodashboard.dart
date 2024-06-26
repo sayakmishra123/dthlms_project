@@ -142,10 +142,10 @@ class _VideoDashboardState extends State<VideoDashboard>
                   length: 6,
                   child: Obx(()=>
                    Scaffold(
-                      backgroundColor: getxController.backgroundColor.value,
+                      backgroundColor: ColorPage.bgcolor,
                       appBar: AppBar(
                         iconTheme: IconThemeData(color: ColorPage.white),
-                        backgroundColor:getxController.themecolor.value,
+                        backgroundColor:ColorPage.appbarcolor,
                         actions: [
                           Container(
                             margin:
@@ -233,7 +233,7 @@ class _VideoDashboardState extends State<VideoDashboard>
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(10),
                                           ),
-                                          color: getxController.backgroundColor.value,
+                                          color: ColorPage.white
                                         ),
                                         margin: EdgeInsets.all(10),
                                         child: ExpansionTile(
@@ -242,7 +242,7 @@ class _VideoDashboardState extends State<VideoDashboard>
                                           title: Text(
                                             filteredPackage[index].packageName,
                                             style: TextStyle(
-                                              color: getxController.textColor.value,
+                                              color: ColorPage.colorblack,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                           onExpansionChanged: (value) {
@@ -274,7 +274,7 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                         decoration: BoxDecoration(
                                                           border: Border(
                                                             top: BorderSide(
-                                                                color:getxController.textColor.value,
+                                                                color:ColorPage.colorblack,
                                                                 width: 1),
                                                           ),
                                                         ),
@@ -284,11 +284,11 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                   .transparent),
                                                           title: Text(
                                                               subItem.courseName, style: TextStyle(
-                                              color: getxController.textColor.value,
+                                              color:ColorPage.colorblack,
                                                 ),),
                                                           subtitle: Text(
                                                               subItem.termName,style: TextStyle(
-                                              color: getxController.textColor.value,
+                                              color:ColorPage.colorblack,
                                                 )),
                                                           onExpansionChanged:
                                                               (value) {
@@ -321,7 +321,7 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                       return Container(
                                                                         decoration:
                                                                             BoxDecoration(
-                                                                                border: Border(top: BorderSide(color: getxController.textColor.value))),
+                                                                                border: Border(top: BorderSide(color: ColorPage.colorblack))),
                                                                         child:
                                                                             ListTile(
                                                                           onTap:
@@ -333,13 +333,13 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                               "Show",
                                                                               style:
                                                                                   TextStyle(
-                                              color: getxController.listviewtext.value,
+                                              color:ColorPage.white,
                                                 ),
                                                                             ),
                                                                             style:
                                                                                 ElevatedButton.styleFrom(
                                                                               backgroundColor:
-                                                                                getxController.textColor.value,
+                                                                              ColorPage.colorblack,
                                                                               shape:
                                                                                   RoundedRectangleBorder(
                                                                                 borderRadius: BorderRadius.all(
@@ -355,11 +355,11 @@ class _VideoDashboardState extends State<VideoDashboard>
                                                                           ),
                                                                           title: Text(
                                                                               subItem.termName,style: TextStyle(
-                                              color: getxController.textColor.value,
+                                              color: ColorPage.colorblack,
                                                 )),
                                                                           subtitle:
                                                                               Text(subSubItem.packageDisplayName,style: TextStyle(
-                                              color: getxController.textColor.value,
+                                              color: ColorPage.colorblack,
                                                 )),
                                                                         ),
                                                                       );

@@ -152,7 +152,7 @@ class _MobileVideoDashboardState extends State<MobileVideoDashboard>
                       length: 6,
                       child: Obx(
                         ()=> Scaffold(
-                          backgroundColor: getxController.themecolor.value,
+                          backgroundColor: ColorPage.appbarcolor,
                           appBar: AppBar(
                             iconTheme: IconThemeData(color: ColorPage.white),
                             backgroundColor: ColorPage.appbarcolor,

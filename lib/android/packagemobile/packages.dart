@@ -202,7 +202,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
       child: Obx(
         ()=> Scaffold(
           appBar: AppBar(
-            backgroundColor: getxController.themecolor.value,
+            backgroundColor: ColorPage.appbarcolor,
             iconTheme: IconThemeData(color: ColorPage.white),
             automaticallyImplyLeading: false,
             //  leading: Row(children: [Padding(
@@ -410,7 +410,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                                                                   style: FontFamily.font8,
                                                                                                 ),
                                                                                                 style: ElevatedButton.styleFrom(
-                                                                                                  backgroundColor: getxController.buttoncolor.value,
+                                                                                                  backgroundColor:ColorPage.color1,
                                                                                                   shape: RoundedRectangleBorder(
                                                                                                     borderRadius: BorderRadius.all(
                                                                                                       Radius.circular(10),
