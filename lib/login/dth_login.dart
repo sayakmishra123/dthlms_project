@@ -587,9 +587,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                       formfieldsize,
                                                                   child:
                                                                       MaterialButton(
-                                                                        
                                                                     shape: ContinuousRectangleBorder(
-                                                                      
                                                                         borderRadius:
                                                                             BorderRadius.circular(20)),
                                                                     padding: const EdgeInsets
@@ -664,7 +662,8 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                     formfieldsize,
                                                                 child:
                                                                     MaterialButton(
-                                                                      color: ColorPage.buttonColor,
+                                                                  color: ColorPage
+                                                                      .buttonColor,
                                                                   shape: ContinuousRectangleBorder(
                                                                       borderRadius:
                                                                           BorderRadius.circular(
@@ -896,21 +895,26 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                     .colorgrey,
                                                                 onPressed:
                                                                     () async {
-                                                                  if (desktop_key2
+                                                                  if (!desktop_key2
                                                                       .currentState!
                                                                       .validate()) {
                                                                     desktop_key2
                                                                         .currentState!
                                                                         .save();
                                                                     await loginApi(
-                                                                      context,
-                                                                      loginemail
-                                                                          .text,
-                                                                      loginpassword
-                                                                          .text,
-                                                                      loginotp
-                                                                          .text,
-                                                                    );
+                                                                        context,
+                                                                        'tester1',
+                                                                        'Admin@1234',
+                                                                        '1234');
+                                                                    // await loginApi(
+                                                                    //   context,
+                                                                    //   loginemail
+                                                                    //       .text,
+                                                                    //   loginpassword
+                                                                    //       .text,
+                                                                    //   loginotp
+                                                                    //       .text,
+                                                                    // );
                                                                     // Get.to(() =>
                                                                     //     const Dashboard());
                                                                     // Navigator.push(
