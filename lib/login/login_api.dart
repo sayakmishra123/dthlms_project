@@ -10,6 +10,7 @@ import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/login/loginmodel.dart';
 import 'package:dthlms/map/apiobject.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
+import 'package:dthlms/routes/router.dart';
 
 import 'package:dthlms/url/api_url.dart';
 import 'package:dthlms/utils/loader.dart';
@@ -93,9 +94,10 @@ Future loginApi(
 // String tk=jsondata['result']['token'];
     Get.back();
 
-    Get.to(() => Platform.isWindows
-        ? PackageDashboard(jsondata['result']['token'])
-        : PackageDashboardMobile(jsondata['result']['token']));
+    Platform.isWindows
+        ? Get.toNamed('/package',
+            arguments: {'token': jsondata['result']['token']})
+        : Get.to(() => PackageDashboardMobile(jsondata['result']['token']));
 
     // showDialog(
     //     context: context,

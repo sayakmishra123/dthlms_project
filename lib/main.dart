@@ -2,6 +2,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/firebase_options.dart';
 import 'package:dthlms/login/dth_login.dart';
+import 'package:dthlms/routes/router.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,9 +37,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  pageRouter router = pageRouter();
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      // initialRoute: '/',
+      getPages: router.Route,
       // enableLog: true,
 
       debugShowCheckedModeBanner: false,

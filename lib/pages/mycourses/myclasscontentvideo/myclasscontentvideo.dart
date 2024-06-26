@@ -265,29 +265,34 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
   // GlobalKey tabbarkey = GlobalKey();
   @override
   Widget build(BuildContext context) {
-    return MaterialVideoControlsTheme(
-      normal: MaterialVideoControlsThemeData(
+    return MaterialDesktopVideoControlsTheme(
+      normal: MaterialDesktopVideoControlsThemeData(
         controlsHoverDuration: Duration(seconds: 15),
+        // shiftSubtitlesOnControlsVisibilityChange: true,
         primaryButtonBar: [
-          MaterialSkipPreviousButton(
+          MaterialDesktopSkipPreviousButton(
             iconSize: 80,
           ),
           // MaterialDesktopPositionIndicator(),
           // MaterialSeekBar(),
-          MaterialPlayOrPauseButton(
+          MaterialDesktopPlayOrPauseButton(
             iconSize: 80,
             // iconColor: ColorPage.blue,
           )
         ],
+
         seekBarThumbColor: Colors.blue,
         seekBarPositionColor: Colors.blue,
-        bottomButtonBar: [
-          MaterialPlayOrPauseButton(),
-          MaterialPositionIndicator()
-        ],
+        toggleFullscreenOnDoublePress: false,
+        // Modify top button bar:
+        // bottomButtonBar: [
+        //   MaterialPlayOrPauseButton(),
+        //   MaterialDesktopVolumeButton(),
+        //   MaterialDesktopPositionIndicator()
+        // ],
         topButtonBar: [
           Obx(
-            () => MaterialCustomButton(
+            () => MaterialDesktopCustomButton(
               onPressed: () {
                 getx.videoplaylock.value = !getx.videoplaylock.value;
                 print(getx.videoplaylock.value);
@@ -298,7 +303,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
             ),
           ),
           const Spacer(),
-          MaterialCustomButton(
+          MaterialDesktopCustomButton(
             onPressed: () {
               showDialog(
                   barrierDismissible: false,
@@ -357,7 +362,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
             },
             icon: Icon(Icons.edit_note),
           ),
-          MaterialCustomButton(
+          MaterialDesktopCustomButton(
             onPressed: () {
               showMenu(
                   context: context,
@@ -387,7 +392,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
             },
             icon: Icon(Icons.slow_motion_video),
           ),
-          MaterialCustomButton(
+          MaterialDesktopCustomButton(
             onPressed: () {
               // showDialog(
               //     context: context,
@@ -427,12 +432,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
           ),
         ],
       ),
-      fullscreen: const MaterialVideoControlsThemeData(
-          // Modify theme options:
-          // displaySeekBar: false,
-          // automaticallyImplySkipNextButton: false,
-          // automaticallyImplySkipPreviousButton: false,
-          ),
+      fullscreen: const MaterialDesktopVideoControlsThemeData(),
       child: Row(
         children: [
           Container(
@@ -529,11 +529,12 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                   child: Column(
                     children: [
                       Flexible(
-                        child: SizedBox(
+                        child: Center(
+                            child: SizedBox(
                           child: Video(
                             controller: videoPlay.controller,
                           ),
-                        ),
+                        )),
                       ),
                     ],
                   )))

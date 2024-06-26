@@ -18,6 +18,10 @@ class pageRouter {
       page: () => const DthLmsLogin(),
     ),
     GetPage(
+      name: '/package',
+      page: () => PackageDashboard(),
+    ),
+    GetPage(
       name: '/Dashboard',
       page: () => Dashboard(),
     ),
@@ -34,20 +38,8 @@ class pageRouter {
       page: () => const MobileHomepage(),
     ),
     GetPage(
-        name: '/Mobilepackagedashboard',
-        page: () {
-          final token = Get.parameters['token']; // not useble for any page.
-          return PackageDashboardMobile(token!);
-        }),
-    GetPage(
       name: '/Mobileforgetpassword',
       page: () => ForgetPasswordMobile(),
     ),
-    GetPage(
-        name: "/Packagedashboard",
-        page: () {
-          final token = Get.parameters['token']; // not useble for any page
-          return PackageDashboard(token!);
-        }),
   ];
 }

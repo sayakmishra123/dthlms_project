@@ -22,8 +22,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:typewritertext/v3/typewriter.dart';
 
 class PackageDashboard extends StatefulWidget {
-  final String token;
-  const PackageDashboard(this.token, {super.key});
+  PackageDashboard({super.key});
 
   @override
   State<PackageDashboard> createState() => _PackageDashboardState();
@@ -116,6 +115,7 @@ class MyPackageDetails {
 class _PackageDashboardState extends State<PackageDashboard>
     with TickerProviderStateMixin {
   Getx getxController = Get.put(Getx());
+  final token = Get.arguments['token'];
   TextEditingController searchController = TextEditingController();
 
   List<AllPackage> allpackage = [];
@@ -275,9 +275,10 @@ class _PackageDashboardState extends State<PackageDashboard>
 
   @override
   void initState() {
+    // print(id);
     // fnusermypackage(widget.token);
     // fnusermypackage(widget.token);
-    fnfindallpackage(widget.token);
+    fnfindallpackage(token);
     super.initState();
   }
 
@@ -767,7 +768,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                           onTap: () {
                                             getxController.packageshow.value =
                                                 false;
-                                            fnfindallpackage(widget.token);
+                                            fnfindallpackage(token);
                                           },
                                           child: Text(
                                             'All Package',
@@ -807,7 +808,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                         allpackage[index]
                                                             .packageId)) {
                                                   fnfindpackage(
-                                                      widget.token,
+                                                      token,
                                                       allpackage[index]
                                                           .packageId);
                                                 }
@@ -976,7 +977,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                             index]
                                                                         .packageId)) {
                                                               fnfindpackage(
-                                                                  widget.token,
+                                                                  token,
                                                                   filteredPackage[
                                                                           index]
                                                                       .packageId);
@@ -1034,7 +1035,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                               (value) {
                                                                             if (value &&
                                                                                 !allnestedData.containsKey(subItem.packageId)) {
-                                                                              fnfindpackage(widget.token, subItem.packageId);
+                                                                              fnfindpackage(token, subItem.packageId);
                                                                             }
                                                                           },
                                                                           children: [
@@ -1048,7 +1049,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                                         decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
                                                                                         child: ListTile(
                                                                                           onTap: () {
-                                                                                            Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                                            Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(token)));
                                                                                           },
                                                                                           title: Text(
                                                                                             subItem.termName,
@@ -1068,7 +1069,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                                               ),
                                                                                             ),
                                                                                             onPressed: () {
-                                                                                              Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                                              Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(token)));
                                                                                             },
                                                                                           ),
                                                                                           subtitle: Text(

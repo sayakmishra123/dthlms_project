@@ -18,7 +18,6 @@ class _GlobalDialogState extends State<GlobalDialog>
     with TickerProviderStateMixin {
   late AnimationController _blinkController;
   late Animation<double> _animation;
-  
 
   @override
   void initState() {
@@ -38,7 +37,8 @@ class _GlobalDialogState extends State<GlobalDialog>
     _blinkController.dispose();
     super.dispose();
   }
-   Getx getxController = Get.put(Getx());
+
+  Getx getxController = Get.put(Getx());
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +48,11 @@ class _GlobalDialogState extends State<GlobalDialog>
       child: FadeTransition(
         opacity: _animation,
         child: CustomMessageBubble(
-        
-          text: 'Enabel Activation Key!',
-          color:ColorPage.blue,
+          text: 'Enable Activation Key!',
+          color: ColorPage.blue,
           icon: Icons.info_outline,
-        
           textStyle: TextStyle(
-            color:  Colors.white,
+            color: Colors.white,
             fontSize: 16,
           ),
         ),
@@ -77,8 +75,7 @@ class CustomMessageBubble extends StatelessWidget {
     required this.textStyle,
   });
   TextEditingController activationfield = TextEditingController();
-  Getx get_obj=Get.put(Getx());
-  
+  Getx get_obj = Get.put(Getx());
 
   @override
   Widget build(BuildContext context) {
@@ -105,7 +102,7 @@ class CustomMessageBubble extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color:  Colors.white,
+              color: Colors.white,
               size: 20.0,
             ),
             SizedBox(width: 8.0), // space between icon and text
@@ -228,32 +225,36 @@ class CustomMessageBubble extends StatelessWidget {
               ),
             ],
           ),
-        Obx(() =>   Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            child: TextFormField(
-              // controller: activationfield,
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'cannot blank';
-                }
-                return null;
-              },
-              obscureText: get_obj.passvisibility.value,
-              obscuringCharacter: '*',
-              decoration: InputDecoration(
-                  // prefixIcon: Icon(Icons.code),
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        get_obj.passvisibility.value=!get_obj.passvisibility.value;
+          Obx(() => Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: TextFormField(
+                  // controller: activationfield,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'cannot blank';
+                    }
+                    return null;
+                  },
+                  obscureText: get_obj.passvisibility.value,
+                  obscuringCharacter: '*',
+                  decoration: InputDecoration(
+                      // prefixIcon: Icon(Icons.code),
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            get_obj.passvisibility.value =
+                                !get_obj.passvisibility.value;
+                          },
+                          icon: get_obj.passvisibility.value
+                              ? Icon(Icons.visibility_off)
+                              : Icon(Icons.visibility)),
+                      labelText: 'Enter Activation Code',
+                      // hintText: 'Enter Activation Code',
 
-                      }, icon: get_obj.passvisibility.value? Icon(Icons.visibility_off):Icon(Icons.visibility)),
-                  labelText: 'Enter Activation Code',
-                  // hintText: 'Enter Activation Code',
-                  
-                  filled: false,
-                  focusColor: ColorPage.white),
-            ),
-          ))
+                      filled: false,
+                      focusColor: ColorPage.white),
+                ),
+              ))
         ],
       )),
       buttons: [
