@@ -110,24 +110,24 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
   int t = 0;
   @override
   void initState() {
-    
- 
     videoPlay = VideoPlayClass();
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
     print(videoPlay.controller.player.state.duration.inSeconds);
     super.initState();
     // videoPlay.player.stream.playing.take()
     videoPlay.player.stream.playing.listen((bool playing) {
-      print("Video total watch: ${videoPlay.totalPlayTime.inSeconds}");
-      if (playing) {
-        print(videoPlay.controller.player.state.duration.inSeconds);
-        videoPlay.startTrackingPlayTime();
-      } else {
-        videoPlay.stopTrackingPlayTime();
+      if (!mounted) {
+        print(mounted);
+        print("Video total watch: ${videoPlay.totalPlayTime.inSeconds}");
+        if (playing) {
+          print(videoPlay.controller.player.state.duration.inSeconds);
+          videoPlay.startTrackingPlayTime();
+        } else {
+          videoPlay.stopTrackingPlayTime();
+        }
       }
     });
 
-    videoPlay.player.stream.position.listen((position) {});
     _motionTabBarController = MotionTabBarController(
       initialIndex: 0,
       length: 4,
@@ -285,6 +285,11 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
         seekBarPositionColor: Colors.blue,
         toggleFullscreenOnDoublePress: false,
         // Modify top button bar:
+        bottomButtonBar: [
+          MaterialPlayOrPauseButton(),
+          MaterialDesktopVolumeButton(),
+          MaterialDesktopPositionIndicator()
+        ],
         topButtonBar: [
           Obx(
             () => MaterialDesktopCustomButton(
@@ -385,7 +390,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                     );
                   }).toList());
             },
-            icon: const Icon(Icons.settings),
+            icon: Icon(Icons.slow_motion_video),
           ),
           MaterialDesktopCustomButton(
             onPressed: () {
@@ -435,7 +440,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
               child: DefaultTabController(
                 length: 4,
                 child: Obx(
-                  ()=> Scaffold(
+                  () => Scaffold(
                     backgroundColor: ColorPage.bgcolor,
                     appBar: AppBar(
                       iconTheme: IconThemeData(color: ColorPage.white),
@@ -457,7 +462,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                             Icons.tag,
                             Icons.reviews
                           ],
-                  
+
                           badges: [
                             MotionBadgeWidget(
                               text: '604',
@@ -471,7 +476,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                             null,
                             null,
                           ],
-                  
+
                           tabSize: 50,
                           tabBarHeight: 55,
                           textStyle: const TextStyle(
@@ -479,7 +484,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
                           ),
-                  
+
                           tabIconColor: Colors.blue[600],
                           tabIconSize: 28.0,
                           tabIconSelectedSize: 26.0,
@@ -489,8 +494,9 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                           onTabItemSelected: (int value) {
                             setState(() {
                               _motionTabBarController!.index = value;
-                  
-                              fngetVideodetailsApi(widget.token, tabfield[value]);
+
+                              fngetVideodetailsApi(
+                                  widget.token, tabfield[value]);
                             });
                           },
                         ),
@@ -499,12 +505,14 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                     body: TabBarView(
                         // physics:
                         //     NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
-                  
+
                         controller: _motionTabBarController,
                         children: [
                           pdflink.isNotEmpty
                               ? PdfCategory(pdflink)
-                              : Center(child: Image.asset("assets/android/nodatafound.png")),
+                              : Center(
+                                  child: Image.asset(
+                                      "assets/android/nodatafound.png")),
                           mcq.isNotEmpty ? McqCategory() : Container(),
                           pdflink.isNotEmpty
                               ? PdfCategory(pdflink)
@@ -573,7 +581,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
   }
 
   String url =
-    "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
+      "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4";
   Future downloadcretevideo(url, Directory d, filename, bool check) async {
     showDialog(
         context: context,

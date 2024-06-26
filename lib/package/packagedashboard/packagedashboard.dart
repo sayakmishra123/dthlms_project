@@ -285,8 +285,6 @@ class _PackageDashboardState extends State<PackageDashboard>
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-
-        
         appBar: AppBar(
           backgroundColor: getxController.themecolor.value,
           iconTheme: IconThemeData(color: ColorPage.white),
@@ -353,8 +351,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                       color: Colors.black),
                                   // decoration: ,
                                   // height: 400,
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 50),
+                                  padding: EdgeInsets.symmetric(horizontal: 50),
                                   child: Column(
                                     children: [
                                       AppBar(
@@ -374,8 +371,6 @@ class _PackageDashboardState extends State<PackageDashboard>
                                               // getxController.textColor.value=ColorPage.colorblack;
                                               // getxController.backgroundColor.value=ColorPage.white;
                                               //  getxController.listviewtext.value=ColorPage.white;
-                                
-                                
                                             },
                                             child: Image.asset(
                                               'assets/sun.png',
@@ -385,10 +380,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                           SizedBox(width: 50),
                                           InkWell(
                                             onTap: () {
-                                //  getxController.listviewtext.value=ColorPage.colorblack;
-                                
-                                //                                                   getxController.textColor.value=ColorPage.white;
-                                //                                                 getxController.backgroundColor.value=ColorPage.colorblack;
+                                              //  getxController.listviewtext.value=ColorPage.colorblack;
+
+                                              //                                                   getxController.textColor.value=ColorPage.white;
+                                              //                                                 getxController.backgroundColor.value=ColorPage.colorblack;
                                             },
                                             child: Image.asset(
                                               'assets/themes.png',
@@ -407,8 +402,7 @@ class _PackageDashboardState extends State<PackageDashboard>
                                             Text(
                                               'Primary Color',
                                               style: FontFamily.font3,
-                                              textScaler:
-                                                  TextScaler.linear(1),
+                                              textScaler: TextScaler.linear(1),
                                             )
                                           ],
                                         ),
@@ -428,12 +422,9 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 0])),
                                                 onPressed: () {
-                                               
                                                   getxController
                                                           .themecolor.value =
-                                                      ColorPage
-                                                          .themeColors[0];
-                                                
+                                                      ColorPage.themeColors[0];
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -444,12 +435,9 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 1])),
                                                 onPressed: () {
-                                                
                                                   getxController
                                                           .themecolor.value =
-                                                      ColorPage
-                                                          .themeColors[1];
-                                               
+                                                      ColorPage.themeColors[1];
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -460,9 +448,9 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 2])),
                                                 onPressed: () {
-                                                 
-                                                  getxController.themecolor.value=ColorPage.themeColors[2];
-                                                  
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[2];
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -473,9 +461,9 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 3])),
                                                 onPressed: () {
-                                             
-                                                 getxController.themecolor.value=ColorPage.themeColors[3];
-                                              
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[3];
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -486,10 +474,11 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 4])),
                                                 onPressed: () {
-                                                  int i=4;
-                                                
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                            
+                                                  int i = 4;
+
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
                                                 },
                                                 icon: Text('')),
                                           ],
@@ -509,10 +498,11 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   ColorPage.themeColors[5],
                                                 )),
                                                 onPressed: () {
-                                                  
-                                                     int i=5;
-                                                    //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  int i = 5;
+                                                  //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
                                                   //  getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                   //  getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                   //  getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -526,10 +516,12 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 6])),
                                                 onPressed: () {
-                                                      int i=6;
-                                                      // getxController.toogleButtontextColor.value=false;
-                                                      // getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  int i = 6;
+                                                  // getxController.toogleButtontextColor.value=false;
+                                                  // getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
                                                   //  getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                   //  getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                   //  getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -544,12 +536,14 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                 7])),
                                                 onPressed: () {
                                                   // getxController.toogleButtontextColor.value=false;
-                                                    int i=7;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                //    getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                //    getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                //    getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  int i = 7;
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
+                                                  //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
+                                                  //    getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                  //    getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                  //    getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -560,10 +554,12 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 8])),
                                                 onPressed: () {
-                                                      int i=8;
-                                                      // getxController.toogleButtontextColor.value=false;
-                                                      // getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  int i = 8;
+                                                  // getxController.toogleButtontextColor.value=false;
+                                                  // getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
                                                   //  getxController.buttoncolor.value=ColorPage.themeColors[i];
                                                   //  getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
                                                   //  getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
@@ -577,12 +573,17 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 9])),
                                                 onPressed: () {
-                                                      int i=9;getxController.toogleButtontextColor.value=false;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                //    getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                //    getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                //    getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  int i = 9;
+                                                  getxController
+                                                      .toogleButtontextColor
+                                                      .value = false;
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
+                                                  //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
+                                                  //    getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                  //    getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                  //    getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
                                                 },
                                                 icon: Text('')),
                                           ],
@@ -603,9 +604,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 10])),
                                                 onPressed: () {
-                                                     int i=10;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                
+                                                  int i = 10;
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -615,9 +617,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                   ColorPage.themeColors[11],
                                                 )),
                                                 onPressed: () {
-                                                    int i=11;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                  
+                                                  int i = 11;
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -628,9 +631,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 12])),
                                                 onPressed: () {
-                                                  int i=12;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                               
+                                                  int i = 12;
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -641,9 +645,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 13])),
                                                 onPressed: () {
-                                                      int i=13;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                
+                                                  int i = 13;
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -654,9 +659,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                     .themeColors[
                                                                 14])),
                                                 onPressed: () {
-                                                     int i=14;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                  
+                                                  int i = 14;
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage.themeColors[i];
                                                 },
                                                 icon: Text('')),
                                           ],
@@ -670,64 +676,62 @@ class _PackageDashboardState extends State<PackageDashboard>
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                          ColorPage
-                                                                  .themeColors[
+                                                          ColorPage.themeColors[
                                                               15])),
                                               onPressed: () {
-                                                    int i=15;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                  
+                                                int i = 15;
+                                                getxController
+                                                        .themecolor.value =
+                                                    ColorPage.themeColors[i];
                                               },
                                               icon: Text('')),
                                           IconButton.filled(
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                          ColorPage
-                                                                  .themeColors[
+                                                          ColorPage.themeColors[
                                                               16])),
                                               onPressed: () {
-                                                   int i=16;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                
+                                                int i = 16;
+                                                getxController
+                                                        .themecolor.value =
+                                                    ColorPage.themeColors[i];
                                               },
                                               icon: Text('')),
                                           IconButton.filled(
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                          ColorPage
-                                                                  .themeColors[
+                                                          ColorPage.themeColors[
                                                               17])),
                                               onPressed: () {
-                                                   int i=17;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                
+                                                int i = 17;
+                                                getxController
+                                                        .themecolor.value =
+                                                    ColorPage.themeColors[i];
                                               },
                                               icon: Text('')),
                                           IconButton.filled(
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                          ColorPage
-                                                                  .themeColors[
+                                                          ColorPage.themeColors[
                                                               18])),
                                               onPressed: () {
-                                                    int i=18;
-                                               
+                                                int i = 18;
                                               },
                                               icon: Text('')),
                                           IconButton.filled(
                                               style: ButtonStyle(
                                                   backgroundColor:
                                                       MaterialStatePropertyAll(
-                                                          ColorPage
-                                                                  .themeColors[
+                                                          ColorPage.themeColors[
                                                               19])),
                                               onPressed: () {
-                                                   int i=19;
-                                                 getxController.themecolor.value=ColorPage.themeColors[i];
-                                                
+                                                int i = 19;
+                                                getxController
+                                                        .themecolor.value =
+                                                    ColorPage.themeColors[i];
                                               },
                                               icon: Text('')),
                                         ],
@@ -874,7 +878,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                           },
                                           child: Text(
                                             'My Package',
-                                            style: getxController.toogleButtontextColor.value?FontFamily.fontWhite:FontFamily.font,
+                                            style: getxController
+                                                    .toogleButtontextColor.value
+                                                ? FontFamily.fontWhite
+                                                : FontFamily.font,
                                           )),
                                       ButtonBarEntry(
                                           onTap: () {
@@ -884,7 +891,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                           },
                                           child: Text(
                                             'All Package',
-                                            style: getxController.toogleButtontextColor.value?FontFamily.fontWhite:FontFamily.font,
+                                            style: getxController
+                                                    .toogleButtontextColor.value
+                                                ? FontFamily.fontWhite
+                                                : FontFamily.font,
                                           )),
                                     ],
                                   ),
@@ -909,8 +919,9 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                     ? '123455454541351'
                                                     : mypackage[index]
                                                         .packageID,
-                                                style:  TextStyle(
-                                                  color: getxController.textColor.value,
+                                                style: TextStyle(
+                                                    color: getxController
+                                                        .textColor.value,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -1008,7 +1019,9 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                             BorderRadius.all(
                                                           Radius.circular(10),
                                                         ),
-                                                        color: getxController.backgroundColor.value,
+                                                        color: getxController
+                                                            .backgroundColor
+                                                            .value,
                                                       ),
                                                       margin:
                                                           EdgeInsets.all(10),
@@ -1115,12 +1128,17 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                                     return Container(
                                                                                       decoration: BoxDecoration(border: Border(top: BorderSide(color: getxController.textColor.value))),
                                                                                       child: ListTile(
-                                                                                        onTap: () {  Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));},
-                                                                                        title: Text(subItem.termName,style: TextStyle(color: getxController.textColor.value),),
+                                                                                        onTap: () {
+                                                                                          Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
+                                                                                        },
+                                                                                        title: Text(
+                                                                                          subItem.termName,
+                                                                                          style: TextStyle(color: getxController.textColor.value),
+                                                                                        ),
                                                                                         trailing: ElevatedButton(
                                                                                           child: Text(
                                                                                             "Show",
-                                                                                            style: TextStyle(fontSize: ClsFontsize.DoubleExtraSmall,color: getxController.listviewtext.value),
+                                                                                            style: TextStyle(fontSize: ClsFontsize.DoubleExtraSmall, color: getxController.listviewtext.value),
                                                                                           ),
                                                                                           style: ElevatedButton.styleFrom(
                                                                                             backgroundColor: getxController.textColor.value,
@@ -1134,7 +1152,10 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                                                             Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(widget.token)));
                                                                                           },
                                                                                         ),
-                                                                                        subtitle: Text(subSubItem.packageDisplayName,style: TextStyle(color: getxController.textColor.value),),
+                                                                                        subtitle: Text(
+                                                                                          subSubItem.packageDisplayName,
+                                                                                          style: TextStyle(color: getxController.textColor.value),
+                                                                                        ),
                                                                                       ),
                                                                                     );
                                                                                   },
