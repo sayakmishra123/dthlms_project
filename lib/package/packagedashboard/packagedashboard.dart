@@ -344,374 +344,79 @@ class _PackageDashboardState extends State<PackageDashboard>
                                   AnimationController(vsync: this),
                               onClosing: () {},
                               builder: (context) {
-                                return Flexible(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        // border: Border.all(
-                                        //   width: 5,
-                                        //   color: ColorPage.blue,
-                                        // ),
-                                        color: Colors.black),
-                                    // decoration: ,
-                                    // height: 400,
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 50),
-                                    child: Column(
-                                      children: [
-                                        AppBar(
-                                          backgroundColor: Colors.black,
-                                          title: Text(
-                                            'App Theme',
-                                            style: FontFamily.font3,
-                                            textScaler: TextScaler.linear(1),
-                                          ),
+                                return Container(
+                                  decoration: BoxDecoration(
+                                      // border: Border.all(
+                                      //   width: 5,
+                                      //   color: ColorPage.blue,
+                                      // ),
+                                      color: Colors.black),
+                                  // decoration: ,
+                                  // height: 400,
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 50),
+                                  child: Column(
+                                    children: [
+                                      AppBar(
+                                        backgroundColor: Colors.black,
+                                        title: Text(
+                                          'App Theme',
+                                          style: FontFamily.font3,
+                                          textScaler: TextScaler.linear(1),
                                         ),
-                                        Row(
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          InkWell(
+                                            onTap: () {
+                                              // getxController.textColor.value=ColorPage.colorblack;
+                                              // getxController.backgroundColor.value=ColorPage.white;
+                                              //  getxController.listviewtext.value=ColorPage.white;
+                                
+                                
+                                            },
+                                            child: Image.asset(
+                                              'assets/sun.png',
+                                              width: 50,
+                                            ),
+                                          ),
+                                          SizedBox(width: 50),
+                                          InkWell(
+                                            onTap: () {
+                                //  getxController.listviewtext.value=ColorPage.colorblack;
+                                
+                                //                                                   getxController.textColor.value=ColorPage.white;
+                                //                                                 getxController.backgroundColor.value=ColorPage.colorblack;
+                                            },
+                                            child: Image.asset(
+                                              'assets/themes.png',
+                                              width: 50,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 10),
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            InkWell(
-                                              onTap: () {
-                                                getxController.textColor.value=ColorPage.colorblack;
-                                                getxController.backgroundColor.value=ColorPage.white;
-                                                 getxController.listviewtext.value=ColorPage.white;
-
-
-                                              },
-                                              child: Image.asset(
-                                                'assets/sun.png',
-                                                width: 50,
-                                              ),
-                                            ),
-                                            SizedBox(width: 50),
-                                            InkWell(
-                                              onTap: () {
- getxController.listviewtext.value=ColorPage.colorblack;
-
-                                                  getxController.textColor.value=ColorPage.white;
-                                                getxController.backgroundColor.value=ColorPage.colorblack;
-                                              },
-                                              child: Image.asset(
-                                                'assets/themes.png',
-                                                width: 50,
-                                              ),
+                                            Text(
+                                              'Primary Color',
+                                              style: FontFamily.font3,
+                                              textScaler:
+                                                  TextScaler.linear(1),
                                             )
                                           ],
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Primary Color',
-                                                style: FontFamily.font3,
-                                                textScaler:
-                                                    TextScaler.linear(1),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  0])),
-                                                  onPressed: () {
-                                                    getxController.toogleButtontextColor.value=false;
-                                                    getxController.activationbuttoncolor.value= ColorPage
-                                                            .themeColors[0];
-                                                    getxController
-                                                            .themecolor.value =
-                                                        ColorPage
-                                                            .themeColors[0];
-                                                    getxController
-                                                            .buttoncolor.value =
-                                                        ColorPage
-                                                            .themeColors[0];
-                                                    getxController
-                                                            .tooglebuttonBGcolor =
-                                                        ColorPage
-                                                            .toogleBGButtonColor[0];
-                                                    getxController
-                                                            .tooglebuttonFGcolor =
-                                                        ColorPage
-                                                            .toogleFGButtonColor[0];
-                                                            getxController.activationbuttoncolor.value=ColorPage.themeColors[0];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  1])),
-                                                  onPressed: () {
-                                                    getxController.activationbuttoncolor.value=ColorPage.themeColors[1];
-                                                    getxController.toogleButtontextColor.value=true;
-                                                    getxController
-                                                            .themecolor.value =
-                                                        ColorPage
-                                                            .themeColors[1];
-                                                    getxController
-                                                            .buttoncolor.value =
-                                                        ColorPage
-                                                            .themeColors[1];
-                                                    getxController
-                                                            .tooglebuttonBGcolor =
-                                                        ColorPage
-                                                            .toogleBGButtonColor[1];
-                                                    getxController
-                                                            .tooglebuttonFGcolor =
-                                                        ColorPage
-                                                            .toogleFGButtonColor[1];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  2])),
-                                                  onPressed: () {
-                                                    getxController.toogleButtontextColor.value=true;
-                                                    getxController.activationbuttoncolor.value=ColorPage.themeColors[2];
-                                                    getxController.themecolor.value=ColorPage.themeColors[2];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[2];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[2];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[2];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  3])),
-                                                  onPressed: () {
-                                                    getxController.toogleButtontextColor.value=true;
-                                                    getxController.activationbuttoncolor.value=ColorPage.themeColors[3];
-                                                   getxController.themecolor.value=ColorPage.themeColors[3];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[3];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[3];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[3];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  4])),
-                                                  onPressed: () {
-                                                    int i=4;
-                                                    getxController.toogleButtontextColor.value=true;
-                                                    getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                    ColorPage.themeColors[5],
-                                                  )),
-                                                  onPressed: () {
-                                                    getxController.toogleButtontextColor.value=false;
-                                                       int i=5;
-                                                       getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  6])),
-                                                  onPressed: () {
-                                                        int i=6;
-                                                        getxController.toogleButtontextColor.value=false;
-                                                        getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  7])),
-                                                  onPressed: () {
-                                                    getxController.toogleButtontextColor.value=false;
-                                                      int i=7;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  8])),
-                                                  onPressed: () {
-                                                        int i=8;getxController.toogleButtontextColor.value=false;
-                                                        getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  9])),
-                                                  onPressed: () {
-                                                        int i=9;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  10])),
-                                                  onPressed: () {
-                                                       int i=10;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                    ColorPage.themeColors[11],
-                                                  )),
-                                                  onPressed: () {
-                                                      int i=11;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  12])),
-                                                  onPressed: () {
-                                                    int i=12;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  13])),
-                                                  onPressed: () {
-                                                        int i=13;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                              IconButton.filled(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage
-                                                                      .themeColors[
-                                                                  14])),
-                                                  onPressed: () {
-                                                       int i=14;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
-                                                  },
-                                                  icon: Text('')),
-                                            ],
-                                          ),
-                                        ),
-                                        Row(
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5),
+                                        child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
@@ -721,16 +426,14 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                         MaterialStatePropertyAll(
                                                             ColorPage
                                                                     .themeColors[
-                                                                15])),
+                                                                0])),
                                                 onPressed: () {
-                                                      int i=15;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i]
-
-                                                     ;
-                                                     getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                               
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage
+                                                          .themeColors[0];
+                                                
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -739,14 +442,14 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                         MaterialStatePropertyAll(
                                                             ColorPage
                                                                     .themeColors[
-                                                                16])),
+                                                                1])),
                                                 onPressed: () {
-                                                     int i=16;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                
+                                                  getxController
+                                                          .themecolor.value =
+                                                      ColorPage
+                                                          .themeColors[1];
+                                               
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -755,14 +458,11 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                         MaterialStatePropertyAll(
                                                             ColorPage
                                                                     .themeColors[
-                                                                17])),
+                                                                2])),
                                                 onPressed: () {
-                                                     int i=17;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                 
+                                                  getxController.themecolor.value=ColorPage.themeColors[2];
+                                                  
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -771,14 +471,11 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                         MaterialStatePropertyAll(
                                                             ColorPage
                                                                     .themeColors[
-                                                                18])),
+                                                                3])),
                                                 onPressed: () {
-                                                      int i=18;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                             
+                                                 getxController.themecolor.value=ColorPage.themeColors[3];
+                                              
                                                 },
                                                 icon: Text('')),
                                             IconButton.filled(
@@ -787,68 +484,303 @@ class _PackageDashboardState extends State<PackageDashboard>
                                                         MaterialStatePropertyAll(
                                                             ColorPage
                                                                     .themeColors[
-                                                                19])),
+                                                                4])),
                                                 onPressed: () {
-                                                     int i=19;getxController.toogleButtontextColor.value=false;
-                                                   getxController.themecolor.value=ColorPage.themeColors[i];
-                                                   getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.buttoncolor.value=ColorPage.themeColors[i];
-                                                     getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
-                                                     getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                  int i=4;
+                                                
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                            
                                                 },
                                                 icon: Text('')),
                                           ],
                                         ),
-                                        Spacer(),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            children: [
-                                              ElevatedButton(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage.blue),
-                                                      shape: MaterialStatePropertyAll(
-                                                          ContinuousRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          0)))),
-                                                  onPressed: () {},
-                                                  child: Text(
-                                                    'Ok',
-                                                    style: FontFamily.font3,
-                                                  )),
-                                              SizedBox(
-                                                width: 50,
-                                              ),
-                                              ElevatedButton(
-                                                  style: ButtonStyle(
-                                                      backgroundColor:
-                                                          MaterialStatePropertyAll(
-                                                              ColorPage.red),
-                                                      shape: MaterialStatePropertyAll(
-                                                          ContinuousRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          0)))),
-                                                  onPressed: () {
-                                                    Get.back();
-                                                  },
-                                                  child: Text(
-                                                    'Cancel',
-                                                    style: FontFamily.font3,
-                                                  ))
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                  ColorPage.themeColors[5],
+                                                )),
+                                                onPressed: () {
+                                                  
+                                                     int i=5;
+                                                    //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  //  getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                  //  getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                  //  getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                },
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                6])),
+                                                onPressed: () {
+                                                      int i=6;
+                                                      // getxController.toogleButtontextColor.value=false;
+                                                      // getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  //  getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                  //  getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                  //  getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                },
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                7])),
+                                                onPressed: () {
+                                                  // getxController.toogleButtontextColor.value=false;
+                                                    int i=7;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
+                                                //    getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                //    getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                //    getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                },
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                8])),
+                                                onPressed: () {
+                                                      int i=8;
+                                                      // getxController.toogleButtontextColor.value=false;
+                                                      // getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  //  getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                  //  getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                  //  getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                },
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                9])),
+                                                onPressed: () {
+                                                      int i=9;getxController.toogleButtontextColor.value=false;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                //  getxController.activationbuttoncolor.value=ColorPage.themeColors[i];
+                                                //    getxController.buttoncolor.value=ColorPage.themeColors[i];
+                                                //    getxController.tooglebuttonBGcolor=ColorPage.toogleBGButtonColor[i];
+                                                //    getxController.tooglebuttonFGcolor=ColorPage.toogleFGButtonColor[i];
+                                                },
+                                                icon: Text('')),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                10])),
+                                                onPressed: () {
+                                                     int i=10;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                
+                                                },
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                  ColorPage.themeColors[11],
+                                                )),
+                                                onPressed: () {
+                                                    int i=11;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  
+                                                },
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                12])),
+                                                onPressed: () {
+                                                  int i=12;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                               
+                                                },
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                13])),
+                                                onPressed: () {
+                                                      int i=13;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                
+                                                },
+                                                icon: Text('')),
+                                            IconButton.filled(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage
+                                                                    .themeColors[
+                                                                14])),
+                                                onPressed: () {
+                                                     int i=14;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  
+                                                },
+                                                icon: Text('')),
+                                          ],
+                                        ),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          IconButton.filled(
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStatePropertyAll(
+                                                          ColorPage
+                                                                  .themeColors[
+                                                              15])),
+                                              onPressed: () {
+                                                    int i=15;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                  
+                                              },
+                                              icon: Text('')),
+                                          IconButton.filled(
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStatePropertyAll(
+                                                          ColorPage
+                                                                  .themeColors[
+                                                              16])),
+                                              onPressed: () {
+                                                   int i=16;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                
+                                              },
+                                              icon: Text('')),
+                                          IconButton.filled(
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStatePropertyAll(
+                                                          ColorPage
+                                                                  .themeColors[
+                                                              17])),
+                                              onPressed: () {
+                                                   int i=17;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                
+                                              },
+                                              icon: Text('')),
+                                          IconButton.filled(
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStatePropertyAll(
+                                                          ColorPage
+                                                                  .themeColors[
+                                                              18])),
+                                              onPressed: () {
+                                                    int i=18;
+                                               
+                                              },
+                                              icon: Text('')),
+                                          IconButton.filled(
+                                              style: ButtonStyle(
+                                                  backgroundColor:
+                                                      MaterialStatePropertyAll(
+                                                          ColorPage
+                                                                  .themeColors[
+                                                              19])),
+                                              onPressed: () {
+                                                   int i=19;
+                                                 getxController.themecolor.value=ColorPage.themeColors[i];
+                                                
+                                              },
+                                              icon: Text('')),
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            ElevatedButton(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage.blue),
+                                                    shape: MaterialStatePropertyAll(
+                                                        ContinuousRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        0)))),
+                                                onPressed: () {},
+                                                child: Text(
+                                                  'Ok',
+                                                  style: FontFamily.font3,
+                                                )),
+                                            SizedBox(
+                                              width: 50,
+                                            ),
+                                            ElevatedButton(
+                                                style: ButtonStyle(
+                                                    backgroundColor:
+                                                        MaterialStatePropertyAll(
+                                                            ColorPage.red),
+                                                    shape: MaterialStatePropertyAll(
+                                                        ContinuousRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        0)))),
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: Text(
+                                                  'Cancel',
+                                                  style: FontFamily.font3,
+                                                ))
+                                          ],
+                                        ),
+                                      )
+                                    ],
                                   ),
                                 );
                               });
