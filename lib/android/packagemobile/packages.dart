@@ -19,6 +19,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:showcaseview/showcaseview.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 //abhoymallik
 class PackageDashboardMobile extends StatefulWidget {
@@ -122,7 +123,11 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
         package.add(data);
       }
       filteredPackage = List.from(package);
-      setState(() {});
+      setState(() {
+
+
+        getxController.loading.value=false;
+      });
     }
   }
 
@@ -171,6 +176,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
 
   @override
   void initState() {
+    
     fnfindallpackage(widget.token);
     super.initState();
     searchController.addListener(_filterPackages);
@@ -199,318 +205,324 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child:  Scaffold(
-          appBar: AppBar(
-            backgroundColor: ColorPage.appbarcolor,
-            iconTheme: IconThemeData(color: ColorPage.white),
-            automaticallyImplyLeading: false,
-            //  leading: Row(children: [Padding(
-            //    padding: const EdgeInsets.only(left: 30.0),
-            //    child: Icon(Icons.person,color: ColorPage.white,),
-            //  )],),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 12, left: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Sayak Mishra",
-                      style: FontFamily.font9,
-                    ),
-                    Text(
-                      "Sayakmishra@gmail.com",
-                      style: FontFamily.font9,
-                    )
-                  ],
+      child:  Obx(()=>
+         Scaffold(
+            appBar: AppBar(
+              backgroundColor: ColorPage.appbarcolor,
+              iconTheme: IconThemeData(color: ColorPage.white),
+              automaticallyImplyLeading: false,
+              //  leading: Row(children: [Padding(
+              //    padding: const EdgeInsets.only(left: 30.0),
+              //    child: Icon(Icons.person,color: ColorPage.white,),
+              //  )],),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 12, left: 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Sayak Mishra",
+                        style: FontFamily.font9,
+                      ),
+                      Text(
+                        "Sayakmishra@gmail.com",
+                        style: FontFamily.font9,
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 15.0),
-                child: InkWell(
-                  onTap: () {
-                    showFullImageDialog();
-                  },
-                  child: CircleAvatar(
-                  
-                    backgroundColor: const Color.fromARGB(230, 255, 255, 255),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: InkWell(
+                    onTap: () {
+                      showFullImageDialog();
+                    },
+                    child: CircleAvatar(
                     
-                    child: Padding(
-                      padding: const EdgeInsets.all(3.0),
-                      child: CircleAvatar(
+                      backgroundColor: const Color.fromARGB(230, 255, 255, 255),
                       
+                      child: Padding(
+                        padding: const EdgeInsets.all(3.0),
+                        child: CircleAvatar(
                         
-                      
-                        backgroundImage: AssetImage("assets/sorojda.png"),
+                          
+                        
+                          backgroundImage: AssetImage("assets/sorojda.png"),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          backgroundColor: ColorPage.bgcolor,
-          body: Container(
-            child: Obx(
-              () => SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(height: 20),
-                     Container(
-                                          
-                                          decoration: BoxDecoration( borderRadius: BorderRadius.all(Radius.circular(25)), boxShadow: [
-                                            BoxShadow(color: ColorPage.appbarcolor.withOpacity(0.3),blurRadius: 12,spreadRadius: 5)
-                                          ]),
-                                          margin: EdgeInsets.symmetric(
-                                              horizontal: 20),
-                                          height: 55,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          child: TextFormField(
-                                            // onChanged: (value) {
-                                            //   setFilterData();
-                                            // },
-                                            controller: searchController,
-                                            decoration: InputDecoration(
-                                              hintStyle: TextStyle(
-                                                  color: ColorPage.appbarcolor,
-                                                  fontSize:
-                                                      ClsFontsize.ExtraSmall - 1),
-                                              hintText: 'Search',
-                                              fillColor: Color.fromARGB(255, 255, 255, 255),
-                                              filled: true,
-                                              suffixIcon: Icon(
-                                                Icons.search,
-                                                color: ColorPage.appbarcolor,
+              ],
+            ),
+            backgroundColor: ColorPage.bgcolor,
+            body: Skeletonizer(
+              enabled: getxController.loading.value,
+        
+              child: Container(
+                child: Obx(
+                  () => SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 20),
+                         Container(
+                                              
+                                              decoration: BoxDecoration( borderRadius: BorderRadius.all(Radius.circular(25)), boxShadow: [
+                                                BoxShadow(color: ColorPage.appbarcolor.withOpacity(0.3),blurRadius: 12,spreadRadius: 5)
+                                              ]),
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 20),
+                                              height: 55,
+                                              width:
+                                                  MediaQuery.of(context).size.width,
+                                              child: TextFormField(
+                                                // onChanged: (value) {
+                                                //   setFilterData();
+                                                // },
+                                                controller: searchController,
+                                                decoration: InputDecoration(
+                                                  hintStyle: TextStyle(
+                                                      color: ColorPage.appbarcolor,
+                                                      fontSize:
+                                                          ClsFontsize.ExtraSmall - 1),
+                                                  hintText: 'Search',
+                                                  fillColor: Color.fromARGB(255, 255, 255, 255),
+                                                  filled: true,
+                                                  suffixIcon: Icon(
+                                                    Icons.search,
+                                                    color: ColorPage.appbarcolor,
+                                                  ),
+                                                  border: OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(30),
+                                                      borderSide: BorderSide.none),
+                                                ),
                                               ),
-                                              border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  borderSide: BorderSide.none),
                                             ),
+                        SizedBox(height: 10),
+                        AnimatedButtonBar(
+                          controller: AnimatedButtonController()..setIndex(0),
+                          radius: 32.0,
+                          padding: const EdgeInsets.all(16.0),
+                          backgroundColor: ColorPage.bluegrey800,
+                          foregroundColor: ColorPage.bluegrey300,
+                          elevation: 24,
+                          curve: Curves.bounceIn,
+                          borderColor: ColorPage.white,
+                          borderWidth: 2,
+                          innerVerticalPadding: 16,
+                          children: [
+                            ButtonBarEntry(
+                                onTap: () {
+                                  getxController.packageshow.value = true;
+                                },
+                                child: Text(
+                                  'All Package',
+                                  style: FontFamily.mobilefont,
+                                )),
+                            ButtonBarEntry(
+                                onTap: () {
+                                  getxController.packageshow.value = false;
+                                },
+                                child: Text(
+                                  'My Package',
+                                  style: FontFamily.mobilefont,
+                                )),
+                          ],
+                        ),
+                        SizedBox(height: 20),
+                        getxController.packageshow.value
+                            ? filteredPackage.isNotEmpty
+                                ? ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: filteredPackage.length,
+                                    itemBuilder: (context, index) {
+                                      return Card(
+                                        elevation: 4,
+                                        margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                                        child: Container(
+                                         
+                                          width: MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                             boxShadow: [
+                                                                  BoxShadow(
+                                                                      color: Color
+                                                                              .fromARGB(
+                                                                                  255,
+                                                                                  225,
+                                                                                  214,
+                                                                                  214)
+                                                                          .withOpacity(
+                                                                              0.2),
+                                                                      offset: Offset(
+                                                                          -10, -10),
+                                                                      blurRadius: 10,
+                                                                      spreadRadius:
+                                                                          -5),
+                                                                  BoxShadow(
+                                                                      color: Color
+                                                                              .fromARGB(
+                                                                                  255,
+                                                                                  225,
+                                                                                  214,
+                                                                                  214)
+                                                                          .withOpacity(
+                                                                              0.2),
+                                                                      offset: Offset(
+                                                                          -10, -10),
+                                                                      blurRadius: 10,
+                                                                      spreadRadius:
+                                                                          -5),
+                                                                  BoxShadow(
+                                                                      color: const Color
+                                                                          .fromARGB(
+                                                                          255,
+                                                                          255,
+                                                                          255,
+                                                                          255),
+                                                                      offset: Offset(
+                                                                          -10, -10),
+                                                                      blurRadius: 10,
+                                                                      spreadRadius:
+                                                                          5),
+                                                                ],
+                                              color: ColorPage.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10))),
+                                          child: ExpansionTile(
+                                            shape:
+                                                Border.all(color: Colors.transparent),
+                                            title: Text(
+                                              filteredPackage[index].packageName,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            onExpansionChanged: (value) {
+                                              if (value &&
+                                                  !nestedData.containsKey(
+                                                      filteredPackage[index]
+                                                          .packageId)) {
+                                                fnfindpackage(widget.token,
+                                                    filteredPackage[index].packageId);
+                                              }
+                                            },
+                                            children: [
+                                              nestedData.containsKey(
+                                                      filteredPackage[index].packageId)
+                                                  ? ListView.builder(
+                                                      shrinkWrap: true,
+                                                      itemCount: 1,
+                                                      itemBuilder: (context, subIndex) {
+                                                        var subItem = nestedData[
+                                                            filteredPackage[index]
+                                                                .packageId]![subIndex];
+                                                        return Container(
+                                                          decoration: BoxDecoration(  border:
+                                                                                  Border(
+                                                                                top:
+                                                                                    BorderSide(color: ColorPage.colorblack, width: 1),
+                                                                              ),),
+                                                          child: ExpansionTile(
+                                                            shape: Border.all(
+                                                                color:
+                                                                    Colors.transparent),
+                                                            title:
+                                                                Text(subItem.courseName),
+                                                            subtitle:
+                                                                Text(subItem.termName),
+                                                            onExpansionChanged: (value) {
+                                                              if (value &&
+                                                                  !nestedData.containsKey(
+                                                                      subItem
+                                                                          .packageId)) {
+                                                                fnfindpackage(
+                                                                    widget.token,
+                                                                    subItem.packageId);
+                                                              }
+                                                            },
+                                                            children: [
+                                                              nestedData.containsKey(
+                                                                      subItem.packageId)
+                                                                  ? ListView.builder(
+                                                                      shrinkWrap: true,
+                                                                      itemCount: 1,
+                                                                                                      
+                                                                      //  nestedData[
+                                                                      //         subItem
+                                                                      //             .packageId]!
+                                                                      //     .length,
+                                                                      itemBuilder: (context,
+                                                                          subSubIndex) {
+                                                                        var subSubItem =
+                                                                            nestedData[subItem
+                                                                                    .packageId]![
+                                                                                subSubIndex];
+                                                                        return InkWell(
+                                                                          onTap: (){
+                                                                            Get.to(()=>Studyvidos());
+                                                                          },
+                                                                          child: Container(
+                                                                            decoration: BoxDecoration(  border:
+                                                                                  Border(
+                                                                                top:
+                                                                                    BorderSide(color: ColorPage.colorblack, width: 1),
+                                                                              ),),
+                                                                            child: ListTile(
+                                                                              onTap: () {
+                                                                                Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));
+                                                                              },
+                                                                              trailing: ElevatedButton(
+                                                                                                          child: Text(
+                                                                                                            "Show",
+                                                                                                            style: FontFamily.font8,
+                                                                                                          ),
+                                                                                                          style: ElevatedButton.styleFrom(
+                                                                                                            backgroundColor:ColorPage.color1,
+                                                                                                            shape: RoundedRectangleBorder(
+                                                                                                              borderRadius: BorderRadius.all(
+                                                                                                                Radius.circular(10),
+                                                                                                              ),
+                                                                                                            ),
+                                                                                                          ),
+                                                                                                          onPressed: () {Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));},
+                                                                                                        ),
+                                                                              title: Text(subItem
+                                                                                  .termName),
+                                                                              subtitle: Text(
+                                                                                  subSubItem
+                                                                                      .packageDisplayName),
+                                                                            ),
+                                                                          ),
+                                                                        );
+                                                                      },
+                                                                    )
+                                                                  : CircularProgressIndicator(),
+                                                            ],
+                                                          ),
+                                                        );
+                                                      },
+                                                    )
+                                                  : CircularProgressIndicator()
+                                            ],
                                           ),
                                         ),
-                    SizedBox(height: 10),
-                    AnimatedButtonBar(
-                      controller: AnimatedButtonController()..setIndex(0),
-                      radius: 32.0,
-                      padding: const EdgeInsets.all(16.0),
-                      backgroundColor: ColorPage.bluegrey800,
-                      foregroundColor: ColorPage.bluegrey300,
-                      elevation: 24,
-                      curve: Curves.bounceIn,
-                      borderColor: ColorPage.white,
-                      borderWidth: 2,
-                      innerVerticalPadding: 16,
-                      children: [
-                        ButtonBarEntry(
-                            onTap: () {
-                              getxController.packageshow.value = true;
-                            },
-                            child: Text(
-                              'All Package',
-                              style: FontFamily.mobilefont,
-                            )),
-                        ButtonBarEntry(
-                            onTap: () {
-                              getxController.packageshow.value = false;
-                            },
-                            child: Text(
-                              'My Package',
-                              style: FontFamily.mobilefont,
-                            )),
+                                      );
+                                    },
+                                  )
+                                : Center(
+                                    child:
+                                        Image.asset('assets/android/nodatafound.png'))
+                            : CircularProgressIndicator(),
                       ],
                     ),
-                    SizedBox(height: 20),
-                    getxController.packageshow.value
-                        ? filteredPackage.isNotEmpty
-                            ? ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: filteredPackage.length,
-                                itemBuilder: (context, index) {
-                                  return Card(
-                                    elevation: 4,
-                                    margin: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
-                                    child: Container(
-                                     
-                                      width: MediaQuery.of(context).size.width,
-                                      decoration: BoxDecoration(
-                                         boxShadow: [
-                                                              BoxShadow(
-                                                                  color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              225,
-                                                                              214,
-                                                                              214)
-                                                                      .withOpacity(
-                                                                          0.2),
-                                                                  offset: Offset(
-                                                                      -10, -10),
-                                                                  blurRadius: 10,
-                                                                  spreadRadius:
-                                                                      -5),
-                                                              BoxShadow(
-                                                                  color: Color
-                                                                          .fromARGB(
-                                                                              255,
-                                                                              225,
-                                                                              214,
-                                                                              214)
-                                                                      .withOpacity(
-                                                                          0.2),
-                                                                  offset: Offset(
-                                                                      -10, -10),
-                                                                  blurRadius: 10,
-                                                                  spreadRadius:
-                                                                      -5),
-                                                              BoxShadow(
-                                                                  color: const Color
-                                                                      .fromARGB(
-                                                                      255,
-                                                                      255,
-                                                                      255,
-                                                                      255),
-                                                                  offset: Offset(
-                                                                      -10, -10),
-                                                                  blurRadius: 10,
-                                                                  spreadRadius:
-                                                                      5),
-                                                            ],
-                                          color: ColorPage.white,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(10))),
-                                      child: ExpansionTile(
-                                        shape:
-                                            Border.all(color: Colors.transparent),
-                                        title: Text(
-                                          filteredPackage[index].packageName,
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        onExpansionChanged: (value) {
-                                          if (value &&
-                                              !nestedData.containsKey(
-                                                  filteredPackage[index]
-                                                      .packageId)) {
-                                            fnfindpackage(widget.token,
-                                                filteredPackage[index].packageId);
-                                          }
-                                        },
-                                        children: [
-                                          nestedData.containsKey(
-                                                  filteredPackage[index].packageId)
-                                              ? ListView.builder(
-                                                  shrinkWrap: true,
-                                                  itemCount: 1,
-                                                  itemBuilder: (context, subIndex) {
-                                                    var subItem = nestedData[
-                                                        filteredPackage[index]
-                                                            .packageId]![subIndex];
-                                                    return Container(
-                                                      decoration: BoxDecoration(  border:
-                                                                              Border(
-                                                                            top:
-                                                                                BorderSide(color: ColorPage.colorblack, width: 1),
-                                                                          ),),
-                                                      child: ExpansionTile(
-                                                        shape: Border.all(
-                                                            color:
-                                                                Colors.transparent),
-                                                        title:
-                                                            Text(subItem.courseName),
-                                                        subtitle:
-                                                            Text(subItem.termName),
-                                                        onExpansionChanged: (value) {
-                                                          if (value &&
-                                                              !nestedData.containsKey(
-                                                                  subItem
-                                                                      .packageId)) {
-                                                            fnfindpackage(
-                                                                widget.token,
-                                                                subItem.packageId);
-                                                          }
-                                                        },
-                                                        children: [
-                                                          nestedData.containsKey(
-                                                                  subItem.packageId)
-                                                              ? ListView.builder(
-                                                                  shrinkWrap: true,
-                                                                  itemCount: 1,
-                                                                                                  
-                                                                  //  nestedData[
-                                                                  //         subItem
-                                                                  //             .packageId]!
-                                                                  //     .length,
-                                                                  itemBuilder: (context,
-                                                                      subSubIndex) {
-                                                                    var subSubItem =
-                                                                        nestedData[subItem
-                                                                                .packageId]![
-                                                                            subSubIndex];
-                                                                    return InkWell(
-                                                                      onTap: (){
-                                                                        Get.to(()=>Studyvidos());
-                                                                      },
-                                                                      child: Container(
-                                                                        decoration: BoxDecoration(  border:
-                                                                              Border(
-                                                                            top:
-                                                                                BorderSide(color: ColorPage.colorblack, width: 1),
-                                                                          ),),
-                                                                        child: ListTile(
-                                                                          onTap: () {
-                                                                            Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));
-                                                                          },
-                                                                          trailing: ElevatedButton(
-                                                                                                      child: Text(
-                                                                                                        "Show",
-                                                                                                        style: FontFamily.font8,
-                                                                                                      ),
-                                                                                                      style: ElevatedButton.styleFrom(
-                                                                                                        backgroundColor:ColorPage.color1,
-                                                                                                        shape: RoundedRectangleBorder(
-                                                                                                          borderRadius: BorderRadius.all(
-                                                                                                            Radius.circular(10),
-                                                                                                          ),
-                                                                                                        ),
-                                                                                                      ),
-                                                                                                      onPressed: () {Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));},
-                                                                                                    ),
-                                                                          title: Text(subItem
-                                                                              .termName),
-                                                                          subtitle: Text(
-                                                                              subSubItem
-                                                                                  .packageDisplayName),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  },
-                                                                )
-                                                              : CircularProgressIndicator(),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  },
-                                                )
-                                              : CircularProgressIndicator()
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              )
-                            : Center(
-                                child:
-                                    Image.asset('assets/android/nodatafound.png'))
-                        : CircularProgressIndicator(),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
+      ),
      
     );
   }

@@ -231,6 +231,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                     formfieldsize,
                                                                 child:
                                                                     TextFormField(
+                                                                      
                                                                   autovalidateMode:
                                                                       AutovalidateMode
                                                                           .onUserInteraction,
