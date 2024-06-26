@@ -140,7 +140,7 @@ class _VideoDashboardState extends State<VideoDashboard>
             child: Expanded(
               child: DefaultTabController(
                   length: 6,
-                  child: Obx(()=>
+                  child: 
                    Scaffold(
                       backgroundColor: ColorPage.bgcolor,
                       appBar: AppBar(
@@ -399,7 +399,7 @@ class _VideoDashboardState extends State<VideoDashboard>
                     ),
                   )),
             ),
-          ),
+          
           Expanded(
               child: Container(
                   color: Colors.black,

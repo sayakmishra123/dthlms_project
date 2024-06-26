@@ -434,8 +434,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
             child: Expanded(
               child: DefaultTabController(
                 length: 4,
-                child: Obx(
-                  ()=> Scaffold(
+                child:Scaffold(
                     backgroundColor: ColorPage.bgcolor,
                     appBar: AppBar(
                       iconTheme: IconThemeData(color: ColorPage.white),
@@ -517,7 +516,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                 ),
               ),
             ),
-          ),
+          
           Expanded(
               child: Container(
                   color: Colors.black,
