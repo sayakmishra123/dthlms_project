@@ -14,14 +14,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class signInOtpScreen extends StatefulWidget {
-  String signupuser;
-  String signupfirstname;
-  String signuplastname;
-  String signupemail;
-  String signuppassword;
-  String signupphno;
-  signInOtpScreen(this.signupuser, this.signupfirstname, this.signuplastname,
-      this.signupemail, this.signuppassword, this.signupphno,
+
+  signInOtpScreen(
       {super.key});
 
   // signInOtpScreen({super.key});
@@ -31,6 +25,11 @@ class signInOtpScreen extends StatefulWidget {
 }
 
 class _signInOtpScreenState extends State<signInOtpScreen> {
+
+
+
+
+
   late double screenwidth = MediaQuery.of(context).size.width;
   late double spaceBetweenOtpAndText = MediaQuery.of(context).size.width / 22;
   late double spaceBetweenOtpboxAndText =
@@ -43,6 +42,15 @@ class _signInOtpScreenState extends State<signInOtpScreen> {
       MediaQuery.of(context).size.width / 18;
   // ignore: non_constant_identifier_names
   Getx get_obj = Get.put(Getx());
+
+   final signupuser=Get.arguments['signupuser'];
+  final signupfirstname=Get.arguments['signupfirstname'];
+  final signuplastname=Get.arguments['signuplastname'];
+  final signupemail=Get.arguments['signupemail'];
+  final signuppassword=Get.arguments['signuppassword'];
+  final signupphno=Get.arguments['signupphno'];
+
+
   String key = '';
   @override
   void initState() {
@@ -55,7 +63,7 @@ class _signInOtpScreenState extends State<signInOtpScreen> {
 
   Future call() async {
     try {
-      signupcodegenerate(widget.signupphno, widget.signupemail, context)
+      signupcodegenerate(signupphno, signupemail, context)
           .then((value) {
         print(value);
         key = value;
@@ -235,12 +243,12 @@ class _signInOtpScreenState extends State<signInOtpScreen> {
                                 onPressed: () {
                                   signupApi(
                                       context,
-                                      widget.signupuser,
-                                      widget.signupfirstname,
-                                      widget.signuplastname,
-                                      widget.signupemail,
-                                      widget.signuppassword,
-                                      widget.signupphno,
+                                    signupuser,
+                                      signupfirstname,
+                                    signuplastname,
+                                   signupemail,
+                                   signuppassword,
+                                    signupphno,
                                       key,
                                       get_obj.signupotp.value);
                                 },

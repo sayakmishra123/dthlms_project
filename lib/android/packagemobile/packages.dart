@@ -23,11 +23,11 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 //abhoymallik
 class PackageDashboardMobile extends StatefulWidget {
-  final String token;
-  const PackageDashboardMobile(this.token, {super.key});
+  
+  const PackageDashboardMobile( {super.key});
 
   @override
-  State<PackageDashboardMobile> createState() => _PackageDashboardMobileState();
+  State<PackageDashboardMobile> createState() => PackageDashboardMobileState();
 }
 
 class AllPackage {
@@ -80,9 +80,10 @@ class PackageFind {
   });
 }
 
-class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
+class PackageDashboardMobileState extends State<PackageDashboardMobile> {
   late double screenwidth = MediaQuery.of(context).size.width;
   Getx getxController = Get.put(Getx());
+  final token = Get.arguments['token'];
 
   List<AllPackage> package = [];
   List<AllPackage> filteredPackage = [];
@@ -177,7 +178,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
   @override
   void initState() {
     
-    fnfindallpackage(widget.token);
+    fnfindallpackage(token);
     super.initState();
     searchController.addListener(_filterPackages);
   }
@@ -404,7 +405,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                   !nestedData.containsKey(
                                                       filteredPackage[index]
                                                           .packageId)) {
-                                                fnfindpackage(widget.token,
+                                                fnfindpackage(token,
                                                     filteredPackage[index].packageId);
                                               }
                                             },
@@ -438,7 +439,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                                       subItem
                                                                           .packageId)) {
                                                                 fnfindpackage(
-                                                                    widget.token,
+                                                                    token,
                                                                     subItem.packageId);
                                                               }
                                                             },
@@ -471,7 +472,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                                               ),),
                                                                             child: ListTile(
                                                                               onTap: () {
-                                                                                Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));
+                                                                                Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(token)));
                                                                               },
                                                                               trailing: ElevatedButton(
                                                                                                           child: Text(
@@ -486,7 +487,7 @@ class _PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                                                                               ),
                                                                                                             ),
                                                                                                           ),
-                                                                                                          onPressed: () {Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(widget.token)));},
+                                                                                                          onPressed: () {Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(token)));},
                                                                                                         ),
                                                                               title: Text(subItem
                                                                                   .termName),

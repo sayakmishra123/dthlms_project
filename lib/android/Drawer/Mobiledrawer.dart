@@ -3,15 +3,15 @@
 import 'package:flutter/material.dart';
 
 // ignore: camel_case_types
-class mobileDrawer extends StatefulWidget {
-  const mobileDrawer({super.key});
+class MobileDrawer extends StatefulWidget {
+  const MobileDrawer({super.key});
 
   @override
-  State<mobileDrawer> createState() => _mobileDrawerState();
+  State<MobileDrawer> createState() => _MobileDrawerState();
 }
 
 // ignore: camel_case_types
-class _mobileDrawerState extends State<mobileDrawer> {
+class _MobileDrawerState extends State<MobileDrawer> {
   @override
   Widget build(BuildContext context) {
     return const Placeholder();

@@ -3,6 +3,7 @@
 import 'dart:io';
 import 'package:advertising_id/advertising_id.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:windows_system_info/windows_system_info.dart';
@@ -49,9 +50,13 @@ class ClsDeviceInfo {
     ];
   }
 
-  static Future<List<String>> androidInfo() async {
+  static Future<List<String>> androidInfo(BuildContext context) async {
+
+    
+
+    
     DeviceInfoPlugin android = DeviceInfoPlugin();
-    List<String> information = [];
+    List<dynamic> information = [];
     String? advertisingId;
 // Platform messages may fail, so we use a try/catch PlatformException.
 
@@ -62,13 +67,27 @@ class ClsDeviceInfo {
     }
 
     var info = await android.androidInfo;
+      bool tabletCheck = isTablet(context);
+
+     
 
     print(information);
     return [
-      "AddId--$advertisingId",
-      "deviceId--${info.id}",
-      "type--Android",
-      "Android(${info.version.release})${info.supportedAbis}${info.model},${info.manufacturer}",
+      "$advertisingId",
+      "${info.id}",
+      
+      "Android",
+      
+      "{id: ${info.supportedAbis}),model: ${info.model},OS: ${info.manufacturer}}",
+      
+    
     ];
   }
+
+ static bool isTablet(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  final   diagonal = (size.width * size.width + size.height * size.height);
+  final isTablet = diagonal > 1100.0; // This threshold can be adjusted
+  return isTablet;
+}
 }

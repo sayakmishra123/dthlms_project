@@ -1,7 +1,9 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
+import 'package:dthlms/android/Drawer/Mobiledrawer.dart';
 import 'package:dthlms/android/ForgetPassword/ForgetPasswordScreen.dart';
 import 'package:dthlms/android/Homepage/MobileHomepage.dart';
+import 'package:dthlms/android/SigninOtp/OtpScreen.dart';
 import 'package:dthlms/android/login/dth_mob_login.dart';
 import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
@@ -20,6 +22,11 @@ class pageRouter {
     GetPage(
       name: '/package',
       page: () => PackageDashboard(),
+    ),
+
+     GetPage(
+      name: '/Mobiledrawer',
+      page: () => MobileDrawer(),
     ),
     GetPage(
       name: '/Dashboard',
@@ -40,6 +47,14 @@ class pageRouter {
     GetPage(
       name: '/Mobileforgetpassword',
       page: () => ForgetPasswordMobile(),
+    ),
+    GetPage(
+      name: '/Mobilepakage',
+      page: () => PackageDashboardMobile(),
+    ),
+    GetPage(
+      name: '/Mobilesigninotpscreen',
+      page: () => SignInOtpScreen(),
     ),
   ];
 }

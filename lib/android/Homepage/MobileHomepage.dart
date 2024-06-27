@@ -46,7 +46,7 @@ class _MobileHomepageState extends State<MobileHomepage> {
     return SafeArea(
       child: Obx(
         () => Scaffold(
-          drawer: const mobileDrawer(),
+          drawer: const MobileDrawer(),
           appBar: AppBar(
             backgroundColor: ColorPage.appbarcolor,
             actions: [
@@ -115,7 +115,7 @@ class _MobileHomepageState extends State<MobileHomepage> {
                         [
                           InkWell(
                             onTap: () {
-                              Get.to(() => const PackageDashboardMobile(''));
+                             Get.toNamed("/Mobilepakage",arguments: '');
                             },
                             child: buildContainer(
                               context,
@@ -132,7 +132,7 @@ class _MobileHomepageState extends State<MobileHomepage> {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.to(() => const PackageDashboardMobile(''));
+                               Get.toNamed("/Mobilepakage",arguments: '');
                             },
                             child: buildContainer(
                               context,

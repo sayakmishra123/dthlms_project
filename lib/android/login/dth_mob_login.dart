@@ -515,24 +515,27 @@ FocusNode focusNode = FocusNode();
                                                                   .text)) {
                                                         mobile_key_signup.currentState!
                                                             .save();
-                                                        Get.to(
-                                                            () =>
-                                                                signInOtpScreen(
-                                                                  signupuser
-                                                                      .text,
-                                                                  signupfirstname
-                                                                      .text,
-                                                                      signuplastname
-                                                                      .text,
-                                                                  signupemail
-                                                                      .text,
-                                                                  signuppassword
-                                                                      .text,
-                                                                  signupphno
-                                                                      .text,
-                                                                ),
-                                                            transition: Transition
-                                                                .leftToRight);
+
+
+                                                         
+                                                        // Get.to(
+                                                        //     () =>
+                                                        //         signInOtpScreen(
+                                                        //           signupuser
+                                                        //               .text,
+                                                        //           signupfirstname
+                                                        //               .text,
+                                                        //               signuplastname
+                                                        //               .text,
+                                                        //           signupemail
+                                                        //               .text,
+                                                        //           signuppassword
+                                                        //               .text,
+                                                        //           signupphno
+                                                        //               .text,
+                                                        //         ),
+                                                            // transition: Transition
+                                                            //     .leftToRight);
                                                       } else {
                                                         Get.snackbar("Error",
                                                             "Please enter valid details",
@@ -784,18 +787,23 @@ FocusNode focusNode = FocusNode();
                                                     color: ColorPage.colorgrey,
                                                     onPressed: () async {
                                                      
-                                                      if (mobile_key_login
-                                                          .currentState!
-                                                          .validate()) {
-                                                        mobile_key_login.currentState!
-                                                            .save();
+                                                      // if (mobile_key_login
+                                                      //     .currentState!
+                                                      //     .validate()) {
+                                                      //   mobile_key_login.currentState!
+                                                      //       .save();
    
+                                                        // await loginApi(
+                                                        //     context,
+                                                        //     loginemail.text,
+                                                        //     loginpassword.text,
+                                                        //     loginotp.text);
                                                         await loginApi(
                                                             context,
-                                                            loginemail.text,
-                                                            loginpassword.text,
+                                                            'tester1',
+                                                           'Admin@1234',
                                                             loginotp.text);
-                                                      }
+                                                      // }
     
 
 

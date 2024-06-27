@@ -37,11 +37,11 @@ Future loginApi(
   // }
 
   if (Platform.isAndroid) {
-    deviceinfo = await ClsDeviceInfo.androidInfo();
+    deviceinfo = await ClsDeviceInfo.androidInfo(context);
   } else if (Platform.isWindows) {
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   } else if (Platform.isIOS) {
-    deviceinfo = await ClsDeviceInfo.androidInfo();
+    deviceinfo = await ClsDeviceInfo.androidInfo(context);
   } else if (Platform.isMacOS) {
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   }
@@ -66,6 +66,7 @@ Future loginApi(
       deviceinfo[2],
       deviceinfo[3],
     );
+    print(logindata);
   }
   final res =
       await http.post(Uri.https(ClsUrlApi.mainurl, ClsUrlApi.loginEndpoint),
@@ -97,7 +98,7 @@ Future loginApi(
     Platform.isWindows
         ? Get.toNamed('/package',
             arguments: {'token': jsondata['result']['token']})
-        : Get.to(() => PackageDashboardMobile(jsondata['result']['token']));
+        : Get.toNamed("/Mobilepakage",arguments: {'token':jsondata['result']['token']});
 
     // showDialog(
     //     context: context,
@@ -139,12 +140,12 @@ Future signupApi(
   loader(context);
   var deviceinfo;
   if (Platform.isAndroid) {
-    deviceinfo = await ClsDeviceInfo.androidInfo();
+    deviceinfo = await ClsDeviceInfo.androidInfo(context);
     print(deviceinfo);
   } else if (Platform.isWindows) {
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   } else if (Platform.isIOS) {
-    deviceinfo = ClsDeviceInfo.androidInfo();
+    deviceinfo = ClsDeviceInfo.androidInfo(context);
   } else if (Platform.isMacOS) {
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   }
