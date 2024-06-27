@@ -70,4 +70,9 @@ class ClsMap {
       'date': UtcTime()
     };
   }
+  Map objStudentVideoReview(videoid,optionid){
+    return {'videoid':videoid,
+    'optionid':optionid
+  };
+}
 }
