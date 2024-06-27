@@ -28,7 +28,8 @@ class ClsDeviceInfo {
       'configaration': {
         "id": WindowsSystemInfo.os?.serial.toString(),
         "model": WindowsSystemInfo.system?.model.toString(),
-        "proccesor": WindowsSystemInfo.cpu?.brand.toString()
+        "proccesor": WindowsSystemInfo.cpu?.brand.toString(),
+        "version": Platform.operatingSystemVersion.toString(),
       },
     };
   }

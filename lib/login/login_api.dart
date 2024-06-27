@@ -30,11 +30,7 @@ Future loginApi(
   var logindata;
   final getObj = Get.put(Getx());
   loader(context);
-  var deviceinfo = {};
-
-  // if (Platform.isAndroid) {
-  //   deviceinfo = await ClsDeviceInfo.androidInfo();
-  // }
+  var deviceinfo;
 
   if (Platform.isAndroid) {
     deviceinfo = await ClsDeviceInfo.androidInfo(context);
@@ -47,12 +43,15 @@ Future loginApi(
   }
   if (Platform.isAndroid) {
     logindata = ClsMap().objLoginApi(loginemail, password, otp, deviceinfo);
-    print(logindata);
   } else if (Platform.isWindows) {
     logindata = ClsMap().objLoginApi(loginemail, password, otp, deviceinfo);
   }
+<<<<<<< HEAD
   print(jsonEncode(logindata));
   Get.back();
+=======
+  print(deviceinfo);
+>>>>>>> 836e8592a044d452502349ddc14ae22a1f16a149
   final res =
       await http.post(Uri.https(ClsUrlApi.mainurl, ClsUrlApi.loginEndpoint),
           headers: <String, String>{
@@ -83,6 +82,7 @@ Future loginApi(
     Platform.isWindows
         ? Get.toNamed('/package',
             arguments: {'token': jsondata['result']['token']})
+<<<<<<< HEAD
         : Get.toNamed("/Mobilevideodashboard",arguments:{'token': jsondata['result']['token']} );
 
   // showDialog(
@@ -103,6 +103,9 @@ Future loginApi(
   //             dbdata.toString(),
   //           ));
   //     });
+=======
+        : Get.to(() => PackageDashboardMobile(jsondata['result']['token']));
+>>>>>>> 836e8592a044d452502349ddc14ae22a1f16a149
   } else {
     Get.back();
     ClsErrorMsg.fnErrorDialog(context, 'Login', jsondata['errorMessages'], res);
@@ -136,19 +139,15 @@ Future signupApi(
   }
 
   var signupdata = ClsMap().objSignupApi(
-    signupuser,
-    signupfirstname,
-    signuplastname,
-    signupemail,
-    signuppassword,
-    signupphno,
-    key,
-    otp,
-    deviceinfo[0],
-    deviceinfo[1],
-    deviceinfo[2],
-    deviceinfo[3],
-  );
+      signupuser,
+      signupfirstname,
+      signuplastname,
+      signupemail,
+      signuppassword,
+      signupphno,
+      key,
+      otp,
+      deviceinfo);
 
   final http.Response res = await http.post(
       Uri.https(ClsUrlApi.mainurl, '${ClsUrlApi.signupEndpoint}$key'),

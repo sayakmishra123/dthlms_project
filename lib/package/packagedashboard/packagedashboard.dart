@@ -952,6 +952,11 @@ class PackageDashboardState extends State<PackageDashboard>
                                                               ColorPage.bgcolor,
                                                         ),
                                                         child: ExpansionTile(
+                                                          leading: Icon(
+                                                            Icons.folder,
+                                                            color: Colors
+                                                                .deepOrange,
+                                                          ),
                                                           shape: Border.all(
                                                               color: Colors
                                                                   .transparent),

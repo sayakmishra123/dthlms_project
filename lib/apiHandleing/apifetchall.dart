@@ -11,9 +11,9 @@ import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
 
+Getx getx = Get.put(Getx());
 Future forgetgenerateCode(
     BuildContext context, String signupphno, String signupemail) async {
-  Getx getx = Get.put(Getx());
   loader(context);
   Map body = ClsMap().objSignupconfirmation(signupphno, signupemail);
   var res = await http.post(
@@ -31,7 +31,7 @@ Future forgetgenerateCode(
     getx.forgetpasswordemailcode.value = true;
     return jsondata['result'].toString();
   } else {
-    return jsondata['errorMessages'];
+    return 'jhsbjknbfkjnkajnasd';
   }
 
   // forgetPassword(context, signupemail, jsondata['result']);
@@ -41,7 +41,7 @@ Future forgetPassword(BuildContext context, String signupemail, String key,
     String otpcode) async {
   // try {
   loader(context);
-  Getx getx = Get.put(Getx());
+
   print('forgetpassword');
   Map body = ClsMap().objforgetPassword(signupemail, otpcode);
   final client = HttpClient();
@@ -105,5 +105,25 @@ Future resetPassword(BuildContext context, String email, String ph, String pass,
     Get.back();
     ClsErrorMsg.fnErrorDialog(
         context, 'Password reset', json['errorMessages'], responseBody);
+  }
+}
+
+Future studentWatchtime(BuildContext context) async {
+  loader(context);
+  Map body = ClsMap().objStudentWatchTime(1, 300, 5);
+  var res = await http.post(
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.generateCodeEndpoint),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(body));
+  var jsondata = jsonDecode(res.body);
+  print(jsondata);
+  print('object');
+  Get.back();
+  if (jsondata['statusCode'] == 200 && jsondata['isSuccess'] == true) {
+    return jsondata['result'].toString();
+  } else {
+    return 'kmlfmkzmfkdk';
   }
 }
