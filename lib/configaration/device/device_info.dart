@@ -8,48 +8,29 @@ import 'package:flutter/services.dart';
 import 'package:windows_system_info/windows_system_info.dart';
 
 class ClsDeviceInfo {
-  static Future<List<String>> windowsInfo() async {
+  static Future<Map<String, dynamic>> windowsInfo() async {
     final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
     WindowsDeviceInfo windowsInfo = await deviceInfoPlugin.windowsInfo;
 
     await WindowsSystemInfo.initWindowsInfo(requiredValues: [
-      WindowsSystemInfoFeat.os,
-      WindowsSystemInfoFeat.cpu,
-      WindowsSystemInfoFeat.system,
+      WindowsSystemInfoFeat.all,
     ]);
     if (await WindowsSystemInfo.isInitilized) {}
 
-    // if (kDebugMode) {
-    //   print("motherboard uuid id- ${WindowsSystemInfo.os?.uuid.toString()}");
-    // }
-    // if (kDebugMode) {
-    //   print('Windows processer:${WindowsSystemInfo.cpu?.brand.toString()}');
-    // }
-    // if (kDebugMode) {
-    //   print('Type:${Platform.operatingSystem}');
-    // }
-    // if (kDebugMode) {
-    //   print('id:${WindowsSystemInfo.os?.serial.toString()}');
-    // }
-    // if (kDebugMode) {
-    //   print('Windows Version:${WindowsSystemInfo.os?.distro.toString()}');
-    // }
-    // WindowsSystemInfoFeat.os.
-    print([
-      "${WindowsSystemInfo.os?.uuid.toString()}",
-      windowsInfo.deviceId,
-      'Type:${Platform.operatingSystem}',
-      'id:${WindowsSystemInfo.os?.serial.toString()},${WindowsSystemInfo.os?.distro.toString()},${WindowsSystemInfo.cpu?.brand.toString()}',
-    ]);
-    return [
-      "${WindowsSystemInfo.os?.uuid.toString()}",
-      windowsInfo.deviceId,
-      'Type:${Platform.operatingSystem}',
-      'id:${WindowsSystemInfo.os?.serial.toString()},${WindowsSystemInfo.os?.distro.toString()},${WindowsSystemInfo.cpu?.brand.toString()}',
-    ];
+    return {
+      'deviceid1': WindowsSystemInfo.os?.uuid.toString(),
+      'deviceid2': windowsInfo.deviceId,
+      'type': Platform.operatingSystem,
+      'typekind': 'windows',
+      'configaration': {
+        "id": WindowsSystemInfo.os?.serial.toString(),
+        "model": WindowsSystemInfo.system?.model.toString(),
+        "proccesor": WindowsSystemInfo.cpu?.brand.toString()
+      },
+    };
   }
 
-  static Future<List<String>> androidInfo() async {
+  static Future<Map<String, dynamic>> androidInfo() async {
     DeviceInfoPlugin android = DeviceInfoPlugin();
     List<String> information = [];
     String? advertisingId;
@@ -64,11 +45,16 @@ class ClsDeviceInfo {
     var info = await android.androidInfo;
 
     print(information);
-    return [
-      "AddId--$advertisingId",
-      "deviceId--${info.id}",
-      "type--Android",
-      "Android(${info.version.release})${info.supportedAbis}${info.model},${info.manufacturer}",
-    ];
+    return {
+      'deviceid1': advertisingId,
+      "deviceid2": info.id,
+      "type": "Android",
+      'typekind': 'mobile',
+      'configaration': {
+        'id': '${info.supportedAbis}',
+        'model': '${info.model}',
+        'proccesor': '${info.manufacturer}'
+      }
+    };
   }
 }

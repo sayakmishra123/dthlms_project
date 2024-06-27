@@ -1,18 +1,18 @@
-import 'dart:async';
-import 'dart:io';
-
-import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dthlms/ThemeData/color/color.dart';
-import 'package:dthlms/db/copydbfun.dart';
-import 'package:dthlms/db/dbfunction/dbfunction.dart';
-import 'package:dthlms/package/packagescreen.dart';
-import 'package:flutter/material.dart';
+import 'dart:async' show StreamSubscription;
+import 'dart:io' show Platform;
+import 'package:connectivity_plus/connectivity_plus.dart'
+    show Connectivity, ConnectivityResult;
+import 'package:dthlms/db/copydbfun.dart' show copyDatabase;
+import 'package:dthlms/db/dbfunction/dbfunction.dart' show DbHandler;
+import 'package:dthlms/package/packagescreen.dart' show AllPackage, PackageFind;
+import 'package:flutter/material.dart'
+    show Colors, Icon, Icons, Text, TextButton, TextStyle;
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
 import 'package:simnumber/siminfo.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart'
+    show databaseFactory, databaseFactoryFfi, sqfliteFfiInit;
 
-import '../login/loginmodel.dart';
+import '../login/loginmodel.dart' show DthloginUserDetails;
 
 class Getx extends GetxController {
   RxBool show = false.obs;

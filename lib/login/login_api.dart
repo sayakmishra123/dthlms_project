@@ -30,7 +30,7 @@ Future loginApi(
   var logindata;
   final getObj = Get.put(Getx());
   loader(context);
-  var deviceinfo = [];
+  var deviceinfo = {};
 
   // if (Platform.isAndroid) {
   //   deviceinfo = await ClsDeviceInfo.androidInfo();
@@ -46,81 +46,67 @@ Future loginApi(
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   }
   if (Platform.isAndroid) {
-    logindata = ClsMap().objLoginApi(
-      loginemail,
-      password,
-      otp,
-      deviceinfo[0],
-      deviceinfo[1],
-      deviceinfo[2],
-      deviceinfo[3],
-    );
+    logindata = ClsMap().objLoginApi(loginemail, password, otp, deviceinfo);
     print(logindata);
   } else if (Platform.isWindows) {
-    logindata = ClsMap().objLoginApi(
-      loginemail,
-      password,
-      otp,
-      deviceinfo[0],
-      deviceinfo[1],
-      deviceinfo[2],
-      deviceinfo[3],
-    );
+    logindata = ClsMap().objLoginApi(loginemail, password, otp, deviceinfo);
   }
-  final res =
-      await http.post(Uri.https(ClsUrlApi.mainurl, ClsUrlApi.loginEndpoint),
-          headers: <String, String>{
-            'Content-Type': 'application/json',
-          },
-          body: json.encode(logindata));
+  print(jsonEncode(logindata));
+  Get.back();
+//   final res =
+//       await http.post(Uri.https(ClsUrlApi.mainurl, ClsUrlApi.loginEndpoint),
+//           headers: <String, String>{
+//             'Content-Type': 'application/json',
+//           },
+//           body: json.encode(logindata));
 
-  var jsondata = json.decode(res.body);
-  print(jsondata);
-  if (res.statusCode == 200 && jsondata['isSuccess'] == true) {
-    print(jsondata);
-    final userdata = DthloginUserDetails(
-        email: jsondata['result']['email'],
-        phoneNumber: jsondata['result']['phoneNumber'],
-        token: jsondata['result']['token']);
-    getObj.loginuserdata.add(userdata);
-    // ignore: unused_local_variable
-    List dbdata = [];
+//   var jsondata = json.decode(res.body);
+//   print(jsondata);
+//   if (res.statusCode == 200 && jsondata['isSuccess'] == true) {
+//     print(jsondata);
+//     final userdata = DthloginUserDetails(
+//         email: jsondata['result']['email'],
+//         phoneNumber: jsondata['result']['phoneNumber'],
+//         token: jsondata['result']['token']);
+//     getObj.loginuserdata.add(userdata);
+//     // ignore: unused_local_variable
+//     List dbdata = [];
 
-    // await DbHandler()
-    //     .insertLoginData(userdata.email, userdata.phoneNumber, userdata.token);
-    // await DbHandler().createMyPackagetable();
-    //  await insertMyPackageData();
-    // dbdata = await DbHandler().readData();
-// String tk=jsondata['result']['token'];
-    Get.back();
+//     // await DbHandler()
+//     //     .insertLoginData(userdata.email, userdata.phoneNumber, userdata.token);
+//     // await DbHandler().createMyPackagetable();
+//     //  await insertMyPackageData();
+//     // dbdata = await DbHandler().readData();
+// // String tk=jsondata['result']['token'];
+//     Get.back();
 
-    Platform.isWindows
-        ? Get.toNamed('/package',
-            arguments: {'token': jsondata['result']['token']})
-        : Get.to(() => PackageDashboardMobile(jsondata['result']['token']));
+//     Platform.isWindows
+//         ? Get.toNamed('/package',
+//             arguments: {'token': jsondata['result']['token']})
+//         : Get.to(() => PackageDashboardMobile(jsondata['result']['token']));
 
-    // showDialog(
-    //     context: context,
-    //     builder: (context) {
-    //       return AlertDialog(
-    //           actions: [
-    //             ElevatedButton(
-    //                 onPressed: () {
-    //                   Get.to(() => Platform.isWindows
-    //                       ? Dashboard()
-    //                       : const MobileHomepage());
-    //                 },
-    //                 child: const Text('Ok'))
-    //           ],
-    //           title: const Text('Data'),
-    //           content: Text(
-    //             dbdata.toString(),
-    //           ));
-    //     });
-  } else {
-    Get.back();
-    ClsErrorMsg.fnErrorDialog(context, 'Login', jsondata['errorMessages'], res);
-  }
+  // showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //           actions: [
+  //             ElevatedButton(
+  //                 onPressed: () {
+  //                   Get.to(() => Platform.isWindows
+  //                       ? Dashboard()
+  //                       : const MobileHomepage());
+  //                 },
+  //                 child: const Text('Ok'))
+  //           ],
+  //           title: const Text('Data'),
+  //           content: Text(
+  //             dbdata.toString(),
+  //           ));
+  //     });
+  // } else {
+  //   Get.back();
+  //   ClsErrorMsg.fnErrorDialog(context, 'Login', jsondata['errorMessages'], res);
+  // }
 }
 
 Future signupApi(
