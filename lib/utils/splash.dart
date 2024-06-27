@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future fninfo() async {
     try {
-      info = await ClsDeviceInfo.windowsInfo();
+      // info = await ClsDeviceInfo.windowsInfo();
       print(info);
       print('ksdbnkjsf');
       bool databaseexist = await DbHandler().doesDatabaseExist('sayakdb.db');
@@ -36,12 +36,12 @@ class _SplashScreenState extends State<SplashScreen> {
         print(logintablerow);
         // if (logintablerow.isNotEmpty) {
         Get.back();
-        Get.to(() =>const  DthLmsLogin());
+        Get.to(() => const DthLmsLogin());
         // }
       } else {
         await copyDatabase('assets/copydb/databases/sayakdb.db', 'sayakdb.db');
         Get.back();
-        Get.to(() =>const  DthLmsLogin());
+        Get.to(() => const DthLmsLogin());
       }
     } catch (e) {
       print(e);

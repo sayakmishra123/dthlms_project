@@ -23,7 +23,7 @@ class PackagePage extends StatefulWidget {
 
 class _PackagePageState extends State<PackagePage> {
   List<AllPackage> package = [];
-   Getx getx_obj = Get.put(Getx());
+  Getx getx_obj = Get.put(Getx());
 
   Future fnfindallpackage(String token, BuildContext context) async {
     Map data = {
@@ -113,8 +113,6 @@ class _PackagePageState extends State<PackagePage> {
               ),
             );
           });
-
-           
 
       // print(jsonEncode(jsondata['result'][0].toString()));
       // var jsonData = json.decode(jsondata['result']);

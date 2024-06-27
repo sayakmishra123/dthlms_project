@@ -30,11 +30,7 @@ Future loginApi(
   var logindata;
   final getObj = Get.put(Getx());
   loader(context);
-  var deviceinfo = {};
-
-  // if (Platform.isAndroid) {
-  //   deviceinfo = await ClsDeviceInfo.androidInfo();
-  // }
+  var deviceinfo;
 
   if (Platform.isAndroid) {
     deviceinfo = await ClsDeviceInfo.androidInfo();
@@ -47,66 +43,45 @@ Future loginApi(
   }
   if (Platform.isAndroid) {
     logindata = ClsMap().objLoginApi(loginemail, password, otp, deviceinfo);
-    print(logindata);
   } else if (Platform.isWindows) {
     logindata = ClsMap().objLoginApi(loginemail, password, otp, deviceinfo);
   }
-  print(jsonEncode(logindata));
-  Get.back();
-//   final res =
-//       await http.post(Uri.https(ClsUrlApi.mainurl, ClsUrlApi.loginEndpoint),
-//           headers: <String, String>{
-//             'Content-Type': 'application/json',
-//           },
-//           body: json.encode(logindata));
+  print(deviceinfo);
+  final res =
+      await http.post(Uri.https(ClsUrlApi.mainurl, ClsUrlApi.loginEndpoint),
+          headers: <String, String>{
+            'Content-Type': 'application/json',
+          },
+          body: json.encode(logindata));
 
-//   var jsondata = json.decode(res.body);
-//   print(jsondata);
-//   if (res.statusCode == 200 && jsondata['isSuccess'] == true) {
-//     print(jsondata);
-//     final userdata = DthloginUserDetails(
-//         email: jsondata['result']['email'],
-//         phoneNumber: jsondata['result']['phoneNumber'],
-//         token: jsondata['result']['token']);
-//     getObj.loginuserdata.add(userdata);
-//     // ignore: unused_local_variable
-//     List dbdata = [];
+  var jsondata = json.decode(res.body);
+  print(jsondata);
+  if (res.statusCode == 200 && jsondata['isSuccess'] == true) {
+    print(jsondata);
+    final userdata = DthloginUserDetails(
+        email: jsondata['result']['email'],
+        phoneNumber: jsondata['result']['phoneNumber'],
+        token: jsondata['result']['token']);
+    getObj.loginuserdata.add(userdata);
+    // ignore: unused_local_variable
+    List dbdata = [];
 
-//     // await DbHandler()
-//     //     .insertLoginData(userdata.email, userdata.phoneNumber, userdata.token);
-//     // await DbHandler().createMyPackagetable();
-//     //  await insertMyPackageData();
-//     // dbdata = await DbHandler().readData();
-// // String tk=jsondata['result']['token'];
-//     Get.back();
+    // await DbHandler()
+    //     .insertLoginData(userdata.email, userdata.phoneNumber, userdata.token);
+    // await DbHandler().createMyPackagetable();
+    //  await insertMyPackageData();
+    // dbdata = await DbHandler().readData();
+// String tk=jsondata['result']['token'];
+    Get.back();
 
-//     Platform.isWindows
-//         ? Get.toNamed('/package',
-//             arguments: {'token': jsondata['result']['token']})
-//         : Get.to(() => PackageDashboardMobile(jsondata['result']['token']));
-
-  // showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return AlertDialog(
-  //           actions: [
-  //             ElevatedButton(
-  //                 onPressed: () {
-  //                   Get.to(() => Platform.isWindows
-  //                       ? Dashboard()
-  //                       : const MobileHomepage());
-  //                 },
-  //                 child: const Text('Ok'))
-  //           ],
-  //           title: const Text('Data'),
-  //           content: Text(
-  //             dbdata.toString(),
-  //           ));
-  //     });
-  // } else {
-  //   Get.back();
-  //   ClsErrorMsg.fnErrorDialog(context, 'Login', jsondata['errorMessages'], res);
-  // }
+    Platform.isWindows
+        ? Get.toNamed('/package',
+            arguments: {'token': jsondata['result']['token']})
+        : Get.to(() => PackageDashboardMobile(jsondata['result']['token']));
+  } else {
+    Get.back();
+    ClsErrorMsg.fnErrorDialog(context, 'Login', jsondata['errorMessages'], res);
+  }
 }
 
 Future signupApi(
@@ -136,19 +111,15 @@ Future signupApi(
   }
 
   var signupdata = ClsMap().objSignupApi(
-    signupuser,
-    signupfirstname,
-    signuplastname,
-    signupemail,
-    signuppassword,
-    signupphno,
-    key,
-    otp,
-    deviceinfo[0],
-    deviceinfo[1],
-    deviceinfo[2],
-    deviceinfo[3],
-  );
+      signupuser,
+      signupfirstname,
+      signuplastname,
+      signupemail,
+      signuppassword,
+      signupphno,
+      key,
+      otp,
+      deviceinfo);
 
   final http.Response res = await http.post(
       Uri.https(ClsUrlApi.mainurl, '${ClsUrlApi.signupEndpoint}$key'),
