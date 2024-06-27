@@ -33,11 +33,11 @@ Future loginApi(
   var deviceinfo;
 
   if (Platform.isAndroid) {
-    deviceinfo = await ClsDeviceInfo.androidInfo();
+    deviceinfo = await ClsDeviceInfo.androidInfo(context);
   } else if (Platform.isWindows) {
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   } else if (Platform.isIOS) {
-    deviceinfo = await ClsDeviceInfo.androidInfo();
+    deviceinfo = await ClsDeviceInfo.androidInfo(context);
   } else if (Platform.isMacOS) {
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   }
@@ -77,7 +77,9 @@ Future loginApi(
     Platform.isWindows
         ? Get.toNamed('/package',
             arguments: {'token': jsondata['result']['token']})
-        : Get.to(() => PackageDashboardMobile(jsondata['result']['token']));
+        : Get.toNamed("/Mobilevideodashboard",
+            arguments: {'token': jsondata['result']['token']});
+    ;
   } else {
     Get.back();
     ClsErrorMsg.fnErrorDialog(context, 'Login', jsondata['errorMessages'], res);
@@ -100,12 +102,12 @@ Future signupApi(
   loader(context);
   var deviceinfo;
   if (Platform.isAndroid) {
-    deviceinfo = await ClsDeviceInfo.androidInfo();
+    deviceinfo = await ClsDeviceInfo.androidInfo(context);
     print(deviceinfo);
   } else if (Platform.isWindows) {
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   } else if (Platform.isIOS) {
-    deviceinfo = ClsDeviceInfo.androidInfo();
+    deviceinfo = ClsDeviceInfo.androidInfo(context);
   } else if (Platform.isMacOS) {
     deviceinfo = await ClsDeviceInfo.windowsInfo();
   }

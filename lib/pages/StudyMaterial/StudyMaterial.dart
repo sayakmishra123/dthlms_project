@@ -6,6 +6,7 @@ import 'dart:typed_data';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/key/key.dart';
+import 'package:dthlms/pages/utctime.dart';
 import 'package:dthlms/pdfview/pdfview.dart';
 
 import 'package:flutter/material.dart';
@@ -21,7 +22,6 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../../ThemeData/color/color.dart';
 import '../../ThemeData/font/font_family.dart';
 import '../../widget/drawerWidget.dart';
-import '../../utctime.dart';
 import 'package:http/http.dart' as http;
 
 class StudyMaterialPdf extends StatefulWidget {

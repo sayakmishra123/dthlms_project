@@ -1054,7 +1054,7 @@ class PackageDashboardState extends State<PackageDashboard>
                                                                                         decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
                                                                                         child: ListTile(
                                                                                           onTap: () {
-                                                                                            Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(token)));
+                                                                                        Get.toNamed('Videodashboard',arguments: {'token':token});
                                                                                           },
                                                                                           title: Text(
                                                                                             subItem.termName,
@@ -1074,7 +1074,7 @@ class PackageDashboardState extends State<PackageDashboard>
                                                                                               ),
                                                                                             ),
                                                                                             onPressed: () {
-                                                                                              Get.to(() => ShowCaseWidget(builder: (BuildContext context) => VideoDashboard(token)));
+                                                                                              Get.toNamed('Videodashboard',arguments: {'token':token});
                                                                                             },
                                                                                           ),
                                                                                           subtitle: Text(

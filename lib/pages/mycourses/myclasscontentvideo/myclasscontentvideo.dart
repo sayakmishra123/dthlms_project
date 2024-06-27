@@ -51,9 +51,8 @@ import 'package:showcaseview/showcaseview.dart';
 import '../../../ThemeData/color/color.dart';
 
 class MyClassVideoContent extends StatefulWidget {
-  String videoname;
-  String token;
-  MyClassVideoContent(this.videoname, this.token, {super.key});
+
+  MyClassVideoContent( {super.key});
 
   @override
   State<MyClassVideoContent> createState() => _MyClassVideoContentState();
@@ -151,6 +150,8 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
 
   List<String> tabfield = const ["PDF", "MCQ", "TAG", "Review"];
   Getx getx = Get.put(Getx());
+  final   videoname=Get.arguments['videoname'];
+  final token=Get.arguments['token'];
   List pdf = [];
   List<McqDetails> mcq = [];
   List tag = [];
@@ -444,7 +445,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                   appBar: AppBar(
                     iconTheme: IconThemeData(color: ColorPage.white),
                     title: Text(
-                      widget.videoname,
+                      videoname,
                       style: FontFamily.font5,
                     ),
                     backgroundColor: ColorPage.appbarcolor,
@@ -494,7 +495,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                           setState(() {
                             _motionTabBarController!.index = value;
 
-                            fngetVideodetailsApi(widget.token, tabfield[value]);
+                            fngetVideodetailsApi(token, tabfield[value]);
                           });
                         },
                       ),

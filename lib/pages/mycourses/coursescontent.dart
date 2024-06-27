@@ -1,5 +1,6 @@
 import 'package:dthlms/getx/getxcontroller.getx.dart';
-import 'package:dthlms/utctime.dart';
+import 'package:dthlms/pages/utctime.dart';
+
 import 'package:dthlms/widget/drawerWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,8 +12,7 @@ import 'mycoursesdashboar.dart';
 
 // ignore: must_be_immutable
 class MyClassDashboard extends StatefulWidget {
-  String optionname;
-  MyClassDashboard(this.optionname, {super.key});
+  MyClassDashboard({super.key});
 
   @override
   State<MyClassDashboard> createState() => _MyClassDashboardState();
@@ -22,6 +22,7 @@ class _MyClassDashboardState extends State<MyClassDashboard> {
   final obj = const ButtonWidget();
   // ignore: non_constant_identifier_names
   Getx get_obj = Get.put(Getx());
+  final optionname = Get.arguments['optionname'];
   UtcTime time = UtcTime();
 
   @override
@@ -40,7 +41,7 @@ class _MyClassDashboardState extends State<MyClassDashboard> {
             )
           ],
           title: Text(
-            widget.optionname,
+            optionname,
             style: FontFamily.font2,
             textScaler: const TextScaler.linear(1.7),
           ),
@@ -57,7 +58,8 @@ class _MyClassDashboardState extends State<MyClassDashboard> {
                 for (int i = 0; i < 10; i++)
                   InkWell(
                     onTap: () {
-                      Get.to(() => MyClassContent('All Online'),
+                      Get.to(() => MyClassContent(),
+                          arguments: {'optionname': "all online"},
                           transition: Transition.leftToRight);
                     },
                     child: Padding(

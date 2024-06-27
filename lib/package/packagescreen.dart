@@ -11,11 +11,11 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
 
 class PackageScreen extends StatefulWidget {
-  final String token;
-  PackageScreen(this.token, {super.key});
+  
+  PackageScreen( {super.key});
 
   @override
-  State<PackageScreen> createState() => _PackageScreenState(token);
+  State<PackageScreen> createState() => _PackageScreenState();
 }
 
 class AllPackage {
@@ -69,8 +69,8 @@ class PackageFind {
 }
 
 class _PackageScreenState extends State<PackageScreen> {
-  late String token;
-  _PackageScreenState(this.token);
+
+  
 
   @override
   void initState() {
@@ -80,6 +80,7 @@ class _PackageScreenState extends State<PackageScreen> {
 
   List<AllPackage> package = [];
    Getx getx_obj = Get.put(Getx());
+  final  token=Get.arguments['token'];
   Map<String, List<PackageFind>> nestedData = {};
 
   Future<void> fnfindallpackage(String token) async {

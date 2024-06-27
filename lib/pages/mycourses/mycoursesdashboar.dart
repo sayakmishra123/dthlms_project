@@ -4,7 +4,8 @@ import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
-import 'package:dthlms/utctime.dart';
+import 'package:dthlms/pages/utctime.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,9 +17,7 @@ import 'myclasscontentvideo/myclasscontentvideo.dart';
 
 // ignore: must_be_immutable
 class MyClassContent extends StatefulWidget {
-  String optionname;
-
-  MyClassContent(this.optionname, {super.key});
+  MyClassContent({super.key});
 
   @override
   State<MyClassContent> createState() => _MyClassContentState();
@@ -27,6 +26,7 @@ class MyClassContent extends StatefulWidget {
 class _MyClassContentState extends State<MyClassContent>
     with TickerProviderStateMixin {
   Getx getx = Get.put(Getx());
+  final optionname = Get.arguments['optionname'];
   final white = ColorPage.white;
   UtcTime time = UtcTime();
 
@@ -65,7 +65,7 @@ class _MyClassContentState extends State<MyClassContent>
             title: Row(
               children: [
                 Text(
-                  '${widget.optionname}  ',
+                  '${optionname}  ',
                   textScaler: const TextScaler.linear(1.7),
                   style: FontFamily.font2,
                 ),
@@ -96,7 +96,7 @@ class _MyClassContentState extends State<MyClassContent>
               SizedBox(
                   width: MediaQuery.sizeOf(context).width - 1150,
                   // height: 1000,
-                  child: MyClassVideoContent('', '')),
+                  child: MyClassVideoContent()),
               Expanded(
                 child: Container(
                   color: ColorPage.colorblack,
