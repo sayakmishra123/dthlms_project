@@ -87,6 +87,8 @@ dependencies:
   media_kit_libs_video: ^1.0.4
   neopop: ^1.0.2
 
+  package_info_plus: ^8.0.0
+
   # flutter_sound: ^9.2.13 # replace with the correct version
   # flutter_sound_platform_interface: ^9.2.13
  

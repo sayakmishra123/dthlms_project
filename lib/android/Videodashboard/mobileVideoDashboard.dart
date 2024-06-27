@@ -26,12 +26,12 @@ import 'package:typewritertext/v3/typewriter.dart';
 import 'dart:async'; // Add this import
 
 class MobileVideoDashboard extends StatefulWidget {
-  String token;
-  MobileVideoDashboard(this.token, {super.key});
+  
+  MobileVideoDashboard( {super.key});
 
   @override
   State<MobileVideoDashboard> createState() =>
-      _MobileVideoDashboardState(token);
+      _MobileVideoDashboardState();
 }
 
 class ClassAllVideos {
@@ -49,8 +49,8 @@ class ClassAllVideos {
 
 class _MobileVideoDashboardState extends State<MobileVideoDashboard>
     with TickerProviderStateMixin {
-  String token;
-  _MobileVideoDashboardState(this.token);
+
+
 
   GlobalKey showcase_one = GlobalKey();
   GlobalKey showcase_searchkey = GlobalKey();
@@ -64,6 +64,8 @@ class _MobileVideoDashboardState extends State<MobileVideoDashboard>
   List<AllPackage> filteredPackage = [];
 
   Getx getxController = Get.put(Getx());
+
+  final token=Get.arguments['token'];
 
   List<ClassAllVideos> x1 = [];
   var data1;
@@ -116,7 +118,7 @@ class _MobileVideoDashboardState extends State<MobileVideoDashboard>
   @override
   void initState() {
     super.initState();
-    fnfindallpackage(widget.token);
+    fnfindallpackage(token);
     _motionTabBarController = MotionTabBarController(
       initialIndex: 0,
       length: 6,
@@ -315,7 +317,7 @@ class _MobileVideoDashboardState extends State<MobileVideoDashboard>
                                                             filteredPackage[index]
                                                                 .packageId)) {
                                                       fnfindpackage(
-                                                          widget.token,
+                                                          token,
                                                           filteredPackage[index]
                                                               .packageId);
                                                     }
@@ -361,8 +363,8 @@ class _MobileVideoDashboardState extends State<MobileVideoDashboard>
                                                                                 subItem
                                                                                     .packageId)) {
                                                                       fnfindpackage(
-                                                                          widget
-                                                                              .token,
+                                                                        
+                                                                  token,
                                                                           subItem
                                                                               .packageId);
                                                                     }
@@ -400,13 +402,11 @@ class _MobileVideoDashboardState extends State<MobileVideoDashboard>
                                                                                                             ),
                                                                                                           ),
                                                                                                         ),
-                                                                                                        onPressed: () { Get.to(() => MobileVideoPlayer(filteredPackage[index].courseName,
-                                                                                    widget.token));},
+                                                                                                        onPressed: () { Get.toNamed("/Mobilevideoplayer",arguments: {"token":token,'videoname':filteredPackage[index].courseName});},
                                                                                                       ),
                                                                                   onTap:
                                                                                       () {
-                                                                                    Get.to(() => MobileVideoPlayer(filteredPackage[index].courseName,
-                                                                                    widget.token));
+                                                                                    Get.toNamed("/Mobilevideoplayer",arguments: {"token":token,'videoname':filteredPackage[index].courseName});
                                                                                   },
                                                                                   title:
                                                                                       Text(subItem.termName+"Abhi"),

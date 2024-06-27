@@ -1,14 +1,10 @@
 class ClsMap {
-  Map objLoginApi(String loginemail, String password, String otp,
-      String device1, String device2, String type, String configaration) {
+  Map objLoginApi(String loginemail, String password, String otp, Map info) {
     return {
       'userName': loginemail,
       'password': password,
       'franchiseId': 1,
-      'deviceid1': device1,
-      'deviceid2': device2,
-      'type': type,
-      'configaration': configaration
+      'deviceinfo': info
     };
   }
 

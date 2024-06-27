@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                         onTap: () {
                           get_obj.page_index.value = 1;
-                          Get.offAll(() => MyClassDashboard('My Courses'),
+                          Get.offAll(() => MyClassDashboard(),arguments: {"optionname":"All course"},
                                   transition: Transition.leftToRight)
                               ?.then((value) => get_obj.page_index.value = 0);
                         },
@@ -231,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                       child: InkWell(
                         onTap: () {
                           get_obj.page_index.value = 5;
-                          Get.offAll(() => Profile('Profile'),
+                          Get.offAll(() => Profile(),arguments: {"optionname":"Profile"},
                                   transition: Transition.leftToRight)
                               ?.then((value) => get_obj.page_index.value = 0);
                         },

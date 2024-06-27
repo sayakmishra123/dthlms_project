@@ -472,7 +472,7 @@ class PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                                               ),),
                                                                             child: ListTile(
                                                                               onTap: () {
-                                                                                Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(token)));
+                                                                               Get.toNamed("/Mobilevideodashboard",arguments: {'token':token,});
                                                                               },
                                                                               trailing: ElevatedButton(
                                                                                                           child: Text(
@@ -487,7 +487,7 @@ class PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                                                                                               ),
                                                                                                             ),
                                                                                                           ),
-                                                                                                          onPressed: () {Get.to(() => ShowCaseWidget(builder: (BuildContext context) => MobileVideoDashboard(token)));},
+                                                                                                          onPressed: () {Get.toNamed("/Mobilevideodashboard",arguments: {'token':token,});},
                                                                                                         ),
                                                                               title: Text(subItem
                                                                                   .termName),

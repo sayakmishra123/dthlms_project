@@ -13,18 +13,18 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
-class signInOtpScreen extends StatefulWidget {
+class SignInOtpScreen extends StatefulWidget {
 
-  signInOtpScreen(
+  SignInOtpScreen(
       {super.key});
 
   // signInOtpScreen({super.key});
 
   @override
-  State<signInOtpScreen> createState() => _signInOtpScreenState();
+  State<SignInOtpScreen> createState() => _SignInOtpScreenState();
 }
 
-class _signInOtpScreenState extends State<signInOtpScreen> {
+class _SignInOtpScreenState extends State<SignInOtpScreen> {
 
 
 

@@ -515,27 +515,17 @@ FocusNode focusNode = FocusNode();
                                                                   .text)) {
                                                         mobile_key_signup.currentState!
                                                             .save();
+                                                            Get.toNamed("/Mobilesigninotpscreen",arguments: {'signupuser': signupuser
+                                                                      .text,'signupfirstname':signupfirstname
+                                                                      .text,'signuplastname': signuplastname
+                                                                      .text,'signupemail':signupemail
+                                                                      .text,'signuppassword': signuppassword
+                                                                      .text,'signupphno': signupphno
+                                                                      .text,});
 
 
-                                                         
-                                                        // Get.to(
-                                                        //     () =>
-                                                        //         signInOtpScreen(
-                                                        //           signupuser
-                                                        //               .text,
-                                                        //           signupfirstname
-                                                        //               .text,
-                                                        //               signuplastname
-                                                        //               .text,
-                                                        //           signupemail
-                                                        //               .text,
-                                                        //           signuppassword
-                                                        //               .text,
-                                                        //           signupphno
-                                                        //               .text,
-                                                        //         ),
-                                                            // transition: Transition
-                                                            //     .leftToRight);
+                                                       
+                                                          
                                                       } else {
                                                         Get.snackbar("Error",
                                                             "Please enter valid details",

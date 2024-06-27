@@ -13,8 +13,8 @@ import '../../ThemeData/color/color.dart';
 
 // ignore: must_be_immutable
 class Profile extends StatefulWidget {
-  String optionname;
-  Profile(this.optionname, {super.key});
+
+  Profile({super.key});
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -36,6 +36,7 @@ class _ProfileState extends State<Profile> {
   double width = 400;
   // ignore: non_constant_identifier_names
   Getx get_obj = Get.put(Getx());
+  final optionname=Get.arguments['optionname'];
   UtcTime time = UtcTime();
   @override
   Widget build(BuildContext context) {
@@ -65,7 +66,7 @@ class _ProfileState extends State<Profile> {
             ],
             backgroundColor:ColorPage.appbarcolor,
             title: Text(
-              widget.optionname,
+              optionname,
               style: FontFamily.font2,
               textScaler: const TextScaler.linear(1.5),
             ),

@@ -47,9 +47,8 @@ import 'package:showcaseview/showcaseview.dart';
 import '../../../ThemeData/color/color.dart';
 
 class MobileVideoPlayer extends StatefulWidget {
-  String videoname;
-  String token;
-  MobileVideoPlayer(this.videoname, this.token, {super.key});
+ 
+  MobileVideoPlayer( {super.key});
 
   @override
   State<MobileVideoPlayer> createState() => _MobileVideoPlayerState();
@@ -131,6 +130,9 @@ class _MobileVideoPlayerState extends State<MobileVideoPlayer>
 
   List<String> tabfield = const ["PDF", "MCQ", "TAG", "Review"];
   Getx getx = Get.put(Getx());
+
+   final videoname=Get.arguments['videoname'];
+  final token=Get.arguments['token'];
   List pdf = [];
   List<McqDetails> mcq = [];
   List tag = [];
@@ -425,7 +427,7 @@ class _MobileVideoPlayerState extends State<MobileVideoPlayer>
             ),  Padding(
               padding: const EdgeInsets.only(left: 20
               ),
-              child: Text(widget.videoname,style: FontFamily.font5,),
+              child: Text(videoname,style: FontFamily.font5,),
             )],),),
              Flexible(
                child: Container(
@@ -506,7 +508,7 @@ class _MobileVideoPlayerState extends State<MobileVideoPlayer>
                               setState(() {
                                 _motionTabBarController!.index = value;
                     
-                                fngetVideodetailsApi(widget.token, tabfield[value]);
+                                fngetVideodetailsApi(token, tabfield[value]);
                               });
                             },
                           ),

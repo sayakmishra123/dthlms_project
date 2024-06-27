@@ -56,7 +56,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   tooltip: 'My Courses',
                   onPressed: () {
                     get_obj.page_index.value = 1;
-                    Get.offAll(() => MyClassDashboard('My Courses'),
+                    Get.offAll(() => MyClassDashboard(),
                             transition: Transition.leftToRight)
                         ?.then((value) => get_obj.page_index.value = value);
                   },
@@ -94,7 +94,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   tooltip: 'Profile',
                   onPressed: () {
                     get_obj.page_index.value = 5;
-                    Get.offAll(() => Profile('Profile'),
+                    Get.offAll(() => Profile(),arguments: {"optionname":"Profile"},
                             transition: Transition.leftToRight)
                         ?.then((value) => get_obj.page_index.value = value);
                   },
