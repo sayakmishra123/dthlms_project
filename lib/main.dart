@@ -1,18 +1,27 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:dthlms/ThemeData/color/color.dart';
-import 'package:dthlms/firebase_options.dart';
-import 'package:dthlms/login/dth_login.dart';
-import 'package:dthlms/routes/router.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:media_kit/media_kit.dart';
-import 'package:windows_single_instance/windows_single_instance.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart'
+    show AnimatedSplashScreen, SplashTransition;
+import 'package:dthlms/ThemeData/color/color.dart' show ColorPage;
+import 'package:dthlms/firebase_options.dart' show DefaultFirebaseOptions;
+import 'package:dthlms/login/dth_login.dart' show DthLmsLogin;
+import 'package:dthlms/routes/router.dart' show pageRouter;
+import 'package:firebase_core/firebase_core.dart' show Firebase;
+import 'package:flutter/material.dart'
+    show
+        BuildContext,
+        State,
+        StatefulWidget,
+        Widget,
+        WidgetsFlutterBinding,
+        runApp;
+import 'package:get/get_navigation/src/root/get_material_app.dart'
+    show GetMaterialApp;
+import 'package:media_kit/media_kit.dart' show MediaKit;
+import 'package:windows_single_instance/windows_single_instance.dart'
+    show WindowsSingleInstance;
+
 //sayak mishra mm
 
 void main(List<String> args) async {
-// ...
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -42,15 +51,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      // initialRoute: '/',
       getPages: router.Route,
-      // enableLog: true,
-
       debugShowCheckedModeBanner: false,
       title: 'DTH LMS',
-      // theme: ThemeProvider.themeOf(context).data,
-      // home: ThemePage(),
-
       home: AnimatedSplashScreen(
         splash: "assets/splash6.gif",
         splashIconSize: 6000,
