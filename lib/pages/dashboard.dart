@@ -4,10 +4,9 @@ import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/home/homepage.dart';
-import 'package:dthlms/pages/utctime.dart';
+import 'package:dthlms/utctime.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 
 class Dashboard extends StatefulWidget {
   late final dbdata;

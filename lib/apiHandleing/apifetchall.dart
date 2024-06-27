@@ -33,8 +33,6 @@ Future forgetgenerateCode(
   } else {
     return 'jhsbjknbfkjnkajnasd';
   }
-
-  // forgetPassword(context, signupemail, jsondata['result']);
 }
 
 Future forgetPassword(BuildContext context, String signupemail, String key,
@@ -99,7 +97,7 @@ Future resetPassword(BuildContext context, String email, String ph, String pass,
 
     ClsErrorMsg.fnErrorDialog(
         context, 'Password reset', 'Password reset successfully', responseBody);
-    Get.to(() => DthLmsLogin());
+    Get.toNamed('/');
   }
   {
     Get.back();
@@ -112,7 +110,7 @@ Future studentWatchtime(BuildContext context) async {
   loader(context);
   Map body = ClsMap().objStudentWatchTime(1, 300, 5);
   var res = await http.post(
-      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.generateCodeEndpoint),
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.studentvideoWatchtime),
       headers: {
         'Content-Type': 'application/json',
       },

@@ -11,4 +11,5 @@ class ClsUrlApi {
       "/api/AuthDataGet/ExecuteJson/sptblPackageDetails/2";
   static const forgetpassword = '/api/auth/forgetPassword/';
   static const resetPassword = '/api/auth/resetPassword/';
+  static const studentvideoWatchtime = '/api/auth/studentvideoWatchtime/';
 }
