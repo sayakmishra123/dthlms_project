@@ -4,7 +4,9 @@ import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
-import 'package:dthlms/pages/utctime.dart';
+
+import 'package:dthlms/utctime.dart';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,9 @@ import 'myclasscontentvideo/myclasscontentvideo.dart';
 
 // ignore: must_be_immutable
 class MyClassContent extends StatefulWidget {
-  MyClassContent({super.key});
+
+
+  MyClassContent( {super.key});
 
   @override
   State<MyClassContent> createState() => _MyClassContentState();
@@ -26,7 +30,7 @@ class MyClassContent extends StatefulWidget {
 class _MyClassContentState extends State<MyClassContent>
     with TickerProviderStateMixin {
   Getx getx = Get.put(Getx());
-  final optionname = Get.arguments['optionname'];
+    final optionname=Get.arguments['optionname'];
   final white = ColorPage.white;
   UtcTime time = UtcTime();
 

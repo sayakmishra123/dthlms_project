@@ -77,9 +77,26 @@ Future loginApi(
     Platform.isWindows
         ? Get.toNamed('/package',
             arguments: {'token': jsondata['result']['token']})
-        : Get.toNamed("/Mobilevideodashboard",
-            arguments: {'token': jsondata['result']['token']});
-    ;
+        : Get.toNamed("/Mobilepakagedashboard",arguments:{'token': jsondata['result']['token']} );
+
+  // showDialog(
+  //     context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //           actions: [
+  //             ElevatedButton(
+  //                 onPressed: () {
+  //                   Get.to(() => Platform.isWindows
+  //                       ? Dashboard()
+  //                       : const MobileHomepage());
+  //                 },
+  //                 child: const Text('Ok'))
+  //           ],
+  //           title: const Text('Data'),
+  //           content: Text(
+  //             dbdata.toString(),
+  //           ));
+  //     });
   } else {
     Get.back();
     ClsErrorMsg.fnErrorDialog(context, 'Login', jsondata['errorMessages'], res);

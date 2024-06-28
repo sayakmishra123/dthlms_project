@@ -33,6 +33,8 @@ Future forgetgenerateCode(
   } else {
     return 'jhsbjknbfkjnkajnasd';
   }
+
+  // forgetPassword(context, signupemail, jsondata['result']);
 }
 
 Future forgetPassword(BuildContext context, String signupemail, String key,
@@ -97,7 +99,7 @@ Future resetPassword(BuildContext context, String email, String ph, String pass,
 
     ClsErrorMsg.fnErrorDialog(
         context, 'Password reset', 'Password reset successfully', responseBody);
-    Get.toNamed('/');
+    Get.to(() => DthLmsLogin());
   }
   {
     Get.back();
@@ -110,7 +112,7 @@ Future studentWatchtime(BuildContext context) async {
   loader(context);
   Map body = ClsMap().objStudentWatchTime(1, 300, 5);
   var res = await http.post(
-      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.studentvideoWatchtime),
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.generateCodeEndpoint),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -124,4 +126,26 @@ Future studentWatchtime(BuildContext context) async {
   } else {
     return 'kmlfmkzmfkdk';
   }
+}
+
+
+Future studentVideoReview(BuildContext context)async{
+  loader(context);
+  Map body = ClsMap().objStudentVideoReview(1, 4);
+   var response = await http.post(
+      Uri.https(ClsUrlApi.mainurl,ClsUrlApi.studentVideoreviewlink ),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(body));
+  var jsondata = jsonDecode(response.body);
+  print(jsondata);
+  print('object');
+  Get.back();
+  if (jsondata['statusCode'] == 200 && jsondata['isSuccess'] == true) {
+    return jsondata['result'].toString();
+  } else {
+    return 'error';
+  }
+
 }

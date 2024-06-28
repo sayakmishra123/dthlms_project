@@ -545,36 +545,7 @@ FocusNode focusNode = FocusNode();
                                           ),
                                         ),
                                         SizedBox(height: 10,),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              'Already a member? ',
-                                              style: TextStyle(
-                                                fontSize:
-                                                    ClsFontsize.ExtraSmall,
-                                              ),
-
-                                              
-                                            ),
-                                            InkWell(
-                                              onTap: () {
-                                                getxController.show.value = false;
-                                                getxController.ButtonControllerIndex.value=0;
-                                                print(getxController.ButtonControllerIndex.value.toString());
-                                               
-                                              },
-                                              child: Text(
-                                                'LOGIN',
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      ClsFontsize.ExtraSmall,
-                                                      color: ColorPage.red
-                                                ),),
-                                            ),
-                                          ],
-                                        ),
+                                        
                                         // Row(
                                         //   mainAxisAlignment:
                                         //       MainAxisAlignment.center,

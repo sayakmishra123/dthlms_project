@@ -57,7 +57,7 @@ class pageRouter {
       page: () => ForgetPasswordMobile(),
     ),
     GetPage(
-      name: '/Mobilepakage',
+      name: '/Mobilepakagedashboard',
       page: () => PackageDashboardMobile(),
     ),
     GetPage(

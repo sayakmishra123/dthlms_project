@@ -1,4 +1,5 @@
-import 'package:dthlms/pages/utctime.dart';
+
+import 'package:dthlms/utctime.dart';
 
 class ClsMap {
   Map objLoginApi(String loginemail, String password, String otp, Map info) {
