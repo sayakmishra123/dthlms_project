@@ -1,4 +1,4 @@
-import 'package:dthlms/pages/utctime.dart';
+import 'package:dthlms/utctime.dart';
 
 class ClsMap {
   Map objLoginApi(String loginemail, String password, String otp, Map info) {
@@ -70,9 +70,8 @@ class ClsMap {
       'date': UtcTime()
     };
   }
-  Map objStudentVideoReview(videoid,optionid){
-    return {'videoid':videoid,
-    'optionid':optionid
-  };
-}
+
+  Map objStudentVideoReview(videoid, optionid) {
+    return {'videoid': videoid, 'optionid': optionid};
+  }
 }

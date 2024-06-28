@@ -1,5 +1,5 @@
 import 'package:dthlms/getx/getxcontroller.getx.dart';
-import 'package:dthlms/pages/utctime.dart';
+import 'package:dthlms/utctime.dart';
 
 import 'package:dthlms/widget/drawerWidget.dart';
 import 'package:flutter/material.dart';

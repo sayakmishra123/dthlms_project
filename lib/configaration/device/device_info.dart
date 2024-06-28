@@ -38,9 +38,8 @@ class ClsDeviceInfo {
     DeviceInfoPlugin android = DeviceInfoPlugin();
     List<dynamic> information = [];
     String? advertisingId;
-    String? appVersion;
-    String ?typeKind;
 
+    String? typeKind;
 
     try {
       advertisingId = await AdvertisingId.id(true);
@@ -49,15 +48,8 @@ class ClsDeviceInfo {
     }
 
     var info = await android.androidInfo;
-     bool istablet = (MediaQuery.of(context).size.shortestSide >= 600);
-     typeKind=istablet? 'Tablet':'Mobile';
-
-  
-  
-    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    appVersion=packageInfo.version;
-    
-
+    bool istablet = (MediaQuery.of(context).size.shortestSide >= 600);
+    typeKind = istablet ? 'Tablet' : 'Mobile';
 
     print(information);
     return {
@@ -69,10 +61,8 @@ class ClsDeviceInfo {
         'id': '${info.supportedAbis}',
         'model': '${info.model}',
         'proccesor': '${info.manufacturer}',
-        'version':'$appVersion'
+        'version': Platform.operatingSystemVersion
       }
     };
   }
-
- 
 }

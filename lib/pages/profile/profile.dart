@@ -1,7 +1,7 @@
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
-import 'package:dthlms/pages/utctime.dart';
+import 'package:dthlms/utctime.dart';
 
 import 'package:dthlms/widget/drawerWidget.dart';
 
