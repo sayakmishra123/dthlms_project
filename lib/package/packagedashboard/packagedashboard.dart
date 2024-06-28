@@ -175,46 +175,48 @@ class PackageDashboardState extends State<PackageDashboard>
 
   Future<void> fnfindallpackage(String token) async {
     // loader(context);
-    Future.delayed(Duration(seconds: 3), () async {
-      Map data = {
-        "tblPackage": {"PackageId": "0"}
-      };
-      final response = await http.post(
-        Uri.https(ClsUrlApi.mainurl, ClsUrlApi.allpackage),
-        body: json.encode(data),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-      );
-      var jsondata = json.decode(response.body);
-      print(jsondata);
-      if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
-        var jsonData = json.decode(jsondata['result']);
-        allpackage.clear();
-        for (int i = 0; i < jsonData.length; i++) {
-          final data = AllPackage(
-            courseId: jsonData[i]['CourseId'].toString(),
-            courseName: jsonData[i]['CourseName'].toString(),
-            termId: jsonData[i]['TermId'].toString(),
-            termName: jsonData[i]['TermName'].toString(),
-            packageId: jsonData[i]['PackageId'].toString(),
-            isActive: jsonData[i]['IsActive'].toString(),
-            packageName: jsonData[i]['PackageName'].toString(),
-            packageDisplayName: jsonData[i]['PackageDisplayName'].toString(),
-            srNo: jsonData[i]['SrNo'].toString(),
-            sortedOrder: jsonData[i]['SortedOrder'].toString(),
-          );
-          allpackage.add(data);
-        }
-        filteredPackage = List.from(allpackage);
-        setState(() {
-          getxController.packageshow.value = false;
-          getxController.loading.value = false;
-        });
-        print(getxController.loading.value);
+    print(jsonEncode({
+      "sbAppApi": {"ActivationKey": "123456"}
+    }));
+    Map data = {
+      "tblPackage": {"PackageId": "0"}
+    };
+
+    final response = await http.post(
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.allpackage),
+      body: json.encode(data),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    var jsondata = json.decode(response.body);
+    print(jsondata);
+    if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
+      var jsonData = json.decode(jsondata['result']);
+      allpackage.clear();
+      for (int i = 0; i < jsonData.length; i++) {
+        final data = AllPackage(
+          courseId: jsonData[i]['CourseId'].toString(),
+          courseName: jsonData[i]['CourseName'].toString(),
+          termId: jsonData[i]['TermId'].toString(),
+          termName: jsonData[i]['TermName'].toString(),
+          packageId: jsonData[i]['PackageId'].toString(),
+          isActive: jsonData[i]['IsActive'].toString(),
+          packageName: jsonData[i]['PackageName'].toString(),
+          packageDisplayName: jsonData[i]['PackageDisplayName'].toString(),
+          srNo: jsonData[i]['SrNo'].toString(),
+          sortedOrder: jsonData[i]['SortedOrder'].toString(),
+        );
+        allpackage.add(data);
       }
-    });
+      filteredPackage = List.from(allpackage);
+      setState(() {
+        getxController.packageshow.value = false;
+        getxController.loading.value = false;
+      });
+      print(getxController.loading.value);
+    }
   }
 
   Future<void> fnfindpackage(String token, String id) async {
@@ -707,7 +709,9 @@ class PackageDashboardState extends State<PackageDashboard>
                                                                                         decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
                                                                                         child: ListTile(
                                                                                           onTap: () {
-                                                                                        Get.toNamed('Videodashboard',arguments: {'token':token});
+                                                                                            Get.toNamed('Videodashboard', arguments: {
+                                                                                              'token': token
+                                                                                            });
                                                                                           },
                                                                                           title: Text(
                                                                                             subItem.termName,
@@ -727,7 +731,7 @@ class PackageDashboardState extends State<PackageDashboard>
                                                                                               ),
                                                                                             ),
                                                                                             onPressed: () {
-                                                                                              Get.toNamed('Videodashboard',arguments: {'token':token});
+                                                                                              Get.toNamed('Videodashboard', arguments: {'token': token});
                                                                                             },
                                                                                           ),
                                                                                           subtitle: Text(

@@ -84,7 +84,8 @@ dependencies:
   media_kit_libs_video: ^1.0.4
   win32: ^5.5.0
 
-  package_info_plus: ^8.0.0
+ 
+  flutter_windowmanager:
 
   # flutter_sound: ^9.2.13 # replace with the correct version
   # flutter_sound_platform_interface: ^9.2.13

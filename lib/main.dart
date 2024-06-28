@@ -13,6 +13,7 @@ import 'package:flutter/material.dart'
         Widget,
         WidgetsFlutterBinding,
         runApp;
+
 import 'package:get/get_navigation/src/root/get_material_app.dart'
     show GetMaterialApp;
 import 'package:media_kit/media_kit.dart' show MediaKit;
@@ -23,6 +24,7 @@ import 'package:windows_single_instance/windows_single_instance.dart'
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  // await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -32,7 +34,9 @@ void main(List<String> args) async {
     print(args);
   });
   print(args);
+
   MediaKit.ensureInitialized();
+
   runApp(
     const MyApp(),
   );

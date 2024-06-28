@@ -3,8 +3,6 @@ import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/utctime.dart';
 
-
-
 import 'package:dthlms/widget/drawerWidget.dart';
 
 import 'package:flutter/material.dart';

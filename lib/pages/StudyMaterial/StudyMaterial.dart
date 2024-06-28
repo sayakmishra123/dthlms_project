@@ -6,6 +6,10 @@ import 'dart:typed_data';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/key/key.dart';
+<<<<<<< HEAD
+=======
+import 'package:dthlms/utctime.dart';
+>>>>>>> 7051a8af77720935e99f8000e08c5228d667e3e8
 import 'package:dthlms/pdfview/pdfview.dart';
 import 'package:dthlms/utctime.dart';
 
