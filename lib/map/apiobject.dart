@@ -67,7 +67,7 @@ class ClsMap {
       'videoid': videoId,
       'watchtime': watchtime,
       'studentId': studentid,
-      'date': UtcTime()
+      'date': UtcTime().utctime()
     };
   }
 

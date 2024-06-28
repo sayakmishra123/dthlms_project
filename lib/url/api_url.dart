@@ -10,7 +10,9 @@ class ClsUrlApi {
   static const allpackage = '/api/AuthDataGet/ExecuteJson/sptblPackage/4';
   static const packagedetails =
       "/api/AuthDataGet/ExecuteJson/sptblPackageDetails/2";
+  static const studentvideoWatchtime = '/api/auth/studentvideoWatchtime/';
+
   static const forgetpassword = '/api/auth/forgetPassword/';
   static const resetPassword = '/api/auth/resetPassword/';
-  static const studentvideoWatchtime = '/api/auth/studentvideoWatchtime/';
+  static const studentActivationkey = "/api/AuthDataGet/ExecuteJson/spAppApi/1";
 }

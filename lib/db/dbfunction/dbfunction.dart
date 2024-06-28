@@ -36,7 +36,11 @@ class DbHandler {
   readData() async {
     Database? db = await fninitializeDB;
     print(db!.database);
-    final list = await db.query('UserLogin');
+    final list = await db.query(
+      'UserLogin',
+      distinct: true,
+      limit: 3,
+    );
     for (int i = 0; i < list.length; i++) {
       if (kDebugMode) {
         print('${list[i]}\n');

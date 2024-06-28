@@ -175,9 +175,7 @@ class PackageDashboardState extends State<PackageDashboard>
 
   Future<void> fnfindallpackage(String token) async {
     // loader(context);
-    print(jsonEncode({
-      "sbAppApi": {"ActivationKey": "123456"}
-    }));
+
     Map data = {
       "tblPackage": {"PackageId": "0"}
     };
@@ -1152,7 +1150,7 @@ class PackageDashboardState extends State<PackageDashboard>
                           )))
                 ],
               ),
-              GlobalDialog()
+              GlobalDialog(token)
             ],
           ),
         ),

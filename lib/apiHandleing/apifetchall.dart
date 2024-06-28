@@ -125,3 +125,24 @@ Future studentWatchtime(BuildContext context) async {
     return 'kmlfmkzmfkdk';
   }
 }
+
+Future packactivationKey(
+    BuildContext context, packageactivationkey, token) async {
+  loader(context);
+  print('activation');
+  Map data = {
+    "sbAppApi": {"ActivationKey": packageactivationkey}
+  };
+  print(data);
+  print(token);
+  var res = await http.post(
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.studentActivationkey),
+      headers: <String, String>{
+        // 'accept': 'text/plain',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(data));
+  print(res.body);
+  Get.back();
+}

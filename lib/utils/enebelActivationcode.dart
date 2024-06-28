@@ -1,4 +1,5 @@
 import 'package:dthlms/ThemeData/color/color.dart';
+import 'package:dthlms/apiHandleing/apifetchall.dart';
 
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 
@@ -10,14 +11,19 @@ import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class GlobalDialog extends StatefulWidget {
+  String token = '';
+  GlobalDialog(this.token);
+
   @override
-  _GlobalDialogState createState() => _GlobalDialogState();
+  _GlobalDialogState createState() => _GlobalDialogState(token);
 }
 
 class _GlobalDialogState extends State<GlobalDialog>
     with TickerProviderStateMixin {
   late AnimationController _blinkController;
   late Animation<double> _animation;
+  String token = '';
+  _GlobalDialogState(this.token);
 
   @override
   void initState() {
@@ -55,6 +61,7 @@ class _GlobalDialogState extends State<GlobalDialog>
             color: Colors.white,
             fontSize: 16,
           ),
+          token: widget.token,
         ),
       ),
     );
@@ -64,12 +71,14 @@ class _GlobalDialogState extends State<GlobalDialog>
 // ignore: must_be_immutable
 class CustomMessageBubble extends StatelessWidget {
   final String text;
+  final String token;
   final Color color;
   final IconData icon;
   final TextStyle textStyle;
 
   CustomMessageBubble({
     required this.text,
+    required this.token,
     required this.color,
     required this.icon,
     required this.textStyle,
@@ -115,66 +124,6 @@ class CustomMessageBubble extends StatelessWidget {
       ),
     );
   }
-
-  // Alert custom content
-  // _onAlertWithCustomContentPressed(
-  //     context, TextEditingController activationfield) {
-  //   final _formKey = GlobalKey<FormState>();
-  //   Alert(
-  //       style: AlertStyle(
-  //         alertPadding: EdgeInsets.symmetric(horizontal: 50,vertical: 20),
-  //         animationType: AnimationType.grow,
-
-  //         backgroundColor: ColorPage.color1,
-  //         titleStyle:
-  //             GoogleFonts.kadwa(textStyle: TextStyle(color: ColorPage.blue)),
-  //       ),
-  //       context: context,
-  //       title: "Activation Code",
-  //       content: Form(
-  //         key: _formKey,
-  //         child: Column(
-  //           children: <Widget>[
-  //             SizedBox(height: 20,),
-  //             Row(
-  //               children: [
-  //                 Text(
-  //                                       'Please fill field *',
-  //                                       style: TextStyle(color: ColorPage.red,fontSize: 15),
-  //                                     ),
-  //               ],
-  //             ),
-  //             TextFormField(
-  //               controller: activationfield,
-  //               validator: (value) {
-  //                 if (value!.isEmpty) {
-  //                   return 'cannot blank';
-  //                 }
-  //                 return null;
-  //               },
-  //               decoration: InputDecoration(
-  //                   // prefixIcon: Icon(Icons.code),
-  //                   suffixIcon: IconButton(
-  //                       onPressed: () {}, icon: Icon(Icons.visibility)),
-  //                   labelText: 'Enter Activation Code',
-  //                   // hintText: 'Enter Activation Code',
-  //                   fillColor: ColorPage.white,
-  //                   filled: true,
-  //                   focusColor: ColorPage.white),
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //       buttons: [
-  //         DialogButton(
-  //           onPressed: () => Navigator.pop(context),
-  //           child: Text(
-  //             "LOGIN",
-  //             style: TextStyle(color: Colors.white, fontSize: 20),
-  //           ),
-  //         )
-  //       ]).show();
-  // }
 
   onAlertWithStylePressed(context) {
     // Reusable alert style
@@ -229,13 +178,14 @@ class CustomMessageBubble extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: TextFormField(
-                  // controller: activationfield,
+                  controller: activationfield,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'cannot blank';
                     }
                     return null;
                   },
+                  // controller: ,
                   obscureText: get_obj.passvisibility.value,
                   obscuringCharacter: '*',
                   decoration: InputDecoration(
@@ -264,7 +214,10 @@ class CustomMessageBubble extends StatelessWidget {
             "Ok",
             style: TextStyle(color: Colors.white, fontSize: 15),
           ),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            packactivationKey(context, activationfield.text, token);
+            Get.back();
+          },
           color: ColorPage.colorgrey,
           radius: BorderRadius.circular(5.0),
         ),

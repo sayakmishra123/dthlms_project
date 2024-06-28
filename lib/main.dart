@@ -4,6 +4,7 @@ import 'package:dthlms/ThemeData/color/color.dart' show ColorPage;
 import 'package:dthlms/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:dthlms/login/dth_login.dart' show DthLmsLogin;
 import 'package:dthlms/routes/router.dart' show pageRouter;
+import 'package:dthlms/utctime.dart';
 import 'package:firebase_core/firebase_core.dart' show Firebase;
 import 'package:flutter/material.dart'
     show
@@ -23,6 +24,7 @@ import 'package:windows_single_instance/windows_single_instance.dart'
 //sayak mishra mm
 
 void main(List<String> args) async {
+  print(UtcTime().utctime());
   WidgetsFlutterBinding.ensureInitialized();
   // await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   await Firebase.initializeApp(
