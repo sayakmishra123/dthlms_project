@@ -197,13 +197,6 @@ class _ActivationCodePageState extends State<ActivationCodePage> {
   }
 
 
-    _onAlertWithCustomImagePressed(context) {
-    Alert(
-      context: context,
-      title: "RFLUTTER ALERT",
-      desc: "Flutter is more awesome with RFlutter Alert.",
-      image: Image.asset("assets/splash6.gif"),
-    ).show();
-  }
+ 
 
 }
