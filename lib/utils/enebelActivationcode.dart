@@ -2,6 +2,7 @@ import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/apiHandleing/apifetchall.dart';
 
 import 'package:dthlms/getx/getxcontroller.getx.dart';
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import

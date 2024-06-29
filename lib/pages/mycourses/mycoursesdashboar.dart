@@ -17,7 +17,9 @@ import 'myclasscontentvideo/myclasscontentvideo.dart';
 
 // ignore: must_be_immutable
 class MyClassContent extends StatefulWidget {
-  MyClassContent({super.key});
+
+
+  MyClassContent( {super.key});
 
   @override
   State<MyClassContent> createState() => _MyClassContentState();
@@ -26,7 +28,7 @@ class MyClassContent extends StatefulWidget {
 class _MyClassContentState extends State<MyClassContent>
     with TickerProviderStateMixin {
   Getx getx = Get.put(Getx());
-  final optionname = Get.arguments['optionname'];
+    final optionname=Get.arguments['optionname'];
   final white = ColorPage.white;
   UtcTime time = UtcTime();
 

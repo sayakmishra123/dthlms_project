@@ -14,6 +14,7 @@ import '../../ThemeData/color/color.dart';
 
 // ignore: must_be_immutable
 class Profile extends StatefulWidget {
+
   Profile({super.key});
 
   @override
@@ -36,14 +37,15 @@ class _ProfileState extends State<Profile> {
   double width = 400;
   // ignore: non_constant_identifier_names
   Getx get_obj = Get.put(Getx());
-  final optionname = Get.arguments['optionname'];
+  final optionname=Get.arguments['optionname'];
   UtcTime time = UtcTime();
   @override
   Widget build(BuildContext context) {
     return Material(
       child: Obx(
-        () => Scaffold(
+        ()=> Scaffold(
           appBar: AppBar(
+            
             actions: [
               Text(
                 time.utctime(),
@@ -63,7 +65,7 @@ class _ProfileState extends State<Profile> {
                             color: ColorPage.white)), //20
                   ))
             ],
-            backgroundColor: ColorPage.appbarcolor,
+            backgroundColor:ColorPage.appbarcolor,
             title: Text(
               optionname,
               style: FontFamily.font2,
@@ -127,8 +129,7 @@ class _ProfileState extends State<Profile> {
                                   children: [
                                     CircleAvatar(
                                       radius: 80,
-                                      child:
-                                          Image.asset('assets/loginimg2.png'),
+                                      child: Image.asset('assets/loginimg2.png'),
                                     )
                                   ],
                                 ),
@@ -153,8 +154,7 @@ class _ProfileState extends State<Profile> {
                                           decoration: InputDecoration(
                                               suffix: IconButton(
                                                   onPressed: () {},
-                                                  icon:
-                                                      const Icon(Icons.edit))),
+                                                  icon: const Icon(Icons.edit))),
                                         )),
                                   ],
                                 ),
@@ -180,8 +180,7 @@ class _ProfileState extends State<Profile> {
                                           decoration: InputDecoration(
                                               suffix: IconButton(
                                                   onPressed: () {},
-                                                  icon:
-                                                      const Icon(Icons.edit))),
+                                                  icon: const Icon(Icons.edit))),
                                         )),
                                   ],
                                 ),
@@ -207,8 +206,8 @@ class _ProfileState extends State<Profile> {
                                             decoration: InputDecoration(
                                                 suffix: IconButton(
                                                     onPressed: () {},
-                                                    icon: const Icon(
-                                                        Icons.edit))),
+                                                    icon:
+                                                        const Icon(Icons.edit))),
                                             controller: email,
                                           )),
                                     ],

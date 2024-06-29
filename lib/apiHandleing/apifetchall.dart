@@ -5,7 +5,9 @@ import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/map/apiobject.dart';
 import 'package:dthlms/url/api_url.dart';
+import 'package:dthlms/utils/enebelActivationcode.dart';
 import 'package:dthlms/utils/loader.dart';
+import 'package:dthlms/widget/confirmActivationCode.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -33,6 +35,8 @@ Future forgetgenerateCode(
   } else {
     return 'jhsbjknbfkjnkajnasd';
   }
+
+  // forgetPassword(context, signupemail, jsondata['result']);
 }
 
 Future forgetPassword(BuildContext context, String signupemail, String key,
@@ -97,7 +101,7 @@ Future resetPassword(BuildContext context, String email, String ph, String pass,
 
     ClsErrorMsg.fnErrorDialog(
         context, 'Password reset', 'Password reset successfully', responseBody);
-    Get.toNamed('/');
+    Get.to(() => DthLmsLogin());
   }
   {
     Get.back();
@@ -110,7 +114,7 @@ Future studentWatchtime(BuildContext context) async {
   loader(context);
   Map body = ClsMap().objStudentWatchTime(1, 300, 5);
   var res = await http.post(
-      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.studentvideoWatchtime),
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.generateCodeEndpoint),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -129,7 +133,6 @@ Future studentWatchtime(BuildContext context) async {
 Future packactivationKey(
     BuildContext context, packageactivationkey, token) async {
   loader(context);
-  print('activation');
   Map data = {
     "sbAppApi": {"ActivationKey": packageactivationkey}
   };
@@ -138,11 +141,13 @@ Future packactivationKey(
   var res = await http.post(
       Uri.https(ClsUrlApi.mainurl, ClsUrlApi.studentActivationkey),
       headers: <String, String>{
-        // 'accept': 'text/plain',
         'Content-Type': 'application/json',
         'Authorization': 'Bearer $token',
       },
       body: jsonEncode(data));
   print(res.body);
   Get.back();
+  if (res.statusCode == 200) {
+    await confirmActivationCode(context, res.body);
+  }
 }

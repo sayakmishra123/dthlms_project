@@ -596,7 +596,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,  
                   children: [Text('Video Downloading..')],
                 )
               ],
@@ -649,6 +649,7 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
   //   super.initState();
   // }
 
+  // ignore: override_on_non_overriding_member
   late Directory filelocationpath;
 //
 

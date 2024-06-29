@@ -393,6 +393,11 @@ class PackageDashboardMobileState extends State<PackageDashboardMobile> {
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(10))),
                                           child: ExpansionTile(
+                                              leading: Icon(
+                                                            Icons.folder,
+                                                            color: Colors
+                                                                .deepOrange,
+                                                          ),
                                             shape:
                                                 Border.all(color: Colors.transparent),
                                             title: Text(
