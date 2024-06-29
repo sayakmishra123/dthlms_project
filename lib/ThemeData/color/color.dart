@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ColorPage {
- static List<Color> themeColors = [
+  static List<Color> themeColors = [
     Color(0xFF87CEEB),
     Color(0xFF000080),
     Color(0xFF4169E1),
@@ -24,26 +24,25 @@ class ColorPage {
     Color(0xFF1DBC6D),
   ];
 
-
   static List<Color> toogleFGButtonColor = [
     Color(0xFF87CEEB),
     Color(0xFF000080),
     Color(0xFF4169E1),
     Color(0xFF47F7F7),
     Color(0xFF40E0D0),
-     Color(0xFF00FB00),
+    Color(0xFF00FB00),
     Color(0xFF05E905),
     Color.fromARGB(255, 7, 242, 7),
     Color(0xFF40E0D0),
     Color(0xFFF7F703),
-   Color(0xFFF95D74),
+    Color(0xFFF95D74),
     Color(0xFFFF69B4),
     Color(0xFFFF00FF),
-   Color(0xFFF90248),
-   Color(0xFF9EE1F9),
+    Color(0xFFF90248),
+    Color(0xFF9EE1F9),
     Color(0xFFFA8072),
     Color(0xFFE50909),
-   Color(0xFFE50909),
+    Color(0xFFE50909),
     Color(0xFFFF7D03),
     Color(0xFF25E987),
   ];
@@ -51,30 +50,28 @@ class ColorPage {
     Color(0xFF00B7FF),
     Color(0xFF5555FA),
     Color(0xFF0101AC),
-   Color(0xFF008080),
-   Color(0xFF015E5E),
-   Color(0xFF73C273),
-   Color(0xFF0C640C),
+    Color(0xFF008080),
+    Color(0xFF015E5E),
+    Color(0xFF73C273),
+    Color(0xFF0C640C),
     Color(0xFF228B22),
-   Color(0xFF23766E),
+    Color(0xFF23766E),
     Color(0xFF808000),
     Color(0xFFFFB6C1),
-  Color(0xFF8A3861),
+    Color(0xFF8A3861),
     Color(0xFFA459A4),
     Color(0xFFDE3163),
     Color(0xFFAEC6CF),
-   Color(0xFF81413A),
+    Color(0xFF81413A),
     Color(0xFF800000),
     Color(0xFF800020),
     Color(0xFFB87333),
-      Color(0xFF1DBC6D),
+    Color(0xFF1DBC6D),
   ];
 
-  static List<Color> textcolor=[
+  static List<Color> textcolor = [
     Color.fromARGB(255, 0, 0, 0),
     Color.fromARGB(255, 255, 255, 255),
-
-
   ];
   static const colorgrey = Color.fromRGBO(19, 23, 36, 1);
   //colorgrey Used in forgetPasswordMobile,
@@ -131,7 +128,7 @@ class ColorPage {
   //used in
   //MyClassDashboard
 
-  static const bgcolor = Colors.white;
+  static const bgcolor = Color.fromARGB(255, 232, 237, 252);
   //used in
   //signInOtpScreen
   //HomePage
@@ -145,6 +142,10 @@ class ColorPage {
   //PdfView
 
   static var drawericonbuttoncolor = colorgrey;
+  static var appbarColorgradient = [
+    Colors.deepPurple,
+    Colors.blue,
+  ];
   //used in DrawerWidget
 
   static const grey = Color.fromRGBO(158, 158, 158, 1);
@@ -208,6 +209,5 @@ class ColorPage {
   //MyClassVideoContent
   //PdfView
 
-
-    static var buttonColor = Color.fromRGBO(19, 23, 36, 1);
+  static var buttonColor = Color.fromRGBO(19, 23, 36, 1);
 }
