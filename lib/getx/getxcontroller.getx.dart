@@ -45,7 +45,7 @@ class Getx extends GetxController {
   RxBool passvisibility = false.obs;
   RxBool videoplaylock = false.obs;
 
-  //chat
+  RxList name = [].obs; //chat
   RxString email = ''.obs;
   //chat
 
@@ -71,8 +71,11 @@ class Getx extends GetxController {
     super.onInit();
   }
 
-  networkcheckingsnakbar(result) {
-    if (result == ConnectivityResult.none) {
+  networkcheckingsnakbar(List<ConnectivityResult> result) {
+    print(result);
+    String connection = result.last.toString();
+
+    if (connection == ConnectivityResult.none.toString()) {
       Get.showSnackbar(GetSnackBar(
           shouldIconPulse: true,
           icon: const Icon(

@@ -129,9 +129,9 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                               alignment: Alignment.topLeft,
                                               // height: 200,
                                               // color: Colors.red,
-                                              child: Image.network(
-                                                'https://videoencryptor.com/assets/images/logo.png',
-                                              ),
+                                              // child: Image.network(
+                                              //   'https://videoencryptor.com/assets/images/logo.png',
+                                              // ),
                                             ),
                                           ],
                                         ),
@@ -232,7 +232,6 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                     formfieldsize,
                                                                 child:
                                                                     TextFormField(
-                                                                      
                                                                   autovalidateMode:
                                                                       AutovalidateMode
                                                                           .onUserInteraction,
@@ -908,7 +907,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                         'tester1',
                                                                         'Admin@1234',
                                                                         '1234');
-                                                                        
+
                                                                     // await loginApi(
                                                                     //   context,
                                                                     //   loginemail

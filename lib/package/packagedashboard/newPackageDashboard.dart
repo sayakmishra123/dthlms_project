@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
+import 'package:dthlms/package/packagedashboard/dynamicpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,9 +25,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:icons_launcher/cli_commands.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:typewritertext/v3/typewriter.dart';
+import 'package:win32/win32.dart';
 
 class NewPackageDashboard extends StatefulWidget {
   const NewPackageDashboard({super.key});
@@ -120,8 +123,20 @@ class MyPackageDetails {
 }
 
 class _NewPackageDashboardState extends State<NewPackageDashboard> {
+  List<Color> colors = [
+    Colors.blue,
+    Colors.orange,
+    Colors.pink,
+    Colors.lightBlue,
+    Colors.orange,
+    Colors.lightBlue,
+    Colors.orange,
+    Colors.pink,
+  ];
+  List content = [3, 7, 5, 6, 4, 3, 7, 2];
 
   Getx getxController = Get.put(Getx());
+  List datacontent = ['abc', 'def', 'ghi', 'jkl', 'lmo'];
   final token = Get.arguments['token'];
   TextEditingController searchController = TextEditingController();
 
@@ -282,14 +297,15 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
 
   @override
   void initState() {
-        fnfindallpackage(token);
+    fnfindallpackage(token);
 
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  Obx(
+    return Obx(
       () => Scaffold(
         backgroundColor: ColorPage.bgcolor,
         appBar: AppBar(
@@ -313,6 +329,12 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
           //    child: Icon(Icons.person,color: ColorPage.white,),
           //  )],),
           actions: [
+            IconButton(
+                onPressed: () {
+                  print('object');
+                  debugDumpApp();
+                },
+                icon: Icon(Icons.add)),
             Padding(
               padding: const EdgeInsets.only(right: 12, left: 12),
               child: Column(
@@ -613,18 +635,31 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                                                               ColorPage.white,
                                                         ),
                                                         child: ListTile(
+                                                          subtitle: Text(
+                                                              'No. of folder content ${content[index]}'),
                                                           onTap: () {
-                                                             Get.toNamed('Videodashboard', arguments: {'token': token});
-  
+                                                            Get.to(() => DynamicFolder(
+                                                                content:
+                                                                    content[
+                                                                        index],
+                                                                token: token,
+                                                                datacontent:
+                                                                    datacontent,
+                                                                count: 0));
+                                                            // Get.toNamed(
+                                                            //     'Videodashboard',
+                                                            //     arguments: {
+                                                            //       'token': token
+                                                            //     });
                                                           },
+                                                          trailing: Icon(
+                                                            Icons
+                                                                .arrow_forward_ios,
+                                                          ),
                                                           leading: Icon(
                                                             Icons.folder,
                                                             color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    247,
-                                                                    92,
-                                                                    3),
+                                                                colors[index],
                                                           ),
                                                           shape: Border.all(
                                                               color: Colors
@@ -643,8 +678,6 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                                                                     FontWeight
                                                                         .bold),
                                                           ),
-                                                         
-                                                         
                                                         ),
                                                       ),
                                                     );
@@ -704,7 +737,6 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
       ),
     );
   }
-
 
   void showFullImageDialog() {
     showDialog(
