@@ -6,7 +6,9 @@ import 'package:dthlms/android/Homepage/MobileHomepage.dart';
 import 'package:dthlms/android/SigninOtp/OtpScreen.dart';
 import 'package:dthlms/android/Videodashboard/mobileVideoDashboard.dart';
 import 'package:dthlms/android/Videodashboard/mobileVideoPlayer.dart';
+import 'package:dthlms/android/Videodashboard/newMobileVideoPlayer.dart';
 import 'package:dthlms/android/login/dth_mob_login.dart';
+import 'package:dthlms/android/packagemobile/newPackages.dart';
 import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/package/packagedashboard/newPackageDashboard.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
@@ -101,6 +103,14 @@ class pageRouter {
     GetPage(
       name: "/Newpackagedashboard",
       page: () => NewPackageDashboard(),
+    ),
+     GetPage(
+      name: "/Newmobilepakagedashboard",
+      page: () => NewPackageDashboardMobile(),
+    ),
+     GetPage(
+      name: "/Newmobilevideoplayer",
+      page: () => NewMobileVidePlayer(),
     ),
   ];
 }

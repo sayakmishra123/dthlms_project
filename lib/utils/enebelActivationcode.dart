@@ -274,7 +274,7 @@ class CustomMessageBubble extends StatelessWidget {
             "Okk",
             style: TextStyle(color: Colors.white, fontSize: 15),
           ),
-          onPressed: () { packactivationKey(context, activationfield.text, token);
+          onPressed: () {  Get.back(); packactivationKey(context, activationfield.text, token);
             
           },
           color: ColorPage.colorgrey,
