@@ -127,50 +127,48 @@ class PackageDashboardState extends State<PackageDashboard>
   // Map<String, List<MyPackage>> mynestedData = {};
 
   Future fnusermypackage(String token) async {
-    Future.delayed(Duration(seconds: 5), () async {
-      Map data = {
-        "tblStudentPackage": {"UserID": "1234567890"}
-      };
-      final response = await http.post(
-        Uri.https(ClsUrlApi.mainurl,
-            '/api/AuthDataGet/ExecuteJson/sptblStudentPackage/2'),
-        body: json.encode(data),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-      );
-      var jsondata = json.decode(response.body);
-      print(jsondata);
-      print('sayak');
-      if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
-        var jsonData = json.decode(jsondata['result']);
-        print(jsonData);
-        mypackage.clear();
-        print(jsonData[0].toString());
-        for (int i = 0; i < jsonData.length; i++) {
-          final data = MyPackageDetails(
-              studentPackageID: jsonData[i]['StudentPackageID'],
-              userID: jsonData[i]['UserID'],
-              activationDate: jsonData[i]['ActivationDate'],
-              createdBy: jsonData[i]['CreatedBy'],
-              createdIP: jsonData[i]['CreatedIP'],
-              createdOn: jsonData[i]['CreatedOn'],
-              isActive: jsonData[i]['IsActive'],
-              validityDate: jsonData[i]['ValidityDate'],
-              isBlocked: jsonData[i]['IsBlocked'],
-              modifiedBy: jsonData[i]['ModifiedBy'],
-              modifiedIP: jsonData[i]['ModifiedIP'],
-              modifiedOn: jsonData[i]['ModifiedOn'],
-              packageID: jsonData[i]['PackageID'],
-              validityDays: jsonData[i]['ValidityDays']);
-          mypackage.add(data);
-        }
-        setState(() {
-          getxController.loading.value = false;
-        });
+    Map data = {
+      "tblStudentPackage": {"UserID": "1234567890"}
+    };
+    final response = await http.post(
+      Uri.https(ClsUrlApi.mainurl,
+          '/api/AuthDataGet/ExecuteJson/sptblStudentPackage/2'),
+      body: json.encode(data),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    var jsondata = json.decode(response.body);
+    print(jsondata);
+    print('sayak');
+    if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
+      var jsonData = json.decode(jsondata['result']);
+      print(jsonData);
+      mypackage.clear();
+      print(jsonData[0].toString());
+      for (int i = 0; i < jsonData.length; i++) {
+        final data = MyPackageDetails(
+            studentPackageID: jsonData[i]['StudentPackageID'],
+            userID: jsonData[i]['UserID'],
+            activationDate: jsonData[i]['ActivationDate'],
+            createdBy: jsonData[i]['CreatedBy'],
+            createdIP: jsonData[i]['CreatedIP'],
+            createdOn: jsonData[i]['CreatedOn'],
+            isActive: jsonData[i]['IsActive'],
+            validityDate: jsonData[i]['ValidityDate'],
+            isBlocked: jsonData[i]['IsBlocked'],
+            modifiedBy: jsonData[i]['ModifiedBy'],
+            modifiedIP: jsonData[i]['ModifiedIP'],
+            modifiedOn: jsonData[i]['ModifiedOn'],
+            packageID: jsonData[i]['PackageID'],
+            validityDays: jsonData[i]['ValidityDays']);
+        mypackage.add(data);
       }
-    });
+      setState(() {
+        getxController.loading.value = false;
+      });
+    }
   }
 
   Future<void> fnfindallpackage(String token) async {
