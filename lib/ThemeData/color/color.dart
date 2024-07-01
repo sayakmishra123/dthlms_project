@@ -128,7 +128,8 @@ class ColorPage {
   //used in
   //MyClassDashboard
 
-  static const bgcolor = Color.fromARGB(255, 232, 237, 252);
+  static const bgcolor = Colors.white;
+  static const tabbargradient = [Colors.blue, Colors.purple];
   //used in
   //signInOtpScreen
   //HomePage

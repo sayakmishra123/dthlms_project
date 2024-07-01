@@ -288,15 +288,16 @@ class PackageDashboardState extends State<PackageDashboard>
       () => Scaffold(
         backgroundColor: ColorPage.bgcolor,
         appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: ColorPage.appbarColorgradient,
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-              ),
-            ),
-          ),
+          backgroundColor: ColorPage.appbarcolor,
+          // flexibleSpace: Container(
+          //   decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //       colors: ColorPage.appbarColorgradient,
+          //       begin: Alignment.centerLeft,
+          //       end: Alignment.centerRight,
+          //     ),
+          //   ),
+          // ),
           // elevation: 1,
           scrolledUnderElevation: 20,
 
@@ -351,6 +352,11 @@ class PackageDashboardState extends State<PackageDashboard>
               Row(
                 children: [
                   Container(
+                    // decoration: BoxDecoration(
+                    //     gradient: LinearGradient( begin: , colors: [
+                    //   ColorPage.bgcolor,
+                    //   ColorPage.bluegrey300
+                    // ])),
                     // color: Colors.,
                     child: Expanded(
                       child: Container(
@@ -407,10 +413,8 @@ class PackageDashboardState extends State<PackageDashboard>
                                       ..setIndex(1),
                                     radius: 32.0,
                                     padding: const EdgeInsets.all(16.0),
-                                    backgroundColor:
-                                        Color.fromARGB(255, 72, 64, 177),
-                                    foregroundColor:
-                                        Color.fromARGB(255, 235, 233, 236),
+                                    backgroundColor: ColorPage.bluegrey800,
+                                    foregroundColor: ColorPage.bluegrey300,
                                     // foregroundColor:  Color.fromARGB(255, 37, 233, 135),
                                     // backgroundColor:Color.fromARGB(255, 97, 228, 162),
                                     elevation: 24,
@@ -606,8 +610,12 @@ class PackageDashboardState extends State<PackageDashboard>
                                                         child: ExpansionTile(
                                                           leading: Icon(
                                                             Icons.folder,
-                                                            color: Colors
-                                                                .deepOrange,
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    247,
+                                                                    92,
+                                                                    3),
                                                           ),
                                                           shape: Border.all(
                                                               color: Colors
