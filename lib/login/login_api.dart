@@ -75,7 +75,7 @@ Future loginApi(
     Get.back();
 
     Platform.isWindows
-        ? Get.toNamed('/package',
+        ? Get.toNamed('/Newpackagedashboard',
             arguments: {'token': jsondata['result']['token']})
         : Get.toNamed("/Mobilepakagedashboard",arguments:{'token': jsondata['result']['token']} );
 

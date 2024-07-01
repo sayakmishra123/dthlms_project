@@ -1,5 +1,12 @@
-// ignore_for_file: prefer_const_constructors, dead_code, unnecessary_import, avoid_print, avoid_unnecessary_containers
+import 'dart:ui';
 
+import 'package:dthlms/ThemeData/color/color.dart';
+import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'dart:convert';
 import 'dart:ui';
 
@@ -21,11 +28,11 @@ import 'package:showcaseview/showcaseview.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:typewritertext/v3/typewriter.dart';
 
-class PackageDashboard extends StatefulWidget {
-  PackageDashboard({super.key});
+class NewPackageDashboard extends StatefulWidget {
+  const NewPackageDashboard({super.key});
 
   @override
-  State<PackageDashboard> createState() => PackageDashboardState();
+  State<NewPackageDashboard> createState() => _NewPackageDashboardState();
 }
 
 class AllPackage {
@@ -112,8 +119,8 @@ class MyPackageDetails {
   });
 }
 
-class PackageDashboardState extends State<PackageDashboard>
-    with TickerProviderStateMixin {
+class _NewPackageDashboardState extends State<NewPackageDashboard> {
+
   Getx getxController = Get.put(Getx());
   final token = Get.arguments['token'];
   TextEditingController searchController = TextEditingController();
@@ -275,16 +282,14 @@ class PackageDashboardState extends State<PackageDashboard>
 
   @override
   void initState() {
-    // print(id);
-    // fnusermypackage(widget.token);
-    // fnusermypackage(widget.token);
-    fnfindallpackage(token);
+        fnfindallpackage(token);
+
+    // TODO: implement initState
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
-    return Obx(
+    return  Obx(
       () => Scaffold(
         backgroundColor: ColorPage.bgcolor,
         appBar: AppBar(
@@ -607,7 +612,11 @@ class PackageDashboardState extends State<PackageDashboard>
                                                           color:
                                                               ColorPage.white,
                                                         ),
-                                                        child: ExpansionTile(
+                                                        child: ListTile(
+                                                          onTap: () {
+                                                             Get.toNamed('Videodashboard', arguments: {'token': token});
+  
+                                                          },
                                                           leading: Icon(
                                                             Icons.folder,
                                                             color:
@@ -634,130 +643,8 @@ class PackageDashboardState extends State<PackageDashboard>
                                                                     FontWeight
                                                                         .bold),
                                                           ),
-                                                          onExpansionChanged:
-                                                              (value) {
-                                                            if (value &&
-                                                                !allnestedData.containsKey(
-                                                                    filteredPackage[
-                                                                            index]
-                                                                        .packageId)) {
-                                                              fnfindpackage(
-                                                                  token,
-                                                                  filteredPackage[
-                                                                          index]
-                                                                      .packageId);
-                                                            }
-                                                          },
-                                                          children: [
-                                                            allnestedData.containsKey(
-                                                                    filteredPackage[
-                                                                            index]
-                                                                        .packageId)
-                                                                ? ListView
-                                                                    .builder(
-                                                                    shrinkWrap:
-                                                                        true,
-                                                                    itemCount:
-                                                                        1,
-                                                                    itemBuilder:
-                                                                        (context,
-                                                                            subIndex) {
-                                                                      var subItem =
-                                                                          allnestedData[filteredPackage[index].packageId]![
-                                                                              subIndex];
-                                                                      return Container(
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          border:
-                                                                              Border(
-                                                                            top:
-                                                                                BorderSide(color: ColorPage.colorblack, width: 1),
-                                                                          ),
-                                                                        ),
-                                                                        child:
-                                                                            ExpansionTile(
-                                                                          iconColor:
-                                                                              ColorPage.colorblack,
-                                                                          shape:
-                                                                              Border.all(color: Colors.transparent),
-                                                                          // leading: Text(
-                                                                          //     subItem
-                                                                          //         .courseId),
-                                                                          title:
-                                                                              Text(
-                                                                            subItem.courseName,
-                                                                            style:
-                                                                                TextStyle(color: ColorPage.colorblack),
-                                                                          ),
-                                                                          subtitle:
-                                                                              Text(
-                                                                            subItem.termName,
-                                                                            style:
-                                                                                TextStyle(color: ColorPage.colorblack),
-                                                                          ),
-
-                                                                          onExpansionChanged:
-                                                                              (value) {
-                                                                            if (value &&
-                                                                                !allnestedData.containsKey(subItem.packageId)) {
-                                                                              fnfindpackage(token, subItem.packageId);
-                                                                            }
-                                                                          },
-                                                                          children: [
-                                                                            allnestedData.containsKey(subItem.packageId)
-                                                                                ? ListView.builder(
-                                                                                    shrinkWrap: true,
-                                                                                    itemCount: 1,
-                                                                                    itemBuilder: (context, subSubIndex) {
-                                                                                      var subSubItem = allnestedData[subItem.packageId]![subSubIndex];
-                                                                                      return Container(
-                                                                                        decoration: BoxDecoration(border: Border(top: BorderSide(color: ColorPage.colorblack))),
-                                                                                        child: ListTile(
-                                                                                          onTap: () {
-                                                                                            Get.toNamed('Videodashboard', arguments: {
-                                                                                              'token': token
-                                                                                            });
-                                                                                          },
-                                                                                          title: Text(
-                                                                                            subItem.termName,
-                                                                                            style: TextStyle(color: ColorPage.colorblack),
-                                                                                          ),
-                                                                                          trailing: ElevatedButton(
-                                                                                            child: Text(
-                                                                                              "Show",
-                                                                                              style: TextStyle(fontSize: ClsFontsize.DoubleExtraSmall, color: ColorPage.white),
-                                                                                            ),
-                                                                                            style: ElevatedButton.styleFrom(
-                                                                                              backgroundColor: ColorPage.color1,
-                                                                                              shape: RoundedRectangleBorder(
-                                                                                                borderRadius: BorderRadius.all(
-                                                                                                  Radius.circular(10),
-                                                                                                ),
-                                                                                              ),
-                                                                                            ),
-                                                                                            onPressed: () {
-                                                                                              Get.toNamed('Videodashboard', arguments: {'token': token});
-                                                                                            },
-                                                                                          ),
-                                                                                          subtitle: Text(
-                                                                                            subSubItem.packageDisplayName,
-                                                                                            style: TextStyle(color: ColorPage.colorblack),
-                                                                                          ),
-                                                                                        ),
-                                                                                      );
-                                                                                    },
-                                                                                  )
-                                                                                : CircularProgressIndicator(),
-                                                                          ],
-                                                                        ),
-                                                                      );
-                                                                    },
-                                                                  )
-                                                                : Center(
-                                                                    child:
-                                                                        CircularProgressIndicator(),
-                                                                  )
-                                                          ],
+                                                         
+                                                         
                                                         ),
                                                       ),
                                                     );
@@ -817,6 +704,7 @@ class PackageDashboardState extends State<PackageDashboard>
       ),
     );
   }
+
 
   void showFullImageDialog() {
     showDialog(
