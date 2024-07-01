@@ -286,8 +286,20 @@ class PackageDashboardState extends State<PackageDashboard>
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
+        backgroundColor: ColorPage.bgcolor,
         appBar: AppBar(
-          backgroundColor: ColorPage.appbarcolor,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: ColorPage.appbarColorgradient,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
+            ),
+          ),
+          // elevation: 1,
+          scrolledUnderElevation: 20,
+
           iconTheme: IconThemeData(color: ColorPage.white),
           automaticallyImplyLeading: false,
           //  leading: Row(children: [Padding(
@@ -329,9 +341,6 @@ class PackageDashboardState extends State<PackageDashboard>
                 ),
               ),
             ),
-          
-          
-          
           ],
         ),
         // backgroundColor:,
@@ -398,8 +407,10 @@ class PackageDashboardState extends State<PackageDashboard>
                                       ..setIndex(1),
                                     radius: 32.0,
                                     padding: const EdgeInsets.all(16.0),
-                                    backgroundColor: ColorPage.bluegrey800,
-                                    foregroundColor: ColorPage.bluegrey300,
+                                    backgroundColor:
+                                        Color.fromARGB(255, 72, 64, 177),
+                                    foregroundColor:
+                                        Color.fromARGB(255, 235, 233, 236),
                                     // foregroundColor:  Color.fromARGB(255, 37, 233, 135),
                                     // backgroundColor:Color.fromARGB(255, 97, 228, 162),
                                     elevation: 24,
@@ -557,12 +568,8 @@ class PackageDashboardState extends State<PackageDashboard>
                                                             BoxDecoration(
                                                           boxShadow: [
                                                             BoxShadow(
-                                                                color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            225,
-                                                                            214,
-                                                                            214)
+                                                                color: Colors
+                                                                    .white
                                                                     .withOpacity(
                                                                         0.2),
                                                                 offset: Offset(
@@ -571,12 +578,8 @@ class PackageDashboardState extends State<PackageDashboard>
                                                                 spreadRadius:
                                                                     -5),
                                                             BoxShadow(
-                                                                color: Color
-                                                                        .fromARGB(
-                                                                            255,
-                                                                            225,
-                                                                            214,
-                                                                            214)
+                                                                color: Colors
+                                                                    .white
                                                                     .withOpacity(
                                                                         0.2),
                                                                 offset: Offset(
@@ -585,12 +588,8 @@ class PackageDashboardState extends State<PackageDashboard>
                                                                 spreadRadius:
                                                                     -5),
                                                             BoxShadow(
-                                                                color: const Color
-                                                                    .fromARGB(
-                                                                    255,
-                                                                    255,
-                                                                    255,
-                                                                    255),
+                                                                color: Colors
+                                                                    .white,
                                                                 offset: Offset(
                                                                     -10, -10),
                                                                 blurRadius: 10,
@@ -602,7 +601,7 @@ class PackageDashboardState extends State<PackageDashboard>
                                                             Radius.circular(10),
                                                           ),
                                                           color:
-                                                              ColorPage.bgcolor,
+                                                              ColorPage.white,
                                                         ),
                                                         child: ExpansionTile(
                                                           leading: Icon(
