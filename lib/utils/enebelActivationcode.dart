@@ -271,10 +271,10 @@ class CustomMessageBubble extends StatelessWidget {
         DialogButton(
           width: MediaQuery.of(context).size.width / 4.5,
           child: Text(
-            "Okk",
+            "OK",
             style: TextStyle(color: Colors.white, fontSize: 15),
           ),
-          onPressed: () { packactivationKey(context, activationfield.text, token);
+          onPressed: () {  Get.back(); packactivationKey(context, activationfield.text, token);
             
           },
           color: ColorPage.colorgrey,

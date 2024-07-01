@@ -5,6 +5,7 @@ import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/android/Videodashboard/mobileVideoPlayer.dart';
+import 'package:dthlms/android/Videodashboard/newMobileVideoPlayer.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
 import 'package:dthlms/package/packagevideo.dart/videorelatetedPage.dart';
@@ -406,7 +407,9 @@ class _MobileVideoDashboardState extends State<MobileVideoDashboard>
                                                                                                       ),
                                                                                   onTap:
                                                                                       () {
-                                                                                    Get.toNamed("/Mobilevideoplayer",arguments: {"token":token,'videoname':filteredPackage[index].courseName});
+                                                                                    // Get.toNamed("/Mobilevideoplayer",arguments: {"token":token,'videoname':filteredPackage[index].courseName});
+                                                                                      Get.toNamed("/Mobilevideoplayer",arguments: {"token":token,'videoname':filteredPackage[index].courseName});
+                                                                                  
                                                                                   },
                                                                                   title:
                                                                                       Text(subItem.termName+"Abhi"),

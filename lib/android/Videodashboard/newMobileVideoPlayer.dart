@@ -1,3 +1,22 @@
+// ignore_for_file: file_names
+
+import 'dart:io';
+
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:dthlms/android/Drawer/Mobiledrawer.dart';
+import 'package:dthlms/ThemeData/color/color.dart';
+import 'package:dthlms/ThemeData/font/font_family.dart';
+// import 'package:dthlms/android/PackageDashboard/PackageDashboard.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
+import 'package:dthlms/android/packagemobile/packages.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:media_kit/media_kit.dart';
+import 'package:media_kit_video/media_kit_video.dart';
+import 'package:motion_tab_bar/MotionTabBarController.dart';
+import 'package:path_provider/path_provider.dart';
 // ignore_for_file: unnecessary_import, no_leading_underscores_for_local_identifiers, avoid_print, use_build_context_synchronously
 
 import 'dart:convert';
@@ -45,14 +64,13 @@ import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:showcaseview/showcaseview.dart';
 import '../../../ThemeData/color/color.dart';
-
-class MobileVideoPlayer extends StatefulWidget {
- 
-  MobileVideoPlayer( {super.key});
+class NewMobileVidePlayer extends StatefulWidget {
+  const NewMobileVidePlayer({super.key});
 
   @override
-  State<MobileVideoPlayer> createState() => _MobileVideoPlayerState();
+  State<NewMobileVidePlayer> createState() => NewMobileVidePlayerState();
 }
+
 
 class McqDetails {
   int videoDetailsId;
@@ -94,40 +112,15 @@ class McqDetails {
   });
 }
 
-class _MobileVideoPlayerState extends State<MobileVideoPlayer>
-    with TickerProviderStateMixin {
-  MotionTabBarController? _motionTabBarController;
+class NewMobileVidePlayerState extends State<NewMobileVidePlayer>with TickerProviderStateMixin {
+  final CarouselController carouselController = CarouselController();
+  int currentIndex = 0;
+
+    MotionTabBarController? _motionTabBarController;
   late final player = Player();
   
   late final controller = VideoController(player);
-  @override
-  void initState() {
-    super.initState();
-     player.open(Media('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'));
-
-    _motionTabBarController = MotionTabBarController(
-      initialIndex: 0,
-      length: 4,
-      vsync: this,
-    );
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   // ShowCaseWidget.of(context).startShowCase([tabbarkey]);
-    //   // fngetVideodetailsApi(widget.token, tabfield[0]);3
-    //   fngetVideodetailsApi(widget.token, 'PDF');
-    // });
-    permission();
-  }
-
-  // List<Widget> category = [];
-  @override
-  void dispose() {
-    super.dispose();
-    // category = [PdfCategory(), McqCategory(), PdfCategory(), McqCategory()];
-
-    // _tabController.dispose();
-    _motionTabBarController!.dispose();
-  }
-
+  
   List<String> tabfield = const ["PDF", "MCQ", "TAG", "Review"];
   Getx getx = Get.put(Getx());
 
@@ -246,12 +239,53 @@ class _MobileVideoPlayerState extends State<MobileVideoPlayer>
   late VideoPlayClass videoPlay;
   int t = 0;
 
-  // GlobalKey tabbarkey = GlobalKey();
+  final List<Map<String, String>> imageList = [
+    {"id": "1", "image_path": 'assets/android/p1.jpg'},
+    {"id": "2", "image_path": 'assets/android/p3.jpg'},
+    {"id": "3", "image_path": 'assets/android/p2.jpg'},
+    {"id": "4", "image_path": 'assets/android/p4.avif'},
+    {"id": "5", "image_path": 'assets/android/p2.jpg'},
+  ];
+
+  final Getx ge = Get.put(Getx());
+  late final double elemenContainerWidth = screenwidth / 3.2;
+  late final double screenwidth = MediaQuery.of(context).size.width;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+  @override
+    void dispose() {
+    super.dispose();
+    // category = [PdfCategory(), McqCategory(), PdfCategory(), McqCategory()];
+
+    // _tabController.dispose();
+    _motionTabBarController!.dispose();
+  }
+  
+  void initState() {
+    super.initState();
+     player.open(Media('http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'));
+
+    _motionTabBarController = MotionTabBarController(
+      initialIndex: 0,
+      length: 4,
+      vsync: this,
+    );
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   // ShowCaseWidget.of(context).startShowCase([tabbarkey]);
+    //   // fngetVideodetailsApi(widget.token, tabfield[0]);3
+    //   fngetVideodetailsApi(widget.token, 'PDF');
+    // });
+    permission();
+  }
+
+  static const double iconSize = 80;
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child:
-       MaterialVideoControlsTheme(
+    return   MaterialVideoControlsTheme(
         normal: MaterialVideoControlsThemeData( controlsHoverDuration: Duration(seconds: 15),primaryButtonBar: [ MaterialSkipPreviousButton(
             iconSize: 80,
           ),
@@ -374,36 +408,9 @@ class _MobileVideoPlayerState extends State<MobileVideoPlayer>
           ),
           MaterialCustomButton(
             onPressed: () {
-              // showDialog(
-              //     context: context,
-              //     builder: (context) {
-              //       return AlertDialog.adaptive(
-              //         actions: [
-              //           ElevatedButton(
-              //             child: Text('Cancel'),
-              //             onPressed: () {
-              //               Get.back();
-              //             },
-              //           ),
-              //           ElevatedButton(
-              //             child: Text('Ok'),
-              //             onPressed: () {
-              //               videoPlay.player.seek(
-              //                   Duration(seconds: int.parse(gototext.text)));
-              //               Get.back();
-              //             },
-              //           )
-              //         ],
-              //         content: SizedBox(
-              //           width: 300,
-              //           child: TextFormField(
-              //             controller: gototext,
-              //           ),
-              //         ),
-              //       );
-              //     });
+             
 
-              // videoPlay.player.seek(Duration(seconds: 30));
+             
             },
             icon: Text(
               'GOTO',
@@ -419,129 +426,273 @@ class _MobileVideoPlayerState extends State<MobileVideoPlayer>
     // automaticallyImplySkipNextButton: false,
     // automaticallyImplySkipPreviousButton: false,
   ),
-        child: Column(
-          children: [
-            Container(height: 60,width: MediaQuery.of(context).size.width,color: ColorPage.appbarcolor, child: Row(children: [    Padding(
-              padding: const EdgeInsets.only(left: 15),
-              child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,color: ColorPage.white,size: 35,)),
-            ),  Padding(
-              padding: const EdgeInsets.only(left: 20
-              ),
-              child: Text(videoname,style: FontFamily.font5,),
-            )],),),
-             Flexible(
-               child: Container(
-               
-              
-                        color: Colors.black,
-                        child: Column(
-                          children: [
-                            Flexible(
-                              child: Center(
-                    child: SizedBox(
-                      
-                    // width: MediaQuery.of(context).size.width/2.3,
-                    // height: MediaQuery.of(context).size.width * 9.0 / 16.0,
-                    // Use [Video] widget to display video output.
-                    child: Video(controller: controller),
-                    ),
-                        ),
-                            ),
-                          ],
-                        )),
-             ),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(top: 10),
-               
-                child: DefaultTabController(
-                  length: 4,
-                  child:  Scaffold(
-              
-                      backgroundColor: ColorPage.bgcolor,
-                      appBar: AppBar(
-                       automaticallyImplyLeading: false,
-                       
-                        backgroundColor: ColorPage.appbarcolor,
-                        bottom: PreferredSize(
-                          preferredSize: Size.fromHeight(40),
-                          child: MotionTabBar(
-                            controller:
-                                _motionTabBarController, // ADD THIS if you need to change your tab programmatically
-                            initialSelectedTab: "PDF",
-                            labels: tabfield,
-                            icons: const [
-                              Icons.picture_as_pdf,
-                              Icons.question_answer,
-                              Icons.tag,
-                              Icons.reviews
-                            ],
-                    
-                            badges: [
-                              MotionBadgeWidget(
-                                text: '604',
-                                textColor: Colors.white, // optional, default to Colors.white
-                                color: Colors.red, // optional, default to Colors.red
-                                size: 18, // optional, default to 18
-                              ),
-                              null,
-                              null,
-                              null,
-                             
-                            ],
-                    
-                            tabSize: 50,
-                            tabBarHeight: 55,
-                            textStyle: const TextStyle(
-                              fontSize: 12,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                    
-                            tabIconColor: Colors.blue[600],
-                            tabIconSize: 28.0,
-                            tabIconSelectedSize: 26.0,
-                            tabSelectedColor: Colors.blue[900],
-                            tabIconSelectedColor: Colors.white,
-                            // tabBarColor: Color.fromARGB(255, 64, 41, 231),
-                            onTabItemSelected: (int value) {
-                              setState(() {
-                                _motionTabBarController!.index = value;
-                    
-                                fngetVideodetailsApi(token, tabfield[value]);
-                              });
-                            },
-                          ),
-                        ),
+       child:  NestedScrollView(
+            headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+    return <Widget>[
+      SliverToBoxAdapter(
+        child: SizedBox(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Container(
+                  height: 60,
+                  width: MediaQuery.of(context).size.width,
+                  color: ColorPage.appbarcolor,
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.arrow_back,
+                              color: ColorPage.white,
+                              size: 35,
+                            )),
                       ),
-                      body: TabBarView(
-                          // physics:
-                          //     NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
-                      
-                          controller: _motionTabBarController,
-                          children: [
-                           
-                            pdflink.isNotEmpty
-                                ? PdfCategory(pdflink)
-                                : Center(child: CircularProgressIndicator()),
-                            mcq.isNotEmpty ? McqCategory() : Container(),
-                         Container(),
-                             Container(child: ListView.builder( itemCount: 10, itemBuilder: (context,index){
-                              return ListTile(title: Text("data $index"));
-                             }),)
-                          ]),
-                    ),
-                  
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          'Data',
+                          style: FontFamily.font5,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
+              Expanded(
+                child: Container(
+                              height: 300,
+                
+                              
+                         color: Colors.black,
+                         child: Column(
+                           children: [
+                             Flexible(
+                               child: Center(
+                     child: SizedBox(
+                       
+                     // width: MediaQuery.of(context).size.width/2.3,
+                     // height: MediaQuery.of(context).size.width * 9.0 / 16.0,
+                     // Use [Video] widget to display video output.
+                     child: Video(controller: controller),
+                     ),
+                         ),
+                             ),
+                           ],
+                         )),
+              ),
+
+
+                Expanded(
+                  child: Container(
+                                
+                  margin: EdgeInsets.only(top: 10),
+                                 
+                  child: DefaultTabController(
+                    length: 4,
+                    child:  Scaffold(
+                                
+                        backgroundColor: ColorPage.bgcolor,
+                        appBar: AppBar(
+                         automaticallyImplyLeading: false,
+                         
+                          backgroundColor: ColorPage.appbarcolor,
+                          bottom: PreferredSize(
+                            preferredSize: Size.fromHeight(40),
+                            child: MotionTabBar(
+                              controller:
+                                  _motionTabBarController, // ADD THIS if you need to change your tab programmatically
+                              initialSelectedTab: "PDF",
+                              labels: tabfield,
+                              icons: const [
+                                Icons.picture_as_pdf,
+                                Icons.question_answer,
+                                Icons.tag,
+                                Icons.reviews
+                              ],
+                      
+                              badges: [
+                                MotionBadgeWidget(
+                                  text: '604',
+                                  textColor: Colors.white, // optional, default to Colors.white
+                                  color: Colors.red, // optional, default to Colors.red
+                                  size: 18, // optional, default to 18
+                                ),
+                                null,
+                                null,
+                                null,
+                               
+                              ],
+                      
+                              tabSize: 50,
+                              tabBarHeight: 55,
+                              textStyle: const TextStyle(
+                                fontSize: 12,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
+                      
+                              tabIconColor: Colors.blue[600],
+                              tabIconSize: 28.0,
+                              tabIconSelectedSize: 26.0,
+                              tabSelectedColor: Colors.blue[900],
+                              tabIconSelectedColor: Colors.white,
+                              // tabBarColor: Color.fromARGB(255, 64, 41, 231),
+                              onTabItemSelected: (int value) {
+                                setState(() {
+                                  _motionTabBarController!.index = value;
+                      
+                                  fngetVideodetailsApi(token, tabfield[value]);
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                        body: TabBarView(
+                            // physics:
+                            //     NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
+                        
+                            controller: _motionTabBarController,
+                            children: [
+                             
+                              pdflink.isNotEmpty
+                                  ? PdfCategory(pdflink)
+                                  : Center(child: CircularProgressIndicator()),
+                              mcq.isNotEmpty ? McqCategory() : Container(),
+                           Container(),
+                               SingleChildScrollView(
+                                 child: Container(child: ListView.builder( itemCount: 10, itemBuilder: (context,index){
+                                  return ListTile(title: Text("data $index"));
+                                 }),),
+                               )
+                            ]),
+                      ),
+                    
+                  ),
+                                ),
+                ),
             
-            ),
-          ],
+              
+        
+            ],
+          ),
         ),
       ),
+    ];
+            },
+            body: Container(
+    padding: const EdgeInsets.only(top: 20),
+    width: screenwidth,
+    decoration: const BoxDecoration(
+      color: ColorPage.bgcolor,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(45),
+        topRight: Radius.circular(45),
+      ),
+    ),
+    child: SingleChildScrollView(),
+            ),
+          ),
+     
+      );
    
+  }
+
+  void _showPopupMenu(BuildContext context) {
+    showMenu(
+      context: context,
+      position: const RelativeRect.fromLTRB(
+          1000, 100, 10, 100), // Adjust these values as needed
+      items: [
+        PopupMenuItem<String>(
+          value: 'Profile',
+          child: TextButton.icon(
+            icon: const Icon(Icons.person),
+            onPressed: () {},
+            label: const Text("Profile"),
+          ),
+        ),
+        PopupMenuItem<String>(
+          value: 'Logout',
+          child: TextButton.icon(
+            icon: const Icon(Icons.logout),
+            onPressed: () {},
+            label: const Text("Logout"),
+          ),
+        ),
+        PopupMenuItem<String>(
+          value: 'Support',
+          child: TextButton.icon(
+            icon: const Icon(Icons.support_agent),
+            onPressed: () {},
+            label: const Text("Support"),
+          ),
+        ),
+      ],
     );
   }
+
+  Widget buildRow(BuildContext context, List<Widget> children) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: children,
+    );
+  }
+
+  Widget buildContainer(
+    BuildContext context,
+    String assetPath,
+    String text,
+    Gradient gradient,
+  ) {
+    return SizedBox(
+      width: elemenContainerWidth,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const SizedBox(height: 5),
+          Container(
+            width: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              gradient: gradient,
+            ),
+            child: Image.asset(
+              assetPath,
+              width: iconSize,
+              scale: 12,
+              color: ColorPage.white,
+            ),
+          ),
+          AutoSizeText(
+            text,
+            style: FontFamily.font4,
+            maxLines: 1,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildRowSpaceEvenly(BuildContext context, List<Widget> children) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: children,
+    );
+  }
+
+    Future permission() async {
+    if (Platform.isAndroid) {
+      final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
+      final AndroidDeviceInfo info = await deviceInfoPlugin.androidInfo;
+      if ((info.version.sdkInt) >= 33) {
+      } else {}
+    } else {}
+  }
+
 
   String filename = "encrypt_video.mp4";
   late Directory appDocDir;
@@ -651,12 +802,4 @@ class _MobileVideoPlayerState extends State<MobileVideoPlayer>
   late Directory filelocationpath;
 //
 
-  Future permission() async {
-    if (Platform.isAndroid) {
-      final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-      final AndroidDeviceInfo info = await deviceInfoPlugin.androidInfo;
-      if ((info.version.sdkInt) >= 33) {
-      } else {}
-    } else {}
-  }
 }
