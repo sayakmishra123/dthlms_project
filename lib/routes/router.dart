@@ -8,6 +8,7 @@ import 'package:dthlms/android/Videodashboard/mobileVideoDashboard.dart';
 import 'package:dthlms/android/Videodashboard/mobileVideoPlayer.dart';
 import 'package:dthlms/android/login/dth_mob_login.dart';
 import 'package:dthlms/login/dth_login.dart';
+import 'package:dthlms/package/packagedashboard/newPackageDashboard.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
 import 'package:dthlms/package/packagescreen.dart';
 import 'package:dthlms/package/packagevideo.dart/videodashboard.dart';
@@ -76,11 +77,30 @@ class pageRouter {
       name: '/Packagescreen',
       page: () => PackageScreen(),
     ),
-    GetPage(name: '/Myclassvideocontent', page:()=> MyClassVideoContent()),
-     GetPage(name: '/Videodashboard',page: () => VideoDashboard(),),
-     GetPage(name: '/Videodetails', page:()=> VideoDetails()),
-     GetPage(name: "/Myclassdashboard", page:()=> MyClassDashboard()),
-     GetPage(name: '/Myclasscontent', page: ()=>MyClassContent()),
-     GetPage(name: "/Profile", page: ()=>Profile()),
+    GetPage(name: '/Myclassvideocontent', page: () => MyClassVideoContent()),
+    GetPage(
+      name: '/Videodashboard',
+      page: () => VideoDashboard(),
+    ),
+    GetPage(
+      name: '/Videodetails',
+      page: () => VideoDetails(),
+    ),
+    GetPage(
+      name: "/Myclassdashboard",
+      page: () => MyClassDashboard(),
+    ),
+    GetPage(
+      name: '/Myclasscontent',
+      page: () => MyClassContent(),
+    ),
+    GetPage(
+      name: "/Profile",
+      page: () => Profile(),
+    ),
+    GetPage(
+      name: "/Newpackagedashboard",
+      page: () => NewPackageDashboard(),
+    ),
   ];
 }
