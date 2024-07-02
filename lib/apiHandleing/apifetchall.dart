@@ -146,9 +146,9 @@ Future packactivationKey(
       },
       body: jsonEncode(data));
   print(res.body);
- 
+
   if (res.statusCode == 200) {
-     Get.back();
+    Get.back();
     await confirmActivationCode(context, res.body);
   }
 }

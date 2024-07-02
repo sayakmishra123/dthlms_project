@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 loader(context) async {
   return showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (context) {
         return SpinKitPulsingGrid(

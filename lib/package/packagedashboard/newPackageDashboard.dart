@@ -4,32 +4,22 @@ import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/package/packagedashboard/dynamicpage.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
+
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
-import 'package:dthlms/ThemeData/color/color.dart';
-import 'package:dthlms/ThemeData/font/font_family.dart';
-import 'package:dthlms/getx/getxcontroller.getx.dart';
-import 'package:dthlms/package/packagevideo.dart/videodashboard.dart';
+
 import 'package:dthlms/url/api_url.dart';
 import 'package:dthlms/utils/enebelActivationcode.dart';
-import 'package:flutter/cupertino.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:icons_launcher/cli_commands.dart';
-import 'package:showcaseview/showcaseview.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:typewritertext/v3/typewriter.dart';
-import 'package:win32/win32.dart';
 
 class NewPackageDashboard extends StatefulWidget {
   const NewPackageDashboard({super.key});

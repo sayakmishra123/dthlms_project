@@ -511,44 +511,46 @@ class _VideoDashboardState extends State<VideoDashboard>
   }
 
   Future<void> fnfindallpackage(String token) async {
-    Future.delayed(Duration(seconds: 3), () async {
-      Map data = {
-        "tblPackage": {"PackageId": "0"}
-      };
-      final response = await http.post(
-        Uri.https(ClsUrlApi.mainurl, ClsUrlApi.allpackage),
-        body: json.encode(data),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer $token',
-        },
-      );
-      var jsondata = json.decode(response.body);
-      print(jsondata);
-      if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
-        var jsonData = json.decode(jsondata['result']);
-        allpackage.clear();
-        for (int i = 0; i < jsonData.length; i++) {
-          final data = AllPackage(
-            courseId: jsonData[i]['CourseId'].toString(),
-            courseName: jsonData[i]['CourseName'].toString(),
-            termId: jsonData[i]['TermId'].toString(),
-            termName: jsonData[i]['TermName'].toString(),
-            packageId: jsonData[i]['PackageId'].toString(),
-            isActive: jsonData[i]['IsActive'].toString(),
-            packageName: jsonData[i]['PackageName'].toString(),
-            packageDisplayName: jsonData[i]['PackageDisplayName'].toString(),
-            srNo: jsonData[i]['SrNo'].toString(),
-            sortedOrder: jsonData[i]['SortedOrder'].toString(),
-          );
-          allpackage.add(data);
-        }
-        filteredPackage = List.from(allpackage);
-        setState(() {
-          _isLoading = false;
-        });
+    Map data = {
+      "tblPackage": {"PackageId": "0"}
+    };
+    final response = await http.post(
+      Uri.https(ClsUrlApi.mainurl, ClsUrlApi.allpackage),
+      body: json.encode(data),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    var jsondata = json.decode(response.body);
+    print(jsondata);
+    if (response.statusCode == 200 && jsondata['isSuccess'] == true) {
+      var jsonData = json.decode(jsondata['result']);
+      allpackage.clear();
+      for (int i = 0; i < jsonData.length; i++) {
+        final data = AllPackage(
+          courseId: jsonData[i]['CourseId'].toString(),
+          courseName: jsonData[i]['CourseName'].toString(),
+          termId: jsonData[i]['TermId'].toString(),
+          termName: jsonData[i]['TermName'].toString(),
+          packageId: jsonData[i]['PackageId'].toString(),
+          isActive: jsonData[i]['IsActive'].toString(),
+          packageName: jsonData[i]['PackageName'].toString(),
+          packageDisplayName: jsonData[i]['PackageDisplayName'].toString(),
+          srNo: jsonData[i]['SrNo'].toString(),
+          sortedOrder: jsonData[i]['SortedOrder'].toString(),
+        );
+        allpackage.add(data);
       }
-    });
+      filteredPackage = List.from(allpackage);
+      setState(() {
+        _isLoading = false;
+      });
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   void setFilterData() {
