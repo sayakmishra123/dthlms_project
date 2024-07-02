@@ -302,7 +302,7 @@ class NewMobileVidePlayerState extends State<NewMobileVidePlayer>with TickerProv
          bottomButtonBar: [
           MaterialPlayOrPauseButton(),
          
-          MaterialPositionIndicator()
+          MaterialPositionIndicator(),
         ],
          topButtonBar: [
           Obx(
