@@ -11,6 +11,6 @@ class McqPage extends StatefulWidget {
 class _McqPageState extends State<McqPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(backgroundColor: ColorPage.appbarcolor,),);
+    return Scaffold(appBar: AppBar(backgroundColor: ColorPage.appbarcolor,title: Text("MCQ"),),);
   }
 }

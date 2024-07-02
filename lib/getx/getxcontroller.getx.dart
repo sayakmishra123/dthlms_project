@@ -71,7 +71,7 @@ class Getx extends GetxController {
     super.onInit();
   }
 
-  networkcheckingsnakbar(List<ConnectivityResult> result) {
+  Future networkcheckingsnakbar(List<ConnectivityResult> result) async {
     print(result);
     String connection = result.last.toString();
 
