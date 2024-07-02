@@ -4,6 +4,7 @@ import 'package:dthlms/ThemeData/color/color.dart' show ColorPage;
 import 'package:dthlms/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:dthlms/login/dth_login.dart' show DthLmsLogin;
 import 'package:dthlms/mcq/macterm&conditionpage.dart';
+import 'package:dthlms/mcq/mcqexampage.dart';
 import 'package:dthlms/routes/router.dart' show pageRouter;
 import 'package:dthlms/utctime.dart';
 
@@ -23,7 +24,7 @@ import 'package:media_kit/media_kit.dart' show MediaKit;
 import 'package:windows_single_instance/windows_single_instance.dart'
     show WindowsSingleInstance;
 
-//sayak mishra shubha
+//sayak mishra
 
 void main(List<String> args) async {
   print(UtcTime().utctime());
