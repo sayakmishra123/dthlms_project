@@ -1,5 +1,6 @@
 import 'package:dthlms/widget/mybutton.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class McqExamPage extends StatefulWidget {
   const McqExamPage({super.key});
@@ -8,14 +9,20 @@ class McqExamPage extends StatefulWidget {
   State<McqExamPage> createState() => _McqExamPageState();
 }
 
+
+class _McqExamPageState extends State<McqExamPage> {
+
+  bool isNumberPadVisible = false;
+  RxBool selecte=false.obs;
+  String selectedNumber = 'Select a number';
 var timerStyle =
     TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20);
 var headerStyle = TextStyle(fontWeight: FontWeight.w600, fontSize: 20);
 var optionStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 15);
 
 List options = ['A) 56', 'B) 6', 'C) 5566', 'D) All'];
+int selectedIndex = -1;
 
-class _McqExamPageState extends State<McqExamPage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -64,80 +71,6 @@ class _McqExamPageState extends State<McqExamPage> {
               ),
             ),
           ],
-        ),
-        
-        bottomNavigationBar: Container(
-          color: Colors.white,
-          height: 80,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  MyButton(
-                    btncolor: Colors.grey,
-                    mychild: 'Mark for Review',
-                    mycolor: Colors.orangeAccent,
-                    onPressed: () {
-                      // Add your functionality here
-                    },
-                  ),
-                  SizedBox(width: 20,),
-                  MyButton(
-                    btncolor: Colors.red,
-                    mychild: 'Clear Responce',
-                    mycolor: Colors.orangeAccent,
-                    onPressed: () {
-                      // Add your functionality here
-                    },
-                  ),
-                  // MyButton(
-                  //   btncolor: Colors.grey,
-                  //   mychild: 'Bookmark',
-                  //   mycolor: Colors.orangeAccent,
-                  //   onPressed: () {
-                  //     // Add your functionality here
-                  //   },
-                  // ),
-                  // MyButton(
-                  //   btncolor: Colors.grey,
-                  //   mychild: 'Report',
-                  //   mycolor: Colors.orangeAccent,
-                  //   onPressed: () {
-                  //     // Add your functionality here
-                  //   },
-                  // ),
-                ],
-              ),
-              Row(
-                children: [
-                  MyButton(
-                    btncolor: Colors.blue,
-                    mychild: 'Previous',
-                    mycolor: Colors.orangeAccent,
-                    onPressed: () {
-                      // Add your functionality here
-                    },
-                  ),
-                  SizedBox(width: 20,),
-                  MyButton(
-                    btncolor: Colors.greenAccent,
-                    mychild: 'Save & Next',
-                    mycolor: Colors.orangeAccent,
-                    onPressed: () {
-                      // Add your functionality here
-                    },
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                ],
-              ),
-            ],
-          ),
         ),
         body: SingleChildScrollView(
           child: Row(
@@ -258,38 +191,83 @@ class _McqExamPageState extends State<McqExamPage> {
                         SizedBox(
                           height: 20,
                         ),
-                        Expanded(
+                        SizedBox(
+                          height: 400,
                           child: ListView.builder(
-                            itemCount: 4,
-                            itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      margin: EdgeInsets.only(bottom: 20),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black12,
-                                              offset: Offset(8, 8),
-                                              blurRadius: 10,
-                                            )
-                                          ]),
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 16, horizontal: 10),
-                                      child: Text(
-                                        textAlign: TextAlign.start,
-                                        options[index].toString(),
-                                        style: optionStyle,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
+      itemCount: 4,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: EdgeInsets.symmetric(vertical: 10),
+          child: AnimatedContainer(
+            duration: Duration(milliseconds: 600),
+            curve: Curves.easeInOut,
+            height: 60,
+            decoration: BoxDecoration(
+              color: selectedIndex == index ? Colors.blue[200] : Colors.white,
+              borderRadius: BorderRadius.circular(8),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 10,
+                  offset: Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                onTap: () {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Text(
+                        options[index].toString(),
+                        style: optionStyle,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    ),
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                          MaterialButton(
+                            height: 60,
+                     color: Colors.blueAccent,
+                        padding: EdgeInsets.all(16),
+                        shape: ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                  
+                onPressed: () {
+                  
+                },
+                        child: Text('Previous',style: TextStyle(color: Colors.white),),
+                      ),
+                       MaterialButton(
+                        height: 60,
+                     color: Colors.greenAccent[400],
+                        padding: EdgeInsets.all(16),
+                        shape: ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                  
+                onPressed: () {
+                  
+                },
+                        child: Text('Save & Next',style: TextStyle(color: Colors.white),),
+                      ),
+                        ],)
                       ],
                     ),
                   ),
@@ -305,64 +283,162 @@ class _McqExamPageState extends State<McqExamPage> {
                         Row(
                           children: [
                             Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        offset: Offset(8, 8),
-                                        blurRadius: 10,
-                                      )
-                                    ]),
-                                padding: EdgeInsets.symmetric(
-                                    vertical: 15, horizontal: 20),
-                                child: Column(
-                                  children: [
-                                    DropdownMenu(dropdownMenuEntries: [])
-                                    // Row(
-                                    //   mainAxisAlignment:
-                                    //       MainAxisAlignment.spaceBetween,
-                                    //   children: [
-                                    //     Text(
-                                    //       'Options',
-                                    //       style: headerStyle,
-                                    //     ),
-                                    //     IconButton(
-                                    //         onPressed: () {},
-                                    //         icon:
-                                    //             Icon(Icons.keyboard_arrow_down))
-                                    //   ],
-                                    // ),
-                                    ,
-                                    Row(
+                              child: Column(
+                                children: [
+                                
+                                 
+                                  
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8),
+                                      
+                                    ),
+                                    padding: EdgeInsets.all(20),
+                                    child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          'Options',
+                                          'Group A',
                                           style: headerStyle,
                                         ),
                                         IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              // selecte.value=!selecte.value;
+                                            },
                                             icon:
                                                 Icon(Icons.keyboard_arrow_down))
                                       ],
                                     ),
-                                    Row(
+                                  ),
+                                  SizedBox(height: 20,),
+                                  Container(
+                                       decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8),
+                                      
+                                    ),
+                                    padding: EdgeInsets.all(20),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        // drop down
+                                        Text(
+                                                                                    'Group B',
+                                                                  
+                                          style: headerStyle,
+                                        ),
+                                        IconButton(
+                                            onPressed: () {
+                                              // selecte.value=!selecte.value;
+                                            },
+                                            icon:
+                                                Icon(Icons.keyboard_arrow_down))
                                       ],
-                                    )
-                                  ],
-                                ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 20,),
+                              
+                                  Container(
+                                       decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8),
+                                      
+                                    ),
+                                    padding: EdgeInsets.all(20),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                                                                       'Group C',
+                                                                      
+                                              style: headerStyle,
+                                            ),
+                                            IconButton(
+                                                onPressed: () {
+                                                  selecte.value=!selecte.value;
+                                                },
+                                                icon:
+                                                    Icon(Icons.keyboard_arrow_down))
+                                          ],
+                                        ),
+                                         Obx(()=>
+                                     Visibility(
+                                      visible: selecte.value,
+                                       child: AnimatedContainer(
+                                        duration: Duration(milliseconds: 600),
+                                        curve: Curves.bounceOut,
+                                         child: SizedBox(
+                                          height: 400,
+                                          child: Expanded(
+                                            child: GridView.builder(
+                                              itemCount: 60,
+                                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4), itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: MaterialButton(
+                                                 
+                                                  shape: CircleBorder(side: BorderSide(color: Colors.black12)),
+                                                  onPressed: (){
+                                                                                        
+                                                },
+                                                child: Text(index.toString()),
+                                                ),
+                                              );
+                                            },),
+                                          ),
+                                                                               ),
+                                       ),
+                                     ),
+                                  )
+                                      ],
+                                    ),
+                                  ),
+                                 
+                                  
+                                ],
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 20,
+                        SizedBox(height: 10,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            MaterialButton(
+                                height: 60,
+                                                 color: Colors.grey,
+                            padding: EdgeInsets.all(16),
+                            shape: ContinuousRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                                              
+                                            onPressed: () {
+                                              
+                                            },
+                            child: Text('Mark for Review',style: TextStyle(color: Colors.white),),
+                                                  ),
+                                                  MaterialButton(
+                            height: 60,
+                     color: Colors.orange,
+                        padding: EdgeInsets.all(16),
+                        shape: ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.circular(12)),
+                  
+                onPressed: () {
+                  
+                },
+                        child: Text('Clear Responce',style: TextStyle(color: Colors.white),),
+                      )
+                          ],
                         ),
+                       
+                        // SizedBox(
+                        //   height: 20,
+                        // ),
                       ],
                     ),
                   ),
