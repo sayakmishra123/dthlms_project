@@ -1,4 +1,4 @@
-
+import 'package:dthlms/widget/mybutton.dart';
 import 'package:flutter/material.dart';
 
 class McqExamPage extends StatefulWidget {
@@ -11,15 +11,9 @@ class McqExamPage extends StatefulWidget {
 var timerStyle =
     TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20);
 var headerStyle = TextStyle(fontWeight: FontWeight.w600, fontSize: 20);
-var optionStyle = TextStyle(fontWeight: FontWeight.w500, fontSize:15);
+var optionStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 15);
 
-
-List options = [
-  'A) 56',
-  'B) 6',
-  'C) 5566',
-  'D) All'
-];
+List options = ['A) 56', 'B) 6', 'C) 5566', 'D) All'];
 
 class _McqExamPageState extends State<McqExamPage> {
   @override
@@ -51,16 +45,11 @@ class _McqExamPageState extends State<McqExamPage> {
                   ),
                   Row(
                     children: [
-                      MaterialButton(
-                        splashColor: Colors.orangeAccent,
-                        hoverColor: Colors.orangeAccent.withOpacity(0.5),
-                        padding: EdgeInsets.all(16),
-                        shape: ContinuousRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        color: Colors.white,
-                        onPressed: () {},
-                        child: Text('Submit'),
-                      ),
+                      MyButton(
+                          btncolor: Colors.white,
+                          onPressed: () {},
+                          mychild: 'Submit',
+                          mycolor: Colors.orangeAccent),
                       SizedBox(
                         width: 20,
                       ),
@@ -70,6 +59,80 @@ class _McqExamPageState extends State<McqExamPage> {
               ),
             ),
           ],
+        ),
+        
+        bottomNavigationBar: Container(
+          color: Colors.white,
+          height: 80,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  MyButton(
+                    btncolor: Colors.grey,
+                    mychild: 'Mark for Review',
+                    mycolor: Colors.orangeAccent,
+                    onPressed: () {
+                      // Add your functionality here
+                    },
+                  ),
+                  SizedBox(width: 20,),
+                  MyButton(
+                    btncolor: Colors.red,
+                    mychild: 'Clear Responce',
+                    mycolor: Colors.orangeAccent,
+                    onPressed: () {
+                      // Add your functionality here
+                    },
+                  ),
+                  // MyButton(
+                  //   btncolor: Colors.grey,
+                  //   mychild: 'Bookmark',
+                  //   mycolor: Colors.orangeAccent,
+                  //   onPressed: () {
+                  //     // Add your functionality here
+                  //   },
+                  // ),
+                  // MyButton(
+                  //   btncolor: Colors.grey,
+                  //   mychild: 'Report',
+                  //   mycolor: Colors.orangeAccent,
+                  //   onPressed: () {
+                  //     // Add your functionality here
+                  //   },
+                  // ),
+                ],
+              ),
+              Row(
+                children: [
+                  MyButton(
+                    btncolor: Colors.blue,
+                    mychild: 'Previous',
+                    mycolor: Colors.orangeAccent,
+                    onPressed: () {
+                      // Add your functionality here
+                    },
+                  ),
+                  SizedBox(width: 20,),
+                  MyButton(
+                    btncolor: Colors.greenAccent,
+                    mychild: 'Save & Next',
+                    mycolor: Colors.orangeAccent,
+                    onPressed: () {
+                      // Add your functionality here
+                    },
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
         body: SingleChildScrollView(
           child: Row(
@@ -86,14 +149,15 @@ class _McqExamPageState extends State<McqExamPage> {
                           children: [
                             Expanded(
                               child: Container(
-                                decoration:
-                                    BoxDecoration(color: Colors.white, boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    offset: Offset(8, 8),
-                                    blurRadius: 10,
-                                  )
-                                ]),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(8, 8),
+                                        blurRadius: 10,
+                                      )
+                                    ]),
                                 padding: EdgeInsets.symmetric(vertical: 15),
                                 child: Text(
                                   textAlign: TextAlign.center,
@@ -104,19 +168,22 @@ class _McqExamPageState extends State<McqExamPage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 10,),
-                       Row(
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
                           children: [
                             Expanded(
                               child: Container(
-                                decoration:
-                                    BoxDecoration(color: Colors.white, boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    offset: Offset(8, 8),
-                                    blurRadius: 10,
-                                  )
-                                ]),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(8, 8),
+                                        blurRadius: 10,
+                                      )
+                                    ]),
                                 padding: EdgeInsets.symmetric(vertical: 15),
                                 child: Column(
                                   children: [
@@ -126,15 +193,18 @@ class _McqExamPageState extends State<McqExamPage> {
                                       style: headerStyle,
                                     ),
                                     Container(
-                                      margin: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 20, horizontal: 10),
                                       color: Colors.black26,
-                                    height: 3,
+                                      height: 3,
                                     ),
-                                    Image.network('https://sigma-docs-screenshots.s3.us-west-2.amazonaws.com/Workbooks/Visualizations/Build+a+Bar+Chart/bar-chart.png'),
+                                    Image.network(
+                                        'https://sigma-docs-screenshots.s3.us-west-2.amazonaws.com/Workbooks/Visualizations/Build+a+Bar+Chart/bar-chart.png'),
                                     Container(
-                                      margin: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+                                      margin: EdgeInsets.symmetric(
+                                          vertical: 20, horizontal: 10),
                                       color: Colors.black26,
-                                    height: 3,
+                                      height: 3,
                                     ),
                                   ],
                                 ),
@@ -159,14 +229,15 @@ class _McqExamPageState extends State<McqExamPage> {
                           children: [
                             Expanded(
                               child: Container(
-                                decoration:
-                                    BoxDecoration(color: Colors.white, boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    offset: Offset(8, 8),
-                                    blurRadius: 10,
-                                  )
-                                ]),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(8, 8),
+                                        blurRadius: 10,
+                                      )
+                                    ]),
                                 padding: EdgeInsets.symmetric(vertical: 15),
                                 child: Text(
                                   textAlign: TextAlign.center,
@@ -177,47 +248,47 @@ class _McqExamPageState extends State<McqExamPage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 20,),
-                      Expanded(
-                        child: ListView.builder(
-                         
-                         itemCount: 4,
-                         itemBuilder: (context, index) {
-                          
-                          return  Row(
-                           children: [
-                             Expanded(
-                               child: Container(
-                                 
-                                 margin: EdgeInsets.only(bottom: 20),
-                                 decoration:
-                                     BoxDecoration(color: Colors.white, boxShadow: [
-                                   BoxShadow(
-                                     color: Colors.black12,
-                                     offset: Offset(8, 8),
-                                     blurRadius: 10,
-                                   )
-                                 ]),
-                                 padding: EdgeInsets.symmetric(vertical: 16,horizontal: 10),
-                                 child: Text(
-                                   textAlign: TextAlign.start,
-                                   options[index].toString(),
-                                   style: optionStyle,
-                                 ),
-                               ),
-                             ),
-                           ],
-                         );
-                        },),
-                      ),
-                       
-                      
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: 4,
+                            itemBuilder: (context, index) {
+                              return Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      margin: EdgeInsets.only(bottom: 20),
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.black12,
+                                              offset: Offset(8, 8),
+                                              blurRadius: 10,
+                                            )
+                                          ]),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 16, horizontal: 10),
+                                      child: Text(
+                                        textAlign: TextAlign.start,
+                                        options[index].toString(),
+                                        style: optionStyle,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
-                Expanded(
+              Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   color: Colors.blue,
@@ -229,44 +300,47 @@ class _McqExamPageState extends State<McqExamPage> {
                           children: [
                             Expanded(
                               child: Container(
-                                decoration:
-                                    BoxDecoration(color: Colors.white, boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black12,
-                                    offset: Offset(8, 8),
-                                    blurRadius: 10,
-                                  )
-                                ]),
-                                padding: EdgeInsets.symmetric(vertical: 15,horizontal: 20),
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        offset: Offset(8, 8),
+                                        blurRadius: 10,
+                                      )
+                                    ]),
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 20),
                                 child: Column(
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                                                     
                                           'Options',
                                           style: headerStyle,
                                         ),
-                                        IconButton(onPressed: (){
-                                          
-                                        }, icon: Icon(Icons.keyboard_arrow_down) )
+                                        IconButton(
+                                            onPressed: () {},
+                                            icon:
+                                                Icon(Icons.keyboard_arrow_down))
                                       ],
                                     ),
-                                    Row(children: [
-                                      // drop down
-                                    ],)
+                                    Row(
+                                      children: [
+                                        // drop down
+                                      ],
+                                    )
                                   ],
                                 ),
-                                
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 20,),
-                     
-                       
-                      
+                        SizedBox(
+                          height: 20,
+                        ),
                       ],
                     ),
                   ),
