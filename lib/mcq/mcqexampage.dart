@@ -22,7 +22,12 @@ class _McqExamPageState extends State<McqExamPage> {
     return Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: Colors.blue,
+          title: Text(
+            '10th Social Exam-1 Mock Exam',
+            style: timerStyle,
+          ),
           actions: [
             Expanded(
               child: Row(
@@ -138,6 +143,7 @@ class _McqExamPageState extends State<McqExamPage> {
           child: Row(
             children: [
               Expanded(
+                flex: 2,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   // color: Colors.blue,
@@ -218,6 +224,7 @@ class _McqExamPageState extends State<McqExamPage> {
                 ),
               ),
               Expanded(
+                flex: 2,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                   // color: Colors.blue,
@@ -291,7 +298,6 @@ class _McqExamPageState extends State<McqExamPage> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                  color: Colors.blue,
                   child: SizedBox(
                     height: height,
                     child: Column(
@@ -313,6 +319,22 @@ class _McqExamPageState extends State<McqExamPage> {
                                     vertical: 15, horizontal: 20),
                                 child: Column(
                                   children: [
+                                    DropdownMenu(dropdownMenuEntries: [])
+                                    // Row(
+                                    //   mainAxisAlignment:
+                                    //       MainAxisAlignment.spaceBetween,
+                                    //   children: [
+                                    //     Text(
+                                    //       'Options',
+                                    //       style: headerStyle,
+                                    //     ),
+                                    //     IconButton(
+                                    //         onPressed: () {},
+                                    //         icon:
+                                    //             Icon(Icons.keyboard_arrow_down))
+                                    //   ],
+                                    // ),
+                                    ,
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,

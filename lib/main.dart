@@ -3,6 +3,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart'
 import 'package:dthlms/ThemeData/color/color.dart' show ColorPage;
 import 'package:dthlms/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:dthlms/login/dth_login.dart' show DthLmsLogin;
+import 'package:dthlms/mcq/macterm&conditionpage.dart';
 import 'package:dthlms/mcq/mcqexampage.dart';
 import 'package:dthlms/routes/router.dart' show pageRouter;
 import 'package:dthlms/utctime.dart';
@@ -23,7 +24,7 @@ import 'package:media_kit/media_kit.dart' show MediaKit;
 import 'package:windows_single_instance/windows_single_instance.dart'
     show WindowsSingleInstance;
 
-//sayak mishra shubha
+//sayak mishra
 
 void main(List<String> args) async {
   print(UtcTime().utctime());
@@ -66,7 +67,7 @@ class _MyAppState extends State<MyApp> {
         splash: "assets/splash6.gif",
         splashIconSize: 6000,
         centered: true,
-        nextScreen: McqExamPage(),
+        nextScreen: McqTermAndCondition(),
         backgroundColor: ColorPage.bgcolor,
         splashTransition: SplashTransition.scaleTransition,
         duration: 3500,
