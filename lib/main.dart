@@ -3,6 +3,7 @@ import 'package:animated_splash_screen/animated_splash_screen.dart'
 import 'package:dthlms/ThemeData/color/color.dart' show ColorPage;
 import 'package:dthlms/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:dthlms/login/dth_login.dart' show DthLmsLogin;
+import 'package:dthlms/mcq/macterm&conditionpage.dart';
 import 'package:dthlms/routes/router.dart' show pageRouter;
 import 'package:dthlms/utctime.dart';
 
