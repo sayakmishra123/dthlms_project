@@ -94,6 +94,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
   }
 
   void _uploadImages() {
+    
     if (_images.length == sheetNumber) {
       _onUploadSuccessFull(context);
       print("Images uploaded: ${_images.length} images");
@@ -102,6 +103,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     } else if (_images.length < sheetNumber) {
       _onSheetUnderFlow(context);
     }
+   
   }
 
   void _openFullScreenPdf(int pageNumber) {
@@ -318,6 +320,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                 onChanged: (value) {
                   sheetNumber = value;
                 },
+             
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(borderSide: BorderSide(width: 2)),
                 ),
@@ -332,8 +335,16 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
           width: MediaQuery.of(context).size.width / 5.5,
           child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 15)),
           onPressed: () {
-            getxController.isPaperSubmit.value = true;
+             
+            if(sheetNumber == null || sheetNumber == 0) {
+              _onSheetNull(context);
+
+            }
+            else if(sheetNumber>0){
+               getxController.isPaperSubmit.value = true;
             Navigator.pop(context);
+            }
+          
           },
           color: ColorPage.colorgrey,
           radius: BorderRadius.circular(5.0),
@@ -354,13 +365,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       title: "NUMBER OF SHEET NOT MATCH !!",
       desc: "Your Assign ${sheetNumber.toStringAsFixed(0)} Sheets.\n But you selected ${_images.length} Sheets.\n Please edit the sheet number or\n remove the extra Pages",
       buttons: [
-        DialogButton(
-          child: Text("Remove", style: TextStyle(color: Colors.white, fontSize: 18)),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          color: Color.fromRGBO(161, 5, 18, 1),
-        ),
+       
         DialogButton(
           child: Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
@@ -369,6 +374,39 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
           },
           color: ColorPage.blue,
         ),
+         DialogButton(
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Color.fromRGBO(2, 150, 59, 1),
+        ),
+      ],
+    ).show();
+  }
+
+
+    _onSheetNull(context) {
+    Alert(
+      context: context,
+      type: AlertType.error,
+      style: AlertStyle(
+        titleStyle: TextStyle(color: ColorPage.red),
+        descStyle: FontFamily.font6,
+        isCloseButton: false,
+      ),
+      title: "INVALID SHEET !!",
+      desc: "Atleast 1 sheet you should assign",
+      buttons: [
+        DialogButton(
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(3, 77, 59, 1), 
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Color.fromRGBO(2, 167, 33, 1),
+        ),
+       
       ],
     ).show();
   }
