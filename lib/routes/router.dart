@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
+import 'package:dthlms/TheoryExam/theoryexampage.dart';
 import 'package:dthlms/android/Drawer/Mobiledrawer.dart';
 import 'package:dthlms/android/ForgetPassword/ForgetPasswordScreen.dart';
 import 'package:dthlms/android/Homepage/MobileHomepage.dart';
@@ -22,7 +23,6 @@ import 'package:dthlms/pages/mycourses/mycoursesdashboar.dart';
 import 'package:dthlms/pages/profile/profile.dart';
 import 'package:dthlms/pages/study/studydashboard.dart';
 import 'package:dthlms/android/packagemobile/packages.dart';
-// import 'package:dthlms/showpdf/showpdf.dart';
 import 'package:get/get.dart';
 
 class pageRouter {
@@ -111,6 +111,10 @@ class pageRouter {
      GetPage(
       name: "/Newmobilevideoplayer",
       page: () => NewMobileVidePlayer(),
+    ),
+      GetPage(
+      name: "/Theoryexampage",
+      page: () => TheoryExamPage(),
     ),
   ];
 }

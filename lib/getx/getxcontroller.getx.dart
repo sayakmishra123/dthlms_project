@@ -44,6 +44,7 @@ class Getx extends GetxController {
   RxBool isMypackages = false.obs;
   RxBool passvisibility = false.obs;
   RxBool videoplaylock = false.obs;
+  RxBool isPaperSubmit = false.obs;
 
   RxList name = [].obs; //chat
   RxString email = ''.obs;

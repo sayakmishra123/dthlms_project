@@ -67,7 +67,7 @@ class _MyAppState extends State<MyApp> {
         splash: "assets/splash6.gif",
         splashIconSize: 6000,
         centered: true,
-        nextScreen: McqExamPage(),
+        nextScreen: DthLmsLogin(),
         backgroundColor: ColorPage.bgcolor,
         splashTransition: SplashTransition.scaleTransition,
         duration: 3500,
