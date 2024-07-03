@@ -1,5 +1,4 @@
 import 'dart:ffi';
-
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
@@ -24,31 +23,30 @@ class TheoryExamPage extends StatefulWidget {
 }
 
 class _TheoryExamPageState extends State<TheoryExamPage> {
-  // final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
   final List<File> _images = [];
   File? _selectedImage;
-  double sheetNumber= 1.0;
+  double sheetNumber = 1.0;
   Getx getxController = Get.put(Getx());
+    final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
+  final PdfViewerController _pdfViewerController = PdfViewerController();
 
   TextEditingController sheetController = TextEditingController();
   final GlobalKey<FormState> sheetkey = GlobalKey();
 
   Future<void> _pickImage() async {
-    if(getxController.isPaperSubmit.value){
+    if (getxController.isPaperSubmit.value) {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.image,
-      allowMultiple: true,
-    );
+        type: FileType.image,
+        allowMultiple: true,
+      );
 
-    if (result != null) {
-      setState(() {
-        _images.addAll(result.paths.map((path) => File(path!)).toList());
-      });
-    }
-    }
-    else{
-     editSheetNumber(context);
-      
+      if (result != null) {
+        setState(() {
+          _images.addAll(result.paths.map((path) => File(path!)).toList());
+        });
+      }
+    } else {
+      editSheetNumber(context);
     }
   }
 
@@ -60,9 +58,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       context: context,
       builder: (BuildContext context) {
         return Dialog(
-          shadowColor: Colors.transparent,
-          surfaceTintColor: Colors.transparent,
-          backgroundColor: Color.fromARGB(0, 73, 74, 74),
+          backgroundColor: Colors.transparent,
           child: Stack(
             children: [
               Image.file(
@@ -72,10 +68,10 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                 height: double.infinity,
               ),
               Positioned(
-                right: 100,
-                top: 0,
+                right: 20,
+                top: 20,
                 child: IconButton(
-                  icon: Icon(Icons.close, color: Colors.red,size: 38,),
+                  icon: Icon(Icons.close, color: Colors.red, size: 38),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -97,25 +93,35 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     });
   }
 
-
   void _uploadImages() {
     if (_images.length == sheetNumber) {
-      _onUpload(context);
-  
-    print("Images uploaded: ${_images.length} images");
+      _onUploadSuccessFull(context);
+      print("Images uploaded: ${_images.length} images");
+    } else if (_images.length > sheetNumber) {
+      _onSheetOverFlow(context);
+    } else if (_images.length < sheetNumber) {
+      _onSheetUnderFlow(context);
+    }
   }
-  else if(_images.length > sheetNumber)
-  {
-    _onSheetOverFlow(context);
 
-
-  }
-   else if(_images.length < sheetNumber)
-  {
-    _onSheetUnderFlow(context);
-
-
-  }
+  void _openFullScreenPdf(int pageNumber) {
+       final PdfViewerController fullScreenController = PdfViewerController();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            title: Text("Full Screen PDF", style: FontFamily.font3.copyWith(color: Colors.white)),
+            backgroundColor: ColorPage.appbarcolor,
+          ),
+          body: SfPdfViewer.network('https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf', controller: fullScreenController,
+            key: GlobalKey<SfPdfViewerState>(),
+            onDocumentLoaded: (PdfDocumentLoadedDetails details) {
+              fullScreenController.jumpToPage(pageNumber);
+            },),
+        ),
+      ),
+    );
   }
 
   @override
@@ -124,15 +130,22 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       child: Scaffold(
         appBar: AppBar(
           actions: [
-            Text("Remaining Time ", style: FontFamily.font3),
-            Icon(Icons.alarm, color: Colors.white),
             Padding(
-              padding: const EdgeInsets.only(right: 50),
-              child: Text("  03:56:54", style: FontFamily.font3),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Row(
+                children: [
+                  Text("Remaining Time", style: FontFamily.font3.copyWith(color: Colors.white)),
+                  SizedBox(width: 10),
+                  Icon(Icons.alarm, color: Colors.white),
+                  SizedBox(width: 5),
+                  Text("03:56:54", style: FontFamily.font3.copyWith(color: Colors.white)),
+                  SizedBox(width: 20)
+                ],
+              ),
             ),
           ],
           backgroundColor: ColorPage.appbarcolor,
-          title: Text("Theory Exam", style: FontFamily.font3),
+          title: Text("Theory Exam", style: FontFamily.font3.copyWith(color: Colors.white)),
         ),
         body: Column(
           children: [
@@ -140,11 +153,36 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
               child: Row(
                 children: [
                   Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(color: ColorPage.brownshade300),
-                      padding: EdgeInsets.all(20),
-                      child: SfPdfViewer.network(
-                          'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf'),
+                    child: Stack(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(color: Colors.white,border: Border(right: BorderSide(width: 10,color:ColorPage.appbarcolor))),
+                      
+                          child: SfPdfViewer.network(
+                              'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',key: _pdfViewerKey,controller: _pdfViewerController,),
+                           
+                              
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          right: 20,
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            child: FloatingActionButton(
+                              shape:RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
+                              elevation: 50,
+                              hoverColor: ColorPage.color1,
+                              onPressed: (){
+                              final currentPage = _pdfViewerController.pageNumber;
+                              _openFullScreenPdf(currentPage);
+                              },
+                              child: Icon(Icons.fullscreen, color: Colors.white,size: 26,),
+                              backgroundColor: Color.fromARGB(255, 0, 140, 255),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Expanded(
@@ -155,51 +193,50 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                           Expanded(
                             child: GridView.builder(
                               padding: const EdgeInsets.all(8.0),
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
-                                crossAxisSpacing: 4.0,
-                                mainAxisSpacing: 4.0,
+                                crossAxisSpacing: 8.0,
+                                mainAxisSpacing: 8.0,
                               ),
                               itemCount: _images.length + 1,
                               itemBuilder: (context, index) {
                                 if (index == _images.length) {
-                                  return Container(
-                                   
-                                   decoration: BoxDecoration( color: Color.fromARGB(255, 199, 199, 199),borderRadius: BorderRadius.all(Radius.circular(7))),
-                                    child: MaterialButton(
+                                  return GestureDetector(
+                                    onTap: _pickImage,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
                                       child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Text("Select your Sheet From Device"),
-                                        Icon(Icons.add),
-                                      ],
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.add, size: 50, color: Colors.grey[700]),
+                                          Text("Select your Sheet", style: FontFamily.font3.copyWith(color: Colors.grey[700])),
+                                        ],
+                                      ),
                                     ),
-                                    
-                                      onPressed: () {
-                                        _pickImage();
-                                      },
-                                    )
                                   );
                                 }
                                 return GestureDetector(
                                   onTap: () => _selectImage(_images[index]),
                                   child: Stack(
                                     children: [
-                                      Image.file(
-                                        _images[index],
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                        height: double.infinity,
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.file(
+                                          _images[index],
+                                          fit: BoxFit.cover,
+                                          width: double.infinity,
+                                          height: double.infinity,
+                                        ),
                                       ),
                                       Positioned(
                                         right: 0,
                                         top: 0,
                                         child: IconButton(
-                                          icon: Icon(Icons.delete,
-                                              color: Colors.red),
-                                          onPressed: () =>
-                                              _deleteImage(_images[index]),
+                                          icon: Icon(Icons.delete, color: Colors.red),
+                                          onPressed: () => _deleteImage(_images[index]),
                                         ),
                                       ),
                                     ],
@@ -209,24 +246,23 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                             ),
                           ),
                           Obx(
-                            ()=>getxController.isPaperSubmit.value? Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width/5.5,
-                                height: 40,
-                                child: ElevatedButton(
-                                  onPressed: _uploadImages,
-                                  child: Text("Upload Images",style: FontFamily.font3,),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:Color.fromARGB(255, 5, 1, 31)
-                                 
-                                  ),
-                                ),
-                              ),
-                            ):SizedBox()
+                            () => getxController.isPaperSubmit.value
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                      onPressed: _uploadImages,
+                                      child: Text("Upload Images", style: FontFamily.font3),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color.fromARGB(255, 5, 1, 31),
+                                        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox(),
                           ),
-                         
-                          
                         ],
                       ),
                     ),
@@ -240,119 +276,64 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     );
   }
 
-editSheetNumber(context) {
-    // Reusable alert style
+  editSheetNumber(context) {
     var alertStyle = AlertStyle(
-        animationType: AnimationType.fromTop,
-        isCloseButton: false,
-        isOverlayTapDismiss: true,
-        alertPadding: EdgeInsets.only(top: 200),
-        descStyle: TextStyle(fontWeight: FontWeight.bold),
-        animationDuration: Duration(milliseconds: 400),
-        alertBorder: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
-          side: BorderSide(
-            color: Colors.grey,
-          ),
-        ),
-        titleStyle:
-            TextStyle(color: ColorPage.blue, fontWeight: FontWeight.bold),
-        constraints: BoxConstraints.expand(width: 500),
-        //First to chars "55" represents transparency of color
-        overlayColor: Color(0x55000000),
-        alertElevation: 0,
-        alertAlignment: Alignment.center);
+      animationType: AnimationType.fromTop,
+      isCloseButton: false,
+      isOverlayTapDismiss: true,
+      alertPadding: EdgeInsets.only(top: 200),
+      descStyle: TextStyle(fontWeight: FontWeight.bold),
+      animationDuration: Duration(milliseconds: 400),
+      alertBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+        side: BorderSide(color: Colors.grey),
+      ),
+      titleStyle: TextStyle(color: ColorPage.blue, fontWeight: FontWeight.bold),
+      constraints: BoxConstraints.expand(width: 350),
+      overlayColor: Color(0x55000000),
+      alertElevation: 0,
+      alertAlignment: Alignment.center, 
+    );
 
-    // Alert dialog using custom alert style
     Alert(
       context: context,
       style: alertStyle,
-      // type: AlertType.info,
-
       title: "Enter Your Sheet Number",
-
       content: Form(
-          child: Form(
-            child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-            SizedBox(
-              height: 30,
-            ),
+        key: sheetkey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(height: 30),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 13),
-                  child: Text(
-                    'Please fill field *',
-                    style: TextStyle(color: ColorPage.red, fontSize: 12),
-                  ),
-                ),
+                Text('Enter How Many Sheets You Want To Upload', style: TextStyle( fontSize: 14)),
               ],
             ),
-            
-             Padding(
-              
-              child: SpinBox(
-                key:sheetkey,
-                keyboardType: TextInputType.number,
-                onChanged: (Value){
-                  sheetNumber=Value;
-                },
-                
-                decoration: InputDecoration(
-
-                  
-                border:UnderlineInputBorder(borderSide: BorderSide(width: 2))
-                      
-                  
-                ),
-              
-                value: sheetNumber,
-               
-              ),
+            Padding(
               padding: const EdgeInsets.all(16),
+              child: SpinBox(
+                keyboardType: TextInputType.number,
+                onChanged: (value) {
+                  sheetNumber = value;
+                },
+                decoration: InputDecoration(
+                  border: UnderlineInputBorder(borderSide: BorderSide(width: 2)),
+                ),
+                value: sheetNumber,
+              ),
             ),
-                    // Padding(
-                    //         padding:
-                    //             const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    //         child: TextFormField(
-                    //           // controller: activationfield,
-                    //           validator: (value) {
-                    //             if (value!.isEmpty) {
-                    //               return 'cannot blank';
-                    //             }
-                    //             return null;
-                    //           },
-                   
-                    //           decoration: InputDecoration(
-                      
-                    //               // prefixIcon: Icon(Icons.code),
-                        
-                      
-                    //               hintText: 'Enter Number of Answer Sheet',
-            
-                    //               filled: false,
-                    //               focusColor: ColorPage.white),
-                    //         ),
-                    //       )
-                    ],
-                  ),
-          )),
+          ],
+        ),
+      ),
       buttons: [
         DialogButton(
-          width: MediaQuery.of(context).size.width / 3.5,
-          child: Text(
-            "OK",
-            style: TextStyle(color: Colors.white, fontSize: 15),
-          ),
-          onPressed: () {  getxController.isPaperSubmit.value=true;
-            
-            
-            
-                                                                                Navigator.pop(context);
-                                                                              
-            
+          width: MediaQuery.of(context).size.width / 5.5,
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 15)),
+          onPressed: () {
+            getxController.isPaperSubmit.value = true;
+            Navigator.pop(context);
           },
           color: ColorPage.colorgrey,
           radius: BorderRadius.circular(5.0),
@@ -361,114 +342,91 @@ editSheetNumber(context) {
     ).show();
   }
 
-
-_onSheetOverFlow(context) {
+  _onSheetOverFlow(context) {
     Alert(
       context: context,
       type: AlertType.error,
-      style: AlertStyle(titleStyle: TextStyle(color: ColorPage.red),descStyle: FontFamily.font6,isCloseButton: false),
-
+      style: AlertStyle(
+        titleStyle: TextStyle(color: ColorPage.red),
+        descStyle: FontFamily.font6,
+        isCloseButton: false,
+      ),
       title: "NUMBER OF SHEET NOT MATCH !!",
       desc: "Your Assign ${sheetNumber.toStringAsFixed(0)} Sheets.\n But you selected ${_images.length} Sheets.\n Please edit the sheet number or\n remove the extra Pages",
       buttons: [
         DialogButton(
-          child: Text(
-            "Remove",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
+          child: Text("Remove", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
-
-        
             Navigator.pop(context);
-            
           },
           color: Color.fromRGBO(161, 5, 18, 1),
         ),
         DialogButton(
-          child: Text(
-            "Edite",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          onPressed: (){
+          child: Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
+          onPressed: () {
             Navigator.pop(context);
-             editSheetNumber(context);
-
+            editSheetNumber(context);
           },
           color: ColorPage.blue,
-        )
+        ),
       ],
     ).show();
   }
-
 
   _onSheetUnderFlow(context) {
     Alert(
       context: context,
       type: AlertType.error,
-
-      style: AlertStyle(titleStyle: TextStyle(color: ColorPage.red),descStyle: FontFamily.font6,
-      isCloseButton: false),
-
+      style: AlertStyle(
+        titleStyle: TextStyle(color: ColorPage.red),
+        descStyle: FontFamily.font6,
+        isCloseButton: false,
+      ),
       title: "NUMBER OF SHEET NOT MATCH !!",
       desc: "Your Assign ${sheetNumber.toStringAsFixed(0)} Sheets.\n But you selected ${_images.length} Sheets.\n Please edit the sheet number or\n add more Pages",
       buttons: [
         DialogButton(
-          child: Text(
-            "Add",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
+          child: Text("Add", style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(1, 90, 58, 1),
           onPressed: () {
-
-        
             Navigator.pop(context);
-            
           },
-          color: Color.fromRGBO(34, 250, 171, 1),
+          color: Color.fromRGBO(28, 203, 139, 1),
         ),
         DialogButton(
-          child: Text(
-            "Edite",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          onPressed:(){
+          highlightColor: Color.fromARGB(255, 2, 2, 60),
+          child: Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
+          onPressed: () {
             Navigator.pop(context);
-           editSheetNumber(context);
-
+            editSheetNumber(context);
           },
           color: ColorPage.blue,
-        )
+        ),
       ],
     ).show();
   }
 
-  _onUpload(context) {
+  _onUploadSuccessFull(context) {
     Alert(
       context: context,
       type: AlertType.success,
-
-
-      style: AlertStyle(titleStyle: TextStyle(color: Color.fromARGB(255, 0, 0, 0),fontWeight: FontWeight.bold),descStyle: FontFamily.font6,
-      isCloseButton: false),
-
-      title: "UPLOAD SUCCESSFULL !!",
-      desc: "Your answer sheets are uploaed successfully!",
+      style: AlertStyle(
+        titleStyle: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        descStyle: FontFamily.font6,
+        isCloseButton: false,
+      ),
+      title: "UPLOAD SUCCESSFUL!!",
+      desc: "Your answer sheets are uploaded successfully!",
       buttons: [
         DialogButton(
-          child: Text(
-            "OK",
-            style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 18),
-          ),
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(3, 77, 59, 1), 
           onPressed: () {
-
-        
             Navigator.pop(context);
-            
           },
           color: Color.fromRGBO(2, 167, 33, 1),
         ),
-       
       ],
     ).show();
   }
-
 }
