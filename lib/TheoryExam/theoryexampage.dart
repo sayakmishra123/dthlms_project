@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'package:dthlms/ThemeData/color/color.dart';
+import 'package:crypto/crypto.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,6 +34,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
   TextEditingController sheetController = TextEditingController();
   final GlobalKey<FormState> sheetkey = GlobalKey();
 
+
   Future<void> _pickImage() async {
     if (getxController.isPaperSubmit.value) {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -42,13 +44,40 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
 
       if (result != null) {
         setState(() {
-          _images.addAll(result.paths.map((path) => File(path!)).toList());
+          for (var path in result.paths) {
+            if (path != null) {
+              File file = File(path);
+              if (!_isDuplicateImage(file)) {
+                _images.add(file);
+              } else {
+                // Show an alert or a message that the image is already selected
+                _showDuplicateImageAlert(file.absolute.path.split('\\').last);
+              
+              }
+            }
+          }
         });
       }
     } else {
       editSheetNumber(context);
     }
   }
+
+  bool _isDuplicateImage(File file) {
+    for (var image in _images) {
+      if (_calculateFileHash(image) == _calculateFileHash(file)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  String _calculateFileHash(File file) {
+    var bytes = file.readAsBytesSync();
+    return md5.convert(bytes).toString();
+  }
+
+
 
   void _selectImage(File image) {
     setState(() {
@@ -343,6 +372,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
             else if(sheetNumber>0){
                getxController.isPaperSubmit.value = true;
             Navigator.pop(context);
+            _pickImage();
             }
           
           },
@@ -403,6 +433,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
           highlightColor: Color.fromRGBO(3, 77, 59, 1), 
           onPressed: () {
             Navigator.pop(context);
+            _pickImage();
           },
           color: Color.fromRGBO(2, 167, 33, 1),
         ),
@@ -428,6 +459,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
           highlightColor: Color.fromRGBO(1, 90, 58, 1),
           onPressed: () {
             Navigator.pop(context);
+            _pickImage();
           },
           color: Color.fromRGBO(28, 203, 139, 1),
         ),
@@ -437,6 +469,25 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
           onPressed: () {
             Navigator.pop(context);
             editSheetNumber(context);
+          },
+          color: ColorPage.blue,
+        ),
+      ],
+    ).show();
+  }
+
+
+    void _showDuplicateImageAlert( String file) {
+    Alert(
+      context: context,
+      type: AlertType.error,
+      title: "Duplicate Image",
+      desc: "$file\nThis image has already been selected.",
+      buttons: [
+        DialogButton(
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          onPressed: () {
+            Navigator.pop(context);
           },
           color: ColorPage.blue,
         ),

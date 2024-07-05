@@ -52,135 +52,137 @@ class _ForgetpasswordState extends State<Forgetpassword> {
                   )
                 ],
               ),
-              Form(
-                key: formkey,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: screenwidth - 100,
-                          child: TextFormField(
-                            
-                            controller: oldPassword,
-                            obscureText: _obscureOldPassword,
-                            decoration: InputDecoration(
-                              enabledBorder: bd,
-                              labelText: 'Old Password',
-                                helperText: '  Minimum 8 character With 1 number/symbol',
-                              prefixIcon: Icon(Icons.lock_open),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _obscureOldPassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _obscureOldPassword =
-                                        !_obscureOldPassword;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: screenwidth - 100,
-                          child: TextFormField(
-                            
-                            
-                            controller: newPassword,
-                            obscureText: _obscureNewPassword,
-                            decoration: InputDecoration(
-                              helperText: '  Minimum 8 character With 1 number/symbol',
-                              enabledBorder: bd,
-                               prefixIcon: Icon(Icons.lock),
-                              labelText: 'New Password',
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _obscureNewPassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _obscureNewPassword =
-                                        !_obscureNewPassword;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: screenwidth - 100,
-                          child: TextFormField(
-                            controller: confirmPassword,
-                            obscureText: _obscureConfirmPassword,
-                            decoration: InputDecoration(
-                              enabledBorder:bd,
-                              border: UnderlineInputBorder(borderSide: BorderSide(width: 2,color: Colors.white)),
-                              labelText: 'Confirm Password',
-                               prefixIcon: Icon(Icons.password),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _obscureConfirmPassword
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _obscureConfirmPassword =
-                                        !_obscureConfirmPassword;
-                                  });
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    MaterialButton(color: Colors.blue,
-                    height: 50,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(7))),
-                    
-                                        
-                      
-                      onPressed: () {
-                        if (formkey.currentState!.validate()) {
-                          // Implement your reset password logic here
-                        }
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Text('Reset',style: TextStyle(color: Colors.white,fontSize: 25),),
+              Container(
+                child: Form(
+                  key: formkey,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 30,
                       ),
-                    ),
-                  ],
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: screenwidth - 100,
+                            child: TextFormField(
+                              
+                              controller: oldPassword,
+                              obscureText: _obscureOldPassword,
+                              decoration: InputDecoration(
+                                enabledBorder: bd,
+                                labelText: 'Old Password',
+                                  helperText: '  Minimum 8 character With 1 number/symbol',
+                                prefixIcon: Icon(Icons.lock_open),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscureOldPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _obscureOldPassword =
+                                          !_obscureOldPassword;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: screenwidth - 100,
+                            child: TextFormField(
+                              
+                              
+                              controller: newPassword,
+                              obscureText: _obscureNewPassword,
+                              decoration: InputDecoration(
+                                helperText: '  Minimum 8 character With 1 number/symbol',
+                                enabledBorder: bd,
+                                 prefixIcon: Icon(Icons.lock),
+                                labelText: 'New Password',
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscureNewPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _obscureNewPassword =
+                                          !_obscureNewPassword;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: screenwidth - 100,
+                            child: TextFormField(
+                              controller: confirmPassword,
+                              obscureText: _obscureConfirmPassword,
+                              decoration: InputDecoration(
+                                enabledBorder:bd,
+                                border: UnderlineInputBorder(borderSide: BorderSide(width: 2,color: Colors.white)),
+                                labelText: 'Confirm Password',
+                                 prefixIcon: Icon(Icons.password),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscureConfirmPassword
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      _obscureConfirmPassword =
+                                          !_obscureConfirmPassword;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      MaterialButton(color: Colors.blue,
+                      height: 50,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(7))),
+                      
+                                          
+                        
+                        onPressed: () {
+                          if (formkey.currentState!.validate()) {
+                            // Implement your reset password logic here
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Text('Reset',style: TextStyle(color: Colors.white,fontSize: 25),),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

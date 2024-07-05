@@ -2,12 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dthlms/ThemeData/color/color.dart';
+import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/mcq/modelclass.dart';
 import 'package:dthlms/widget/mybutton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class McqExamPage extends StatefulWidget {
   const McqExamPage({super.key});
@@ -17,6 +21,12 @@ class McqExamPage extends StatefulWidget {
 }
 
 class _McqExamPageState extends State<McqExamPage> {
+  
+  late Timer _timer;
+  Getx getx_obj=Get.put(Getx());
+ RxBool buttonshow=false.obs; 
+  int _start = 5;
+
   Future getdata() async {
     String jsonData = '''
 [
@@ -84,7 +94,10 @@ class _McqExamPageState extends State<McqExamPage> {
       {"optionId": 1, "optionName": "Thor"},
       {"optionId": 2, "optionName": "Hulk"},
       {"optionId": 3, "optionName": "Black Widow"},
-      {"optionId": 4, "optionName": "Hawkeye"}
+      {"optionId": 4, "optionName": "Hawkeye"},
+      {"optionId": 5, "optionName": "Hawkeye2"},
+      {"optionId": 6, "optionName": "Hawkeye3"}
+      
     ]
   },
   {
@@ -143,9 +156,41 @@ class _McqExamPageState extends State<McqExamPage> {
 
   @override
   void initState() {
-    getdata().whenComplete(() => setState(() {}));
-    // TODO: implement initState
     super.initState();
+    getdata().whenComplete(() => setState(() {}));
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+            _onimeUp(context);
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  String get timerText {
+    int hours = _start ~/ 3600;
+    int minutes = (_start % 3600) ~/ 60;
+    int seconds = _start % 60;
+    return '$hours:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 
   String groupname = 'Group A';
@@ -164,7 +209,7 @@ class _McqExamPageState extends State<McqExamPage> {
     return Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: true,
           centerTitle: false,
           backgroundColor: Colors.blue,
           title: Text(
@@ -180,7 +225,15 @@ class _McqExamPageState extends State<McqExamPage> {
                   children: [
                     SizedBox(width: 20),
                     Text(
-                      'Time : 3:05 mins',
+                      'Remaining Time ',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20),
+                    ),
+                    Icon(Icons.watch_later_outlined,color: ColorPage.white,),
+                    Text(
+                      ' $timerText',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
@@ -268,7 +321,10 @@ class _McqExamPageState extends State<McqExamPage> {
                                           fontSize: 20),
                                     ),
                                     if (mcqData[qindex].imageUrl != null)
-                                      Image.network(mcqData[qindex].imageUrl!),
+                                      Padding(
+                                        padding: const EdgeInsets.all(15),
+                                        child: Image.network(mcqData[qindex].imageUrl!),
+                                      ),
                                     if (mcqData[qindex].videoUrl != null)
                                       Container(
                                         margin:
@@ -332,7 +388,7 @@ class _McqExamPageState extends State<McqExamPage> {
                         ),
                         SizedBox(height: 20),
                         SizedBox(
-                          height: 400,
+                          height: MediaQuery.of(context).size.height - 200,
                           child: ListView.builder(
                             itemCount: mcqData[qindex].options.length,
                             itemBuilder: (context, index) {
@@ -388,7 +444,7 @@ class _McqExamPageState extends State<McqExamPage> {
                           ),
                         ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             MaterialButton(
                               height: 40,
@@ -415,15 +471,24 @@ class _McqExamPageState extends State<McqExamPage> {
                               shape: ContinuousRectangleBorder(
                                   borderRadius: BorderRadius.circular(12)),
                               onPressed: () {
-                                if (qindex < mcqData.length - 1) {
+                                if (qindex <mcqData.length-1 ) {
                                   setState(() {
+                                  
                                     savelist.add(qindex);
                                     qindex++;
                                   });
                                 }
+                                else if(qindex==mcqData.length-1)
+                                {
+                                  setState(() {
+                                    savelist.add(qindex);
+                                    _onSubmitExam(context);
+                                    
+                                  });
+                                }
                               },
                               child: Text(
-                                'Save & Next',
+                               qindex==mcqData.length-1? 'Save & Submit':'Save & Next',
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -439,12 +504,17 @@ class _McqExamPageState extends State<McqExamPage> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
+                          vertical: 5, horizontal: 15),
                       child: Container(
                         width: 270,
                         child: ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                           child: ExpansionTile(
+
+                            onExpansionChanged: (Value){
+                             buttonshow.value=Value;
+
+                            },
                             shape: Border.all(color: Colors.transparent),
                             backgroundColor: ColorPage.white,
                             collapsedBackgroundColor: ColorPage.white,
@@ -453,7 +523,7 @@ class _McqExamPageState extends State<McqExamPage> {
                               Container(
                                 height: 400,
                                 child: GridView.builder(
-                                  itemCount: 120,
+                                  itemCount: mcqData.length,
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 4),
@@ -464,8 +534,7 @@ class _McqExamPageState extends State<McqExamPage> {
                                         color: reviewlist.contains(index)
                                             ? Colors.amber
                                             : qindex == index
-                                                ? Color.fromARGB(
-                                                    255, 70, 150, 241)
+                                                ? Color.fromARGB(255, 0, 5, 95)
                                                 : savelist.contains(index)
                                                     ? Colors.green
                                                     : Colors.white,
@@ -477,7 +546,13 @@ class _McqExamPageState extends State<McqExamPage> {
                                             qindex = index;
                                           });
                                         },
-                                        child: Text((index + 1).toString()),
+                                        child: Text(
+                                          (index + 1).toString(),
+                                          style: TextStyle(
+                                              color: qindex == index
+                                                  ? Colors.white
+                                                  : Colors.black),
+                                        ),
                                       ),
                                     );
                                   },
@@ -488,48 +563,50 @@ class _McqExamPageState extends State<McqExamPage> {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MaterialButton(
-                          height: 40,
-                          color: Colors.grey,
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                          shape: ContinuousRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                          onPressed: () {
-                            setState(() {
-                              reviewlist.add(qindex);
-                            });
-                          },
-                          child: Text(
-                            'Mark for Review',
-                            style: TextStyle(color: Colors.white),
+                    Visibility(
+                      visible:buttonshow.value,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MaterialButton(
+                            height: 40,
+                            color: Colors.orange,
+                            padding:
+                                EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                            shape: ContinuousRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            onPressed: () {
+                              setState(() {
+                                reviewlist.add(qindex);
+                              });
+                            },
+                            child: Text(
+                              'Mark for Review',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        MaterialButton(
-                          height: 40,
-                          color: Colors.orange,
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                          shape: ContinuousRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)),
-                          onPressed: () {
-                            setState(() {
-                              reviewlist.remove(qindex);
-                              savelist.remove(qindex);
-                            });
-                          },
-                          child: Text(
-                            'Clear Responce',
-                            style: TextStyle(color: Colors.white),
+                          SizedBox(
+                            width: 30,
                           ),
-                        )
-                      ],
+                          MaterialButton(
+                            height: 40,
+                            color: Colors.blueGrey,
+                            padding:
+                                EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                            shape: ContinuousRectangleBorder(
+                                borderRadius: BorderRadius.circular(12)),
+                            onPressed: () {
+                              setState(() {
+                                reviewlist.remove(qindex);
+                              });
+                            },
+                            child: Text(
+                              'Clear Responce',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -538,7 +615,85 @@ class _McqExamPageState extends State<McqExamPage> {
           ),
         ));
   }
+
+
+
+
+
+  _onSubmitExam(context) {
+    Alert(
+      context: context,
+      type: AlertType.info,
+      style: AlertStyle(
+        animationType: AnimationType.fromLeft,
+        titleStyle: TextStyle(color: ColorPage.red,fontWeight: FontWeight.bold),
+        descStyle: FontFamily.font6,
+        isCloseButton: false,
+      ),
+      title: "Are you Sure?",
+      desc: "If you are sure to Submit Your Exam. \n Then Click on Yes Button.  ",
+      buttons: [
+        DialogButton(
+          child: Text("Cancel", style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(77, 3, 3, 1), 
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Color.fromRGBO(177, 58, 58, 1),
+        ),
+          DialogButton(
+          child: Text("Yes", style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(3, 77, 59, 1), 
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Color.fromRGBO(9, 89, 158, 1),
+        ),
+       
+      ],
+    ).show();
+  }
+
+
+  _onimeUp(context) {
+    
+    Alert(
+      context: context,
+      
+      type: AlertType.info,
+      style: AlertStyle(
+        animationType: AnimationType.fromTop,
+        
+        titleStyle: TextStyle(color: ColorPage.red,fontWeight: FontWeight.bold),
+        descStyle: FontFamily.font6,
+        isCloseButton: false,
+      ),
+      title: "Your Time is Up !!",
+      desc: "Sorry! But Your time is over. \n To Submit your Answer Clik Ok Button  ",
+      buttons: [
+        // DialogButton(
+        //   child: Text("Cancel", style: TextStyle(color: Colors.white, fontSize: 18)),
+        //   highlightColor: Color.fromRGBO(77, 3, 3, 1), 
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        //   color: Color.fromRGBO(177, 58, 58, 1),
+        // ),
+          DialogButton(
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(3, 77, 59, 1), 
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Color.fromRGBO(9, 89, 158, 1),
+        ),
+       
+      ],
+    ).show();
+  }
 }
+
+
 
 
 
