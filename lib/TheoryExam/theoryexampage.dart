@@ -28,12 +28,11 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
   File? _selectedImage;
   double sheetNumber = 1.0;
   Getx getxController = Get.put(Getx());
-    final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
+  final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
   final PdfViewerController _pdfViewerController = PdfViewerController();
 
   TextEditingController sheetController = TextEditingController();
   final GlobalKey<FormState> sheetkey = GlobalKey();
-
 
   Future<void> _pickImage() async {
     if (getxController.isPaperSubmit.value) {
@@ -50,9 +49,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
               if (!_isDuplicateImage(file)) {
                 _images.add(file);
               } else {
-                // Show an alert or a message that the image is already selected
                 _showDuplicateImageAlert(file.absolute.path.split('\\').last);
-              
               }
             }
           }
@@ -76,8 +73,6 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     var bytes = file.readAsBytesSync();
     return md5.convert(bytes).toString();
   }
-
-
 
   void _selectImage(File image) {
     setState(() {
@@ -123,7 +118,6 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
   }
 
   void _uploadImages() {
-    
     if (_images.length == sheetNumber) {
       _onUploadSuccessFull(context);
       print("Images uploaded: ${_images.length} images");
@@ -132,11 +126,10 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     } else if (_images.length < sheetNumber) {
       _onSheetUnderFlow(context);
     }
-   
   }
 
   void _openFullScreenPdf(int pageNumber) {
-       final PdfViewerController fullScreenController = PdfViewerController();
+    final PdfViewerController fullScreenController = PdfViewerController();
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -145,11 +138,14 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
             title: Text("Full Screen PDF", style: FontFamily.font3.copyWith(color: Colors.white)),
             backgroundColor: ColorPage.appbarcolor,
           ),
-          body: SfPdfViewer.network('https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf', controller: fullScreenController,
+          body: SfPdfViewer.network(
+            'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+            controller: fullScreenController,
             key: GlobalKey<SfPdfViewerState>(),
             onDocumentLoaded: (PdfDocumentLoadedDetails details) {
               fullScreenController.jumpToPage(pageNumber);
-            },),
+            },
+          ),
         ),
       ),
     );
@@ -170,7 +166,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                   Icon(Icons.alarm, color: Colors.white),
                   SizedBox(width: 5),
                   Text("03:56:54", style: FontFamily.font3.copyWith(color: Colors.white)),
-                  SizedBox(width: 20)
+                  SizedBox(width: 20),
                 ],
               ),
             ),
@@ -187,29 +183,25 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                     child: Stack(
                       children: [
                         Container(
-                          decoration: BoxDecoration(color: Colors.white,border: Border(right: BorderSide(width: 10,color:ColorPage.appbarcolor))),
-                      
+                          decoration: BoxDecoration(color: Colors.white, border: Border(right: BorderSide(width: 10, color: ColorPage.appbarcolor))),
                           child: SfPdfViewer.network(
-                              'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',key: _pdfViewerKey,controller: _pdfViewerController,),
-                           
-                              
+                            'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+                            key: _pdfViewerKey,
+                            controller: _pdfViewerController,
+                          ),
                         ),
                         Positioned(
                           bottom: 10,
                           right: 20,
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            child: FloatingActionButton(
-                              shape:RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(10))),
-                              elevation: 50,
-                              hoverColor: ColorPage.color1,
-                              onPressed: (){
-                              final currentPage = _pdfViewerController.pageNumber;
-                              _openFullScreenPdf(currentPage);
-                              },
-                              child: Icon(Icons.fullscreen, color: Colors.white,size: 26,),
-                              backgroundColor: Color.fromARGB(255, 0, 140, 255),
+                          child: InkWell(
+                            onTap: (){_openFullScreenPdf(_pdfViewerController.pageNumber);
+                              
+                            },
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              color: ColorPage.blue,
+                              child: Icon(Icons.fullscreen)
                             ),
                           ),
                         ),
@@ -229,9 +221,34 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                                 crossAxisSpacing: 8.0,
                                 mainAxisSpacing: 8.0,
                               ),
-                              itemCount: _images.length + 1,
+                              itemCount: sheetNumber.toInt(),
                               itemBuilder: (context, index) {
-                                if (index == _images.length) {
+                                if (index < _images.length) {
+                                  return GestureDetector(
+                                    onTap: () => _selectImage(_images[index]),
+                                    child: Stack(
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(10),
+                                          child: Image.file(
+                                            _images[index],
+                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                            height: double.infinity,
+                                          ),
+                                        ),
+                                        Positioned(
+                                          right: 0,
+                                          top: 0,
+                                          child: IconButton(
+                                            icon: Icon(Icons.delete, color: Colors.red),
+                                            onPressed: () => _deleteImage(_images[index]),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                } else {
                                   return GestureDetector(
                                     onTap: _pickImage,
                                     child: Container(
@@ -249,30 +266,6 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                                     ),
                                   );
                                 }
-                                return GestureDetector(
-                                  onTap: () => _selectImage(_images[index]),
-                                  child: Stack(
-                                    children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: Image.file(
-                                          _images[index],
-                                          fit: BoxFit.cover,
-                                          width: double.infinity,
-                                          height: double.infinity,
-                                        ),
-                                      ),
-                                      Positioned(
-                                        right: 0,
-                                        top: 0,
-                                        child: IconButton(
-                                          icon: Icon(Icons.delete, color: Colors.red),
-                                          onPressed: () => _deleteImage(_images[index]),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
                               },
                             ),
                           ),
@@ -323,7 +316,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       constraints: BoxConstraints.expand(width: 350),
       overlayColor: Color(0x55000000),
       alertElevation: 0,
-      alertAlignment: Alignment.center, 
+      alertAlignment: Alignment.center,
     );
 
     Alert(
@@ -339,7 +332,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Enter How Many Sheets You Want To Upload', style: TextStyle( fontSize: 14)),
+                Text('Enter How Many Sheets You Want To Upload', style: TextStyle(fontSize: 14)),
               ],
             ),
             Padding(
@@ -349,7 +342,6 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                 onChanged: (value) {
                   sheetNumber = value;
                 },
-             
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(borderSide: BorderSide(width: 2)),
                 ),
@@ -364,17 +356,13 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
           width: MediaQuery.of(context).size.width / 5.5,
           child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 15)),
           onPressed: () {
-             
-            if(sheetNumber == null || sheetNumber == 0) {
+            if (sheetNumber == null || sheetNumber == 0) {
               _onSheetNull(context);
-
+            } else if (sheetNumber > 0) {
+              getxController.isPaperSubmit.value = true;
+              Navigator.pop(context);
+              _pickImage();
             }
-            else if(sheetNumber>0){
-               getxController.isPaperSubmit.value = true;
-            Navigator.pop(context);
-            _pickImage();
-            }
-          
           },
           color: ColorPage.colorgrey,
           radius: BorderRadius.circular(5.0),
@@ -395,7 +383,6 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       title: "NUMBER OF SHEET NOT MATCH !!",
       desc: "Your Assign ${sheetNumber.toStringAsFixed(0)} Sheets.\n But you selected ${_images.length} Sheets.\n Please edit the sheet number or\n remove the extra Pages",
       buttons: [
-       
         DialogButton(
           child: Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
@@ -404,7 +391,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
           },
           color: ColorPage.blue,
         ),
-         DialogButton(
+        DialogButton(
           child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
             Navigator.pop(context);
@@ -415,8 +402,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     ).show();
   }
 
-
-    _onSheetNull(context) {
+  _onSheetNull(context) {
     Alert(
       context: context,
       type: AlertType.error,
@@ -426,18 +412,17 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
         isCloseButton: false,
       ),
       title: "INVALID SHEET !!",
-      desc: "Atleast 1 sheet you should assign",
+      desc: "At least 1 sheet you should assign",
       buttons: [
         DialogButton(
           child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
-          highlightColor: Color.fromRGBO(3, 77, 59, 1), 
+          highlightColor: Color.fromRGBO(3, 77, 59, 1),
           onPressed: () {
             Navigator.pop(context);
             _pickImage();
           },
           color: Color.fromRGBO(2, 167, 33, 1),
         ),
-       
       ],
     ).show();
   }
@@ -476,8 +461,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     ).show();
   }
 
-
-    void _showDuplicateImageAlert( String file) {
+  void _showDuplicateImageAlert(String file) {
     Alert(
       context: context,
       type: AlertType.error,
@@ -509,7 +493,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       buttons: [
         DialogButton(
           child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
-          highlightColor: Color.fromRGBO(3, 77, 59, 1), 
+          highlightColor: Color.fromRGBO(3, 77, 59, 1),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -519,4 +503,3 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     ).show();
   }
 }
-
