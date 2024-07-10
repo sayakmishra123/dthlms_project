@@ -3,6 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
+  animated_progress_bar
   cloud_firestore
   connectivity_plus
   file_selector_windows
@@ -17,6 +18,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   screen_retriever
   syncfusion_pdfviewer_windows
   url_launcher_windows
+  webview_universal
   window_manager
   window_size
   windows_single_instance

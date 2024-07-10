@@ -12,21 +12,21 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class McqExamPage extends StatefulWidget {
-  const McqExamPage({super.key});
+class MockTestMcqExamPage extends StatefulWidget {
+  const MockTestMcqExamPage({super.key});
 
   @override
-  State<McqExamPage> createState() => _McqExamPageState();
+  State<MockTestMcqExamPage> createState() => _MockTestMcqExamPageState();
 }
 
-class _McqExamPageState extends State<McqExamPage> {
+class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
   List<Map<int, int>> answer = [
     {1: 2},
     {2: 3},
     {3: 2},
     {4: 1},
     {5: 1},
-    {6: 5},
+    {6: 1},
     {7: 2},
     {8: 1},
     {9: 2},
@@ -37,7 +37,7 @@ class _McqExamPageState extends State<McqExamPage> {
   late Timer _timer;
   Getx getx_obj = Get.put(Getx());
   RxBool buttonshow = false.obs;
-  RxInt _start = 10.obs;
+  RxInt _start = 1200.obs;
 
   Future getdata() async {
     String jsonData = '''
@@ -165,9 +165,6 @@ class _McqExamPageState extends State<McqExamPage> {
     mcqData = mcqDatalist;
   }
 
-
-
-
   @override
   void initState() {
     super.initState();
@@ -205,12 +202,12 @@ class _McqExamPageState extends State<McqExamPage> {
 
   String groupname = 'Group A';
 
-  List<int> wrongsavelist = [];
-  List<int> rightsavelist = [];
   List<int> reviewlist = [];
 
   RxInt qindex = 0.obs;
   int selectedIndex = -1;
+  RxBool isSubmitted = false.obs;
+  RxInt score = 0.obs;
 
   List<McqItem> mcqData = [];
 
@@ -220,6 +217,7 @@ class _McqExamPageState extends State<McqExamPage> {
     return Obx(() => Scaffold(
           backgroundColor: Colors.grey[200],
           appBar: AppBar(
+            iconTheme: IconThemeData(color: ColorPage.white),
             automaticallyImplyLeading: true,
             centerTitle: false,
             backgroundColor: Colors.blue,
@@ -264,7 +262,9 @@ class _McqExamPageState extends State<McqExamPage> {
                     children: [
                       MyButton(
                           btncolor: Colors.white,
-                          onPressed: () {},
+                          onPressed: () {
+                            _onSubmitExam(context);
+                          },
                           mychild: 'Submit',
                           mycolor: Colors.orangeAccent),
                       SizedBox(width: 20),
@@ -429,19 +429,19 @@ class _McqExamPageState extends State<McqExamPage> {
                                         userAns.containsKey(questionId);
 
                                     Color tileColor;
-                                    if (isAnswered) {
-                                      if (isSelected && isCorrect) {
+                                    if (isSubmitted.value) {
+                                      if (isCorrect) {
                                         tileColor = Colors.green;
                                       } else if (isSelected && !isCorrect) {
                                         tileColor = Colors.red;
-                                      } else if (isCorrect) {
-                                        tileColor = Colors.green;
                                       } else {
                                         tileColor =
                                             Colors.white; // default color
                                       }
                                     } else {
-                                      tileColor = Colors.white; // default color
+                                      tileColor = isSelected
+                                          ? Colors.blue
+                                          : Colors.white; // default color
                                     }
 
                                     return Padding(
@@ -470,13 +470,10 @@ class _McqExamPageState extends State<McqExamPage> {
                                                 BorderRadius.circular(8),
                                             onTap: () {
                                               setState(() {
-                                                if(!wrongsavelist.contains(qindex.value)&&!rightsavelist.contains(qindex.value))
-                                                {
-                                                   userAns[questionId] = optionId;
-                                                    isCorrect?rightsavelist.add(qindex.value):wrongsavelist.add(qindex.value);
+                                                if (!isSubmitted.value) {
+                                                  userAns[questionId] =
+                                                      optionId;
                                                 }
-                                               
-                                               
                                               });
                                             },
                                             child: Row(
@@ -536,13 +533,14 @@ class _McqExamPageState extends State<McqExamPage> {
                                         // savelist.add(qindex.value);
                                         qindex.value++;
                                       } else if (qindex.value ==
-                                          mcqData.length - 1) {
+                                          mcqData.length - 1 && !isSubmitted.value) {
                                         // savelist.add(qindex.value);
                                         _onSubmitExam(context);
                                       }
                                     },
                                     child: Text(
-                                      qindex.value == mcqData.length - 1
+                                      !isSubmitted.value &&
+                                              qindex.value == mcqData.length - 1
                                           ? 'Submit'
                                           : 'Next',
                                       style: TextStyle(color: Colors.white),
@@ -588,13 +586,10 @@ class _McqExamPageState extends State<McqExamPage> {
                                               height: 55,
                                               color: reviewlist.contains(index)
                                                   ? Colors.amber
-                                                  : wrongsavelist.contains(index)
-                                                          ? Color.fromARGB(255, 214, 8, 29)
-                                                         
-                                                      :rightsavelist.contains(index)
-                                                          ? Color.fromARGB(255, 13, 146, 24): qindex.value == index
-                                                      ? Color.fromARGB(255, 13, 32, 79)
-                                                          : Colors.white,
+                                                  : qindex.value == index
+                                                      ? Color.fromARGB(
+                                                          255, 13, 32, 79) 
+                                                      : Colors.white,
                                               shape: CircleBorder(
                                                   side: BorderSide(
                                                       color: Colors.black12)),
@@ -669,6 +664,13 @@ class _McqExamPageState extends State<McqExamPage> {
   }
 
   _onSubmitExam(context) {
+    int correctAnswers = 0;
+    userAns.forEach((questionId, selectedOptionId) {
+      if (answer.any((map) => map[questionId] == selectedOptionId)) {
+        correctAnswers++;
+      }
+    });
+
     Alert(
       context: context,
       type: AlertType.info,
@@ -679,9 +681,77 @@ class _McqExamPageState extends State<McqExamPage> {
         descStyle: FontFamily.font6,
         isCloseButton: false,
       ),
-      title: "Are you Sure?",
+      title: "Are You Sure?",
       desc:
-          "If you are sure to Submit Your Exam. \n Then Click on Yes Button.  ",
+          "Once You submit , You can't Change your Sheet \n If you sure then Click on 'Yes' Button",
+      buttons: [
+        DialogButton(
+          child: Text("Cancel",
+              style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(77, 3, 3, 1),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Color.fromRGBO(158, 9, 9, 1),
+        ),
+        DialogButton(
+          child:
+              Text("Yes", style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(77, 3, 3, 1),
+          onPressed: () {
+            score.value = correctAnswers;
+
+            isSubmitted.value = true;
+            Navigator.pop(context);
+          },
+          color: Color.fromRGBO(9, 89, 158, 1),
+        ),
+      ],
+    ).show();
+  }
+
+  _onimeUp(context) {
+    _onSubmitExam(context);
+    Alert(
+      context: context,
+      type: AlertType.info,
+      style: AlertStyle(
+        animationType: AnimationType.fromTop,
+        titleStyle:
+            TextStyle(color: ColorPage.red, fontWeight: FontWeight.bold),
+        descStyle: FontFamily.font6,
+        isCloseButton: false,
+      ),
+      title: "Your Time is Up !!",
+      desc: "Sorry! But Your time is over. \n Your Exam has been submitted.",
+      buttons: [
+        DialogButton(
+          child:
+              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(3, 77, 59, 1),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Color.fromRGBO(9, 89, 158, 1),
+        ),
+      ],
+    ).show();
+  }
+
+  _onincompleteSubmission(context) {
+    Alert(
+      context: context,
+      type: AlertType.info,
+      style: AlertStyle(
+        animationType: AnimationType.fromLeft,
+        titleStyle:
+            TextStyle(color: ColorPage.red, fontWeight: FontWeight.bold),
+        descStyle: FontFamily.font6,
+        isCloseButton: false,
+      ),
+      title: "Your Sheet is Incomplete",
+      desc:
+          "Your Answer sheet is Incomplete. \n Are you Sure to Submit then Click on Yes Button.  ",
       buttons: [
         DialogButton(
           child: Text("Cancel",
@@ -697,34 +767,13 @@ class _McqExamPageState extends State<McqExamPage> {
               Text("Yes", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: Color.fromRGBO(3, 77, 59, 1),
           onPressed: () {
-            Navigator.pop(context);
-          },
-          color: Color.fromRGBO(9, 89, 158, 1),
-        ),
-      ],
-    ).show();
-  }
+            setState(() {
+              
 
-  _onimeUp(context) {
-    Alert(
-      context: context,
-      type: AlertType.info,
-      style: AlertStyle(
-        animationType: AnimationType.fromTop,
-        titleStyle:
-            TextStyle(color: ColorPage.red, fontWeight: FontWeight.bold),
-        descStyle: FontFamily.font6,
-        isCloseButton: false,
-      ),
-      title: "Your Time is Up !!",
-      desc:
-          "Sorry! But Your time is over. \n To Submit your Answer Clik Ok Button  ",
-      buttons: [
-        DialogButton(
-          child:
-              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
-          highlightColor: Color.fromRGBO(3, 77, 59, 1),
-          onPressed: () {
+          
+
+            isSubmitted.value = true;
+            });
             Navigator.pop(context);
           },
           color: Color.fromRGBO(9, 89, 158, 1),
@@ -733,478 +782,3 @@ class _McqExamPageState extends State<McqExamPage> {
     ).show();
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class McqExamPage extends StatefulWidget {
-//   const McqExamPage({super.key});
-
-//   @override
-//   State<McqExamPage> createState() => _McqExamPageState();
-// }
-
-// class _McqExamPageState extends State<McqExamPage> {
-//   String groupname = 'Group A';
-//  List selectedquestion=[];
-//   List<String> grouplist = [];
-//   int qindex = 0;
-//   bool isNumberPadVisible = false;
-//   RxBool selecte = false.obs;
-//   String selectedNumber = 'Select a number';
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   Map<String, List<String>> mcq = {
-//     'Group A': [
-//       "question1",
-//       "question2",
-//       "question3",
-//       "question4",
-//       "question5"
-//     ],
-//     'Group B': [
-//       "question6",
-//       "question7",
-//       "question8",
-//       "question9",
-//       "question10",
-//       'question100'
-//     ],
-//     'Group C': [
-//       "question11",
-//       "question12",
-//       "question13",
-//       "question14",
-//       "question15",
-//       'question16',
-//       'question17'
-//     ],
-//      'Group D': [
-//       "question11",
-//       "question12",
-//       "question13",
-//       "question14",
-//       "question15",
-//       'question16',
-//       'question17'
-//     ],
-//   };
-
-//   int itemcno = 0;
-//   var timerStyle =
-//       TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20);
-//   var headerStyle = TextStyle(fontWeight: FontWeight.w600, fontSize: 20);
-//   var optionStyle = TextStyle(fontWeight: FontWeight.w500, fontSize: 15);
-
-//   List options = ['A) 56', 'B) 6', 'C) 5566', 'D) All'];
-//   int selectedIndex = -1;
-//   @override
-//   void initState() {
-//     itemcno = mcq.length;
-//     grouplist = mcq.keys.toList();
-//     selectedquestion=[0,0];
-
-//     // TODO: implement initState
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     double height = MediaQuery.of(context).size.height;
-//     return Scaffold(
-//         backgroundColor: Colors.grey[200],
-//         appBar: AppBar(
-//           automaticallyImplyLeading: false,
-//           centerTitle: true,
-//           backgroundColor: Colors.blue,
-//           title: Text(
-//             '10th Social Exam-1 Mock Exam',
-//             style: timerStyle,
-//           ),
-//           actions: [
-//             Expanded(
-//               child: Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                 children: [
-//                   Row(
-//                     children: [
-//                       SizedBox(
-//                         width: 20,
-//                       ),
-//                       Text(
-//                         'Time : 3:05 mins',
-//                         style: timerStyle,
-//                       ),
-//                     ],
-//                   ),
-//                   Text(
-//                     '10th Social Exam-1 Mock Exam',
-//                     style: timerStyle,
-//                   ),
-//                   Row(
-//                     children: [
-//                       MyButton(
-//                           btncolor: Colors.white,
-//                           onPressed: () {},
-//                           mychild: 'Submit',
-//                           mycolor: Colors.orangeAccent),
-//                       SizedBox(
-//                         width: 20,
-//                       ),
-//                     ],
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ],
-//         ),
-//         body: SingleChildScrollView(
-//           child: Row(
-//             children: [
-//               Expanded(
-//                 flex: 2,
-//                 child: Container(
-//                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-//                   // color: Colors.blue,
-//                   child: SizedBox(
-//                     height: height,
-//                     child: Column(
-//                       children: [
-//                         Row(
-//                           children: [
-//                             Expanded(
-//                               child: Container(
-//                                 decoration: BoxDecoration(
-//                                     color: Colors.white,
-//                                     boxShadow: [
-//                                       BoxShadow(
-//                                         color: Colors.black12,
-//                                         offset: Offset(8, 8),
-//                                         blurRadius: 10,
-//                                       )
-//                                     ]),
-//                                 padding: EdgeInsets.symmetric(vertical: 15),
-//                                 child: Text(
-//                                   textAlign: TextAlign.center,
-//                                   groupname,
-//                                   style: headerStyle,
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                         SizedBox(
-//                           height: 10,
-//                         ),
-//                         Row(
-//                           children: [
-//                             Expanded(
-//                               child: Container(
-//                                 decoration: BoxDecoration(
-//                                     color: Colors.white,
-//                                     boxShadow: [
-//                                       BoxShadow(
-//                                         color: Colors.black12,
-//                                         offset: Offset(8, 8),
-//                                         blurRadius: 10,
-//                                       )
-//                                     ]),
-//                                 padding: EdgeInsets.symmetric(vertical: 15),
-//                                 child: Column(
-//                                   children: [
-//                                     Text(
-//                                       textAlign: TextAlign.center,
-//                                       mcq[groupname]![qindex],
-//                                       style: headerStyle,
-//                                     ),
-//                                     Container(
-//                                       margin: EdgeInsets.symmetric(
-//                                           vertical: 20, horizontal: 10),
-//                                       color: Colors.black26,
-//                                       height: 3,
-//                                     ),
-//                                     Image.network(
-//                                         'https://sigma-docs-screenshots.s3.us-west-2.amazonaws.com/Workbooks/Visualizations/Build+a+Bar+Chart/bar-chart.png'),
-//                                     Container(
-//                                       margin: EdgeInsets.symmetric(
-//                                           vertical: 20, horizontal: 10),
-//                                       color: Colors.black26,
-//                                       height: 3,
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               Expanded(
-//                 flex: 2,
-//                 child: Container(
-//                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-//                   // color: Colors.blue,
-//                   child: SizedBox(
-//                     height: height,
-//                     child: Column(
-//                       children: [
-//                         Row(
-//                           children: [
-//                             Expanded(
-//                               child: Container(
-//                                 decoration: BoxDecoration(
-//                                     color: Colors.white,
-//                                     boxShadow: [
-//                                       BoxShadow(
-//                                         color: Colors.black12,
-//                                         offset: Offset(8, 8),
-//                                         blurRadius: 10,
-//                                       )
-//                                     ]),
-//                                 padding: EdgeInsets.symmetric(vertical: 15),
-//                                 child: Text(
-//                                   textAlign: TextAlign.center,
-//                                   'Options',
-//                                   style: headerStyle,
-//                                 ),
-//                               ),
-//                             ),
-//                           ],
-//                         ),
-//                         SizedBox(
-//                           height: 20,
-//                         ),
-//                         SizedBox(
-//                           height: 400,
-//                           child: ListView.builder(
-//                             itemCount: 4,
-//                             itemBuilder: (context, index) {
-//                               return Padding(
-//                                 padding: EdgeInsets.symmetric(vertical: 10),
-//                                 child: AnimatedContainer(
-//                                   duration: Duration(milliseconds: 600),
-//                                   curve: Curves.easeInOut,
-//                                   height: 60,
-//                                   decoration: BoxDecoration(
-//                                     color: selectedIndex == index
-//                                         ? Colors.blue[200]
-//                                         : Colors.white,
-//                                     borderRadius: BorderRadius.circular(8),
-//                                     boxShadow: [
-//                                       BoxShadow(
-//                                         color: Colors.black12,
-//                                         blurRadius: 10,
-//                                         offset: Offset(0, 5),
-//                                       ),
-//                                     ],
-//                                   ),
-//                                   child: Material(
-//                                     color: Colors.transparent,
-//                                     child: InkWell(
-//                                       borderRadius: BorderRadius.circular(8),
-//                                       onTap: () {
-//                                         setState(() {
-//                                           selectedIndex = index;
-//                                         });
-//                                       },
-//                                       child: Row(
-//                                         children: [
-//                                           Padding(
-//                                             padding: EdgeInsets.symmetric(
-//                                                 horizontal: 16),
-//                                             child: Text(
-//                                               options[index].toString(),
-//                                               style: optionStyle,
-//                                             ),
-//                                           ),
-//                                         ],
-//                                       ),
-//                                     ),
-//                                   ),
-//                                 ),
-//                               );
-//                             },
-//                           ),
-//                         ),
-//                         Row(
-//                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-//                           children: [
-//                             MaterialButton(
-//                               height: 40,
-//                               color: Colors.blueAccent,
-//                               padding: EdgeInsets.all(16),
-//                               shape: ContinuousRectangleBorder(
-//                                   borderRadius: BorderRadius.circular(12)),
-//                               onPressed: () {},
-//                               child: Text(
-//                                 'Previous',
-//                                 style: TextStyle(color: Colors.white),
-//                               ),
-//                             ),
-//                             MaterialButton(
-//                               height: 40,
-//                               color: Color.fromARGB(255, 22, 140, 26),
-//                               padding: EdgeInsets.all(16),
-//                               shape: ContinuousRectangleBorder(
-//                                   borderRadius: BorderRadius.circular(12)),
-//                               onPressed: () {},
-//                               child: Text(
-//                                 'Save & Next',
-//                                 style: TextStyle(color: Colors.white),
-//                               ),
-//                             ),
-//                           ],
-//                         )
-//                       ],
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               Expanded(
-//                 child: Container(
-//                   padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-//                   child: SizedBox(
-//                     height: height,
-//                     child: ListView.builder(
-//                         itemCount: itemcno + 1,
-//                         itemBuilder: (context, gindex) {
-//                           return gindex == itemcno
-//                               ? Row(
-//                                   mainAxisAlignment:
-//                                       MainAxisAlignment.spaceAround,
-//                                   children: [
-//                                     MaterialButton(
-//                                       height: 40,
-//                                       color: Colors.grey,
-//                                       padding: EdgeInsets.symmetric(
-//                                           horizontal: 15, vertical: 5),
-//                                       shape: ContinuousRectangleBorder(
-//                                           borderRadius:
-//                                               BorderRadius.circular(12)),
-//                                       onPressed: () {},
-//                                       child: Text(
-//                                         'Mark for Review',
-//                                         style: TextStyle(color: Colors.white),
-//                                       ),
-//                                     ),
-//                                     MaterialButton(
-//                                       height: 40,
-//                                       color: Colors.orange,
-//                                       padding: EdgeInsets.symmetric(
-//                                           horizontal: 15, vertical: 5),
-//                                       shape: ContinuousRectangleBorder(
-//                                           borderRadius:
-//                                               BorderRadius.circular(12)),
-//                                       onPressed: () {},
-//                                       child: Text(
-//                                         'Clear Responce',
-//                                         style: TextStyle(color: Colors.white),
-//                                       ),
-//                                     )
-//                                   ],
-//                                 )
-//                               : Padding(
-//                                   padding:
-//                                       const EdgeInsets.symmetric(vertical: 10),
-//                                   child: ClipRRect(
-//                                     borderRadius:
-//                                         BorderRadius.all(Radius.circular(7)),
-//                                     child: ExpansionTile(
-//                                       // clipBehavior: Clip.hardEdge,
-//                                       shape:
-//                                           Border.all(color: Colors.transparent),
-
-//                                       backgroundColor: ColorPage.white,
-
-//                                       collapsedBackgroundColor: ColorPage.white,
-
-//                                       title: Text(grouplist[gindex]),
-
-//                                       children: [
-//                                         Container(
-//                                           height: 400,
-//                                           child: GridView.builder(
-//                                             itemCount:
-//                                                 mcq[grouplist[gindex]]!.length,
-//                                             gridDelegate:
-//                                                 SliverGridDelegateWithFixedCrossAxisCount(
-//                                                     crossAxisCount: 4),
-//                                             itemBuilder: (context, index) {
-//                                               return Padding(
-//                                                 padding:
-//                                                     const EdgeInsets.all(8.0),
-//                                                 child: MaterialButton(
-//                                                   color: gindex==selectedquestion[0]&& index==selectedquestion[1]?Colors.orange:Colors.white,
-
-//                                                   shape: CircleBorder(
-//                                                       side: BorderSide(
-//                                                           color:
-//                                                               Colors.black12)),
-//                                                   onPressed: () {
-//                                                     setState(() {
-//                                                       groupname =
-//                                                           grouplist[gindex];
-//                                                       qindex = index;
-//                                                       selectedquestion=[gindex,index];
-//                                                     });
-//                                                   },
-//                                                   child: Text(
-//                                                       (index + 1).toString()),
-//                                                 ),
-//                                               );
-//                                             },
-//                                           ),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                   ),
-//                                 );
-//                         }),
-                    
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ));
-//   }
-// }
-

@@ -52,7 +52,7 @@ dependencies:
   encrypt: ^5.0.3
   device_info_plus: ^9.0.2
   intl:
-  webview_flutter:
+  # webview_flutter: ^4.8.0
   sqflite_common: ^2.5.4
   path: 
   sqflite_common_ffi:
@@ -87,6 +87,7 @@ dependencies:
   file_picker: ^8.0.5
   flutter_spinbox: ^0.13.1
   popup_menu_plus: ^0.0.6
+  animated_progress_bar: ^0.0.3
 
  
   flutter_windowmanager:
@@ -114,6 +115,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   shared_preferences: ^2.2.3
+  webview_universal: ^0.0.5
+  workmanager: ^0.5.2
+  camera: ^0.11.0+1
 
 dev_dependencies:
   flutter_test:

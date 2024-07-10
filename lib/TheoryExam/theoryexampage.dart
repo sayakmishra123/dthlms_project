@@ -3,6 +3,7 @@ import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
+import 'package:dthlms/utils/loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,10 +11,11 @@ import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
 class TheoryExamPage extends StatefulWidget {
@@ -30,15 +32,24 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
   Getx getxController = Get.put(Getx());
   final GlobalKey<SfPdfViewerState> _pdfViewerKey = GlobalKey();
   final PdfViewerController _pdfViewerController = PdfViewerController();
+  String? _localPdfPath;
 
   TextEditingController sheetController = TextEditingController();
   final GlobalKey<FormState> sheetkey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    _downloadPdf();
+  }
 
   Future<void> _pickImage() async {
     if (getxController.isPaperSubmit.value) {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
         type: FileType.image,
         allowMultiple: true,
+        dialogTitle: "Press & Hold CTRL to Select Multiple Sheet!"
+        
       );
 
       if (result != null) {
@@ -128,6 +139,25 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     }
   }
 
+  Future<void> _downloadPdf() async {
+  
+    final response = await http.get(Uri.parse(
+        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf'));
+    if (response.statusCode == 200) {
+      final directory = await getApplicationDocumentsDirectory();
+      final filePath = '${directory.path}/QuestionPaper.pdf';
+      final file = File(filePath);
+      await file.writeAsBytes(response.bodyBytes);
+      setState(() {
+        Get.back();
+        _localPdfPath = filePath;
+        print(filePath);
+      });
+    } else {
+      print('Failed to download PDF.');
+    }
+  }
+
   void _openFullScreenPdf(int pageNumber) {
     final PdfViewerController fullScreenController = PdfViewerController();
     Navigator.push(
@@ -135,11 +165,13 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       MaterialPageRoute(
         builder: (context) => Scaffold(
           appBar: AppBar(
-            title: Text("Full Screen PDF", style: FontFamily.font3.copyWith(color: Colors.white)),
+            iconTheme: IconThemeData(color: ColorPage.white),
+            title: Text("Full Screen PDF",
+                style: FontFamily.font3.copyWith(color: Colors.white)),
             backgroundColor: ColorPage.appbarcolor,
           ),
-          body: SfPdfViewer.network(
-            'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
+          body: SfPdfViewer.file(
+            File(_localPdfPath!),
             controller: fullScreenController,
             key: GlobalKey<SfPdfViewerState>(),
             onDocumentLoaded: (PdfDocumentLoadedDetails details) {
@@ -161,18 +193,21 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 children: [
-                  Text("Remaining Time", style: FontFamily.font3.copyWith(color: Colors.white)),
+                  Text("Remaining Time",
+                      style: FontFamily.font3.copyWith(color: Colors.white)),
                   SizedBox(width: 10),
                   Icon(Icons.alarm, color: Colors.white),
                   SizedBox(width: 5),
-                  Text("03:56:54", style: FontFamily.font3.copyWith(color: Colors.white)),
+                  Text("03:56:54",
+                      style: FontFamily.font3.copyWith(color: Colors.white)),
                   SizedBox(width: 20),
                 ],
               ),
             ),
           ],
           backgroundColor: ColorPage.appbarcolor,
-          title: Text("Theory Exam", style: FontFamily.font3.copyWith(color: Colors.white)),
+          title: Text("Theory Exam",
+              style: FontFamily.font3.copyWith(color: Colors.white)),
         ),
         body: Column(
           children: [
@@ -183,25 +218,41 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                     child: Stack(
                       children: [
                         Container(
-                          decoration: BoxDecoration(color: Colors.white, border: Border(right: BorderSide(width: 10, color: ColorPage.appbarcolor))),
-                          child: SfPdfViewer.network(
-                            'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf',
-                            key: _pdfViewerKey,
-                            controller: _pdfViewerController,
-                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border(
+                                  right: BorderSide(
+                                      width: 10,
+                                      color: ColorPage.appbarcolor))),
+                          child: _localPdfPath == null
+                              ? Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : SfPdfViewer.file(
+                                  File(_localPdfPath!),
+                                  key: _pdfViewerKey,
+                                  controller: _pdfViewerController,
+                                ),
                         ),
                         Positioned(
                           bottom: 10,
                           right: 20,
-                          child: InkWell(
-                            onTap: (){_openFullScreenPdf(_pdfViewerController.pageNumber);
-                              
-                            },
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                              color: ColorPage.blue,
-                              child: Icon(Icons.fullscreen)
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            child: FloatingActionButton(
+                              hoverColor: ColorPage.deepblue,
+                              backgroundColor: ColorPage.blue,
+                              child: Icon(
+                                Icons.fullscreen,
+                                color: ColorPage.white,
+                              ),
+                              onPressed: () {
+                                if (_localPdfPath != null) {
+                                  _openFullScreenPdf(
+                                      _pdfViewerController.pageNumber);
+                                }
+                              },
                             ),
                           ),
                         ),
@@ -216,7 +267,8 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                           Expanded(
                             child: GridView.builder(
                               padding: const EdgeInsets.all(8.0),
-                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
                                 crossAxisSpacing: 8.0,
                                 mainAxisSpacing: 8.0,
@@ -229,7 +281,8 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                                     child: Stack(
                                       children: [
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           child: Image.file(
                                             _images[index],
                                             fit: BoxFit.cover,
@@ -241,8 +294,10 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                                           right: 0,
                                           top: 0,
                                           child: IconButton(
-                                            icon: Icon(Icons.delete, color: Colors.red),
-                                            onPressed: () => _deleteImage(_images[index]),
+                                            icon: Icon(Icons.delete,
+                                                color: Colors.red),
+                                            onPressed: () =>
+                                                _deleteImage(_images[index]),
                                           ),
                                         ),
                                       ],
@@ -257,10 +312,15 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         children: [
-                                          Icon(Icons.add, size: 50, color: Colors.grey[700]),
-                                          Text("Select your Sheet", style: FontFamily.font3.copyWith(color: Colors.grey[700])),
+                                          Icon(Icons.add,
+                                              size: 50,
+                                              color: Colors.grey[700]),
+                                          Text("Select your Sheet",
+                                              style: FontFamily.font3.copyWith(
+                                                  color: Colors.grey[700])),
                                         ],
                                       ),
                                     ),
@@ -275,12 +335,16 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: ElevatedButton(
                                       onPressed: _uploadImages,
-                                      child: Text("Upload Images", style: FontFamily.font3),
+                                      child: Text("Upload Images",
+                                          style: FontFamily.font3),
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color.fromARGB(255, 5, 1, 31),
-                                        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                                        backgroundColor:
+                                            Color.fromARGB(255, 5, 1, 31),
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 15, horizontal: 50),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(30),
+                                          borderRadius:
+                                              BorderRadius.circular(30),
                                         ),
                                       ),
                                     ),
@@ -332,7 +396,8 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Enter How Many Sheets You Want To Upload', style: TextStyle(fontSize: 14)),
+                Text('Enter How Many Sheets You Want To Upload',
+                    style: TextStyle(fontSize: 14)),
               ],
             ),
             Padding(
@@ -343,7 +408,8 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
                   sheetNumber = value;
                 },
                 decoration: InputDecoration(
-                  border: UnderlineInputBorder(borderSide: BorderSide(width: 2)),
+                  border:
+                      UnderlineInputBorder(borderSide: BorderSide(width: 2)),
                 ),
                 value: sheetNumber,
               ),
@@ -354,14 +420,25 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       buttons: [
         DialogButton(
           width: MediaQuery.of(context).size.width / 5.5,
-          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 15)),
+          child:
+              Text("OK", style: TextStyle(color: Colors.white, fontSize: 15)),
           onPressed: () {
             if (sheetNumber == null || sheetNumber == 0) {
               _onSheetNull(context);
-            } else if (sheetNumber > 0) {
-              getxController.isPaperSubmit.value = true;
+            } else if (sheetNumber > 0 && sheetNumber>_images.length) {
+             setState(() {
+                getxController.isPaperSubmit.value = true;
               Navigator.pop(context);
               _pickImage();
+             });
+            }
+            else{
+               setState(() {
+                getxController.isPaperSubmit.value = true;
+              Navigator.pop(context);
+             
+             });
+             
             }
           },
           color: ColorPage.colorgrey,
@@ -381,10 +458,12 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
         isCloseButton: false,
       ),
       title: "NUMBER OF SHEET NOT MATCH !!",
-      desc: "Your Assign ${sheetNumber.toStringAsFixed(0)} Sheets.\n But you selected ${_images.length} Sheets.\n Please edit the sheet number or\n remove the extra Pages",
+      desc:
+          "Your Assign ${sheetNumber.toStringAsFixed(0)} Sheets.\n But you selected ${_images.length} Sheets.\n Please edit the sheet number or\n remove the extra Pages",
       buttons: [
         DialogButton(
-          child: Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child:
+              Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
             Navigator.pop(context);
             editSheetNumber(context);
@@ -392,7 +471,8 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
           color: ColorPage.blue,
         ),
         DialogButton(
-          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child:
+              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -415,7 +495,8 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       desc: "At least 1 sheet you should assign",
       buttons: [
         DialogButton(
-          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child:
+              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: Color.fromRGBO(3, 77, 59, 1),
           onPressed: () {
             Navigator.pop(context);
@@ -437,10 +518,12 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
         isCloseButton: false,
       ),
       title: "NUMBER OF SHEET NOT MATCH !!",
-      desc: "Your Assign ${sheetNumber.toStringAsFixed(0)} Sheets.\n But you selected ${_images.length} Sheets.\n Please edit the sheet number or\n add more Pages",
+      desc:
+          "Your Assign ${sheetNumber.toStringAsFixed(0)} Sheets.\n But you selected ${_images.length} Sheets.\n Please edit the sheet number or\n add more Pages",
       buttons: [
         DialogButton(
-          child: Text("Add", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child:
+              Text("Add", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: Color.fromRGBO(1, 90, 58, 1),
           onPressed: () {
             Navigator.pop(context);
@@ -450,7 +533,8 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
         ),
         DialogButton(
           highlightColor: Color.fromARGB(255, 2, 2, 60),
-          child: Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child:
+              Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
             Navigator.pop(context);
             editSheetNumber(context);
@@ -469,9 +553,11 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       desc: "$file\nThis image has already been selected.",
       buttons: [
         DialogButton(
-          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child:
+              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
             Navigator.pop(context);
+            _pickImage();
           },
           color: ColorPage.blue,
         ),
@@ -492,7 +578,8 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       desc: "Your answer sheets are uploaded successfully!",
       buttons: [
         DialogButton(
-          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child:
+              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: Color.fromRGBO(3, 77, 59, 1),
           onPressed: () {
             Navigator.pop(context);

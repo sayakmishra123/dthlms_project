@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:animated_splash_screen/animated_splash_screen.dart'
     show AnimatedSplashScreen, SplashTransition;
+import 'package:camera/camera.dart';
+import 'package:dthlms/Testing/cameratesting.dart';
 import 'package:dthlms/ThemeData/color/color.dart' show ColorPage;
 import 'package:dthlms/TheoryExam/theoryexampage.dart';
 import 'package:dthlms/aapnaapp/fogetpasspage.dart';
@@ -7,6 +11,8 @@ import 'package:dthlms/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:dthlms/login/dth_login.dart' show DthLmsLogin;
 import 'package:dthlms/mcq/macterm&conditionpage.dart';
 import 'package:dthlms/mcq/mcqexampage.dart';
+import 'package:dthlms/mcq/mockTestmcqPage.dart';
+import 'package:dthlms/mcq/practiceMcqPage.dart';
 import 'package:dthlms/routes/router.dart' show pageRouter;
 import 'package:dthlms/utctime.dart';
 
@@ -23,14 +29,22 @@ import 'package:flutter/material.dart'
 import 'package:get/get_navigation/src/root/get_material_app.dart'
     show GetMaterialApp;
 import 'package:media_kit/media_kit.dart' show MediaKit;
+import 'package:webview_flutter/webview_flutter.dart';
 import 'package:windows_single_instance/windows_single_instance.dart'
     show WindowsSingleInstance;
+import 'package:workmanager/workmanager.dart';
 
 //sayak mishra
 
 void main(List<String> args) async {
   print(UtcTime().utctime());
   WidgetsFlutterBinding.ensureInitialized();
+   if(Platform.isAndroid)
+   {
+    
+    cameras = await availableCameras();
+   }
+  
   // await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -61,6 +75,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return GetMaterialApp(
       getPages: router.Route,
       debugShowCheckedModeBanner: false,
@@ -69,7 +85,7 @@ class _MyAppState extends State<MyApp> {
         splash: "assets/splash6.gif",
         splashIconSize: 6000,
         centered: true,
-        nextScreen: TheoryExamPage(),
+        nextScreen:Platform.isAndroid?TestCamera(): MockTestMcqExamPage(),
         backgroundColor: ColorPage.bgcolor,
         splashTransition: SplashTransition.scaleTransition,
         duration: 3500,
