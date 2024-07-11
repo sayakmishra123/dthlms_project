@@ -85,7 +85,7 @@ class _MyAppState extends State<MyApp> {
         splash: "assets/splash6.gif",
         splashIconSize: 6000,
         centered: true,
-        nextScreen:Platform.isAndroid?TestCamera(): MockTestMcqExamPage(),
+        nextScreen:Platform.isAndroid?TestCamera(): MockTestMcqExamPage  (),
         backgroundColor: ColorPage.bgcolor,
         splashTransition: SplashTransition.scaleTransition,
         duration: 3500,
