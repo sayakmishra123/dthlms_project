@@ -105,60 +105,64 @@ class _ResultPageState extends State<ResultPage> {
                   fontWeight: FontWeight.w600,
                   fontSize: 20),),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Center(
-            child: Card(
-              elevation: 100,
-              child: DataTable(
-                border: TableBorder.all(color: ColorPage.colorblack),
-                headingRowColor: MaterialStatePropertyAll(Colors.blueGrey[600]),
-                dividerThickness: 2,
-                columns: [
-                  DataColumn(
-                    label: Container(
-                      child: Text(
-                        'SL. No',
-                        textAlign: TextAlign.center,
-                        style: FontFamily.font3,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SingleChildScrollView(
+              child: Center(
+                child: Card(
+                  elevation: 100,
+                  child: DataTable(
+                    border: TableBorder.all(color: ColorPage.colorblack),
+                    headingRowColor: MaterialStatePropertyAll(Colors.blueGrey[600]),
+                    dividerThickness: 2,
+                    columns: [
+                      DataColumn(
+                        label: Container(
+                          child: Text(
+                            'SL. No',
+                            textAlign: TextAlign.center,
+                            style: FontFamily.font3,
+                          ),
+                        ),
                       ),
-                    ),
+                      DataColumn(
+                        label: Text(
+                          'Question',
+                          textAlign: TextAlign.center,
+                          style: FontFamily.font3,
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Your ANS.',
+                          textAlign: TextAlign.center,
+                          style: FontFamily.font3,
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Correct ANS.',
+                          textAlign: TextAlign.center,
+                          style: FontFamily.font3,
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Marks',
+                          textAlign: TextAlign.center,
+                          style: FontFamily.font3,
+                        ),
+                      ),
+                    ],
+                    rows: dataRows,
                   ),
-                  DataColumn(
-                    label: Text(
-                      'Question',
-                      textAlign: TextAlign.center,
-                      style: FontFamily.font3,
-                    ),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'Your ANS.',
-                      textAlign: TextAlign.center,
-                      style: FontFamily.font3,
-                    ),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'Correct ANS.',
-                      textAlign: TextAlign.center,
-                      style: FontFamily.font3,
-                    ),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'Marks',
-                      textAlign: TextAlign.center,
-                      style: FontFamily.font3,
-                    ),
-                  ),
-                ],
-                rows: dataRows,
+                ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

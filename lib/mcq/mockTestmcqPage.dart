@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
+import 'package:dthlms/mcq/ResultPage.dart';
 import 'package:dthlms/mcq/mcoktestResult.dart';
 import 'package:dthlms/mcq/modelclass.dart';
 import 'package:dthlms/widget/mybutton.dart';
@@ -37,7 +38,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
   late Timer _timer;
   Getx getx_obj = Get.put(Getx());
   RxBool buttonshow = false.obs;
-  RxInt _start = 10.obs;
+  RxInt _start = 1200.obs;
 
   Future getdata() async {
     String jsonData = '''
@@ -258,19 +259,22 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                   SizedBox(
                     width: 50,
                   ),
-                 isSubmitted.value? Row(
+                //  isSubmitted.value?
+                  Row(
                     children: [
                       MyButton(
                           btncolor: Colors.white,
                           onPressed: () {
-                            Get.to(()=>ResultPage(mcqData: mcqData,correctAnswers: answer,userAns: userAns,));
+                            // Get.to(()=>ResultPage(mcqData: mcqData,correctAnswers: answer,userAns: userAns,));
+                            Get.to(()=>MockTestResultPage());
                          
                           },
                           mychild: 'Result',
                           mycolor: Colors.orangeAccent),
                       SizedBox(width: 20),
                     ],
-                  ):SizedBox(),
+                  )
+                  // :SizedBox(),
                 ],
               ),
             ],
@@ -722,7 +726,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
               Text("Yes", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: Color.fromRGBO(77, 3, 3, 1),
           onPressed: () {
-            _timer.cancel(); 
+            _timer.cancel();
             score.value = correctAnswers;
 
             isSubmitted.value = true;
