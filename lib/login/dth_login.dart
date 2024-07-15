@@ -8,7 +8,9 @@ import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/apiHandleing/apifetchall.dart';
 import 'package:dthlms/forgotpassword/forgetscreen.dart';
+import 'package:dthlms/utils/splash.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:local_notifier/local_notifier.dart';
 
 import '../getx/getxcontroller.getx.dart';
 import 'package:dthlms/login/login_api.dart';
@@ -60,6 +62,51 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
       AnimatedButtonController();
   var key = '0';
   Getx getx = Get.put(Getx());
+
+  notification() async {
+    // Add in main method.
+    await localNotifier.setup(
+      appName: 'local_notifier_example',
+      // The parameter shortcutPolicy only works on Windows
+      shortcutPolicy: ShortcutPolicy.requireCreate,
+    );
+
+    LocalNotification notification = LocalNotification(
+      title: "local_notifier_example",
+      body: "hello flutter!",
+    );
+    notification.onShow = () {
+      // showDialog(
+      //     context: context,
+      //     builder: (context) {
+      //       return CircularProgressIndicator();
+      //     });
+    };
+    notification.onClose = (closeReason) {
+      // Only supported on windows, other platforms closeReason is always unknown.
+      switch (closeReason) {
+        case LocalNotificationCloseReason.userCanceled:
+          // do something
+          break;
+        case LocalNotificationCloseReason.timedOut:
+          // do something
+          break;
+        default:
+      }
+      // print('onClose ${_exampleNotification?.identifier} - $closeReason');
+    };
+    notification.onClick = () {
+      print('onClick ${notification.identifier}');
+      Get.to(() => DthLmsLogin());
+      // notification.onShow!();
+    };
+    notification.onClickAction = (actionIndex) {
+      print('onClickAction ${notification.identifier} - $actionIndex');
+      Get.to(() => DthLmsLogin());
+    };
+
+    notification.show();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -883,10 +930,13 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                   formfieldsize,
                                                               child:
                                                                   MaterialButton(
-                                                                shape: ContinuousRectangleBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            20)),
+                                                                shape:
+                                                                    ContinuousRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20),
+                                                                ),
                                                                 padding:
                                                                     const EdgeInsets
                                                                         .only(
@@ -896,6 +946,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                     .colorgrey,
                                                                 onPressed:
                                                                     () async {
+                                                                  notification();
                                                                   if (!desktop_key2
                                                                       .currentState!
                                                                       .validate()) {
@@ -907,45 +958,46 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                         'tester1',
                                                                         'Admin@1234',
                                                                         '1234');
-
-                                                                    // await loginApi(
-                                                                    //   context,
-                                                                    //   loginemail
-                                                                    //       .text,
-                                                                    //   loginpassword
-                                                                    //       .text,
-                                                                    //   loginotp
-                                                                    //       .text,
-                                                                    // );
-                                                                    // Get.to(() =>
-                                                                    //     const Dashboard());
-                                                                    // Navigator.push(
-                                                                    //     context,
-                                                                    //     MaterialPageRoute(
-                                                                    //         builder: (context) => Material(
-                                                                    //               child: Scaffold(
-                                                                    //                 body: Center(
-                                                                    //                     child: ElevatedButton(
-                                                                    //                         onPressed: () async {
-                                                                    //                           const link = WhatsAppUnilink(
-                                                                    //                             phoneNumber: '+919749088472',
-                                                                    //                             text: "Hey! I'm inquiring about the apartment listing",
-                                                                    //                           );
-                                                                    //                           Platform.isWindows ? await launchUrl(Uri.parse("https://wa.me/${9749088472}?text=Hello")) : await launchUrlString('$link');
-                                                                    //                           // launchWhatsAppUri() async {
-
-                                                                    //                           //   // Convert the WhatsAppUnilink instance to a Uri.
-                                                                    //                           //   // The "launch" method is part of "url_launcher".
-                                                                    //                           //  ;
-                                                                    //                           //   print('https://web.whatsapp.com/$link');
-                                                                    //                           // }
-
-                                                                    //                           // launchWhatsAppUri();
-                                                                    //                         },
-                                                                    //                         child: Text('Link'))),
-                                                                    //               ),
-                                                                    //             )));
                                                                   }
+
+                                                                  // await loginApi(
+                                                                  //   context,
+                                                                  //   loginemail
+                                                                  //       .text,
+                                                                  //   loginpassword
+                                                                  //       .text,
+                                                                  //   loginotp
+                                                                  //       .text,
+                                                                  // );
+                                                                  // Get.to(() =>
+                                                                  //     const Dashboard());
+                                                                  // Navigator.push(
+                                                                  //     context,
+                                                                  //     MaterialPageRoute(
+                                                                  //         builder: (context) => Material(
+                                                                  //               child: Scaffold(
+                                                                  //                 body: Center(
+                                                                  //                     child: ElevatedButton(
+                                                                  //                         onPressed: () async {
+                                                                  //                           const link = WhatsAppUnilink(
+                                                                  //                             phoneNumber: '+919749088472',
+                                                                  //                             text: "Hey! I'm inquiring about the apartment listing",
+                                                                  //                           );
+                                                                  //                           Platform.isWindows ? await launchUrl(Uri.parse("https://wa.me/${9749088472}?text=Hello")) : await launchUrlString('$link');
+                                                                  //                           // launchWhatsAppUri() async {
+
+                                                                  //                           //   // Convert the WhatsAppUnilink instance to a Uri.
+                                                                  //                           //   // The "launch" method is part of "url_launcher".
+                                                                  //                           //  ;
+                                                                  //                           //   print('https://web.whatsapp.com/$link');
+                                                                  //                           // }
+
+                                                                  //                           // launchWhatsAppUri();
+                                                                  //                         },
+                                                                  //                         child: Text('Link'))),
+                                                                  //               ),
+                                                                  //             )));
+                                                                  // }
                                                                 },
                                                                 child: Text(
                                                                   'Login',

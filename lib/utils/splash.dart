@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    fninfo();
+    fninfo().whenComplete(() => null);
     super.initState();
   }
 
@@ -29,17 +29,18 @@ class _SplashScreenState extends State<SplashScreen> {
       print(info);
       print('ksdbnkjsf');
       bool databaseexist = await DbHandler().doesDatabaseExist('sayakdb.db');
+      print(databaseexist);
       if (databaseexist == true) {
         print('object');
         // await DbHandler().insertData('username', 'password');
-        List logintablerow = await DbHandler().readData();
+        List logintablerow = await DbHandler().readData('UserLogin');
         print(logintablerow);
         // if (logintablerow.isNotEmpty) {
         Get.back();
         Get.to(() => const DthLmsLogin());
         // }
       } else {
-        await copyDatabase('assets/copydb/databases/sayakdb.db', 'sayakdb.db');
+        // await copyDatabase('assets/copydb/databases/sayakdb.db', 'sayakdb.db');
         Get.back();
         Get.to(() => const DthLmsLogin());
       }

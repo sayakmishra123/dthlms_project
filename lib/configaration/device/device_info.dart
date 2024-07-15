@@ -16,10 +16,10 @@ class ClsDeviceInfo {
       final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
       WindowsDeviceInfo windowsInfo = await deviceInfoPlugin.windowsInfo;
 
-      await WindowsSystemInfo.initWindowsInfo(requiredValues: [
-        WindowsSystemInfoFeat.all,
-      ]);
-      if (await WindowsSystemInfo.isInitilized) {}
+      // await WindowsSystemInfo.initWindowsInfo(requiredValues: [
+      //   WindowsSystemInfoFeat.all,
+      // ]);
+      // if (await WindowsSystemInfo.isInitilized) {}
 
       return {
         'deviceid1': WindowsSystemInfo.os?.uuid.toString(),

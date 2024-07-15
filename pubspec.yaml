@@ -89,6 +89,7 @@ dependencies:
   popup_menu_plus: ^0.0.6
   animated_progress_bar: ^0.0.3
   desktop_multi_window: ^0.2.0
+  flutter_secure_storage: ^9.2.2
   # flet: ^0.2.1
 
  
@@ -121,11 +122,15 @@ dependencies:
   webview_universal: ^0.0.5
   workmanager: ^0.5.2
   camera: ^0.11.0+1
+  local_notifier: ^0.1.6
+  # sqflite_sqlcipher:
+  # sqlcipher_flutter_libs:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.13.1"
+
 
 flutter_launcher_icons:
   android: "launcher_icon"

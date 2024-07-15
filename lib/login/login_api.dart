@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dthlms/configaration/device/device_info.dart';
+import 'package:dthlms/db/dbfunction/dbfunction.dart';
 import 'package:dthlms/errormsg/errorhandling.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/login/dth_login.dart';
@@ -66,37 +67,22 @@ Future loginApi(
     // ignore: unused_local_variable
     List dbdata = [];
 
-    // await DbHandler()
-    //     .insertLoginData(userdata.email, userdata.phoneNumber, userdata.token);
+    await DbHandler()
+        .insertLoginData(userdata.email, userdata.phoneNumber, userdata.token);
     // await DbHandler().createMyPackagetable();
     //  await insertMyPackageData();
-    // dbdata = await DbHandler().readData();
+    dbdata = await DbHandler().readData('UserLogin');
+    print(dbdata);
+    print('sayak');
 // String tk=jsondata['result']['token'];
     Get.back();
+    DbHandler().closedb();
 
     Platform.isWindows
         ? Get.toNamed('/Newpackagedashboard',
             arguments: {'token': jsondata['result']['token']})
-        : Get.toNamed("/Newmobilepakagedashboard",arguments:{'token': jsondata['result']['token']} );
-
-  // showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return AlertDialog(
-  //           actions: [
-  //             ElevatedButton(
-  //                 onPressed: () {
-  //                   Get.to(() => Platform.isWindows
-  //                       ? Dashboard()
-  //                       : const MobileHomepage());
-  //                 },
-  //                 child: const Text('Ok'))
-  //           ],
-  //           title: const Text('Data'),
-  //           content: Text(
-  //             dbdata.toString(),
-  //           ));
-  //     });
+        : Get.toNamed("/Newmobilepakagedashboard",
+            arguments: {'token': jsondata['result']['token']});
   } else {
     Get.back();
     ClsErrorMsg.fnErrorDialog(context, 'Login', jsondata['errorMessages'], res);
