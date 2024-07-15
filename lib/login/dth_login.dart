@@ -663,8 +663,8 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                     formfieldsize,
                                                                 child:
                                                                     MaterialButton(
-                                                                  color: ColorPage
-                                                                      .buttonColor,
+                                                                  // color: ColorPage
+                                                                  //     .buttonColor,
                                                                   shape: ContinuousRectangleBorder(
                                                                       borderRadius:
                                                                           BorderRadius.circular(

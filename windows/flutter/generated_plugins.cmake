@@ -6,6 +6,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   animated_progress_bar
   cloud_firestore
   connectivity_plus
+  desktop_multi_window
   file_selector_windows
   firebase_auth
   firebase_core
@@ -15,11 +16,9 @@ list(APPEND FLUTTER_PLUGIN_LIST
   media_kit_video
   permission_handler_windows
   screen_brightness_windows
-  screen_retriever
   syncfusion_pdfviewer_windows
   url_launcher_windows
   webview_universal
-  window_manager
   window_size
   windows_single_instance
 )

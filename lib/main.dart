@@ -15,6 +15,7 @@ import 'package:dthlms/mcq/mockTestmcqPage.dart';
 import 'package:dthlms/mcq/practiceMcqPage.dart';
 import 'package:dthlms/routes/router.dart' show pageRouter;
 import 'package:dthlms/utctime.dart';
+import 'package:dthlms/utils/newpage.dart';
 
 import 'package:firebase_core/firebase_core.dart' show Firebase;
 import 'package:flutter/material.dart'
@@ -39,12 +40,10 @@ import 'package:workmanager/workmanager.dart';
 void main(List<String> args) async {
   print(UtcTime().utctime());
   WidgetsFlutterBinding.ensureInitialized();
-   if(Platform.isAndroid)
-   {
-    
+  if (Platform.isAndroid) {
     cameras = await availableCameras();
-   }
-  
+  }
+
   // await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -57,9 +56,9 @@ void main(List<String> args) async {
   print(args);
 
   MediaKit.ensureInitialized();
-
+  final windowId = int.parse('1');
   runApp(
-    const MyApp(),
+    MyApp(),
   );
 }
 
@@ -75,8 +74,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-
-    
     return GetMaterialApp(
       getPages: router.Route,
       debugShowCheckedModeBanner: false,
@@ -85,7 +82,7 @@ class _MyAppState extends State<MyApp> {
         splash: "assets/splash6.gif",
         splashIconSize: 6000,
         centered: true,
-        nextScreen:Platform.isAndroid?TestCamera(): MockTestMcqExamPage(),
+        nextScreen: Platform.isAndroid ? TestCamera() : DthLmsLogin(),
         backgroundColor: ColorPage.bgcolor,
         splashTransition: SplashTransition.scaleTransition,
         duration: 3500,

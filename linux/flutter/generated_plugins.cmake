@@ -4,14 +4,13 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   animated_progress_bar
+  desktop_multi_window
   file_selector_linux
   flutter_platform_alert
   media_kit_libs_linux
   media_kit_video
-  screen_retriever
   url_launcher_linux
   webview_universal
-  window_manager
   window_size
 )
 
