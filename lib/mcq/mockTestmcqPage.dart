@@ -4,12 +4,13 @@ import 'dart:convert';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
+import 'package:dthlms/mcq/ResultPage.dart';
+import 'package:dthlms/mcq/mcoktestResult.dart';
 import 'package:dthlms/mcq/modelclass.dart';
 import 'package:dthlms/widget/mybutton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class MockTestMcqExamPage extends StatefulWidget {
@@ -79,7 +80,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
   {
     "mcqId": 4,
     "mcqType": "SimpleMcq",
-    "mcqQuestion": "Who is Tony Stark's father?",
+    "mcqQuestion": "Who is Tony Stark's father asjdsahgdhgfuysd gczxbczhg csdfc gzjz hxgcy ugfhdb chxzgc sdfbdsc zhbch jgcbsdh gcsdy gfsdcgc fsdbvxch csdgd h cbjgcufsd?",
     "options": [
       {"optionId": 1, "optionName": "Howard Stark"},
       {"optionId": 2, "optionName": "Steve Rogers"},
@@ -258,18 +259,22 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                   SizedBox(
                     width: 50,
                   ),
+                //  isSubmitted.value?
                   Row(
                     children: [
                       MyButton(
                           btncolor: Colors.white,
                           onPressed: () {
-                            _onSubmitExam(context);
+                            // Get.to(()=>ResultPage(mcqData: mcqData,correctAnswers: answer,userAns: userAns,));
+                            Get.to(()=>MockTestResultPage());
+                         
                           },
-                          mychild: 'Submit',
+                          mychild: 'Result',
                           mycolor: Colors.orangeAccent),
                       SizedBox(width: 20),
                     ],
-                  ),
+                  )
+                  // :SizedBox(),
                 ],
               ),
             ],
@@ -586,13 +591,29 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                                               height: 55,
                                               color: reviewlist.contains(index)
                                                   ? Colors.amber
-                                                  : qindex.value == index
-                                                      ? Color.fromARGB(
-                                                          255, 13, 32, 79) 
-                                                      : Colors.white,
+                                                  : userAns.containsKey(index+1)
+                                                      ? isSubmitted.value
+                                                          ? answer.any((map) =>
+                                                                  map[index+1] ==
+                                                                  userAns[
+                                                                      index+1])
+                                                              ? Colors.green
+                                                              : Colors.red
+                                                          : Colors.blue
+                                                      : qindex.value == index
+                                                          ? Color.fromARGB(
+                                                              255, 13, 32, 79)
+                                                          : Colors.white,
                                               shape: CircleBorder(
                                                   side: BorderSide(
-                                                      color: Colors.black12)),
+                                                      width:
+                                                          qindex.value == index
+                                                              ? 4
+                                                              : 1,
+                                                      color: qindex.value ==
+                                                              index
+                                                          ? ColorPage.white
+                                                          : Colors.black12)),
                                               onPressed: () {
                                                 qindex.value = index;
                                               },
@@ -614,7 +635,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                             ),
                           ),
                           Visibility(
-                            visible: buttonshow.value,
+                            visible:isSubmitted.value?false: buttonshow.value,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -626,7 +647,13 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                                   shape: ContinuousRectangleBorder(
                                       borderRadius: BorderRadius.circular(12)),
                                   onPressed: () {
+                                   if(reviewlist.contains(qindex.value) ){
+
+
+                                   }
+                                   else{
                                     reviewlist.add(qindex.value);
+                                   }
                                   },
                                   child: Text(
                                     'Mark for Review',
@@ -647,7 +674,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                                     reviewlist.remove(qindex.value);
                                   },
                                   child: Text(
-                                    'Clear Responce',
+                                    'Clear Response',
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 )
@@ -683,7 +710,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
       ),
       title: "Are You Sure?",
       desc:
-          "Once You submit , You can't Change your Sheet \n If you sure then Click on 'Yes' Button",
+          "Once You submit, You can't Change your Sheet \n If you are sure then Click on 'Yes' Button",
       buttons: [
         DialogButton(
           child: Text("Cancel",
@@ -699,6 +726,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
               Text("Yes", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: Color.fromRGBO(77, 3, 3, 1),
           onPressed: () {
+            _timer.cancel();
             score.value = correctAnswers;
 
             isSubmitted.value = true;
