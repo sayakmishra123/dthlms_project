@@ -21,11 +21,16 @@ import 'package:flutter/material.dart'
 import 'package:get/get_navigation/src/root/get_material_app.dart'
     show GetMaterialApp;
 import 'package:media_kit/media_kit.dart' show MediaKit;
+import 'package:sqlcipher_library_windows/sqlcipher_library_windows.dart';
+import 'package:sqlite3/open.dart';
+// import 'package:sqlcipher_library_windows/sqlcipher_library_windows.dart';
+// import 'package:sqlite3/open.dart';
 import 'package:windows_single_instance/windows_single_instance.dart'
     show WindowsSingleInstance;
 
 //sayak mishra
 void main(List<String> args) async {
+  open.overrideFor(OperatingSystem.windows, openSQLCipherOnWindows);
   print(UtcTime().utctime());
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isAndroid) {
@@ -41,7 +46,6 @@ void main(List<String> args) async {
   });
   print(args);
   MediaKit.ensureInitialized();
-  final windowId = int.parse('1');
 
   runApp(
     MyApp(),
@@ -68,7 +72,7 @@ class _MyAppState extends State<MyApp> {
         splash: "assets/splash6.gif",
         splashIconSize: 6000,
         centered: true,
-        nextScreen: Platform.isAndroid ? TestCamera() : DthLmsLogin(),
+        nextScreen: Platform.isAndroid ? DthLmsLogin() : DthLmsLogin(),
         backgroundColor: ColorPage.bgcolor,
         splashTransition: SplashTransition.scaleTransition,
         duration: 3500,

@@ -53,12 +53,12 @@ dependencies:
   device_info_plus: ^9.0.2
   intl:
   # webview_flutter: ^4.8.0
-  sqflite_common: ^2.5.4
+  # sqflite_common: ^2.5.4
   path: 
-  sqflite_common_ffi:
+  # sqflite_common_ffi:
   advertising_id: ^2.6.0
   auto_size_text: ^3.0.0
-  sqflite: ^2.3.3+1
+  # sqflite: ^2.3.3+1
   simnumber: ^0.0.12
   carousel_slider: ^4.2.1
   flutter_spinkit: ^5.2.1
@@ -94,7 +94,7 @@ dependencies:
 
  
   flutter_windowmanager:
-  android_window:
+  # android_window:
 
   # flutter_sound: ^9.2.13 # replace with the correct version
   # flutter_sound_platform_interface: ^9.2.13
@@ -123,6 +123,10 @@ dependencies:
   workmanager: ^0.5.2
   camera: ^0.11.0+1
   local_notifier: ^0.1.6
+  sqlcipher_library_windows: ^1.0.2
+  sqlite3: 2.4.3
+  sqlite3_flutter_libs: ^0.5.24
+  # sqflite_sqlcipher: ^3.1.0+1
   # sqflite_sqlcipher:
   # sqlcipher_flutter_libs:
 

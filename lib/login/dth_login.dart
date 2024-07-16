@@ -7,8 +7,9 @@ import 'package:dthlms/android/login/dth_mob_login.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/apiHandleing/apifetchall.dart';
+import 'package:dthlms/db/dbfunction/dbfunction.dart';
 import 'package:dthlms/forgotpassword/forgetscreen.dart';
-import 'package:dthlms/utils/splash.dart';
+
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:local_notifier/local_notifier.dart';
 
@@ -54,6 +55,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
     // print(widget.info);
     // ignore: avoid_print
     print('logindth');
+    testSQLCipherOnWindows();
     formfieldsize = Platform.isAndroid ? 300 : formfieldsize;
     super.initState();
   }

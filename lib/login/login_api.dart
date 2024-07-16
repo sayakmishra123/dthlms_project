@@ -66,17 +66,19 @@ Future loginApi(
     getObj.loginuserdata.add(userdata);
     // ignore: unused_local_variable
     List dbdata = [];
-
-    await DbHandler()
-        .insertLoginData(userdata.email, userdata.phoneNumber, userdata.token);
-    // await DbHandler().createMyPackagetable();
-    //  await insertMyPackageData();
-    dbdata = await DbHandler().readData('UserLogin');
-    print(dbdata);
+    await insertLogindataa(
+        userdata.email, userdata.phoneNumber, userdata.token);
+    await readLoginData();
+    // await DbHandler()
+    //     .insertLoginData(userdata.email, userdata.phoneNumber, userdata.token);
+    // // await DbHandler().createMyPackagetable();
+    // //  await insertMyPackageData();
+    // dbdata = await DbHandler().readData('UserLogin');
+    // print(dbdata);
     print('sayak');
 // String tk=jsondata['result']['token'];
     Get.back();
-    DbHandler().closedb();
+    // DbHandler().closedb();
 
     Platform.isWindows
         ? Get.toNamed('/Newpackagedashboard',

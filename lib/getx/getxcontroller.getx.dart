@@ -3,14 +3,16 @@ import 'dart:io' show Platform;
 import 'package:connectivity_plus/connectivity_plus.dart'
     show Connectivity, ConnectivityResult;
 import 'package:dthlms/db/copydbfun.dart' show copyDatabase;
-import 'package:dthlms/db/dbfunction/dbfunction.dart' show DbHandler;
+import 'package:dthlms/db/dbfunction/dbfunction.dart'
+    show DbHandler, testSQLCipherOnWindows;
 import 'package:dthlms/package/packagescreen.dart' show AllPackage, PackageFind;
 import 'package:flutter/material.dart'
     show Colors, Icon, Icons, Text, TextButton, TextStyle;
 import 'package:get/get.dart';
 import 'package:simnumber/siminfo.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart'
-    show databaseFactory, databaseFactoryFfi, sqfliteFfiInit;
+// import 'package:sqflite_common_ffi/sqflite_ffi.dart';
+// import 'package:sqflite_common_ffi/sqflite_ffi.dart'
+// show databaseFactory, databaseFactoryFfi, sqfliteFfiInit;
 
 import '../login/loginmodel.dart' show DthloginUserDetails;
 
@@ -65,7 +67,7 @@ class Getx extends GetxController {
         .onConnectivityChanged
         .listen((List<ConnectivityResult> result) {
       networkcheckingsnakbar(result);
-
+      // testSQLCipherOnWindows();
       // Received changes in available connectivity types!
     });
     databasecopy();
@@ -100,13 +102,14 @@ class Getx extends GetxController {
 
   databasecopy() async {
     if (Platform.isWindows) {
-      sqfliteFfiInit();
+      // sqfliteFfiInit();
 
-      databaseFactory = databaseFactoryFfi;
+      // databaseFactory = databaseFactoryFfi;
     }
+
     String path = "assets/copydb/databases/sayakdb.db";
-    if (!await DbHandler().doesDatabaseExist('sayakdb.db')) {
-      await copyDatabase(path, 'sayakdb.db');
-    }
+    // if (!await DbHandler().doesDatabaseExist('sayakdb.db')) {
+    //   await copyDatabase(path, 'sayakdb.db');
+    // }
   }
 }
