@@ -17,8 +17,8 @@ list(APPEND FLUTTER_PLUGIN_LIST
   media_kit_libs_windows_video
   media_kit_video
   permission_handler_windows
+  printing
   screen_brightness_windows
-  sqlite3_flutter_libs
   syncfusion_pdfviewer_windows
   url_launcher_windows
   webview_universal

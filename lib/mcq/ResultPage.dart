@@ -1,112 +1,472 @@
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/mcq/modelclass.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:lottie/lottie.dart';
 
-class MockTestResultPage extends StatefulWidget {
-  const MockTestResultPage({super.key});
+class MockTestresult extends StatefulWidget {
+  final List<McqItem> mcqData;
+  final Map<int, int> userAns;
+  final List<Map<int, int>> correctAnswers;
+
+  MockTestresult({
+    required this.mcqData,
+    required this.userAns,
+    required this.correctAnswers,
+  });
 
   @override
-  State<MockTestResultPage> createState() => _MockTestResultPageState();
+  State<MockTestresult> createState() => _MockTestresultState();
 }
 
-class _MockTestResultPageState extends State<MockTestResultPage> {
+class _MockTestresultState extends State<MockTestresult> with SingleTickerProviderStateMixin {
+  bool _isLottieVisible = true;
+  late AnimationController _animationController;
+
+  List<Map<String, dynamic>> dummyData = [
+    {
+      'rank': 1,
+      'image': 'https://picsum.photos/500/500',
+      'level': 9.5,
+      'project': 3.8,
+      'name': 'Alice'
+    },
+    {
+      'rank': 2,
+      'image': 'https://picsum.photos/500/500',
+      'level': 8.7,
+      'project': 4.2,
+      'name': 'Bob'
+    },
+    {
+      'rank': 3,
+      'image': 'https://picsum.photos/500/500',
+      'level': 7.8,
+      'project': 3.5,
+      'name': 'Charlie'
+    },
+    {
+      'rank': 4,
+      'image': 'https://picsum.photos/500/500',
+      'level': 8.3,
+      'project': 3.9,
+      'name': 'David'
+    },
+    {
+      'rank': 5,
+      'image': 'https://picsum.photos/500/500',
+      'level': 9.1,
+      'project': 4.0,
+      'name': 'Eve'
+    },
+    {
+      'rank': 6,
+      'image': 'https://picsum.photos/500/500',
+      'level': 7.5,
+      'project': 3.7,
+      'name': 'Frank'
+    },
+    {
+      'rank': 7,
+      'image': 'https://picsum.photos/500/500',
+      'level': 8.0,
+      'project': 3.6,
+      'name': 'Grace'
+    },
+    {
+      'rank': 8,
+      'image': 'https://picsum.photos/500/500',
+      'level': 7.9,
+      'project': 4.1,
+      'name': 'Hank'
+    },
+    {
+      'rank': 9,
+      'image': 'https://picsum.photos/500/500',
+      'level': 8.6,
+      'project': 3.4,
+      'name': 'Ivy'
+    },
+    {
+      'rank': 10,
+      'image': 'https://picsum.photos/500/500',
+      'level': 9.0,
+      'project': 3.8,
+      'name': 'Jack'
+    }
+  ];
+
+  var rankStyle = TextStyle(fontSize: 16);
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 8), // Adjust this duration to match your Lottie animation
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          setState(() {
+            _isLottieVisible = false;
+          });
+        }
+      });
+
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorPage.appbarcolor,
-        iconTheme: IconThemeData(color: ColorPage.white),
-        title: Text(
-          "Your Result",
-          style: FontFamily.font7,
-        ),
-      ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+    int totalMarks = 0;
+
+    List<Widget> questionWidgets = widget.mcqData.asMap().entries.map((entry) {
+      int index = entry.key;
+      McqItem mcqItem = entry.value;
+      int questionId = mcqItem.mcqId;
+      String question = mcqItem.mcqQuestion;
+      String userSelected = widget.userAns.containsKey(questionId)
+          ? mcqItem.options
+              .firstWhere((option) => option.optionId == widget.userAns[questionId])
+              .optionName
+          : 'Not Answered';
+      String correctAnswer = mcqItem.options
+          .firstWhere((option) => widget.correctAnswers
+              .any((map) => map[questionId] == option.optionId))
+          .optionName;
+      int marks = widget.userAns.containsKey(questionId) &&
+              widget.correctAnswers
+                  .any((map) => map[questionId] == widget.userAns[questionId])
+          ? 1
+          : 0;
+      totalMarks += marks;
+
+      return Container(
+        margin: EdgeInsets.only(top: 10),
+        // decoration: BoxDecoration(color: Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.all(Radius.circular(10),),boxShadow: [
+        //   BoxShadow(color: Colors.black.withOpacity(0.2), spreadRadius: 1, blurRadius: 2),
+        // ]),
+        child: ListTile(
+          title: Text(
+            '${index + 1}. $question',
+            style: FontFamily.font4.copyWith(fontWeight: FontWeight.w500),
+          ),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(top: 70),
-                child: Container(
-                  height: 200,
-                  width: 120,
-                  color: Colors.blue,
-                ),
-              ),
+              Text('Your Answer: $userSelected'),
+              Text('Correct Answer: $correctAnswer'),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25,vertical: 40),
-                child: Container(
-                 height: 100,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          tileMode: TileMode.clamp,
-                          begin: Alignment.topLeft,
-                          colors: [
-                           Color.fromARGB(255, 32, 39, 62),
-                            Color.fromARGB(255, 111, 131, 203),
-                          ]),
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(50, 50))),
-                  child: Center(
-                      child: Text(
-                    "50",
-                    style: FontFamily.font7,
-                  )),
-                ),
-              ),
-              Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 25,vertical: 40),
-                child: Container(
-                height: 100,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        
-                          begin: Alignment.topLeft,
-                          colors: [
-                            Color.fromARGB(255, 35, 101, 66),
-                              Color.fromARGB(255, 70, 189, 125),
-                          ]),
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(50, 30))),
-                  child: Center(
-                      child: Text(
-                    "60",
-                    style: FontFamily.font7,
-                  )),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25,vertical: 40),
-                child: Container(
-                height: 100,
-                  width: 150,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        
-                          begin: Alignment.topLeft,
-                          colors: [
-                            Color.fromARGB(255, 125, 37, 37),
-                              Color.fromARGB(255, 190, 66, 66),
-                          ]),
-                      borderRadius:
-                          BorderRadius.all(Radius.elliptical(50, 30))),
-                  child: Center(
-                      child: Text(
-                    "51",
-                    style: FontFamily.font7,
-                  )),
-                ),
-              ),
-            ],
+          trailing: Text(
+            marks.toString(),
+            style: FontFamily.font3.copyWith(color: Colors.black),
+          ),
+        ),
+      );
+    }).toList();
+
+    double width = MediaQuery.of(context).size.width;
+
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: width / 4),
+            child: Text("QNA", style: FontFamily.font7),
           )
+        ],
+        iconTheme: IconThemeData(color: ColorPage.white),
+        backgroundColor: ColorPage.appbarcolor,
+        title: Text(
+          "Leaderboard",
+          style: FontFamily.font3,
+        ),
+      ),
+      body: Row(
+        children: [
+          Expanded(
+            child: Container(
+              child: Stack(
+                children: [
+                  Column(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(color: ColorPage.blue),
+                        width: MediaQuery.of(context).size.width / 2,
+                        height: 200,
+                        padding: EdgeInsets.symmetric(horizontal: 130, vertical: 10),
+                        child: Container(
+                          color: const Color.fromARGB(0, 209, 29, 29),
+                          child: Stack(
+                            alignment: Alignment.topCenter,
+                            children: [
+                              Positioned(
+                                top: 40,
+                                left: 20,
+                                child: Container(
+                                  padding: EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Colors.white,
+                                        Colors.white,
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: SizedBox(
+                                    height: 80,
+                                    width: 80,
+                                    child: Image.asset(
+                                      'assets/sorojda.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                left: 20,
+                                top: 90,
+                                child: SizedBox(
+                                  height: 80,
+                                  child: Image.asset('assets/rank2.png'),
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [
+                                      Colors.amber.shade300,
+                                      Colors.amber.shade800,
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: SizedBox(
+                                  height: 80,
+                                  width: 80,
+                                  child: Image.asset(
+                                    'assets/sorojda.png',
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 50,
+                                child: SizedBox(
+                                  height: 80,
+                                  child: Image.asset('assets/rank1.png'),
+                                ),
+                              ),
+                              Positioned(
+                                right: 20,
+                                top: 40,
+                                child: Container(
+                                  padding: EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                      colors: [
+                                        Colors.white,
+                                        Colors.white,
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: SizedBox(
+                                    height: 80,
+                                    width: 80,
+                                    child: Image.asset(
+                                      'assets/sorojda.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                right: 20,
+                                top: 90,
+                                child: SizedBox(
+                                  height: 80,
+                                  child: Image.asset('assets/rank3.png'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 40,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text('Rank'),
+                              ],
+                            ),
+                            Text('Name'),
+                            Row(
+                              children: [
+                                Text('Score'),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: dummyData.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              surfaceTintColor: Colors.blue,
+                              shape: ContinuousRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: ListTile(
+                                leading: index == 0
+                                    ? SizedBox(
+                                        height: 35,
+                                        child: Image.asset('assets/rank1.png'))
+                                    : index == 1
+                                        ? SizedBox(
+                                            height: 35,
+                                            child:
+                                                Image.asset('assets/rank2.png'))
+                                        : index == 2
+                                            ? SizedBox(
+                                                height: 35,
+                                                child: Image.asset(
+                                                    'assets/rank3.png'))
+                                            : Text(
+                                                '#${dummyData[index]['rank']}',
+                                                style: TextStyle(fontSize: 15),
+                                              ),
+                                title: Center(
+                                  child: Text(
+                                    '${dummyData[index]['name']}',
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                                trailing: Text(
+                                  '${dummyData[index]['project']}',
+                                  style: TextStyle(
+                                    color: Colors.red[400],
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    bottom: 20,
+                    left: 5,
+                    right: 5,
+                    child: Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Center(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 20),
+                              child: Text(
+                                '50',
+                                style: TextStyle(color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 0),
+                              child: Text(
+                                'Floating Container',
+                                style: TextStyle(color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: Text(
+                                totalMarks.toString(),
+                                style: TextStyle(color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: _isLottieVisible,
+                    child: Positioned(
+                      left: 5,
+                      right: 5,
+                      child: Container(
+                        height: 600,
+                        decoration: BoxDecoration(
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: LottieBuilder.asset(
+                            'assets/C2.json',
+                            repeat: false,
+                            controller: _animationController,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 218, 225, 227),
+                border: Border(
+                  left: BorderSide(color: ColorPage.appbarcolor, width: 3),
+                ),
+              ),
+              child: Container(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  children: questionWidgets,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

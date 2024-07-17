@@ -265,8 +265,8 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                       MyButton(
                           btncolor: Colors.white,
                           onPressed: () {
-                            // Get.to(()=>ResultPage(mcqData: mcqData,correctAnswers: answer,userAns: userAns,));
-                            Get.to(()=>MockTestResultPage());
+                            Get.to(()=>MockTestresult(mcqData: mcqData,correctAnswers: answer,userAns: userAns,));
+                            // Get.to(()=>MockTestResultPage());
                          
                           },
                           mychild: 'Result',

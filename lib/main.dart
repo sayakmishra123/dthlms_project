@@ -4,8 +4,10 @@ import 'package:animated_splash_screen/animated_splash_screen.dart'
 import 'package:camera/camera.dart';
 import 'package:dthlms/Testing/cameratesting.dart';
 import 'package:dthlms/ThemeData/color/color.dart' show ColorPage;
+import 'package:dthlms/TheoryExam/theoryexampage.dart';
 import 'package:dthlms/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:dthlms/login/dth_login.dart' show DthLmsLogin;
+import 'package:dthlms/mcq/mockTestmcqPage.dart';
 import 'package:dthlms/routes/router.dart' show pageRouter;
 import 'package:dthlms/utctime.dart';
 import 'package:firebase_core/firebase_core.dart' show Firebase;
@@ -72,7 +74,7 @@ class _MyAppState extends State<MyApp> {
         splash: "assets/splash6.gif",
         splashIconSize: 6000,
         centered: true,
-        nextScreen: Platform.isAndroid ? DthLmsLogin() : DthLmsLogin(),
+        nextScreen: Platform.isAndroid ? DthLmsLogin() :TheoryExamPage(),
         backgroundColor: ColorPage.bgcolor,
         splashTransition: SplashTransition.scaleTransition,
         duration: 3500,
