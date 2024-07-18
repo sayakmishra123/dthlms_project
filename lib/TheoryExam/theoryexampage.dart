@@ -187,21 +187,47 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     );
   }
 
-  void _printPdf() async {
-    try {
-      if (_localPdfPath != null) {
-        final file = File(_localPdfPath!);
-        final pdfBytes = await file.readAsBytes();
-        await Printing.layoutPdf(
-          onLayout: ( format) async => pdfBytes,
-        );
-      } else {
-        print('No PDF file available to print.');
-      }
-    } catch (e) {
-      print('Error printing PDF: $e');
+
+void _printPdf() async {
+  try {
+    if (_localPdfPath != null) {
+      final file = File(_localPdfPath!);
+      final pdfBytes = await file.readAsBytes();
+
+      List<Printer> filteredPrinters = [];
+      //  Future<void> fetchPrinters() async {
+    final printers = await Printing.listPrinters();
+
+    setState(() {
+      filteredPrinters = printers.where((printer) {
+        return printer.name.contains("Microsoft Print to PDF");
+      }).toList();
+    });
+  // }
+
+  // Future<void> printDocument() async {
+    if (filteredPrinters.isNotEmpty) {
+      await Printing.layoutPdf(
+        onLayout: (format) async {
+          // Generate your PDF document here
+          // final pdfBytes =pdfBytes;
+          return pdfBytes;
+        },
+        usePrinterSettings: true,
+        dynamicLayout: true,
+      );
+    } else {
+      print('No suitable printers found. Please check your printer connections.');
     }
+  // }
+
+    } else {
+      print('No PDF file available to print.');
+    }
+  } catch (e) {
+    print('Error printing PDF: $e');
   }
+}
 
   @override
   Widget build(BuildContext context) {

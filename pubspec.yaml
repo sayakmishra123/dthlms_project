@@ -1,7 +1,7 @@
 name: dthlms
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
+# pub.dev using flutter pub publish. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
@@ -23,17 +23,17 @@ environment:
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# consider running flutter pub upgrade --major-versions. Alternatively,
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
+# versions available, run flutter pub outdated.
 dependencies:
 
   flutter:
     sdk: flutter
   get:
   http:
-  flutter_platform_alert: ^0.5.1
+  flutter_platform_alert: ^0.5.1 
   animated_button_bar: ^1.0.0
   google_fonts: ^6.2.1
   icons_launcher: ^2.1.7
@@ -53,12 +53,12 @@ dependencies:
   device_info_plus: ^9.0.2
   intl:
   # webview_flutter: ^4.8.0
-  sqflite_common: ^2.5.4
+  # sqflite_common: ^2.5.4
   path: 
-  sqflite_common_ffi:
+  # sqflite_common_ffi:
   advertising_id: ^2.6.0
   auto_size_text: ^3.0.0
-  sqflite: ^2.3.3+1
+  # sqflite: ^2.3.3+1
   simnumber: ^0.0.12
   carousel_slider: ^4.2.1
   flutter_spinkit: ^5.2.1
@@ -94,7 +94,7 @@ dependencies:
 
  
   flutter_windowmanager:
-  
+  # android_window:
 
   # flutter_sound: ^9.2.13 # replace with the correct version
   # flutter_sound_platform_interface: ^9.2.13
@@ -122,11 +122,14 @@ dependencies:
   webview_universal: ^0.0.5
   workmanager: ^0.5.2
   camera: ^0.11.0+1
-  lottie: ^3.1.2
-  shimmer: ^3.0.0
-  printing: ^5.12.0
   local_notifier: ^0.1.6
   sqlcipher_library_windows: ^1.0.2
+  sqlite3: 2.4.3
+  sqlite3_flutter_libs: ^0.5.24
+  printing: ^5.12.0
+  lottie: ^3.1.2
+  fluid_dialog: ^2.0.0
+  # sqflite_sqlcipher: ^3.1.0+1
   # sqflite_sqlcipher:
   # sqlcipher_flutter_libs:
 
@@ -157,7 +160,7 @@ flutter_launcher_icons:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
+  # activated in the analysis_options.yaml file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
