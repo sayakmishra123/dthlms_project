@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/android/MCQ/mockTestRank.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/mcq/ResultPage.dart';
 import 'package:dthlms/mcq/mcoktestResult.dart';
@@ -43,6 +43,8 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
   Getx getx_obj = Get.put(Getx());
   RxBool buttonshow = false.obs;
   RxInt _start = 1800.obs;
+
+  PageController _pageController = PageController();
 
   Future getdata() async {
     String jsonData = '''
@@ -180,6 +182,7 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
   @override
   void dispose() {
     _timer.cancel();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -205,7 +208,7 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
     return '$hours:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
   }
 
-  String groupname = 'Questions';
+  String groupname = ' All Questions';
 
   List<int> reviewlist = [];
 
@@ -263,403 +266,500 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
                 ),
               ],
             ),
-            body: Obx(() => Stack(
+            body: Stack(
                   children: [
-                    SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 5),
-                            child: Column(
-                              children: [
-                                Row(
+                    PageView.builder(
+                      controller: _pageController,
+                      onPageChanged: (index) {
+                        qindex.value = index;
+                      },
+                      itemCount: mcqData.length,
+                      itemBuilder: (context, index) {
+                        return SingleChildScrollView(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 5),
+                                child: Column(
                                   children: [
-                                    Expanded(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black12,
-                                              offset: Offset(8, 8),
-                                              blurRadius: 10,
-                                            )
-                                          ],
-                                        ),
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 15),
-                                        child: Text(
-                                          textAlign: TextAlign.center,
-                                          groupname,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 20),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: InkWell(
+                                            onTap: (){
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20),
                                 ),
-                                SizedBox(height: 10),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black12,
-                                                offset: Offset(8, 8),
-                                                blurRadius: 10,
-                                              )
-                                            ]),
-                                        padding:
-                                            EdgeInsets.symmetric(vertical: 15),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              textAlign: TextAlign.center,
-                                              mcqData[qindex.value].mcqQuestion,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 20),
-                                            ),
-                                            if (mcqData[qindex.value]
-                                                    .imageUrl !=
-                                                null)
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(15),
-                                                child: Image.network(
-                                                    mcqData[qindex.value]
-                                                        .imageUrl!),
-                                              ),
-                                            if (mcqData[qindex.value]
-                                                    .videoUrl !=
-                                                null)
+                              ),
+                              builder: (context) => DraggableScrollableSheet(
+                                expand: false,
+                                builder: (context, scrollController) => Container(
+                                  decoration: BoxDecoration(
+                                    color: ColorPage.bgcolor,
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    controller: scrollController,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
                                               Container(
-                                                margin: EdgeInsets.symmetric(
-                                                    vertical: 20),
-                                                child: AspectRatio(
-                                                  aspectRatio: 16 / 9,
+                                                width: 50,
+                                                height: 5,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey,
+                                                  borderRadius:
+                                                      BorderRadius.circular(2.5),
                                                 ),
                                               ),
-                                            Container(
-                                              margin: EdgeInsets.symmetric(
-                                                  vertical: 20, horizontal: 10),
-                                              color: Colors.black26,
-                                              height: 3,
+                                            ],
+                                          ),
+                                          SizedBox(height: 20),
+                                          GridView.builder(
+                                            shrinkWrap: true,
+                                            controller: scrollController,
+                                            itemCount: mcqData.length,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 4,
+                                              childAspectRatio: 1.5,
                                             ),
-                                          ],
-                                        ),
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: MaterialButton(
+                                                  height: 55,
+                                                  color: reviewlist.contains(index)
+                                                      ? Colors.amber
+                                                      : userAns.containsKey(index + 1)
+                                                          ? isSubmitted.value
+                                                              ? answer.any((map) =>
+                                                                      map[index + 1] ==
+                                                                      userAns[index + 1])
+                                                                  ? Colors.green
+                                                                  : Colors.red
+                                                              : Colors.blue
+                                                          : qindex.value == index
+                                                              ? Color.fromARGB(
+                                                                  255, 13, 32, 79)
+                                                              : Colors.white,
+                                                  shape: CircleBorder(
+                                                    side: BorderSide(
+                                                      width: qindex.value == index
+                                                          ? 4
+                                                          : 1,
+                                                      color: qindex.value == index
+                                                          ? ColorPage.white
+                                                          : Colors.black12,
+                                                    ),
+                                                  ),
+                                                  onPressed: () {
+                                                    qindex.value = index;
+                                                    _pageController.jumpToPage(
+                                                        index);
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text(
+                                                    (index + 1).toString(),
+                                                    style: TextStyle(
+                                                      color: qindex.value == index
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 5),
-                            child: SizedBox(
-                              height: height,
-                              child: Column(
-                                children: [
-                                  SizedBox(height: 20),
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height /
-                                        2.4,
-                                    child: ListView.builder(
-                                      physics:
-                                          mcqData[qindex.value].options.length <
-                                                  5
-                                              ? NeverScrollableScrollPhysics()
-                                              : AlwaysScrollableScrollPhysics(),
-                                      itemCount:
-                                          mcqData[qindex.value].options.length,
-                                      itemBuilder: (context, index) {
-                                        int optionId = mcqData[qindex.value]
-                                            .options[index]
-                                            .optionId;
-                                        int questionId =
-                                            mcqData[qindex.value].mcqId;
-                                        bool isSelected =
-                                            userAns[questionId] == optionId;
-                                        bool isCorrect = answer.any((map) =>
-                                            map[questionId] == optionId);
-                                        bool isAnswered =
-                                            userAns.containsKey(questionId);
-
-                                        Color tileColor;
-                                        if (isSubmitted.value) {
-                                          if (isCorrect) {
-                                            tileColor = Colors.green;
-                                          } else if (isSelected && !isCorrect) {
-                                            tileColor = Colors.red;
-                                          } else {
-                                            tileColor =
-                                                Colors.white; // default color
-                                          }
-                                        } else {
-                                          tileColor = isSelected
-                                              ? Colors.blue
-                                              : Colors.white; // default color
-                                        }
-
-                                        return Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          child: AnimatedContainer(
-                                            duration:
-                                                Duration(milliseconds: 600),
-                                            curve: Curves.easeInOut,
-                                            height: 60,
-                                            decoration: BoxDecoration(
-                                              color: tileColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black12,
-                                                  blurRadius: 10,
-                                                  offset: Offset(0, 5),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Material(
-                                              color: Colors.transparent,
-                                              child: InkWell(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                onTap: () {
-                                                  setState(() {
-                                                    if (!isSubmitted.value) {
-                                                      userAns[questionId] =
-                                                          optionId;
-                                                    }
-                                                  });
-                                                },
-                                                child: Row(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 16),
-                                                      child: Text(
-                                                        mcqData[qindex.value]
-                                                            .options[index]
-                                                            .optionName,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 15),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                              ),
+                            );
+                          },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black12,
+                                                    offset: Offset(8, 8),
+                                                    blurRadius: 10,
+                                                  )
+                                                ],
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 15),
+                                              child: Text(
+                                                textAlign: TextAlign.center,
+                                                groupname,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 20),
                                               ),
                                             ),
                                           ),
-                                        );
-                                      },
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    SizedBox(height: 10),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black12,
+                                                    offset: Offset(8, 8),
+                                                    blurRadius: 10,
+                                                  )
+                                                ]),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 15),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  textAlign: TextAlign.center,
+                                                  mcqData[index].mcqQuestion,
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w600,
+                                                      fontSize: 20),
+                                                ),
+                                                if (mcqData[index].imageUrl !=
+                                                    null)
+                                                  Padding(
+                                                    padding: const EdgeInsets.all(
+                                                        15),
+                                                    child: Image.network(
+                                                        mcqData[index].imageUrl!),
+                                                  ),
+                                                if (mcqData[index].videoUrl !=
+                                                    null)
+                                                  Container(
+                                                    margin: EdgeInsets.symmetric(
+                                                        vertical: 20),
+                                                    child: AspectRatio(
+                                                      aspectRatio: 16 / 9,
+                                                    ),
+                                                  ),
+                                                Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      vertical: 20,
+                                                      horizontal: 10),
+                                                  color: Colors.black26,
+                                                  height: 3,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 5),
+                                child: SizedBox(
+                                  height: height,
+                                  child: Column(
                                     children: [
-                                      MaterialButton(
-                                        height: 40,
-                                        color:  ColorPage.appbarcolorcopy,
-                                        padding: EdgeInsets.all(16),
-                                        shape: ContinuousRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        onPressed: () {
-                                          if (qindex.value > 0) {
-                                            qindex.value--;
-                                          }
-                                        },
-                                        child: Text(
-                                          'Previous',
-                                          style: TextStyle(color: Colors.white),
+                                      SizedBox(height: 20),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height /
+                                                2.4,
+                                        child: ListView.builder(
+                                          physics: mcqData[index]
+                                                      .options.length <
+                                                  5
+                                              ? NeverScrollableScrollPhysics()
+                                              : AlwaysScrollableScrollPhysics(),
+                                          itemCount:
+                                              mcqData[index].options.length,
+                                          itemBuilder: (context, optionIndex) {
+                                            int optionId = mcqData[index]
+                                                .options[optionIndex]
+                                                .optionId;
+                                            int questionId =
+                                                mcqData[index].mcqId;
+                                            bool isSelected =
+                                                userAns[questionId] == optionId;
+                                            bool isCorrect = answer.any((map) =>
+                                                map[questionId] == optionId);
+                                            bool isAnswered =
+                                                userAns.containsKey(questionId);
+
+                                            Color tileColor;
+                                            if (isSubmitted.value) {
+                                              if (isCorrect) {
+                                                tileColor = Colors.green;
+                                              } else if (isSelected &&
+                                                  !isCorrect) {
+                                                tileColor = Colors.red;
+                                              } else {
+                                                tileColor = Colors.white;
+                                              }
+                                            } else {
+                                              tileColor = isSelected
+                                                  ? Colors.blue
+                                                  : Colors.white;
+                                            }
+
+                                            return Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 10),
+                                              child: AnimatedContainer(
+                                                duration:
+                                                    Duration(milliseconds: 600),
+                                                curve: Curves.easeInOut,
+                                                height: 60,
+                                                decoration: BoxDecoration(
+                                                  color: tileColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      color: Colors.black12,
+                                                      blurRadius: 10,
+                                                      offset: Offset(0, 5),
+                                                    ),
+                                                  ],
+                                                ),
+                                                child: Material(
+                                                  color: Colors.transparent,
+                                                  child: InkWell(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                    onTap: () {
+                                                      setState(() {
+                                                        if (!isSubmitted.value) {
+                                                          userAns[questionId] =
+                                                              optionId;
+                                                        }
+                                                      });
+                                                    },
+                                                    child: Row(
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      16),
+                                                          child: Text(
+                                                            mcqData[index]
+                                                                .options[
+                                                                    optionIndex]
+                                                                .optionName,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                fontSize: 15),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ),
-                                      MaterialButton(
-                                        height: 40,
-                                        color:
-                                            ColorPage.appbarcolorcopy,
-                                        padding: EdgeInsets.all(16),
-                                        shape: ContinuousRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        onPressed: () {
-                                          if (qindex.value <
-                                              mcqData.length - 1) {
-                                            // savelist.add(qindex.value);
-                                            qindex.value++;
-                                          } else if (qindex.value ==
-                                                  mcqData.length - 1 &&
-                                              !isSubmitted.value) {
-                                            // savelist.add(qindex.value);
-                                            _onSubmitExam(context);
-                                          }
-                                        },
-                                        child: Text(
-                                          !isSubmitted.value &&
-                                                  qindex.value ==
-                                                      mcqData.length - 1
-                                              ? 'Submit'
-                                              : 'Next',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          MaterialButton(
+                                            height: 40,
+                                            color: ColorPage.appbarcolorcopy,
+                                            padding: EdgeInsets.all(16),
+                                            shape: ContinuousRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12)),
+                                            onPressed: () {
+                                              if (index > 0) {
+                                                _pageController.previousPage(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  curve: Curves.easeInOut,
+                                                );
+                                              }
+                                            },
+                                            child: Text(
+                                              'Previous',
+                                              style:
+                                                  TextStyle(color: Colors.white),
+                                            ),
+                                          ),
+                                          MaterialButton(
+                                            height: 40,
+                                            color: ColorPage.appbarcolorcopy,
+                                            padding: EdgeInsets.all(16),
+                                            shape: ContinuousRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(12)),
+                                            onPressed: () {
+                                              if (index < mcqData.length - 1) {
+                                                _pageController.nextPage(
+                                                  duration: Duration(
+                                                      milliseconds: 300),
+                                                  curve: Curves.easeInOut,
+                                                );
+                                              } else if (index ==
+                                                      mcqData.length - 1 &&
+                                                  !isSubmitted.value) {
+                                                _onSubmitExam(context);
+                                              }
+                                            },
+                                            child: Text(
+                                              !isSubmitted.value &&
+                                                      index ==
+                                                          mcqData.length - 1
+                                                  ? 'Submit'
+                                                  : 'Next',
+                                              style:
+                                                  TextStyle(color: Colors.white),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
-                                  )
-                                ],
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                          
-                        ],
-                      ),
+                        );
+                      },
                     ),
                     Positioned(
                         right: 10,
                         top: 5,
                         child: InkWell(
                           onTap: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return Padding(
-                                   padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width/8,top: 40,bottom: MediaQuery.of(context).size.width-110),
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          left: 10, right: 10, top: 30),
-                                      decoration: BoxDecoration(
-                                        color: ColorPage.bgcolor,
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(20),
-                                        ),
-                                      ),
-                                     
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20),
+                                ),
+                              ),
+                              builder: (context) => DraggableScrollableSheet(
+                                expand: false,
+                                builder: (context, scrollController) => Container(
+                                  decoration: BoxDecoration(
+                                    color: ColorPage.bgcolor,
+                                    borderRadius: BorderRadius.vertical(
+                                      top: Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: SingleChildScrollView(
+                                    controller: scrollController,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
                                       child: Column(
                                         children: [
-
-                                           Visibility(
-                                  visible: isSubmitted.value
-                                      ? false
-                                      : true,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      MaterialButton(
-                                        height: 40,
-                                        color: Colors.orange,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15, vertical: 5),
-                                        shape: ContinuousRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        onPressed: () {
-                                          if (reviewlist
-                                              .contains(qindex.value)) {
-                                          } else {
-                                            reviewlist.add(qindex.value);
-                                          }
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text(
-                                          'Mark for Review',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 30,
-                                      ),
-                                      MaterialButton(
-                                        height: 40,
-                                        color: Colors.blueGrey,
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15, vertical: 5),
-                                        shape: ContinuousRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                          reviewlist.remove(qindex.value);
-                                        },
-                                        child: Text(
-                                          'Clear Response',
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              
-                                          Container(
-                                                  height: 400,
-                                                  padding: EdgeInsets.only(top: 20),
-                                            child: GridView.builder(
-                                              itemCount: mcqData.length,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                      crossAxisCount: 4),
-                                              itemBuilder: (context, index) {
-                                                return SingleChildScrollView(
-                                                  child: MaterialButton(
-                                                    height: 55,
-                                                    color: reviewlist.contains(index)
-                                                        ? Colors.amber
-                                                        : userAns.containsKey(index + 1)
-                                                            ? isSubmitted.value
-                                                                ? answer.any((map) =>
-                                                                        map[index +
-                                                                            1] ==
-                                                                        userAns[
-                                                                            index + 1])
-                                                                    ? Colors.green
-                                                                    : Colors.red
-                                                                : Colors.blue
-                                                            : qindex.value == index
-                                                                ? Color.fromARGB(
-                                                                    255, 13, 32, 79)
-                                                                : Colors.white,
-                                                    shape: CircleBorder(
-                                                        side: BorderSide(
-                                                            width: qindex.value == index
-                                                                ? 4
-                                                                : 1,
-                                                            color: qindex.value == index
-                                                                ? ColorPage.white
-                                                                : Colors.black12)),
-                                                    onPressed: () {
-                                                      qindex.value = index;
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: Text(
-                                                      (index + 1).toString(),
-                                                      style: TextStyle(
-                                                          color: qindex.value == index
-                                                              ? Colors.white
-                                                              : Colors.black),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Container(
+                                                width: 50,
+                                                height: 5,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey,
+                                                  borderRadius:
+                                                      BorderRadius.circular(2.5),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          SizedBox(height: 20),
+                                          GridView.builder(
+                                            shrinkWrap: true,
+                                            controller: scrollController,
+                                            itemCount: mcqData.length,
+                                            gridDelegate:
+                                                SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 4,
+                                              childAspectRatio: 1.5,
+                                            ),
+                                            itemBuilder: (context, index) {
+                                              return Padding(
+                                                padding: const EdgeInsets.all(4.0),
+                                                child: MaterialButton(
+                                                  height: 55,
+                                                  color: reviewlist.contains(index)
+                                                      ? Colors.amber
+                                                      : userAns.containsKey(index + 1)
+                                                          ? isSubmitted.value
+                                                              ? answer.any((map) =>
+                                                                      map[index + 1] ==
+                                                                      userAns[index + 1])
+                                                                  ? Colors.green
+                                                                  : Colors.red
+                                                              : Colors.blue
+                                                          : qindex.value == index
+                                                              ? Color.fromARGB(
+                                                                  255, 13, 32, 79)
+                                                              : Colors.white,
+                                                  shape: CircleBorder(
+                                                    side: BorderSide(
+                                                      width: qindex.value == index
+                                                          ? 4
+                                                          : 1,
+                                                      color: qindex.value == index
+                                                          ? ColorPage.white
+                                                          : Colors.black12,
                                                     ),
                                                   ),
-                                                );
-                                              },
-                                            ),
+                                                  onPressed: () {
+                                                    qindex.value = index;
+                                                    _pageController.jumpToPage(
+                                                        index);
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text(
+                                                    (index + 1).toString(),
+                                                    style: TextStyle(
+                                                      color: qindex.value == index
+                                                          ? Colors.white
+                                                          : Colors.black,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ],
                                       ),
                                     ),
-                                  );
-                                });
+                                  ),
+                                ),
+                              ),
+                            );
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -675,7 +775,7 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
                         ))
                   ],
                 )),
-          ),
+          
         ));
   }
 
@@ -720,6 +820,12 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
 
             isSubmitted.value = true;
             Navigator.pop(context);
+            Get.to(() => RankPage(
+                  mcqData: mcqData,
+                  correctAnswers: answer,
+                  userAns: userAns,
+                  totalnomber: correctAnswers * 1,
+                ));
           },
           color: Color.fromRGBO(9, 89, 158, 1),
         ),
@@ -743,8 +849,7 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
       desc: "Sorry! But Your time is over. \n Your Exam has been submitted.",
       buttons: [
         DialogButton(
-          child:
-              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: Color.fromRGBO(3, 77, 59, 1),
           onPressed: () {
             Navigator.pop(context);
@@ -795,6 +900,10 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
     ).show();
   }
 }
+
+
+
+
 
 
 

@@ -1,7 +1,10 @@
+import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/android/MCQ/mockTestAns.dart';
 import 'package:dthlms/mcq/modelclass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path/path.dart';
 
@@ -9,18 +12,20 @@ class RankPage extends StatefulWidget {
 final List<McqItem> mcqData;
   final Map<int, int> userAns;
   final List<Map<int, int>> correctAnswers;
+  final int totalnomber;
 
   RankPage({
     required this.mcqData,
     required this.userAns,
     required this.correctAnswers,
+    required this.totalnomber
   });
 
   @override
   State<RankPage> createState() => _RankPageState();
 }
 
-class _RankPageState extends State<RankPage> {
+class _RankPageState extends State<RankPage> with SingleTickerProviderStateMixin{
 
 
     bool _isLottieVisible = true;
@@ -98,58 +103,28 @@ class _RankPageState extends State<RankPage> {
     }
   ];
 
+   void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 8), // Adjust this duration to match your Lottie animation
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          setState(() {
+            _isLottieVisible = false;
+          });
+        }
+      });
+
+    _animationController.forward();
+  }
+
   var rankStyle = TextStyle(fontSize: 16);
 
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-     int totalMarks=0;
-     List<Widget> questionWidgets = widget.mcqData.asMap().entries.map((entry) {
-      int index = entry.key;
-      McqItem mcqItem = entry.value;
-      int questionId = mcqItem.mcqId;
-      String question = mcqItem.mcqQuestion;
-      String userSelected = widget.userAns.containsKey(questionId)
-          ? mcqItem.options
-              .firstWhere((option) => option.optionId == widget.userAns[questionId])
-              .optionName
-          : 'Not Answered';
-      String correctAnswer = mcqItem.options
-          .firstWhere((option) => widget.correctAnswers
-              .any((map) => map[questionId] == option.optionId))
-          .optionName;
-      int marks = widget.userAns.containsKey(questionId) &&
-              widget.correctAnswers
-                  .any((map) => map[questionId] == widget.userAns[questionId])
-          ? 1
-          : 0;
-      totalMarks += marks;
-
-      return Container(
-        margin: EdgeInsets.only(top: 10),
-        // decoration: BoxDecoration(color: Color.fromARGB(255, 255, 255, 255), borderRadius: BorderRadius.all(Radius.circular(10),),boxShadow: [
-        //   BoxShadow(color: Colors.black.withOpacity(0.2), spreadRadius: 1, blurRadius: 2),
-        // ]),
-        child: ListTile(
-          title: Text(
-            '${index + 1}. $question',
-            style: FontFamily.font4.copyWith(fontWeight: FontWeight.w500),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Your Answer: $userSelected'),
-              Text('Correct Answer: $correctAnswer'),
-            ],
-          ),
-          trailing: Text(
-            marks.toString(),
-            style: FontFamily.font3.copyWith(color: Colors.black),
-          ),
-        ),
-      );
-    }).toList();
-
+   
    
 
     
@@ -159,19 +134,26 @@ class _RankPageState extends State<RankPage> {
         appBar: AppBar(
           bottomOpacity: 0.99,
           iconTheme: IconThemeData(color: Colors.white),
-          backgroundColor: Color(0xff0085FF),
+          backgroundColor: ColorPage.appbarcolorcopy,
           automaticallyImplyLeading: false,
           centerTitle: true,
           elevation: 0,
           leading: IconButton(
-              onPressed: () {}, icon: Icon(Icons.arrow_back_ios_new_outlined)),
+              onPressed: () {
+
+                Navigator.pop(context);
+              }, icon: Icon(Icons.arrow_back_ios_new_outlined)),
           title: Text(
             'Leaderboard',
             style: TextStyle(color: Colors.white),
           ),
+          actions: [IconButton(onPressed: (){
+
+            Get.to(()=>MocktestAnswer(mcqData:widget.mcqData, userAns: widget.userAns, correctAnswers: widget.correctAnswers));
+          }, icon: Icon(Icons.list_alt_rounded))],
         
         ),
-        endDrawer: SizedBox(),
+        
         body: Stack(
           children: [
             Column(
@@ -181,7 +163,7 @@ class _RankPageState extends State<RankPage> {
                     child: Stack(
                       alignment: Alignment.topCenter,
                       children: [
-                        Image(image: AssetImage('assets/topbg.png')),
+                        Image( color: ColorPage.appbarcolorcopy, image: AssetImage('assets/topbg.png')),
                         Positioned(
                           top: 40,
                           left: 20,
@@ -348,7 +330,7 @@ class _RankPageState extends State<RankPage> {
                     child: Container(
                       height: 60,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: ColorPage.appbarcolorcopy,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Center(
@@ -372,7 +354,7 @@ class _RankPageState extends State<RankPage> {
                             Padding(
                               padding: const EdgeInsets.only(right: 20),
                               child: Text(
-                                totalMarks.toString(),
+                               widget.totalnomber.toString(),
                                 style: TextStyle(color: Colors.white, fontSize: 20),
                               ),
                             ),

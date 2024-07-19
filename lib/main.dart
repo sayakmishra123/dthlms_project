@@ -6,7 +6,7 @@ import 'package:dthlms/Testing/cameratesting.dart';
 import 'package:dthlms/ThemeData/color/color.dart' show ColorPage;
 import 'package:dthlms/TheoryExam/theoryexampage.dart';
 import 'package:dthlms/android/MCQ/mcqCondition.dart';
-import 'package:dthlms/android/MCQ/mcqpage.dart';
+import 'package:dthlms/android/MCQ/mockTestRank.dart';
 import 'package:dthlms/android/MCQ/mockTestMcq.dart';
 import 'package:dthlms/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:dthlms/login/dth_login.dart' show DthLmsLogin;

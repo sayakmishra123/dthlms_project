@@ -259,7 +259,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                   SizedBox(
                     width: 50,
                   ),
-                //  isSubmitted.value?
+                 isSubmitted.value?
                   Row(
                     children: [
                       MyButton(
@@ -274,7 +274,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                       SizedBox(width: 20),
                     ],
                   )
-                  // :SizedBox(),
+                  :SizedBox(),
                 ],
               ),
             ],
