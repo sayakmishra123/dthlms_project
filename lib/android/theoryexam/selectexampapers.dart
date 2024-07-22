@@ -123,7 +123,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
           // color: Color.fromARGB(255, 225, 253, 254),
           child: Column(
             children: [
-              Expanded(
+           _images.isNotEmpty ?    Expanded(
          flex: 3,
                   // scrollDirection: Axis.horizontal,
        
@@ -140,9 +140,8 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
                     ),
                   
                 
-              ),
-             
-              Expanded(
+              ): SizedBox(),
+             _images.isNotEmpty ? Expanded(
                 
                 child:  Column(
                   children: [
@@ -213,6 +212,36 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
                           }}),
                     ),
                   ],
+                ),
+              ): Expanded(
+                child: Center(
+                  child: Column(
+               
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                     GestureDetector(
+                           onTap: _pickImage,
+                           child: Container(
+                            height: 200,
+                             width: 100,
+                             decoration: BoxDecoration(
+                               color: Colors.transparent,
+                               borderRadius: BorderRadius.circular(10),
+                             ),
+                             child: Column(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 Icon(Icons.add_rounded,
+                                     size: 30 , color: Colors.grey[700]),
+                                 // Text("Select your Sheet",
+                                 //     style: FontFamily.font3.copyWith(
+                                 //         color: Colors.grey[700])),
+                               ],
+                             ),
+                           ),
+                         ),
+                    ]
+                  ),
                 ),
               ),
             
