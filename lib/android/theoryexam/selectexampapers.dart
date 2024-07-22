@@ -278,6 +278,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: SpinBox(
+                min: 1,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   sheetNumber = value;
@@ -367,7 +368,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
           highlightColor: ColorPage.appbarcolor,
           onPressed: () {
             Navigator.pop(context);
-            _pickImage();
+          
           },
           color: ColorPage.blue,
         ),
