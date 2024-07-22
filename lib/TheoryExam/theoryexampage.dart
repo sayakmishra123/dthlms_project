@@ -290,7 +290,7 @@ void _printPdf() async {
                                 width: 40,
                                 child: FloatingActionButton(
                                   hoverColor: ColorPage.deepblue,
-                                  backgroundColor: ColorPage.blue,
+                                  backgroundColor: ColorPage.appbarcolorcopy,
                                   child: Icon(
                                     Icons.print,
                                     color: ColorPage.white,
@@ -307,7 +307,7 @@ void _printPdf() async {
                                   borderRadius: BorderRadius.all(Radius.circular(17)),
                                   child: MaterialButton(
                                     hoverColor: ColorPage.deepblue,
-                                    color: ColorPage.blue,
+                                    color: ColorPage.appbarcolorcopy,
                                     
                                     child: Icon(
                                       Icons.fullscreen,
