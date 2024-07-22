@@ -22,17 +22,28 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
   File? _selectedImage;
 
   double sheetNumber = 1.0;
+<<<<<<< HEAD
 
   bool _isFilePickerOpen = false;
 
+=======
+  bool _isFilePickerOpen = false; 
+>>>>>>> c573bab2965c9e4d2ebc3e2d5e315842e249007c
   Getx getxController = Get.put(Getx());
 
   final GlobalKey<FormState> sheetkey = GlobalKey();
 
   Future<void> _pickImage() async {
+<<<<<<< HEAD
     if (_isFilePickerOpen) return;
     if (getxController.isPaperSubmit.value) {
       _isFilePickerOpen = true;
+=======
+    if (_isFilePickerOpen) return; 
+    if (getxController.isPaperSubmit.value) {
+      _isFilePickerOpen =
+          true; 
+>>>>>>> c573bab2965c9e4d2ebc3e2d5e315842e249007c
       try {
         final ImagePicker _picker = ImagePicker();
         final List<XFile>? selectedFiles = await _picker.pickMultiImage(

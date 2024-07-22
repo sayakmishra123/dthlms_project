@@ -53,7 +53,7 @@ class _TheoryExamPageMobileState extends State<TheoryExamPageMobile> {
 
   Future<void> _downloadPdf() async {
     final response = await http.get(Uri.parse(
-        'https://cdn.syncfusion.com/content/PDFViewer/flutter-succinctly.pdf'));
+        'https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf'));
     if (response.statusCode == 200) {
       final directory = await getApplicationDocumentsDirectory();
       final filePath = '${directory.path}/QuestionPaper.pdf';

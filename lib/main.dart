@@ -80,7 +80,8 @@ class _MyAppState extends State<MyApp> {
         centered: true,
         nextScreen:
             // Platform.isAndroid ? MockTestMcqExamPageMobile() : TheoryExamPage(),
-            Platform.isAndroid ? TheoryExamPageMobile() : TheoryExamPage(),
+            Platform.isAndroid ? TheoryExamPageMobile
+            () : TheoryExamPage(),
 
         backgroundColor: ColorPage.bgcolor,
         splashTransition: SplashTransition.scaleTransition,
