@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:crypto/crypto.dart';
@@ -11,49 +9,50 @@ import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:flutter_spinbox/flutter_spinbox.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class SelectExamPapers extends StatefulWidget {
-  const SelectExamPapers({super.key});
+import 'package:image_picker/image_picker.dart';
 
+class SelectExamPapers extends StatefulWidget {
   @override
   State<SelectExamPapers> createState() => _SelectExamPapersState();
 }
 
 class _SelectExamPapersState extends State<SelectExamPapers> {
   final List<File> _images = [];
+
   File? _selectedImage;
+
   double sheetNumber = 1.0;
-  bool _isFilePickerOpen = false; // Add this variable
+
+  bool _isFilePickerOpen = false;
+
   Getx getxController = Get.put(Getx());
 
   final GlobalKey<FormState> sheetkey = GlobalKey();
 
   Future<void> _pickImage() async {
-    if (_isFilePickerOpen) return; // Prevent multiple file pickers from opening
+    if (_isFilePickerOpen) return;
     if (getxController.isPaperSubmit.value) {
-      _isFilePickerOpen =
-          true; // Set the variable to true when opening the picker
+      _isFilePickerOpen = true;
       try {
-        FilePickerResult? result = await FilePicker.platform.pickFiles(
-            type: FileType.image,
-            allowMultiple: true,
-            dialogTitle: "Press & Hold CTRL to Select Multiple Sheet!");
+        final ImagePicker _picker = ImagePicker();
+        final List<XFile>? selectedFiles = await _picker.pickMultiImage(
+          imageQuality: 85, // Reduce image quality to save space if needed
+        );
 
-        if (result != null) {
+        if (selectedFiles != null) {
           setState(() {
-            for (var path in result.paths) {
-              if (path != null) {
-                File file = File(path);
-                if (!_isDuplicateImage(file)) {
-                  _images.add(file);
-                } else {
-                  _showDuplicateImageAlert(file.absolute.path.split('\\').last);
-                }
+            for (var xFile in selectedFiles) {
+              File file = File(xFile.path);
+              if (!_isDuplicateImage(file)) {
+                _images.add(file);
+              } else {
+                _showDuplicateImageAlert(file.absolute.path.split('/').last);
               }
             }
           });
         }
       } finally {
-        _isFilePickerOpen = false; // Reset the variable after picker is closed
+        _isFilePickerOpen = false;
       }
     } else {
       editSheetNumber(context);
@@ -103,13 +102,12 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.white,
-
-        onPressed: _uploadImages,child: Icon(Icons.upload_rounded,color: ColorPage.appbarcolor,)) ,
+        backgroundColor: Colors.white,
+        onPressed: _uploadImages,
+        child: Icon(Icons.upload_rounded, color: ColorPage.appbarcolor),
+      ),
       appBar: AppBar(
-        // actionsIconTheme: IconThemeData(color: Colors.white),
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: ColorPage.appbarcolor,
         title: Text(
@@ -119,139 +117,127 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
       ),
       body: SafeArea(
         child: Container(
-          // padding: EdgeInsets.all(10),
-          // color: Color.fromARGB(255, 225, 253, 254),
           child: Column(
             children: [
-           _images.isNotEmpty ?    Expanded(
-         flex: 3,
-                  // scrollDirection: Axis.horizontal,
-       
-           child: 
-               Container(
-                      child: 
-                      
-                    _images.isNotEmpty ?  Image.file(
-                    _selectedImage != null  ? _selectedImage!:_images[0],
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                        height: double.infinity,
-                      ): SizedBox(),
-                    ),
-                  
-                
-              ): SizedBox(),
-             _images.isNotEmpty ? Expanded(
-                
-                child:  Column(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        padding: EdgeInsets.all(10),
-                      
-                        scrollDirection: Axis.horizontal,
-                                         itemCount: sheetNumber.toInt(),
-                      
-                        itemBuilder: (context, index) {
-                             if (index < _images.length) {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 5),
-                              child: GestureDetector(
-                                onTap: () {
-                                  _selectImage(_images[index]);
-                                 
-                                },
-                                child: Stack(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.file(
-                                        _images[index],
-                                        fit: BoxFit.cover,
+              _images.isNotEmpty
+                  ? Expanded(
+                      flex: 3,
+                      child: Container(
+                        child: _images.isNotEmpty
+                            ? Image.file(
+                                _selectedImage != null
+                                    ? _selectedImage!
+                                    : _images[0],
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              )
+                            : SizedBox(),
+                      ),
+                    )
+                  : SizedBox(),
+              _images.isNotEmpty
+                  ? Expanded(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: ListView.builder(
+                              padding: EdgeInsets.all(10),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: sheetNumber.toInt(),
+                              itemBuilder: (context, index) {
+                                if (index < _images.length) {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        _selectImage(_images[index]);
+                                      },
+                                      child: Stack(
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(10),
+                                            child: Image.file(
+                                              _images[index],
+                                              fit: BoxFit.cover,
+                                              width: 100,
+                                              height: double.infinity,
+                                            ),
+                                          ),
+                                          Positioned(
+                                            right: 0,
+                                            top: 0,
+                                            child: IconButton(
+                                              icon: Icon(Icons.close_rounded,
+                                                  color: Color(0xFF008080)),
+                                              onPressed: () => _deleteImage(_images[index]),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                } else {
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                                    child: GestureDetector(
+                                      onTap: _pickImage,
+                                      child: Container(
                                         width: 100,
-                                        height: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[300],
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.add_rounded,
+                                                size: 30, color: Colors.grey[700]),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                    Positioned(
-                                      right: 0,
-                                      top: 0,
-                                      child: IconButton(
-                                        icon: Icon(Icons.close_rounded, color: Color(0xFF008080)),
-                                        onPressed: () => _deleteImage(_images[index]),
-                                      ),
-                                    ),
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Expanded(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: _pickImage,
+                              child: Container(
+                                height: 200,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  color: Colors.transparent,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.add_rounded,
+                                        size: 30, color: Colors.grey[700]),
                                   ],
                                 ),
                               ),
-                            );
-                          } else {
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 5),
-                      
-                              child: GestureDetector(
-                                onTap: _pickImage,
-                                child: Container(
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(Icons.add_rounded,
-                                          size: 30 , color: Colors.grey[700]),
-                                      // Text("Select your Sheet",
-                                      //     style: FontFamily.font3.copyWith(
-                                      //         color: Colors.grey[700])),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          }}),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ],
-                ),
-              ): Expanded(
-                child: Center(
-                  child: Column(
-               
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                     GestureDetector(
-                           onTap: _pickImage,
-                           child: Container(
-                            height: 200,
-                             width: 100,
-                             decoration: BoxDecoration(
-                               color: Colors.transparent,
-                               borderRadius: BorderRadius.circular(10),
-                             ),
-                             child: Column(
-                               mainAxisAlignment: MainAxisAlignment.center,
-                               children: [
-                                 Icon(Icons.add_rounded,
-                                     size: 30 , color: Colors.grey[700]),
-                                 // Text("Select your Sheet",
-                                 //     style: FontFamily.font3.copyWith(
-                                 //         color: Colors.grey[700])),
-                               ],
-                             ),
-                           ),
-                         ),
-                    ]
-                  ),
-                ),
-              ),
-            
             ],
           ),
         ),
       ),
     );
   }
-
 
   editSheetNumber(context) {
     var alertStyle = AlertStyle(
@@ -297,8 +283,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
                   sheetNumber = value;
                 },
                 decoration: InputDecoration(
-                  border:
-                      UnderlineInputBorder(borderSide: BorderSide(width: 2)),
+                  border: UnderlineInputBorder(borderSide: BorderSide(width: 2)),
                 ),
                 value: sheetNumber,
               ),
@@ -309,10 +294,8 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
       buttons: [
         DialogButton(
           width: MediaQuery.of(context).size.width / 5.5,
-          child:
-              Text("OK", style: TextStyle(color: Colors.white, fontSize: 15)),
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 15)),
           onPressed: () {
-            // ignore: unnecessary_null_comparison
             if (sheetNumber == null || sheetNumber == 0) {
               _onSheetNull(context);
             } else if (sheetNumber > 0 && sheetNumber > _images.length) {
@@ -349,8 +332,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
           "Your Assign ${sheetNumber.toStringAsFixed(0)} Sheets.\n But you selected ${_images.length} Sheets.\n Please edit the sheet number or\n remove the extra Pages",
       buttons: [
         DialogButton(
-          child:
-              Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child: Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
             Navigator.pop(context);
             editSheetNumber(context);
@@ -358,8 +340,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
           color: Color.fromARGB(255, 32, 194, 209),
         ),
         DialogButton(
-          child:
-              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -382,8 +363,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
       desc: "At least 1 sheet you should assign",
       buttons: [
         DialogButton(
-          child:
-              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: ColorPage.appbarcolor,
           onPressed: () {
             Navigator.pop(context);
@@ -409,8 +389,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
           "Your Assign ${sheetNumber.toStringAsFixed(0)} Sheets.\n But you selected ${_images.length} Sheets.\n Please edit the sheet number or\n add more Pages",
       buttons: [
         DialogButton(
-          child:
-              Text("Add", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child: Text("Add", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: ColorPage.blue,
           onPressed: () {
             Navigator.pop(context);
@@ -420,8 +399,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
         ),
         DialogButton(
           highlightColor: Color.fromARGB(255, 2, 2, 60),
-          child:
-              Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child: Text("Edit", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
             Navigator.pop(context);
             editSheetNumber(context);
@@ -440,8 +418,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
       desc: "$file\nThis image has already been selected.",
       buttons: [
         DialogButton(
-          child:
-              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           onPressed: () {
             Navigator.pop(context);
             _pickImage();
@@ -465,8 +442,7 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
       desc: "Your answer sheets are uploaded successfully!",
       buttons: [
         DialogButton(
-          child:
-              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: ColorPage.blue,
           onPressed: () {
             Navigator.pop(context);
@@ -477,3 +453,4 @@ class _SelectExamPapersState extends State<SelectExamPapers> {
     ).show();
   }
 }
+
