@@ -32,24 +32,23 @@ class _TheoryExamPageMobileState extends State<TheoryExamPageMobile> {
     _downloadPdf();
   }
 
-      var alertStyle = AlertStyle(
-      animationType: AnimationType.fromTop,
-      isCloseButton: false,
-      isOverlayTapDismiss: true,
-      
-      alertPadding: EdgeInsets.only(top: 300),
-      descStyle: TextStyle(fontWeight: FontWeight.bold),
-      animationDuration: Duration(milliseconds: 600),
-      alertBorder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-        side: BorderSide(color: Colors.grey),
-      ),
-      titleStyle: TextStyle(color: ColorPage.blue, fontWeight: FontWeight.bold),
-      constraints: BoxConstraints.expand(width: 350),
-      overlayColor: Color(0x55000000),
-      alertElevation: 0,
-      alertAlignment: Alignment.center,
-    );
+  var alertStyle = AlertStyle(
+    animationType: AnimationType.fromTop,
+    isCloseButton: false,
+    isOverlayTapDismiss: true,
+    alertPadding: EdgeInsets.only(top: 300),
+    descStyle: TextStyle(fontWeight: FontWeight.bold),
+    animationDuration: Duration(milliseconds: 600),
+    alertBorder: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+      side: BorderSide(color: Colors.grey),
+    ),
+    titleStyle: TextStyle(color: ColorPage.blue, fontWeight: FontWeight.bold),
+    constraints: BoxConstraints.expand(width: 350),
+    overlayColor: Color(0x55000000),
+    alertElevation: 0,
+    alertAlignment: Alignment.center,
+  );
 
   Future<void> _downloadPdf() async {
     final response = await http.get(Uri.parse(
@@ -94,66 +93,40 @@ class _TheoryExamPageMobileState extends State<TheoryExamPageMobile> {
     );
   }
 
+  void _printPdf() async {
+    try {
+      if (_localPdfPath != null) {
+        final file = File(_localPdfPath!);
+        final pdfBytes = await file.readAsBytes();
 
-void _printPdf() async {
-  try {
-    if (_localPdfPath != null) {
-      final file = File(_localPdfPath!);
-      final pdfBytes = await file.readAsBytes();
-
-      List<Printer> filteredPrinters = [];
-      //  Future<void> fetchPrinters() async {
-    final printers = await Printing.listPrinters();
-
-    setState(() {
-      filteredPrinters = printers.where((printer) {
-        return printer.name.contains("Microsoft Print to PDF");
-      }).toList();
-    });
-  // }
-
-  // Future<void> printDocument() async {
-    if (filteredPrinters.isNotEmpty) {
-      await Printing.layoutPdf(
-        onLayout: (format) async {
-          // Generate your PDF document here
-          // final pdfBytes =pdfBytes;
-          return pdfBytes;
-        },
-        usePrinterSettings: true,
-        dynamicLayout: true,
-      );
-    } else {
-      print('No suitable printers found. Please check your printer connections.');
+        // Use Printing.layoutPdf to print the PDF
+        await Printing.layoutPdf(
+          onLayout: ( format) async => pdfBytes,
+        );
+      } else {
+        print('No PDF file available to print.');
+      }
+    } catch (e) {
+      print('Error printing PDF: $e');
     }
-  // }
-
-    } else {
-      print('No PDF file available to print.');
-    }
-  } catch (e) {
-    print('Error printing PDF: $e');
   }
-}
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
                 children: [
-                  // Text("Remaining Time",
-                  //     style: FontFamily.font3.copyWith(color: Colors.white)),
                   SizedBox(width: 10),
-                  Icon(Icons.alarm, color: Colors.white,size: 16,),
+                  Icon(Icons.alarm, color: Colors.white, size: 16),
                   SizedBox(width: 5),
                   Text("03:56:54",
-                      style: FontFamily.font3.copyWith(color: Colors.white,fontSize: 14)),
+                      style: FontFamily.font3.copyWith(
+                          color: Colors.white, fontSize: 14)),
                   SizedBox(width: 20),
                 ],
               ),
@@ -161,7 +134,8 @@ void _printPdf() async {
           ],
           backgroundColor: ColorPage.appbarcolor,
           title: Text("Theory Exam",
-              style: FontFamily.font3.copyWith(color: Colors.white,fontSize: 18)),
+              style: FontFamily.font3
+                  .copyWith(color: Colors.white, fontSize: 18)),
         ),
         body: Column(
           children: [
@@ -191,7 +165,6 @@ void _printPdf() async {
                       ],
                     ),
                   ),
-             
                 ],
               ),
             ),
@@ -200,26 +173,23 @@ void _printPdf() async {
         floatingActionButton: SizedBox(
           width: 80,
           child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               FloatingActionButton(
-      backgroundColor: Color.fromARGB(255, 207, 232, 255),
-                
-                onPressed: _printPdf,child: Icon(Icons.print),
-              heroTag: 'btn1',
+                backgroundColor: Color.fromARGB(255, 207, 232, 255),
+                onPressed: _printPdf,
+                child: Icon(Icons.print),
+                heroTag: 'btn1',
               ),
-              SizedBox(height: 15,),
-            
-    FloatingActionButton(
-      backgroundColor: Color.fromARGB(255, 207, 232, 255),
-
-      onPressed: (){
-          submitPaper();
-              },child: Icon(Icons.arrow_forward_rounded),
-              heroTag: 'btn2',
-              
+              SizedBox(height: 15),
+              FloatingActionButton(
+                backgroundColor: Color.fromARGB(255, 207, 232, 255),
+                onPressed: () {
+                  submitPaper();
+                },
+                child: Icon(Icons.arrow_forward_rounded),
+                heroTag: 'btn2',
               ),
-          
             ],
           ),
         ),
@@ -227,40 +197,32 @@ void _printPdf() async {
     );
   }
 
-
- submitPaper() async {
+  submitPaper() async {
     // Mark dialog as open
-
-    return  Alert(
+    return Alert(
       context: context,
       style: alertStyle,
-      title: "submit your paper now?",
-      content:  Column(
-              mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Select images to submit your paper')
-            ],
-          ),
-        
+      title: "Submit your paper now?",
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [Text('Select images to submit your paper')],
+      ),
       buttons: [
         DialogButton(
           width: MediaQuery.of(context).size.width / 5.5,
-          child:
-              Text("Cancel", style: TextStyle(color: Colors.white, fontSize: 15)),
+          child: Text("Cancel",
+              style: TextStyle(color: Colors.white, fontSize: 15)),
           onPressed: () {
-            // ignore: unnecessary_null_comparison
             Get.back();
           },
           color: ColorPage.colorgrey,
           radius: BorderRadius.circular(5.0),
         ),
-         DialogButton(
+        DialogButton(
           width: MediaQuery.of(context).size.width / 5.5,
-          child:
-              Text("OK", style: TextStyle(color: Colors.white, fontSize: 15)),
+          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 15)),
           onPressed: () {
-            // ignore: unnecessary_null_comparison
-          Get.back();
+            Get.back();
             Get.to(SelectExamPapers());
           },
           color: ColorPage.colorgrey,
@@ -268,6 +230,5 @@ void _printPdf() async {
         ),
       ],
     ).show();
-  }}
-
-
+  }
+}

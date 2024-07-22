@@ -200,7 +200,7 @@ void _printPdf() async {
 
     setState(() {
       filteredPrinters = printers.where((printer) {
-        return printer.name.contains("Microsoft Print to PDF");
+        return printer.isAvailable;
       }).toList();
     });
   // }
