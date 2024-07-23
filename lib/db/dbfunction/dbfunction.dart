@@ -151,6 +151,7 @@
 // }
 
 import 'dart:io';
+import 'dart:math';
 
 import 'package:path_provider/path_provider.dart';
 
@@ -182,6 +183,9 @@ void testSQLCipherOnWindows() async {
   }
   getVersion();
   createLoginTable();
+  createTblEncryptionHistory();
+  createtblChapter();
+  createtblFileDetails();
 }
 
 void getVersion() {
@@ -204,6 +208,32 @@ void createLoginTable() {
   ''');
 }
 
+///Create Schema
+void createtblChapter() {
+  // Create a table and insert some data
+  _db.execute('''
+   CREATE TABLE IF NOT EXISTS TblChapter(ChapterId TEXT, ChapterName TEXT, PackageId TEXT,ParentId TEXT, FileType TEXT);
+  ''');
+  // log()
+  print('tblchapter');
+}
+
+void createTblEncryptionHistory() {
+  // Create a table and insert some data
+  _db.execute('''
+   CREATE TABLE IF NOT EXISTS TblEncryptionHistory(FileId TEXT, FileType TEXT, FileName TEXT, FileDuration TEXT,FileDescription TEXT,SortedOrder TEXT,FromDateTime TEXT,UptoDateTime TEXT,ThumbnailImage TEXT,LiveId TEXT,LiveUrl TEXT,PackageId TEXT,FranchiseId TEXT);
+  ''');
+  print('tblfile table');
+}
+
+void createtblFileDetails() {
+  // Create a table and insert some data
+  _db.execute('''
+   CREATE TABLE IF NOT EXISTS TblFileDetails(FileId TEXT, FileDetailsId TEXT, FileName TEXT, FileType TEXT,Option1 TEXT,Option2 TEXT,Option3 TEXT,Option4 TEXT,VideoTime TEXT,Answer TEXT,Category TEXT,TagName TEXT, DocumentPath TEXT,SortedOrder TEXT,IsVideoCompulsory TEXT,IsChapterCompulsory TEXT,PreviousVideoId TEXT,MinimumVideoDuration TEXT,PackageId TEXT,PreviousChapterId TEXT);
+  ''');
+  print('tblFileDetails table');
+}
+
 Future<void> insertLogindataa(
     String email, String phoneNumber, String token) async {
   _db.execute('''
@@ -212,6 +242,105 @@ Future<void> insertLogindataa(
     ''');
 
   // return null;
+}
+
+Future<void> inserttblChapter(String chapterId, String chapterName,
+    String packageId, String parentId, String fileType) async {
+  _db.execute('''
+       INSERT INTO TblChapter (ChapterId, ChapterName, PackageId,ParentId,FileType) 
+      VALUES ('$chapterId', '$chapterName', '$packageId','$parentId','$fileType');
+    ''');
+}
+
+Future<void> insertTblEncryptionHistory(
+  String fileId,
+  String fileType,
+  String fileName,
+  String fileDuration,
+  String fileDescription,
+  String sortedOrder,
+  String fromDateTime,
+  String uptoDateTime,
+  String thumbnailImage,
+  String liveId,
+  String liveUrl,
+  String packageId,
+  String franchiseId,
+) async {
+  _db.execute('''
+       INSERT INTO TblEncryptionHistory (FileId, FileType, FileName,FileDuration,FileDescription,SortedOrder,FromDateTime,UptoDateTime,ThumbnailImage,LiveId,LiveUrl,PackageId,FranchiseId) 
+      VALUES ('$fileId', '$fileType', '$fileName','$fileDuration','$fileDescription','$sortedOrder','$fromDateTime','$uptoDateTime','$thumbnailImage','$liveId','$liveUrl','$packageId','$franchiseId');
+    ''');
+}
+
+Future<void> insertTblFileDetails(
+  String fileId,
+  String fileDetailsId,
+  String fileName,
+  String fileType,
+  String option1,
+  String option2,
+  String option3,
+  String option4,
+  String videoTime,
+  String answer,
+  String category,
+  String tagName,
+  String documentPath,
+  String sortedOrder,
+  String isVideoCompulsory,
+  String isChapterCompulsory,
+  String previousVideoId,
+  String minimumVideoDuration,
+  String packageId,
+  String previousChapterId,
+) async {
+  _db.execute('''
+    INSERT INTO TblFileDetails (
+      FileId,
+      FileDetailsId,
+      FileName,
+      FileType,
+      Option1,
+      Option2,
+      Option3,
+      Option4,
+      VideoTime,
+      Answer,
+      Category,
+      TagName,
+      DocumentPath,
+      SortedOrder,
+      IsVideoCompulsory,
+      IsChapterCompulsory,
+      PreviousVideoId,
+      MinimumVideoDuration,
+      PackageId,
+      PreviousChapterId
+    ) VALUES (
+      '$fileId',
+      '$fileDetailsId',
+      '$fileName',
+      '$fileType',
+      '$option1',
+      '$option2',
+      '$option3',
+      '$option4',
+      '$videoTime',
+      '$answer',
+      '$category',
+      '$tagName',
+      '$documentPath',
+      '$sortedOrder',
+      '$isVideoCompulsory',
+      '$isChapterCompulsory',
+      '$previousVideoId',
+      '$minimumVideoDuration',
+      '$packageId',
+      '$previousChapterId'
+    );
+  ''');
+  print('Inserted data into TblFileDetails');
 }
 
 Future<void> readLoginData() async {

@@ -296,6 +296,7 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
     super.initState();
   }
 
+  List x = ['avinash', 2, 3];
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -602,7 +603,7 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                                                                 token: token,
                                                                 datacontent:
                                                                     datacontent,
-                                                                count: 0));
+                                                                count: 3));
                                                             // Get.toNamed(
                                                             //     'Videodashboard',
                                                             //     arguments: {
