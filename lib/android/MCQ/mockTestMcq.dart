@@ -6,7 +6,7 @@ import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/android/MCQ/mockTestRank.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/mcq/ResultPage.dart';
-import 'package:dthlms/mcq/mcoktestResult.dart';
+
 import 'package:dthlms/mcq/modelclass.dart';
 import 'package:dthlms/widget/mybutton.dart';
 import 'package:flutter/cupertino.dart';
@@ -820,12 +820,7 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
 
             isSubmitted.value = true;
             Navigator.pop(context);
-            Get.to(() => RankPage(
-                  mcqData: mcqData,
-                  correctAnswers: answer,
-                  userAns: userAns,
-                  totalnomber: correctAnswers * 1,
-                ));
+            Get.toNamed("/Mocktestrankpagemobile",arguments:{"mcqData":mcqData,"correctAnswers":answer,"userAns":userAns,"totalnomber":correctAnswers*1});
           },
           color: Color.fromRGBO(9, 89, 158, 1),
         ),

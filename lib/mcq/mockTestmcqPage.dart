@@ -5,13 +5,14 @@ import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/mcq/ResultPage.dart';
-import 'package:dthlms/mcq/mcoktestResult.dart';
+
 import 'package:dthlms/mcq/modelclass.dart';
 import 'package:dthlms/widget/mybutton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:win32/win32.dart';
 
 class MockTestMcqExamPage extends StatefulWidget {
   const MockTestMcqExamPage({super.key});
@@ -38,7 +39,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
   late Timer _timer;
   Getx getx_obj = Get.put(Getx());
   RxBool buttonshow = false.obs;
-  RxInt _start = 1200.obs;
+  RxInt _start = 5000.obs;
 
   Future getdata() async {
     String jsonData = '''
@@ -186,7 +187,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
       (Timer timer) {
         if (_start.value == 0) {
           timer.cancel();
-          _onimeUp(context);
+          _onTimeUp(context);
         } else {
           _start.value--;
         }
@@ -211,6 +212,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
   RxInt score = 0.obs;
 
   List<McqItem> mcqData = [];
+  // List<McqItem> mcqData1 = [];  
 
   @override
   Widget build(BuildContext context) {
@@ -221,7 +223,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
             iconTheme: IconThemeData(color: ColorPage.white),
             automaticallyImplyLeading: true,
             centerTitle: false,
-            backgroundColor: Colors.blue,
+            backgroundColor: ColorPage.appbarcolor,
             title: Text(
               '10th Social Exam-1 Mock Exam',
               style: TextStyle(
@@ -265,7 +267,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                       MyButton(
                           btncolor: Colors.white,
                           onPressed: () {
-                            Get.to(()=>MockTestresult(mcqData: mcqData,correctAnswers: answer,userAns: userAns,));
+                            Get.toNamed("/Mocktestresult",arguments: {"mcqData":mcqData,"userAns":userAns,"correctAnswers":answer});
                             // Get.to(()=>MockTestResultPage());
                          
                           },
@@ -511,7 +513,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                                 children: [
                                   MaterialButton(
                                     height: 40,
-                                    color: Colors.blueAccent,
+                                    color: ColorPage.appbarcolorcopy,
                                     padding: EdgeInsets.all(16),
                                     shape: ContinuousRectangleBorder(
                                         borderRadius:
@@ -528,7 +530,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                                   ),
                                   MaterialButton(
                                     height: 40,
-                                    color: Color.fromARGB(255, 32, 104, 192),
+                                    color: ColorPage.appbarcolorcopy,
                                     padding: EdgeInsets.all(16),
                                     shape: ContinuousRectangleBorder(
                                         borderRadius:
@@ -702,6 +704,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
       context: context,
       type: AlertType.info,
       style: AlertStyle(
+        isOverlayTapDismiss: false,
         animationType: AnimationType.fromLeft,
         titleStyle:
             TextStyle(color: ColorPage.red, fontWeight: FontWeight.bold),
@@ -738,12 +741,22 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
     ).show();
   }
 
-  _onimeUp(context) {
-    _onSubmitExam(context);
+  _onTimeUp(context) {
+      int correctAnswers = 0;
+    userAns.forEach((questionId, selectedOptionId) {
+      if (answer.any((map) => map[questionId] == selectedOptionId)) {
+        correctAnswers++;
+      }
+    });
+   
     Alert(
+      
       context: context,
+      onWillPopActive: false,
+      
       type: AlertType.info,
       style: AlertStyle(
+        isOverlayTapDismiss: false,
         animationType: AnimationType.fromTop,
         titleStyle:
             TextStyle(color: ColorPage.red, fontWeight: FontWeight.bold),
@@ -758,7 +771,11 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
               Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
           highlightColor: Color.fromRGBO(3, 77, 59, 1),
           onPressed: () {
+             score.value = correctAnswers;
+
+            isSubmitted.value = true;
             Navigator.pop(context);
+     
           },
           color: Color.fromRGBO(9, 89, 158, 1),
         ),
@@ -768,6 +785,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
 
   _onincompleteSubmission(context) {
     Alert(
+
       context: context,
       type: AlertType.info,
       style: AlertStyle(

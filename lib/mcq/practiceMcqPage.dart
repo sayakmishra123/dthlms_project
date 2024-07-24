@@ -193,7 +193,7 @@ class _PracticeMcqState extends State<PracticeMcq> {
         iconTheme: IconThemeData(color: ColorPage.white),
         automaticallyImplyLeading: true,
         centerTitle: false,
-        backgroundColor: Colors.blue,
+        backgroundColor: ColorPage.appbarcolor,
         title: Text(
           '10th Social Exam-1 Practice Exam',
           style: TextStyle(
@@ -457,7 +457,7 @@ class _PracticeMcqState extends State<PracticeMcq> {
                             children: [
                               MaterialButton(
                                 height: 40,
-                                color: Colors.blueAccent,
+                                color: ColorPage.appbarcolorcopy,
                                 padding: EdgeInsets.all(16),
                                 shape: ContinuousRectangleBorder(
                                     borderRadius: BorderRadius.circular(12)),
@@ -473,7 +473,7 @@ class _PracticeMcqState extends State<PracticeMcq> {
                               ),
                               MaterialButton(
                                 height: 40,
-                                color: Color.fromARGB(255, 32, 104, 192),
+                                color: ColorPage.appbarcolorcopy,
                                 padding: EdgeInsets.all(16),
                                 shape: ContinuousRectangleBorder(
                                     borderRadius: BorderRadius.circular(12)),

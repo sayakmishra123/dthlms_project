@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/android/MCQ/practiceMcq.dart';
-import 'package:dthlms/mcq/mcqexampage.dart';
+
 import 'package:dthlms/mcq/practiceMcqPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -190,7 +190,7 @@ class McqTermAndConditionmobile extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      checkbox.value? Get.to(() => PracticeMcqMobile()):_onTermDeniey(context);
+                      checkbox.value? Get.toNamed("/Practicemcqmobile"):_onTermDeniey(context);
                     },
                     child: Text(
                       'Next',

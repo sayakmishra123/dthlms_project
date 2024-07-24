@@ -1,47 +1,48 @@
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/mcq/modelclass.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class MocktestAnswer extends StatefulWidget {
-  final List<McqItem> mcqData;
-  final Map<int, int> userAns;
-  final List<Map<int, int>> correctAnswers;
-
-  MocktestAnswer({
-    required this.mcqData,
-    required this.userAns,
-    required this.correctAnswers,
-  });
+ 
 
   @override
   State<MocktestAnswer> createState() => _MocktestAnswerState();
 }
 
 class _MocktestAnswerState extends State<MocktestAnswer> {
+
+
+   Getx getxController = Get.put(Getx());
+  final List<McqItem> mcqData= Get.arguments['mcqData'];
+   final Map<int, int> userAns = Get.arguments['userAns'];
+  final List<Map<int, int>> correctAnswers = Get.arguments['correctAnswers'];
   @override
   Widget build(BuildContext context) {
     int totalMarks = 0;
-    List<Widget> questionWidgets = widget.mcqData.asMap().entries.map((entry) {
+    List<Widget> questionWidgets = mcqData.asMap().entries.map((entry) {
       int index = entry.key;
       McqItem mcqItem = entry.value;
       int questionId = mcqItem.mcqId;
       String question = mcqItem.mcqQuestion;
-      String userSelected = widget.userAns.containsKey(questionId)
+      String userSelected = userAns.containsKey(questionId)
           ? mcqItem.options
               .firstWhere(
-                  (option) => option.optionId == widget.userAns[questionId])
+                  (option) => option.optionId == userAns[questionId])
               .optionName
           : 'Not Answered';
       String correctAnswer = mcqItem.options
-          .firstWhere((option) => widget.correctAnswers
+          .firstWhere((option) => correctAnswers
               .any((map) => map[questionId] == option.optionId))
           .optionName;
-      int marks = widget.userAns.containsKey(questionId) &&
-              widget.correctAnswers
-                  .any((map) => map[questionId] == widget.userAns[questionId])
+      int marks = userAns.containsKey(questionId) &&
+              correctAnswers
+                  .any((map) => map[questionId] == userAns[questionId])
           ? 1
           : 0;
       totalMarks += marks;
