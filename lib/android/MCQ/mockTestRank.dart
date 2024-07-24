@@ -1,6 +1,7 @@
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/android/MCQ/mockTestAns.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/mcq/modelclass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,23 +10,18 @@ import 'package:lottie/lottie.dart';
 import 'package:path/path.dart';
 
 class RankPage extends StatefulWidget {
-final List<McqItem> mcqData;
-  final Map<int, int> userAns;
-  final List<Map<int, int>> correctAnswers;
-  final int totalnomber;
 
-  RankPage({
-    required this.mcqData,
-    required this.userAns,
-    required this.correctAnswers,
-    required this.totalnomber
-  });
 
   @override
   State<RankPage> createState() => _RankPageState();
 }
 
 class _RankPageState extends State<RankPage> with SingleTickerProviderStateMixin{
+   Getx getxController = Get.put(Getx());
+  final List<McqItem> mcqData= Get.arguments['mcqData'];
+   final Map<int, int> userAns = Get.arguments['userAns'];
+  final List<Map<int, int>> correctAnswers = Get.arguments['correctAnswers'];
+  final int totalnomber = Get.arguments['totalnumber'];
 
 
     bool _isLottieVisible = true;
@@ -149,7 +145,7 @@ class _RankPageState extends State<RankPage> with SingleTickerProviderStateMixin
           ),
           actions: [IconButton(onPressed: (){
 
-            Get.to(()=>MocktestAnswer(mcqData:widget.mcqData, userAns: widget.userAns, correctAnswers: widget.correctAnswers));
+            Get.toNamed("/Mocktestanswermobile",arguments: {"mcqData":mcqData, "userAns": userAns, "correctAnswers": correctAnswers});
           }, icon: Icon(Icons.list_alt_rounded))],
         
         ),
@@ -354,7 +350,7 @@ class _RankPageState extends State<RankPage> with SingleTickerProviderStateMixin
                             Padding(
                               padding: const EdgeInsets.only(right: 20),
                               child: Text(
-                               widget.totalnomber.toString(),
+                               totalnomber.toString(),
                                 style: TextStyle(color: Colors.white, fontSize: 20),
                               ),
                             ),

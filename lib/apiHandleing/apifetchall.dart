@@ -151,4 +151,33 @@ Future packactivationKey(
     Get.back();
     await confirmActivationCode(context, res.body);
   }
+    }
+
+
+
+
+    
+  Future tableEncryptionHistory(
+    BuildContext context,token) async {
+  loader(context);
+ 
+  Map data={
+
+  };
+
+  // print(token);
+  var responce = await http.post(
+    Uri.https(ClsUrlApi.mainurl,'/api/AuthDataGet/ExecuteJson/sptblEncryptionHistory/8'),
+    //  Uri.parse("/api/AuthDataGet/ExecuteJson/sptblEncryptionHistory/8"),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(data));
+  print(responce.statusCode.toString()+"hello");
+
+  if (responce.statusCode == 200) {
+  
+    print(responce.body.toString());
+  }  Get.back();
 }

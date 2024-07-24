@@ -19,6 +19,7 @@ import 'package:dthlms/utils/enebelActivationcode.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:typewritertext/v3/typewriter.dart';
 
 class NewPackageDashboard extends StatefulWidget {
@@ -296,6 +297,7 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
     super.initState();
   }
 
+  List x = ['avinash', 2, 3];
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -433,8 +435,8 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                                       ..setIndex(1),
                                     radius: 32.0,
                                     padding: const EdgeInsets.all(16.0),
-                                    backgroundColor: ColorPage.appbarcolor,
-                                    foregroundColor: ColorPage.white,
+                                    backgroundColor: ColorPage.bluegrey800,
+                                    foregroundColor: ColorPage.bluegrey300,
                                     // foregroundColor:  Color.fromARGB(255, 37, 233, 135),
                                     // backgroundColor:Color.fromARGB(255, 97, 228, 162),
                                     elevation: 24,
@@ -602,7 +604,7 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                                                                 token: token,
                                                                 datacontent:
                                                                     datacontent,
-                                                                count: 0));
+                                                                count: 3));
                                                             // Get.toNamed(
                                                             //     'Videodashboard',
                                                             //     arguments: {
@@ -642,7 +644,9 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                                                 )
                                               : Center(
                                                   child: Image.asset(
-                                                      'assets/android/nodatafound.png'))),
+                                                      'assets/android/nodatafound.png'),
+                                                ),
+                                        ),
                                 ],
                               ),
                             ),
@@ -652,39 +656,21 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                     ),
                   ),
                   Expanded(
-                      child: Container(
-                          color: Colors.black,
-                          child: Column(
-                            children: [
-                              Flexible(
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      Stack(children: [
-                                        Image.asset(
-                                          fit: BoxFit.fitHeight,
-                                          'assets/wallpaperflare.com_wallpaper.jpg',
-                                          height:
-                                              MediaQuery.sizeOf(context).height,
-                                        ),
-                                        Positioned(
-                                          bottom: 500,
-                                          left: 300,
-                                          child: TypeWriter.text(
-                                            'lorem ipsum dolot sit amet ...',
-                                            style: FontFamily.font2,
-                                            repeat: true,
-                                            duration: const Duration(
-                                                milliseconds: 50),
-                                          ),
-                                        ),
-                                      ]),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )))
+                      child: SfCalendar(
+                    // allowDragAndDrop: false,
+                    // allowViewNavigation: true,
+                    // backgroundColor: ColorPage.colorgrey,
+                    headerStyle:
+                        CalendarHeaderStyle(backgroundColor: Colors.blue),
+                    // showTodayButton: true,
+                    view: CalendarView.month,
+                    monthViewSettings: MonthViewSettings(
+                      agendaStyle: AgendaStyle(
+                          dateTextStyle: FontFamily.font3,
+                          placeholderTextStyle: TextStyle(color: Colors.red)),
+                      showAgenda: true,
+                    ),
+                  ))
                 ],
               ),
               GlobalDialog(token)

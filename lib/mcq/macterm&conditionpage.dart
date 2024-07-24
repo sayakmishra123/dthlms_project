@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
-import 'package:dthlms/mcq/mcqexampage.dart';
+
 import 'package:dthlms/mcq/mockTestmcqPage.dart';
-import 'package:dthlms/mcq/practiceMcqPage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -181,7 +181,7 @@ Row(
                   ),
                   ElevatedButton(
                     onPressed: () {
-                     checkbox.value? Get.to(() =>PracticeMcq()):_onTermDeniey(context);
+                     checkbox.value? Get.toNamed("/Mocktestmcqexampage"):_onTermDeniey(context);
                     },
                     child: Text(
                       'Next',
@@ -194,7 +194,7 @@ Row(
                             ContinuousRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         backgroundColor:
-                            MaterialStatePropertyAll(ColorPage.blue)),
+                            MaterialStatePropertyAll(ColorPage.appbarcolorcopy)),
                   )
                 ],
               )         ],

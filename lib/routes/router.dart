@@ -4,6 +4,11 @@ import 'package:dthlms/TheoryExam/theoryexampage.dart';
 import 'package:dthlms/android/Drawer/Mobiledrawer.dart';
 import 'package:dthlms/android/ForgetPassword/ForgetPasswordScreen.dart';
 import 'package:dthlms/android/Homepage/MobileHomepage.dart';
+import 'package:dthlms/android/MCQ/mcqCondition.dart';
+import 'package:dthlms/android/MCQ/mockTestAns.dart';
+import 'package:dthlms/android/MCQ/mockTestMcq.dart';
+import 'package:dthlms/android/MCQ/mockTestRank.dart';
+import 'package:dthlms/android/MCQ/practiceMcq.dart';
 import 'package:dthlms/android/SigninOtp/OtpScreen.dart';
 import 'package:dthlms/android/Videodashboard/mobileVideoDashboard.dart';
 import 'package:dthlms/android/Videodashboard/mobileVideoPlayer.dart';
@@ -11,6 +16,10 @@ import 'package:dthlms/android/Videodashboard/newMobileVideoPlayer.dart';
 import 'package:dthlms/android/login/dth_mob_login.dart';
 import 'package:dthlms/android/packagemobile/newPackages.dart';
 import 'package:dthlms/login/dth_login.dart';
+import 'package:dthlms/mcq/ResultPage.dart';
+import 'package:dthlms/mcq/macterm&conditionpage.dart';
+import 'package:dthlms/mcq/mockTestmcqPage.dart';
+import 'package:dthlms/mcq/practiceMcqPage.dart';
 import 'package:dthlms/package/packagedashboard/newPackageDashboard.dart';
 import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
 import 'package:dthlms/package/packagescreen.dart';
@@ -104,17 +113,53 @@ class pageRouter {
       name: "/Newpackagedashboard",
       page: () => NewPackageDashboard(),
     ),
-     GetPage(
+    GetPage(
       name: "/Newmobilepakagedashboard",
       page: () => NewPackageDashboardMobile(),
     ),
-     GetPage(
+    GetPage(
       name: "/Newmobilevideoplayer",
       page: () => NewMobileVidePlayer(),
     ),
-      GetPage(
+    GetPage(
       name: "/Theoryexampage",
       page: () => TheoryExamPage(),
+    ),
+    GetPage(
+      name: "/Mcqtermandcondition",
+      page: () => McqTermAndCondition(),
+    ),
+    GetPage(
+      name: "/Mocktestmcqexampage",
+      page: () => MockTestMcqExamPage(),
+    ),
+    GetPage(
+      name: "/Practicemcq",
+      page: () => PracticeMcq(),
+    ),
+    GetPage(
+      name: "/Mocktestresult",
+      page: () => MockTestresult(),
+    ),
+    GetPage(
+      name: "/Mcqterandconditionmobile",
+      page: () => McqTermAndConditionmobile(),
+    ),
+    GetPage(
+      name: "/Mocktestanswermobile",
+      page: () => MocktestAnswer(),
+    ),
+    GetPage(
+      name: "/Mocktestexampagemobile",
+      page: () => MockTestMcqExamPageMobile(),
+    ),
+    GetPage(
+      name: "/Mocktestrankpagemobile",
+      page: () => RankPage(),
+    ),
+    GetPage(
+      name: "/Practicemcqmobile",
+      page: () => PracticeMcqMobile(),
     ),
   ];
 }
