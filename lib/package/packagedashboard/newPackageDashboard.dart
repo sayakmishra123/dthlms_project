@@ -298,6 +298,8 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
   }
 
   List x = ['avinash', 2, 3];
+  CalendarController _controller = CalendarController();
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -657,19 +659,30 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                   ),
                   Expanded(
                       child: SfCalendar(
-                    // allowDragAndDrop: false,
-                    // allowViewNavigation: true,
+                    controller: _controller,
+                    showNavigationArrow: true,
+                    allowViewNavigation: true,
+                    allowAppointmentResize: true,
+                    showCurrentTimeIndicator: true,
+                    // specialRegions: [
+                    //   TimeRegion(
+                    //       color: Colors.red,
+                    //       enablePointerInteraction: true,
+                    //       startTime: DateTime.now(),
+                    //       endTime: DateTime(2025))
+                    // ],
+
                     // backgroundColor: ColorPage.colorgrey,
                     headerStyle:
                         CalendarHeaderStyle(backgroundColor: Colors.blue),
-                    // showTodayButton: true,
+                    showTodayButton: true,
                     view: CalendarView.month,
+                    dataSource: MeetingDataSource(_getDataSource()),
                     monthViewSettings: MonthViewSettings(
-                      agendaStyle: AgendaStyle(
-                          dateTextStyle: FontFamily.font3,
-                          placeholderTextStyle: TextStyle(color: Colors.red)),
-                      showAgenda: true,
-                    ),
+                        navigationDirection:
+                            MonthNavigationDirection.horizontal,
+                        appointmentDisplayMode:
+                            MonthAppointmentDisplayMode.appointment),
                   ))
                 ],
               ),
@@ -679,6 +692,17 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
         ),
       ),
     );
+  }
+
+  List<Meeting> _getDataSource() {
+    final List<Meeting> meetings = <Meeting>[];
+    final DateTime today = DateTime.now();
+    final DateTime startTime =
+        DateTime(today.year, today.month, today.day, 9, 0, 0);
+    final DateTime endTime = startTime.add(const Duration(hours: 2));
+    meetings.add(Meeting('Conference dfffdsf', startTime, endTime,
+        const Color(0xFF0F8644), false));
+    return meetings;
   }
 
   void showFullImageDialog() {
@@ -726,4 +750,45 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
       },
     );
   }
+}
+
+class MeetingDataSource extends CalendarDataSource {
+  MeetingDataSource(List<Meeting> source) {
+    appointments = source;
+  }
+
+  @override
+  DateTime getStartTime(int index) {
+    return appointments![index].from;
+  }
+
+  @override
+  DateTime getEndTime(int index) {
+    return appointments![index].to;
+  }
+
+  @override
+  String getSubject(int index) {
+    return appointments![index].eventName;
+  }
+
+  @override
+  Color getColor(int index) {
+    return appointments![index].background;
+  }
+
+  @override
+  bool isAllDay(int index) {
+    return appointments![index].isAllDay;
+  }
+}
+
+class Meeting {
+  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+
+  String eventName;
+  DateTime from;
+  DateTime to;
+  Color background;
+  bool isAllDay;
 }
