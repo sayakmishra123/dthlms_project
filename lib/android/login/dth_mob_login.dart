@@ -5,6 +5,7 @@ import 'package:dthlms/android/ForgetPassword/ForgetPasswordScreen.dart';
 import 'package:dthlms/android/SigninOtp/OtpScreen.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/apiHandleing/apifetchall.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 
 // import 'package:dthlms/getx/getxcontroller.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:win32/win32.dart';
 
 import '../phone/siminformation.dart';
 
@@ -28,7 +30,7 @@ class Mobilelogin extends StatefulWidget {
 class _MobileloginState extends State<Mobilelogin> {
   TextEditingController signupuser = TextEditingController();
   TextEditingController signupfirstname = TextEditingController();
-    TextEditingController signuplastname = TextEditingController();
+  TextEditingController signuplastname = TextEditingController();
   TextEditingController signupemail = TextEditingController();
   TextEditingController signupphno = TextEditingController();
   TextEditingController signuppassword = TextEditingController();
@@ -37,17 +39,16 @@ class _MobileloginState extends State<Mobilelogin> {
   TextEditingController loginpassword = TextEditingController();
   TextEditingController loginotp = TextEditingController();
 
-  int controllerIndex=0;
+  int controllerIndex = 0;
 
   // ignore: non_constant_identifier_names
   // final GlobalKey<FormState> desktop_key = GlobalKey();
-FocusNode focusNode = FocusNode();
-
+  FocusNode focusNode = FocusNode();
 
   // ignore: non_constant_identifier_names
   final GlobalKey<FormState> mobile_key_login = GlobalKey();
-    // ignore: non_constant_identifier_names
-    final GlobalKey<FormState> mobile_key_signup = GlobalKey();
+  // ignore: non_constant_identifier_names
+  final GlobalKey<FormState> mobile_key_signup = GlobalKey();
   late double formfieldsize = MediaQuery.of(context).size.width - 60;
   late double fontsize = ClsFontsize.ExtraLarge + 2;
   Getx getxController = Get.put(Getx());
@@ -114,9 +115,9 @@ FocusNode focusNode = FocusNode();
                                 SizedBox(
                                   width: 300,
                                   child: AnimatedButtonBar(
-                                    
                                     controller: AnimatedButtonController()
-                                      ..setIndex(getxController.ButtonControllerIndex.value),
+                                      ..setIndex(getxController
+                                          .ButtonControllerIndex.value),
                                     radius: 32.0,
                                     padding: const EdgeInsets.all(16.0),
                                     backgroundColor: Colors.blueGrey.shade800,
@@ -128,25 +129,26 @@ FocusNode focusNode = FocusNode();
                                     innerVerticalPadding: 16,
                                     children: [
                                       ButtonBarEntry(
-
-
-
                                           onTap: () {
                                             getxController.show.value = false;
-                                            getxController.ButtonControllerIndex.value=0;
-                                            print(getxController.ButtonControllerIndex.value.toString());
+                                            getxController.ButtonControllerIndex
+                                                .value = 0;
+                                            print(getxController
+                                                .ButtonControllerIndex.value
+                                                .toString());
                                           },
                                           child: Text(
                                             'Log in',
                                             style: FontFamily.font,
                                           )),
                                       ButtonBarEntry(
-
                                           onTap: () {
-                                           
                                             getxController.show.value = true;
-                                            getxController.ButtonControllerIndex.value=1;
-                                             print(getxController.ButtonControllerIndex.value.toString());
+                                            getxController.ButtonControllerIndex
+                                                .value = 1;
+                                            print(getxController
+                                                .ButtonControllerIndex.value
+                                                .toString());
                                           },
                                           child: Text(
                                             'Sign up',
@@ -164,7 +166,7 @@ FocusNode focusNode = FocusNode();
                                     key: mobile_key_signup,
                                     child: Column(
                                       children: [
-                                         Row(
+                                        Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
@@ -204,115 +206,92 @@ FocusNode focusNode = FocusNode();
                                                 ))
                                           ],
                                         ),
-                                         SizedBox(height: 10,),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: formfieldsize/2,
-                                                          child: Text(
-                                                            'First Name',
-                                                            style:
-                                                                FontFamily.font,
-                                                          ),
-                                                        ),
-                                                        SizedBox(width: 20,),
-                                                        SizedBox(
-                                                          width: formfieldsize/2.2,
-                                                          child: Text(
-                                                            'Last Name',
-                                                            style:
-                                                                FontFamily.font,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        SizedBox(
-                                                            width:
-                                                                formfieldsize/2.2,
-                                                            child:
-                                                                TextFormField(
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .onUserInteraction,
-                                                              textInputAction:
-                                                                  TextInputAction
-                                                                      .next,
-                                                              validator:
-                                                                  (value) {
-                                                                if (value!
-                                                                    .isEmpty) {
-                                                                  return 'Cannot blank';
-                                                                } else {
-                                                                  return null;
-                                                                }
-                                                              },
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .name,
-                                                              controller:
-                                                                  signupfirstname,
-                                                              decoration: InputDecoration(
-                                                                  prefixIcon:
-                                                                      const Icon(
-                                                                          Icons
-                                                                              .person),
-                                                                  enabledBorder:
-                                                                      border,
-                                                                  focusedBorder:
-                                                                      border,
-                                                                  hintText:
-                                                                      'First Name'),
-                                                            )),
-                                                            SizedBox(width: 30,),
-
-                                                            SizedBox(
-                                                            width:
-                                                                formfieldsize/2,
-                                                            child:
-                                                                TextFormField(
-                                                              autovalidateMode:
-                                                                  AutovalidateMode
-                                                                      .onUserInteraction,
-                                                              textInputAction:
-                                                                  TextInputAction
-                                                                      .next,
-                                                              validator:
-                                                                  (value) {
-                                                                if (value!
-                                                                    .isEmpty) {
-                                                                  return 'Cannot blank';
-                                                                } else {
-                                                                  return null;
-                                                                }
-                                                              },
-                                                              keyboardType:
-                                                                  TextInputType
-                                                                      .name,
-                                                              controller:
-                                                                  signuplastname,
-                                                              decoration: InputDecoration(
-                                                                  prefixIcon:
-                                                                      const Icon(
-                                                                          Icons
-                                                                              .person),
-                                                                  enabledBorder:
-                                                                      border,
-                                                                  focusedBorder:
-                                                                      border,
-                                                                  hintText:
-                                                                      'Last Name'),
-                                                            ))
-                                                      ],
-                                                    ),
-                                                   Row(
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                              width: formfieldsize / 2,
+                                              child: Text(
+                                                'First Name',
+                                                style: FontFamily.font,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            SizedBox(
+                                              width: formfieldsize / 2.2,
+                                              child: Text(
+                                                'Last Name',
+                                                style: FontFamily.font,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            SizedBox(
+                                                width: formfieldsize / 2.2,
+                                                child: TextFormField(
+                                                  autovalidateMode:
+                                                      AutovalidateMode
+                                                          .onUserInteraction,
+                                                  textInputAction:
+                                                      TextInputAction.next,
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'Cannot blank';
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  keyboardType:
+                                                      TextInputType.name,
+                                                  controller: signupfirstname,
+                                                  decoration: InputDecoration(
+                                                      prefixIcon: const Icon(
+                                                          Icons.person),
+                                                      enabledBorder: border,
+                                                      focusedBorder: border,
+                                                      hintText: 'First Name'),
+                                                )),
+                                            SizedBox(
+                                              width: 30,
+                                            ),
+                                            SizedBox(
+                                                width: formfieldsize / 2,
+                                                child: TextFormField(
+                                                  autovalidateMode:
+                                                      AutovalidateMode
+                                                          .onUserInteraction,
+                                                  textInputAction:
+                                                      TextInputAction.next,
+                                                  validator: (value) {
+                                                    if (value!.isEmpty) {
+                                                      return 'Cannot blank';
+                                                    } else {
+                                                      return null;
+                                                    }
+                                                  },
+                                                  keyboardType:
+                                                      TextInputType.name,
+                                                  controller: signuplastname,
+                                                  decoration: InputDecoration(
+                                                      prefixIcon: const Icon(
+                                                          Icons.person),
+                                                      enabledBorder: border,
+                                                      focusedBorder: border,
+                                                      hintText: 'Last Name'),
+                                                ))
+                                          ],
+                                        ),
+                                        Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
@@ -374,23 +353,23 @@ FocusNode focusNode = FocusNode();
                                                 width: formfieldsize,
                                                 child: IntlPhoneField(
                                                   initialCountryCode: 'IN',
-                                                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                                                  autovalidateMode:
+                                                      AutovalidateMode
+                                                          .onUserInteraction,
                                                   validator: (value) {
-                                                    if(value.toString().length>10){
+                                                    if (value
+                                                            .toString()
+                                                            .length >
+                                                        10) {
                                                       return "number may not be";
                                                     }
                                                     return null;
-                                                    
                                                   },
-                                                  disableLengthCheck:true,
+                                                  disableLengthCheck: true,
                                                   focusNode: focusNode,
-                                                 
-                                                 
-                                                  
                                                   controller: signupphno,
                                                   style: FontFamily.font6,
-                                                  onTap: () async{
-                                                    
+                                                  onTap: () async {
                                                     await ClsSimInfo()
                                                         .printSimCardsData(
                                                             context)
@@ -431,15 +410,16 @@ FocusNode focusNode = FocusNode();
                                                     });
                                                   },
                                                   languageCode: "en",
-                  onChanged: (phone) {
-                    print(phone.completeNumber);
-                  },
-                  onCountryChanged: (country) {
-                    // ignore: avoid_print, prefer_interpolation_to_compose_strings
-                    print('Country changed to: ' + country.name);
-                  },
-                                                )
-                                                  )
+                                                  onChanged: (phone) {
+                                                    print(phone.completeNumber);
+                                                  },
+                                                  onCountryChanged: (country) {
+                                                    // ignore: avoid_print, prefer_interpolation_to_compose_strings
+                                                    print(
+                                                        'Country changed to: ' +
+                                                            country.name);
+                                                  },
+                                                ))
                                           ],
                                         ),
                                         Row(
@@ -513,19 +493,31 @@ FocusNode focusNode = FocusNode();
                                                           GetUtils.isEmail(
                                                               signupemail
                                                                   .text)) {
-                                                        mobile_key_signup.currentState!
+                                                        mobile_key_signup
+                                                            .currentState!
                                                             .save();
-                                                            Get.toNamed("/Mobilesigninotpscreen",arguments: {'signupuser': signupuser
-                                                                      .text,'signupfirstname':signupfirstname
-                                                                      .text,'signuplastname': signuplastname
-                                                                      .text,'signupemail':signupemail
-                                                                      .text,'signuppassword': signuppassword
-                                                                      .text,'signupphno': signupphno
-                                                                      .text,});
-
-
-                                                       
-                                                          
+                                                        Get.toNamed(
+                                                            "/Mobilesigninotpscreen",
+                                                            arguments: {
+                                                              'signupuser':
+                                                                  signupuser
+                                                                      .text,
+                                                              'signupfirstname':
+                                                                  signupfirstname
+                                                                      .text,
+                                                              'signuplastname':
+                                                                  signuplastname
+                                                                      .text,
+                                                              'signupemail':
+                                                                  signupemail
+                                                                      .text,
+                                                              'signuppassword':
+                                                                  signuppassword
+                                                                      .text,
+                                                              'signupphno':
+                                                                  signupphno
+                                                                      .text,
+                                                            });
                                                       } else {
                                                         Get.snackbar("Error",
                                                             "Please enter valid details",
@@ -544,8 +536,10 @@ FocusNode focusNode = FocusNode();
                                             ],
                                           ),
                                         ),
-                                        SizedBox(height: 10,),
-                                        
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+
                                         // Row(
                                         //   mainAxisAlignment:
                                         //       MainAxisAlignment.center,
@@ -747,28 +741,28 @@ FocusNode focusNode = FocusNode();
                                                         vertical: 10),
                                                     color: ColorPage.colorgrey,
                                                     onPressed: () async {
-                                                     
+                                                      // var token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJGaXJzdE5hbWUiOiJTb3VyYXYiLCJMYXN0TmFtZSI6Ik5hdGgiLCJuYW1laWQiOiI2NTg0YWUzNC00NjMwLTRhNjMtYjI3MC1kNjUwNjdmNTNmZDIiLCJGcmFuY2hpc2VJZCI6IjEiLCJNb2JpbGUiOiI5ODMxODExOTIzIiwiZW1haWwiOiJpc3NzYnN0MjAxNkBnbWFpbC5jb20iLCJyb2xlIjoiVGVzdGVyIiwibmJmIjoxNzIxNzI2NjA3LCJleHAiOjE3MjE3MzAyMDcsImlhdCI6MTcyMTcyNjYwN30.Z3ALSqb6bZwjkOcx2uSFpPjS3Ktqhp8dkolsUrekH1o";
+                                                      //  await tableEncryptionHistory(context,token);
+
                                                       // if (mobile_key_login
                                                       //     .currentState!
                                                       //     .validate()) {
                                                       //   mobile_key_login.currentState!
                                                       //       .save();
-   
-                                                        // await loginApi(
-                                                        //     context,
-                                                        //     loginemail.text,
-                                                        //     loginpassword.text,
-                                                        //     loginotp.text);
-                                                        await loginApi(
-                                                            context,
-                                                            'tester1',
-                                                           'Admin@1234',
-                                                            loginotp.text);
+
+                                                      // await loginApi(
+                                                      //     context,
+                                                      //     loginemail.text,
+                                                      //     loginpassword.text,
+                                                      //     loginotp.text);
+
                                                       // }
-    
 
-
-
+                                                      await loginApi(
+                                                          context,
+                                                          'tester1',
+                                                          'Admin@1234',
+                                                          loginotp.text);
                                                     },
                                                     child: Text(
                                                       'Login',

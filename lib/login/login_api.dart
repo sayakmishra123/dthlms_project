@@ -65,10 +65,10 @@ Future loginApi(
         token: jsondata['result']['token']);
     getObj.loginuserdata.add(userdata);
     // ignore: unused_local_variable
-    List dbdata = [];
-    await insertLogindataa(
-        userdata.email, userdata.phoneNumber, userdata.token);
-    await readLoginData();
+    // List dbdata = [];
+    // await insertLogindataa(
+    //     userdata.email, userdata.phoneNumber, userdata.token);
+    // await readLoginData();
     // await DbHandler()
     //     .insertLoginData(userdata.email, userdata.phoneNumber, userdata.token);
     // // await DbHandler().createMyPackagetable();
@@ -79,7 +79,7 @@ Future loginApi(
 // String tk=jsondata['result']['token'];
     Get.back();
     // DbHandler().closedb();
-
+print(jsondata['result']['token']);
     Platform.isWindows
         ? Get.toNamed('/Newpackagedashboard',
             arguments: {'token': jsondata['result']['token']})

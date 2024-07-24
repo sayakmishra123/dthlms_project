@@ -1,6 +1,5 @@
 import 'dart:io';
-import 'package:animated_splash_screen/animated_splash_screen.dart'
-    show AnimatedSplashScreen, SplashTransition;
+
 import 'package:camera/camera.dart';
 import 'package:dthlms/Testing/cameratesting.dart';
 import 'package:dthlms/ThemeData/color/color.dart' show ColorPage;
@@ -8,9 +7,11 @@ import 'package:dthlms/TheoryExam/theoryexampage.dart';
 import 'package:dthlms/android/MCQ/mcqCondition.dart';
 import 'package:dthlms/android/MCQ/mockTestRank.dart';
 import 'package:dthlms/android/MCQ/mockTestMcq.dart';
+import 'package:dthlms/android/login/dth_mob_login.dart';
 import 'package:dthlms/android/theoryexam/TheoryExamPageMobile.dart';
 import 'package:dthlms/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:dthlms/login/dth_login.dart' show DthLmsLogin;
+import 'package:dthlms/mcq/macterm&conditionpage.dart';
 import 'package:dthlms/mcq/mockTestmcqPage.dart';
 import 'package:dthlms/routes/router.dart' show pageRouter;
 import 'package:dthlms/utctime.dart';
@@ -74,19 +75,8 @@ class _MyAppState extends State<MyApp> {
       getPages: router.Route,
       debugShowCheckedModeBanner: false,
       title: 'DTH LMS',
-      home: AnimatedSplashScreen(
-        splash: "assets/splash6.gif",
-        splashIconSize: 6000,
-        centered: true,
-        nextScreen:
-            // Platform.isAndroid ? MockTestMcqExamPageMobile() : TheoryExamPage(),
-            Platform.isAndroid ? TheoryExamPageMobile
-            () : TheoryExamPage(),
-
-        backgroundColor: ColorPage.bgcolor,
-        splashTransition: SplashTransition.scaleTransition,
-        duration: 3500,
-      ),
+      home:  Platform.isAndroid ? Mobilelogin
+            () : DthLmsLogin(),
     );
   }
 }

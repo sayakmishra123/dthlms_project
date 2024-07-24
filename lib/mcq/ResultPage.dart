@@ -1,22 +1,17 @@
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/mcq/modelclass.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:lottie/lottie.dart';
 
 class MockTestresult extends StatefulWidget {
-  final List<McqItem> mcqData;
-  final Map<int, int> userAns;
-  final List<Map<int, int>> correctAnswers;
-
-  MockTestresult({
-    required this.mcqData,
-    required this.userAns,
-    required this.correctAnswers,
-  });
+ 
 
   @override
   State<MockTestresult> createState() => _MockTestresultState();
@@ -25,6 +20,10 @@ class MockTestresult extends StatefulWidget {
 class _MockTestresultState extends State<MockTestresult> with SingleTickerProviderStateMixin {
   bool _isLottieVisible = true;
   late AnimationController _animationController;
+    Getx getxController = Get.put(Getx());
+  final List<McqItem> mcqData= Get.arguments['mcqData'];
+   final Map<int, int> userAns = Get.arguments['userAns'];
+  final List<Map<int, int>> correctAnswers = Get.arguments['correctAnswers'];
 
   List<Map<String, dynamic>> dummyData = [
     {
@@ -128,23 +127,23 @@ class _MockTestresultState extends State<MockTestresult> with SingleTickerProvid
   Widget build(BuildContext context) {
     int totalMarks = 0;
 
-    List<Widget> questionWidgets = widget.mcqData.asMap().entries.map((entry) {
+    List<Widget> questionWidgets = mcqData.asMap().entries.map((entry) {
       int index = entry.key;
       McqItem mcqItem = entry.value;
       int questionId = mcqItem.mcqId;
       String question = mcqItem.mcqQuestion;
-      String userSelected = widget.userAns.containsKey(questionId)
+      String userSelected = userAns.containsKey(questionId)
           ? mcqItem.options
-              .firstWhere((option) => option.optionId == widget.userAns[questionId])
+              .firstWhere((option) => option.optionId == userAns[questionId])
               .optionName
           : 'Not Answered';
       String correctAnswer = mcqItem.options
-          .firstWhere((option) => widget.correctAnswers
+          .firstWhere((option) => correctAnswers
               .any((map) => map[questionId] == option.optionId))
           .optionName;
-      int marks = widget.userAns.containsKey(questionId) &&
-              widget.correctAnswers
-                  .any((map) => map[questionId] == widget.userAns[questionId])
+      int marks = userAns.containsKey(questionId) &&
+              correctAnswers
+                  .any((map) => map[questionId] ==userAns[questionId])
           ? 1
           : 0;
       totalMarks += marks;
@@ -167,7 +166,7 @@ class _MockTestresultState extends State<MockTestresult> with SingleTickerProvid
             ],
           ),
           trailing: Text(
-            marks.toString(),
+           "Obtain Marks: "+ marks.toString(),
             style: FontFamily.font3.copyWith(color: Colors.black),
           ),
         ),
@@ -202,7 +201,7 @@ class _MockTestresultState extends State<MockTestresult> with SingleTickerProvid
                   Column(
                     children: [
                       Container(
-                        decoration: BoxDecoration(color: ColorPage.blue),
+                        decoration: BoxDecoration(color: ColorPage.appbarcolorcopy),
                         width: MediaQuery.of(context).size.width / 2,
                         height: 200,
                         padding: EdgeInsets.symmetric(horizontal: 130, vertical: 10),
@@ -395,7 +394,7 @@ class _MockTestresultState extends State<MockTestresult> with SingleTickerProvid
                     child: Container(
                       height: 60,
                       decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: ColorPage.appbarcolorcopy,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Center(
@@ -412,7 +411,7 @@ class _MockTestresultState extends State<MockTestresult> with SingleTickerProvid
                             Padding(
                               padding: const EdgeInsets.only(left: 0),
                               child: Text(
-                                'Floating Container',
+                                'Student Name',
                                 style: TextStyle(color: Colors.white, fontSize: 20),
                               ),
                             ),
@@ -456,7 +455,7 @@ class _MockTestresultState extends State<MockTestresult> with SingleTickerProvid
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 218, 225, 227),
+                color: Color.fromARGB(255, 255, 255, 255),
                 border: Border(
                   left: BorderSide(color: ColorPage.appbarcolor, width: 3),
                 ),
