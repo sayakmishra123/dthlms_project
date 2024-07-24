@@ -19,6 +19,7 @@ import 'package:dthlms/utils/enebelActivationcode.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:typewritertext/v3/typewriter.dart';
 
 class NewPackageDashboard extends StatefulWidget {
@@ -643,7 +644,9 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                                                 )
                                               : Center(
                                                   child: Image.asset(
-                                                      'assets/android/nodatafound.png'))),
+                                                      'assets/android/nodatafound.png'),
+                                                ),
+                                        ),
                                 ],
                               ),
                             ),
@@ -653,39 +656,21 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                     ),
                   ),
                   Expanded(
-                      child: Container(
-                          color: Colors.black,
-                          child: Column(
-                            children: [
-                              Flexible(
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      Stack(children: [
-                                        Image.asset(
-                                          fit: BoxFit.fitHeight,
-                                          'assets/wallpaperflare.com_wallpaper.jpg',
-                                          height:
-                                              MediaQuery.sizeOf(context).height,
-                                        ),
-                                        Positioned(
-                                          bottom: 500,
-                                          left: 300,
-                                          child: TypeWriter.text(
-                                            'lorem ipsum dolot sit amet ...',
-                                            style: FontFamily.font2,
-                                            repeat: true,
-                                            duration: const Duration(
-                                                milliseconds: 50),
-                                          ),
-                                        ),
-                                      ]),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )))
+                      child: SfCalendar(
+                    // allowDragAndDrop: false,
+                    // allowViewNavigation: true,
+                    // backgroundColor: ColorPage.colorgrey,
+                    headerStyle:
+                        CalendarHeaderStyle(backgroundColor: Colors.blue),
+                    // showTodayButton: true,
+                    view: CalendarView.month,
+                    monthViewSettings: MonthViewSettings(
+                      agendaStyle: AgendaStyle(
+                          dateTextStyle: FontFamily.font3,
+                          placeholderTextStyle: TextStyle(color: Colors.red)),
+                      showAgenda: true,
+                    ),
+                  ))
                 ],
               ),
               GlobalDialog(token)

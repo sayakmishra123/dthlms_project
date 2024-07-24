@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:dthlms/android/MCQ/practiceMcq.dart';
 import 'package:dthlms/mcq/mcqexampage.dart';
 import 'package:dthlms/mcq/practiceMcqPage.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +13,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 class McqTermAndConditionmobile extends StatelessWidget {
 
-  bool androiddevice=Platform.isAndroid?true:false;
-  bool windowsddevice=Platform.isWindows?true:false;
+
 
   McqTermAndConditionmobile({super.key});
   RxBool checkbox = false.obs;
@@ -27,16 +28,10 @@ class McqTermAndConditionmobile extends StatelessWidget {
         ),
         title: Text(
           'Welcome xyz classes',
-          style: FontFamily.font5,
+          style: FontFamily.font5.copyWith(fontSize: 15),
         ),
         actions: [
-          Text(
-            'Exam Starts in : 4.50 min  ',
-            style: TextStyle(
-                color: ColorPage.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20),
-          ),
+         
           IconButton(
               onPressed: () {},
               icon: Icon(
@@ -53,7 +48,7 @@ class McqTermAndConditionmobile extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: Platform.isAndroid?30:100, vertical: 20),
+          padding:  EdgeInsets.symmetric(horizontal: 30, vertical: 20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -70,7 +65,7 @@ class McqTermAndConditionmobile extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    width: androiddevice?MediaQuery.sizeOf(context).width/1.5:MediaQuery.sizeOf(context).width-200,
+                    width:MediaQuery.sizeOf(context).width/1.5,
 
                     child: Text(
                       'Please read the following instructions carefully',
@@ -93,7 +88,7 @@ class McqTermAndConditionmobile extends StatelessWidget {
                   
                   Container(
                       // alignment: Alignment.center,
-                      width:androiddevice? MediaQuery.sizeOf(context).width /1.2:MediaQuery.of(context).size.width-200,
+                      width: MediaQuery.sizeOf(context).width /1.2,
                       child: Text(
                         textAlign: TextAlign.justify,
                         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi officia doloribus veritatis facere autem necessitatibus, similique asperiores consectetur aliquam excepturi dolor error reiciendis beatae? Reprehenderit ducimus, voluptate facilis eveniet autem ab fuga accusantium suscipit labore obcaecati amet voluptatibus corporis numquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor accusantium voluptatibus, aliquam ratione exercitationem aut debitis quos saepe nemo atque, odio magni architecto sapiente voluptate! Dolores voluptate sapiente voluptatibus explicabo beatae, praesentium necessitatibus. Alias et perspiciatis fugiat est? Explicabo, neque vel est numquam quam similique ullam soluta veritatis dolores, quas ut cumque porro, eaque accusantium odio? Ad id officiis quis ducimus dolorem eum nobis dignissimos maxime! Porro id ratione quam deserunt eum adipisci, similique, qui placeat nisi voluptatem ullam nemo accusantium laudantium quas quidem voluptatum eveniet laboriosam. Iusto, adipisci, deleniti ullam possimus exercitationem at cum, illum maxime eius iure ipsam? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi officia doloribus veritatis facere autem necessitatibus, similique asperiores consectetur aliquam excepturi dolor error reiciendis beatae? Reprehenderit ducimus, voluptate facilis eveniet autem ab fuga accusantium suscipit labore obcaecati amet voluptatibus corporis numquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor accusantium voluptatibus, aliquam ratione exercitationem aut debitis quos saepe nemo atque, odio magni architecto sapiente voluptate! Dolores voluptate sapiente voluptatibus explicabo beatae, praesentium necessitatibus. Alias et perspiciatis fugiat est? Explicabo, neque vel est numquam quam similique ullam soluta veritatis dolores, quas ut cumque porro, eaque accusantium odio? Ad id officiis quis ducimus dolorem eum nobis dignissimos maxime! Porro id ratione quam deserunt eum adipisci, similique, qui placeat nisi voluptatem ullam nemo accusantium laudantium quas quidem voluptatum eveniet laboriosam. Iusto, adipisci, deleniti ullam possimus exercitationem at cum, illum maxime eius iure ipsam? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi officia doloribus veritatis facere autem necessitatibus, similique asperiores consectetur aliquam excepturi dolor error reiciendis beatae? Reprehenderit ducimus, voluptate facilis eveniet autem ab fuga accusantium suscipit labore obcaecati amet voluptatibus corporis numquam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor accusantium voluptatibus, aliquam ratione exercitationem aut debitis quos saepe nemo atque, odio magni architecto sapiente voluptate! Dolores voluptate sapiente voluptatibus explicabo beatae, praesentium necessitatibus. Alias et perspiciatis fugiat est? Explicabo, neque vel est numquam quam similique ullam soluta veritatis dolores, quas ut cumque porro, eaque accusantium odio? Ad id officiis quis ducimus dolorem eum nobis dignissimos maxime! Porro id ratione quam deserunt eum adipisci, similique, qui placeat nisi voluptatem ullam nemo accusantium laudantium quas quidem voluptatum eveniet laboriosam. Iusto, adipisci, deleniti ullam possimus exercitationem at cum, illum maxime eius iure ipsam? Dolor accusantium voluptatibus, aliquam ratione exercitationem aut debitis quos saepe nemo atque, odio magni architecto sapiente voluptate! Dolores voluptate sapiente voluptatibus explicabo beatae, praesentium necessitatibus. Alias et perspiciatis fugiat est? Explicabo, neque vel est numquam quam similique ullam soluta veritatis dolores, quas ut cumque porro, eaque accusantium odio? Ad id officiis quis ducimus dolorem eum nobis dignissimos maxime! Porro id ratione quam deserunt eum adipisci, similique, qui placeat nisi voluptatem ullam nemo accusantium laudantium quas quidem voluptatum eveniet laboriosam. Iusto, adipisci, deleniti ullam possimus exercitationem at cum, illum maxime eius iure ipsam?',
@@ -104,12 +99,12 @@ class McqTermAndConditionmobile extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: androiddevice?30:windowsddevice?150:100,
+                height:30
               ),
 
 
 
-              androiddevice?Column(
+            Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -119,33 +114,19 @@ class McqTermAndConditionmobile extends StatelessWidget {
                       Text(
                         'Name : Paper 1 - Arithmetic',
                         style: TextStyle(fontWeight: FontWeight.bold),
-                        textScaler:androiddevice? null:TextScaler.linear(1.4),
+                        
                       ),
                     ],
                   ),
                   Text(
                     'Total Questions : 60',
                     style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaler:androiddevice? null:TextScaler.linear(1.4),
-                  )
-                ],
-              ):
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Name : Paper 1 - Arithmetic',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaler:androiddevice? null:TextScaler.linear(1.4),
-                  ),
-                  Text(
-                    'Total Questions : 60',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaler:androiddevice? null:TextScaler.linear(1.4),
+                    
                   )
                 ],
               ),
-           androiddevice? Column(
+            
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -155,28 +136,14 @@ class McqTermAndConditionmobile extends StatelessWidget {
                       Text(
                         'Type : Multiple Choice',
                         style: TextStyle(fontWeight: FontWeight.bold),
-                       textScaler:androiddevice? null:TextScaler.linear(1.4),
+                   
                       ),
                     ],
                   ),
                   Text(
                     'Total Duration : 60 Minutes',
                     style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaler:androiddevice? null:TextScaler.linear(1.4),
-                  )
-                ],
-              ):   Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Type : Multiple Choice',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                   textScaler:androiddevice? null:TextScaler.linear(1.4),
-                  ),
-                  Text(
-                    'Total Duration : 60 Minutes',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    textScaler:androiddevice? null:TextScaler.linear(1.4),
+                  
                   )
                 ],
               ),
@@ -186,12 +153,13 @@ class McqTermAndConditionmobile extends StatelessWidget {
                   Text(
                     'Marks : 60',
                     style: TextStyle(fontWeight: FontWeight.bold),
-                   textScaler:androiddevice? null:TextScaler.linear(1.4),
+                 
                   ),
                 ],
               ),
-             androiddevice?Column(children: [
+         Column(children: [
                Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Obx(
                         () => SizedBox(
@@ -207,16 +175,22 @@ class McqTermAndConditionmobile extends StatelessWidget {
                         )),
                       ),
                       Container(
-                          // width: 300,
-                          child: Text(
-                        'I have read the instructions carefully',
+                          
+                          child: AutoSizeText(
+                        'I have read the instructions carefully!',
+                      style: FontFamily.font6.copyWith(fontSize: 11),
+                        minFontSize: 5,
+                        maxFontSize: 15,
+
+
+                        
                         overflow: TextOverflow.ellipsis,
                       )),
                     ],
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      checkbox.value? Get.to(() => McqExamPage()):_onTermDeniey(context);
+                      checkbox.value? Get.to(() => PracticeMcqMobile()):_onTermDeniey(context);
                     },
                     child: Text(
                       'Next',
@@ -238,49 +212,7 @@ class McqTermAndConditionmobile extends StatelessWidget {
 
 
              //For Windows
-:Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Obx(
-                        () => SizedBox(
-                            // width: 100,
-                            child: Checkbox(
-                          // fillColor: MaterialStatePropertyAll(ColorPage.blue),
-                          value: checkbox.value,
-                          onChanged: (v) {
-                            checkbox.value = !checkbox.value;
-                          },
-                        )),
-                      ),
-                      Container(
-                          // width: 300,
-                          child: Text(
-                        'I have read the instructions carefully',
-                        overflow: TextOverflow.ellipsis,
-                      )),
-                    ],
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                     checkbox.value? Get.to(() =>PracticeMcq()):_onTermDeniey(context);
-                    },
-                    child: Text(
-                      'Next',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: ButtonStyle(
-                        padding: MaterialStatePropertyAll(
-                            EdgeInsets.symmetric(vertical: 20, horizontal: 40)),
-                        shape: MaterialStatePropertyAll(
-                            ContinuousRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        backgroundColor:
-                            MaterialStatePropertyAll(ColorPage.blue)),
-                  )
-                ],
-              )         ],
+        ],
           ),
         ),
       ),

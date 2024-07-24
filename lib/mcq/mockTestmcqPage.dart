@@ -259,14 +259,14 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                   SizedBox(
                     width: 50,
                   ),
-                //  isSubmitted.value?
+                 isSubmitted.value?
                   Row(
                     children: [
                       MyButton(
                           btncolor: Colors.white,
                           onPressed: () {
-                            // Get.to(()=>ResultPage(mcqData: mcqData,correctAnswers: answer,userAns: userAns,));
-                            Get.to(()=>MockTestResultPage());
+                            Get.to(()=>MockTestresult(mcqData: mcqData,correctAnswers: answer,userAns: userAns,));
+                            // Get.to(()=>MockTestResultPage());
                          
                           },
                           mychild: 'Result',
@@ -274,7 +274,7 @@ class _MockTestMcqExamPageState extends State<MockTestMcqExamPage> {
                       SizedBox(width: 20),
                     ],
                   )
-                  // :SizedBox(),
+                  :SizedBox(),
                 ],
               ),
             ],
