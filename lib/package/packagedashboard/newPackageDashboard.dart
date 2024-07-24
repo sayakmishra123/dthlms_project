@@ -296,6 +296,7 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
     super.initState();
   }
 
+  List x = ['avinash', 2, 3];
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -695,6 +696,17 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
     );
   }
 
+  List<Meeting> _getDataSource() {
+    final List<Meeting> meetings = <Meeting>[];
+    final DateTime today = DateTime.now();
+    final DateTime startTime =
+        DateTime(today.year, today.month, today.day, 9, 0, 0);
+    final DateTime endTime = startTime.add(const Duration(hours: 2));
+    meetings.add(Meeting('Conference dfffdsf', startTime, endTime,
+        const Color(0xFF0F8644), false));
+    return meetings;
+  }
+
   void showFullImageDialog() {
     showDialog(
       context: context,
@@ -740,4 +752,14 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
       },
     );
   }
+}
+
+class Meeting {
+  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+
+  String eventName;
+  DateTime from;
+  DateTime to;
+  Color background;
+  bool isAllDay;
 }

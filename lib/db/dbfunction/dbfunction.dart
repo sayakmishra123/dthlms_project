@@ -186,6 +186,9 @@ void testSQLCipherOnWindows() async {
   createTblEncryptionHistory();
   createtblChapter();
   createtblFileDetails();
+  createtblSectionFilesDetails();
+  createtblMyPackage();
+  createtblPackageDetails();
 }
 
 void getVersion() {
@@ -221,7 +224,7 @@ void createtblChapter() {
 void createTblEncryptionHistory() {
   // Create a table and insert some data
   _db.execute('''
-   CREATE TABLE IF NOT EXISTS TblEncryptionHistory(FileId TEXT, FileType TEXT, FileName TEXT, FileDuration TEXT,FileDescription TEXT,SortedOrder TEXT,FromDateTime TEXT,UptoDateTime TEXT,ThumbnailImage TEXT,LiveId TEXT,LiveUrl TEXT,PackageId TEXT,FranchiseId TEXT);
+   CREATE TABLE IF NOT EXISTS TblEncryptionHistory(FileId TEXT, FileType TEXT, FileName TEXT, FileDuration TEXT,FileDescription TEXT,SortedOrder TEXT,FromDateTime TEXT,UptoDateTime TEXT,ThumbnailImage TEXT,LiveId TEXT,LiveUrl TEXT,PackageId TEXT,FranchiseId TEXT,UserId TEXT,SectionChapterId TEXT);
   ''');
   print('tblfile table');
 }
@@ -232,6 +235,47 @@ void createtblFileDetails() {
    CREATE TABLE IF NOT EXISTS TblFileDetails(FileId TEXT, FileDetailsId TEXT, FileName TEXT, FileType TEXT,Option1 TEXT,Option2 TEXT,Option3 TEXT,Option4 TEXT,VideoTime TEXT,Answer TEXT,Category TEXT,TagName TEXT, DocumentPath TEXT,SortedOrder TEXT,IsVideoCompulsory TEXT,IsChapterCompulsory TEXT,PreviousVideoId TEXT,MinimumVideoDuration TEXT,PackageId TEXT,PreviousChapterId TEXT);
   ''');
   print('tblFileDetails table');
+}
+
+void createtblMyPackage() {
+  // Create a table and insert some data
+  _db.execute('''
+   CREATE TABLE IF NOT EXISTS TblMyPackage(UserId TEXT, PackageName TEXT, PackageId TEXT PRIMARY KEY, CourseName TEXT, CourseId TEXT, TermId TEXT, TermName TEXT, ValidUpto TEXT, ValidFrom TEXT, FranchiseId INTEGER, ActivationId TEXT);
+  ''');
+  // log()
+  print('tblMyPackage');
+}
+
+void createtblPackageDetails() {
+  // Create a table and insert some data
+  _db.execute('''
+      CREATE TABLE IF NOT EXISTS TblPackageDetails (
+        PackageId TEXT PRIMARY KEY,
+        NodeId TEXT,
+        NodeName TEXT,
+        NodeOptionId TEXT,
+        NodeOptionName TEXT,
+        SortedOrder INTEGER,
+        FranchiseId TEXT,
+        UserId TEXT
+      )
+      ''');
+
+  // log()
+  print('PackageDetails');
+}
+
+void createtblSectionFilesDetails() {
+  // Create a table and insert some data
+  _db.execute('''
+          CREATE TABLE IF NOT EXISTS TblSectionFilesDetails(
+            SectionChapterId TEXT PRIMARY KEY,
+            SectionChapterName TEXT,
+            SortedOrder TEXT
+          )
+          ''');
+  // log()
+  print('tblSectionFilesDetails');
 }
 
 Future<void> insertLogindataa(
@@ -253,23 +297,24 @@ Future<void> inserttblChapter(String chapterId, String chapterName,
 }
 
 Future<void> insertTblEncryptionHistory(
-  String fileId,
-  String fileType,
-  String fileName,
-  String fileDuration,
-  String fileDescription,
-  String sortedOrder,
-  String fromDateTime,
-  String uptoDateTime,
-  String thumbnailImage,
-  String liveId,
-  String liveUrl,
-  String packageId,
-  String franchiseId,
-) async {
+    String fileId,
+    String fileType,
+    String fileName,
+    String fileDuration,
+    String fileDescription,
+    String sortedOrder,
+    String fromDateTime,
+    String uptoDateTime,
+    String thumbnailImage,
+    String liveId,
+    String liveUrl,
+    String packageId,
+    String franchiseId,
+    String userId,
+    String sectionChapterId) async {
   _db.execute('''
-       INSERT INTO TblEncryptionHistory (FileId, FileType, FileName,FileDuration,FileDescription,SortedOrder,FromDateTime,UptoDateTime,ThumbnailImage,LiveId,LiveUrl,PackageId,FranchiseId) 
-      VALUES ('$fileId', '$fileType', '$fileName','$fileDuration','$fileDescription','$sortedOrder','$fromDateTime','$uptoDateTime','$thumbnailImage','$liveId','$liveUrl','$packageId','$franchiseId');
+       INSERT INTO TblEncryptionHistory (FileId, FileType, FileName,FileDuration,FileDescription,SortedOrder,FromDateTime,UptoDateTime,ThumbnailImage,LiveId,LiveUrl,PackageId,FranchiseId,UserId,SectionChapterId) 
+      VALUES ('$fileId', '$fileType', '$fileName','$fileDuration','$fileDescription','$sortedOrder','$fromDateTime','$uptoDateTime','$thumbnailImage','$liveId','$liveUrl','$packageId','$franchiseId','$userId'.'$sectionChapterId');
     ''');
 }
 
