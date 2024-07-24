@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       getPages: router.Route,
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,    
       title: 'DTH LMS',
       home:  Platform.isAndroid ? Mobilelogin
             () : DthLmsLogin(),
