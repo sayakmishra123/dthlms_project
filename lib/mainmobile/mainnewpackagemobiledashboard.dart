@@ -18,8 +18,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:popup_menu_plus/popup_menu_plus.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:showcaseview/showcaseview.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 //abhoymallik
 class MainNewPackageDashboardMobile extends StatefulWidget {
@@ -289,9 +292,9 @@ final GlobalKey<ScaffoldState> _key = GlobalKey();
                     ),
                   ],
           ),
-          drawer: Drawer(),
+          
           floatingActionButton: FloatingActionButton(onPressed: (){
-_key.currentState!.openDrawer();
+         _showMyDialog();
           },
           child: Icon(Icons.date_range_outlined),
           ),
@@ -444,6 +447,14 @@ _key.currentState!.openDrawer();
       ),
     );
   }
+  void _showMyDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Calenderwidget();
+      },
+    );
+  }
 
   void showFullImageDialog() {
     showDialog(
@@ -529,7 +540,64 @@ _key.currentState!.openDrawer();
       },
     );
   }
+  Widget Calenderwidget(){
+  return   Expanded(
+                      child: Container(
+                    margin: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: ColorPage.white,
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 3,
+                            color: Color.fromARGB(255, 192, 191, 191),
+                            offset: Offset(0, 0))
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: SfCalendar(
+                      viewHeaderHeight: 50,
+                      viewHeaderStyle: ViewHeaderStyle(dayTextStyle:FontFamily.font6 ),
+
+                      // allowDragAndDrop: false,
+                      // allowViewNavigation: true,
+                      // backgroundColor: ColorPage.colorgrey,
+                      headerStyle: CalendarHeaderStyle(
+                          backgroundColor: ColorPage.blue,
+                          textAlign: TextAlign.center,
+                          textStyle: FontFamily.font3),
+                      // showTodayButton: true,
+                      view: CalendarView.month,
+                      monthViewSettings: MonthViewSettings(
+                        agendaStyle: AgendaStyle(
+                            dateTextStyle: FontFamily.font3,
+                            placeholderTextStyle: TextStyle(color: Colors.red)),
+                        showAgenda: true,
+                      ),
+                    ),
+                  ));
 }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
