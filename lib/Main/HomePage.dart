@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
@@ -21,11 +22,11 @@ import 'package:http/http.dart' as http;
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:typewritertext/v3/typewriter.dart';
 
-class NewPackageDashboard extends StatefulWidget {
-  const NewPackageDashboard({super.key});
+class Homepagedashboard extends StatefulWidget {
+  const Homepagedashboard({super.key});
 
   @override
-  State<NewPackageDashboard> createState() => _NewPackageDashboardState();
+  State<Homepagedashboard> createState() => _HomepagedashboardState();
 }
 
 class AllPackage {
@@ -112,7 +113,7 @@ class MyPackageDetails {
   });
 }
 
-class _NewPackageDashboardState extends State<NewPackageDashboard> {
+class _HomepagedashboardState extends State<Homepagedashboard> {
   List<Color> colors = [
     Colors.blue,
     Colors.orange,
@@ -135,6 +136,21 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
 
   List<MyPackageDetails> mypackage = [];
   List<AllPackage> filteredPackage = [];
+
+  int currentIndex = 0;
+  final CarouselController carouselController = CarouselController();
+
+  final List<Map<String, String>> notificationlist = [
+    {
+      "id": "1",
+      "title":
+          'Shubha-1ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc'
+    },
+    {"id": "2", "title": 'Shubha-2dddddddddddddddddddddddddddddddddddddddddd'},
+    {"id": "3", "title": 'Shubha-dddddddddddddddddddddddddddddddddddddddd'},
+    {"id": "4", "title": 'Shubha-4dddddddddddddddddddddddddddddddddddddddddd'},
+    {"id": "5", "title": 'Shubha-5dddddddddddddddddddddddddddddddddddddddddd'},
+  ];
 
   // Map<String, List<MyPackage>> mynestedData = {};
 
@@ -296,7 +312,6 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
     super.initState();
   }
 
-  List x = ['avinash', 2, 3];
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -314,7 +329,7 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
           //   ),
           // ),
           // elevation: 1,
-          scrolledUnderElevation: 20,
+          // scrolledUnderElevation: 20,
 
           iconTheme: IconThemeData(color: ColorPage.white),
           automaticallyImplyLeading: false,
@@ -322,6 +337,42 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
           //    padding: const EdgeInsets.only(left: 30.0),
           //    child: Icon(Icons.person,color: ColorPage.white,),
           //  )],),
+
+          title: Padding(
+            padding: const EdgeInsets.only(bottom: 7,left: 20),
+            child: Container(
+              height: 40,
+              width: MediaQuery.of(context).size.width / 2.2,
+              child: TextFormField(
+              
+                onChanged: (value) {
+                  setFilterData();
+                },
+                controller: searchController,
+                decoration: InputDecoration(
+                  hintStyle: TextStyle(
+                      color: ColorPage.brownshade300,
+                      fontSize: ClsFontsize.ExtraSmall - 3),
+                  hintText: 'Search',
+                  fillColor: ColorPage.white,
+                  filled: true,
+                  suffixIcon: IconButton(
+                    icon: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Icon(Icons.search),
+                    ),
+                    onPressed: () {
+                      setFilterData();
+                    },
+                  ),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none),
+                ),
+                style: TextStyle(color: ColorPage.colorblack),
+              ),
+            ),
+          ),
           actions: [
             IconButton(
                 onPressed: () {
@@ -387,51 +438,95 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                               child: Column(
                                 children: [
                                   SizedBox(
-                                    height: 20,
+                                    height: 10,
                                   ),
                                   Container(
+                                    height: 85,
+                                    margin: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
+                                      width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(blurRadius: 7,color: Color.fromARGB(255, 200, 196, 196))
+                                      ],
                                         borderRadius: BorderRadius.all(
-                                            Radius.circular(25)),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: ColorPage.appbarcolor
-                                                  .withOpacity(0.3),
-                                              blurRadius: 12,
-                                              spreadRadius: 5)
-                                        ]),
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 20),
-                                    height: 55,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: TextFormField(
-                                      onChanged: (value) {
-                                        setFilterData();
-                                      },
-                                      controller: searchController,
-                                      decoration: InputDecoration(
-                                        hintStyle: TextStyle(
-                                            color: ColorPage.appbarcolor,
-                                            fontSize:
-                                                ClsFontsize.ExtraSmall - 1),
-                                        hintText: 'Search',
-                                        fillColor:
-                                            Color.fromARGB(255, 255, 255, 255),
-                                        filled: true,
-                                        suffixIcon: Icon(
-                                          Icons.search,
-                                          color: ColorPage.appbarcolor,
+                                          Radius.circular(20),
                                         ),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            borderSide: BorderSide.none),
-                                      ),
-                                    ),
-                                  ),
+                                        color: ColorPage.white),
+                                  )
+
+                                  //  Container(
+                                  //   height: 50,
+
+                                  //    child: Stack(children: [
+                                  //      InkWell(
+                                  //        child: CarouselSlider(
+
+                                  //          items: notificationlist
+                                  //              .map(
+                                  //                (item) => Container(
+
+                                  //                  margin: const EdgeInsets.symmetric(
+                                  //                      horizontal: 5),
+                                  //                  decoration: BoxDecoration(
+                                  //                      borderRadius:
+                                  //                          BorderRadius.circular(20),
+                                  //                    color: const Color.fromARGB(255, 211, 49, 49),
+                                  //                      border: Border.all(
+                                  //                          color: ColorPage.appbarcolor,
+                                  //                          width: 2)),
+                                  //                          child: Row(
+                                  //                            children: [
+                                  //                              Text(item['title'].toString()),
+                                  //                            ],
+                                  //                          ),
+                                  //                ),
+                                  //              )
+                                  //              .toList(),
+                                  //          carouselController: carouselController,
+                                  //          options: CarouselOptions(
+                                  //            scrollPhysics: const BouncingScrollPhysics(),
+                                  //            autoPlay: true,
+                                  //            aspectRatio: 2,
+                                  //            viewportFraction: 1,
+                                  //            onPageChanged: (index, reason) {
+                                  //              setState(() {
+                                  //                currentIndex = index;
+                                  //              });
+                                  //            },
+                                  //          ),
+                                  //        ),
+                                  //      ),
+                                  //      Positioned(
+                                  //        bottom: 5,
+                                  //        left: 0,
+                                  //        right: 0,
+                                  //        child: Row(
+                                  //          mainAxisAlignment: MainAxisAlignment.center,
+                                  //          children: notificationlist.asMap().entries.map((entry) {
+                                  //            return GestureDetector(
+                                  //              onTap: () => carouselController
+                                  //                  .animateToPage(entry.key),
+                                  //              child: Container(
+                                  //                width: currentIndex == entry.key ? 20 : 10,
+                                  //                height: 10,
+                                  //                margin: const EdgeInsets.symmetric(
+                                  //                    horizontal: 3.0),
+                                  //                decoration: BoxDecoration(
+                                  //                    borderRadius: BorderRadius.circular(10),
+                                  //                    color: currentIndex == entry.key
+                                  //                        ? ColorPage.appbarcolor
+                                  //                        : ColorPage.white),
+                                  //              ),
+                                  //            );
+                                  //          }).toList(),
+                                  //        ),
+                                  //      ),
+                                  //    ]),
+                                  //  ),
+                                  ,
                                   AnimatedButtonBar(
                                     controller: AnimatedButtonController()
-                                      ..setIndex(1),
+                                      ..setIndex(0),
                                     radius: 32.0,
                                     padding: const EdgeInsets.all(16.0),
                                     backgroundColor: ColorPage.bluegrey800,
@@ -446,20 +541,11 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
                                       ButtonBarEntry(
                                           onTap: () {
                                             getxController.packageshow.value =
-                                                true;
-                                          },
-                                          child: Text(
-                                            'My Package',
-                                            style: FontFamily.font,
-                                          )),
-                                      ButtonBarEntry(
-                                          onTap: () {
-                                            getxController.packageshow.value =
                                                 false;
                                             fnfindallpackage(token);
                                           },
                                           child: Text(
-                                            'All Package',
+                                            'My Package',
                                             style: FontFamily.font,
                                           )),
                                     ],
@@ -696,17 +782,6 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
     );
   }
 
-  List<Meeting> _getDataSource() {
-    final List<Meeting> meetings = <Meeting>[];
-    final DateTime today = DateTime.now();
-    final DateTime startTime =
-        DateTime(today.year, today.month, today.day, 9, 0, 0);
-    final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting('Conference dfffdsf', startTime, endTime,
-        const Color(0xFF0F8644), false));
-    return meetings;
-  }
-
   void showFullImageDialog() {
     showDialog(
       context: context,
@@ -752,14 +827,4 @@ class _NewPackageDashboardState extends State<NewPackageDashboard> {
       },
     );
   }
-}
-
-class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
-
-  String eventName;
-  DateTime from;
-  DateTime to;
-  Color background;
-  bool isAllDay;
 }

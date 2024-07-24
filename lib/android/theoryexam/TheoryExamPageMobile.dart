@@ -185,8 +185,9 @@ class _TheoryExamPageMobileState extends State<TheoryExamPageMobile> {
               FloatingActionButton(
                 backgroundColor: Color.fromARGB(255, 207, 232, 255),
                 onPressed: () {
-                  submitPaper();
-                },
+                 
+                 _onSubmitExam(context)
+;                },
                 child: Icon(Icons.arrow_forward_rounded),
                 heroTag: 'btn2',
               ),
@@ -197,38 +198,48 @@ class _TheoryExamPageMobileState extends State<TheoryExamPageMobile> {
     );
   }
 
-  submitPaper() async {
-    // Mark dialog as open
-    return Alert(
+
+
+  _onSubmitExam(context) {
+  
+
+    Alert(
       context: context,
-      style: alertStyle,
-      title: "Submit your paper now?",
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [Text('Select images to submit your paper')],
+      type: AlertType.info,
+      style: AlertStyle(
+        isOverlayTapDismiss: false,
+        animationType: AnimationType.fromTop,
+        titleStyle:
+            TextStyle(color: ColorPage.red, fontWeight: FontWeight.bold),
+        descStyle: FontFamily.font6,
+        isCloseButton: false,
       ),
+      title: "Submit your paper now?",
+      desc:
+          "Select images to submit your paper",
       buttons: [
         DialogButton(
-          width: MediaQuery.of(context).size.width / 5.5,
           child: Text("Cancel",
-              style: TextStyle(color: Colors.white, fontSize: 15)),
+              style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(77, 3, 3, 1),
           onPressed: () {
-            Get.back();
+            Navigator.pop(context);
           },
-          color: ColorPage.colorgrey,
-          radius: BorderRadius.circular(5.0),
+          color: Color.fromRGBO(158, 9, 9, 1),
         ),
         DialogButton(
-          width: MediaQuery.of(context).size.width / 5.5,
-          child: Text("OK", style: TextStyle(color: Colors.white, fontSize: 15)),
+          child:
+              Text("Yes", style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(77, 3, 3, 1),
           onPressed: () {
-            Get.back();
+              Get.back();
             Get.to(SelectExamPapers());
+            
           },
-          color: ColorPage.colorgrey,
-          radius: BorderRadius.circular(5.0),
+          color: Color.fromRGBO(9, 89, 158, 1),
         ),
       ],
     ).show();
   }
+
 }
