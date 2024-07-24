@@ -16,6 +16,7 @@ import 'package:dthlms/android/Videodashboard/newMobileVideoPlayer.dart';
 import 'package:dthlms/android/login/dth_mob_login.dart';
 import 'package:dthlms/android/packagemobile/newPackages.dart';
 import 'package:dthlms/login/dth_login.dart';
+import 'package:dthlms/mainmobile/mainnewpackagemobiledashboard.dart';
 import 'package:dthlms/mcq/ResultPage.dart';
 import 'package:dthlms/mcq/macterm&conditionpage.dart';
 import 'package:dthlms/mcq/mockTestmcqPage.dart';
@@ -115,7 +116,10 @@ class pageRouter {
     ),
     GetPage(
       name: "/Newmobilepakagedashboard",
-      page: () => NewPackageDashboardMobile(),
+      // page: () => NewPackageDashboardMobile(),
+      // changed by shubha
+      page: () => MainNewPackageDashboardMobile(),
+
     ),
     GetPage(
       name: "/Newmobilevideoplayer",

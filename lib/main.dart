@@ -76,6 +76,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'DTH LMS',
       home: Platform.isAndroid ? Mobilelogin() : DthLmsLogin(),
+
     );
   }
 }
