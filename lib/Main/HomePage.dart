@@ -20,6 +20,7 @@ import 'package:dthlms/utils/enebelActivationcode.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:typewritertext/v3/typewriter.dart';
 
 class Homepagedashboard extends StatefulWidget {
@@ -317,8 +318,19 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
     return Obx(
       () => Scaffold(
         backgroundColor: ColorPage.bgcolor,
+        
         appBar: AppBar(
-          backgroundColor: ColorPage.appbarcolor,
+          surfaceTintColor: Colors.white,
+          shadowColor: Color.fromARGB(255, 255, 255, 255),
+          elevation: 3,
+          
+          
+          
+          // flexibleSpace: Container(decoration: BoxDecoration(boxShadow: [
+          //   BoxShadow(offset: Offset(1, 1),spreadRadius: 0,blurRadius: 0,color: ColorPage.blue)
+          // ]),),
+        
+          // backgroundColor: ,
           // flexibleSpace: Container(
           //   decoration: BoxDecoration(
           //     gradient: LinearGradient(
@@ -339,12 +351,11 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
           //  )],),
 
           title: Padding(
-            padding: const EdgeInsets.only(bottom: 7,left: 20),
+            padding: const EdgeInsets.only(bottom: 0, left: 20),
             child: Container(
               height: 40,
               width: MediaQuery.of(context).size.width / 2.2,
               child: TextFormField(
-              
                 onChanged: (value) {
                   setFilterData();
                 },
@@ -354,7 +365,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                       color: ColorPage.brownshade300,
                       fontSize: ClsFontsize.ExtraSmall - 3),
                   hintText: 'Search',
-                  fillColor: ColorPage.white,
+                  fillColor: Color.fromARGB(255, 228, 227, 227),
                   filled: true,
                   suffixIcon: IconButton(
                     icon: Padding(
@@ -388,11 +399,11 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                 children: [
                   Text(
                     "Sayak Mishra",
-                    style: FontFamily.font9,
+                    style: FontFamily.font4.copyWith(fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "Sayakmishra@gmail.com",
-                    style: FontFamily.font9,
+                    style: FontFamily.font4.copyWith(fontSize: 12,color: Color.fromARGB(255, 0, 0, 0)),
                   )
                 ],
               ),
@@ -442,12 +453,16 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                                   ),
                                   Container(
                                     height: 85,
-                                    margin: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
-                                      width: MediaQuery.of(context).size.width,
+                                    margin: EdgeInsets.symmetric(
+                                        vertical: 5, horizontal: 20),
+                                    width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(blurRadius: 7,color: Color.fromARGB(255, 200, 196, 196))
-                                      ],
+                                        boxShadow: [
+                                          BoxShadow(
+                                              blurRadius: 7,
+                                              color: Color.fromARGB(
+                                                  255, 200, 196, 196))
+                                        ],
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(20),
                                         ),
@@ -527,16 +542,16 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                                   AnimatedButtonBar(
                                     controller: AnimatedButtonController()
                                       ..setIndex(0),
-                                    radius: 32.0,
-                                    padding: const EdgeInsets.all(16.0),
+                                    radius: 8.0,
+                                    padding: const EdgeInsets.all(10.0),
                                     backgroundColor: ColorPage.bluegrey800,
-                                    foregroundColor: ColorPage.bluegrey300,
+                                    foregroundColor: ColorPage.blue,
                                     // foregroundColor:  Color.fromARGB(255, 37, 233, 135),
                                     // backgroundColor:Color.fromARGB(255, 97, 228, 162),
-                                    elevation: 24,
+                                    elevation: 5,
                                     curve: Curves.bounceIn,
                                     borderColor: ColorPage.white,
-                                    innerVerticalPadding: 16,
+                                    innerVerticalPadding: 10,
                                     children: [
                                       ButtonBarEntry(
                                           onTap: () {
@@ -546,7 +561,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                                           },
                                           child: Text(
                                             'My Package',
-                                            style: FontFamily.font,
+                                            style: FontFamily.font2,
                                           )),
                                     ],
                                   ),
@@ -738,40 +753,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                       ),
                     ),
                   ),
-                  Expanded(
-                      child: Container(
-                          color: Colors.black,
-                          child: Column(
-                            children: [
-                              Flexible(
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      Stack(children: [
-                                        Image.asset(
-                                          fit: BoxFit.fitHeight,
-                                          'assets/wallpaperflare.com_wallpaper.jpg',
-                                          height:
-                                              MediaQuery.sizeOf(context).height,
-                                        ),
-                                        Positioned(
-                                          bottom: 500,
-                                          left: 300,
-                                          child: TypeWriter.text(
-                                            'lorem ipsum dolot sit amet ...',
-                                            style: FontFamily.font2,
-                                            repeat: true,
-                                            duration: const Duration(
-                                                milliseconds: 50),
-                                          ),
-                                        ),
-                                      ]),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )))
+                Calenderwidget(),
                 ],
               ),
               GlobalDialog(token)
@@ -782,6 +764,50 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
     );
   }
 
+
+
+Widget Calenderwidget(){
+  return   Expanded(
+                      child: Container(
+                    margin: EdgeInsets.all(20),
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      color: ColorPage.white,
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 3,
+                            color: Color.fromARGB(255, 192, 191, 191),
+                            offset: Offset(0, 0))
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    child: SfCalendar(
+                    
+                      viewHeaderHeight: 50,
+                      viewHeaderStyle: ViewHeaderStyle(dayTextStyle:FontFamily.font6 ),
+
+                      // allowDragAndDrop: false,
+                      // allowViewNavigation: true,
+                      // backgroundColor: ColorPage.colorgrey,
+                      headerStyle: CalendarHeaderStyle(
+                          backgroundColor: ColorPage.blue,
+                          textAlign: TextAlign.center,
+                          textStyle: FontFamily.font3),
+                      // showTodayButton: true,
+                      view: CalendarView.month,
+                      monthViewSettings: MonthViewSettings(
+                        // agendaItemHeight: 20,
+                        agendaViewHeight: 80,
+                        agendaStyle: AgendaStyle(
+                            dateTextStyle: FontFamily.font3,
+                            placeholderTextStyle: TextStyle(color: Colors.red)),
+                        showAgenda: true,
+                      ),
+                    ),
+                  ));
+}
   void showFullImageDialog() {
     showDialog(
       context: context,

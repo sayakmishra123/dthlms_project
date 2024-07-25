@@ -17,14 +17,7 @@ import 'package:dthlms/routes/router.dart' show pageRouter;
 import 'package:dthlms/utctime.dart';
 import 'package:firebase_core/firebase_core.dart' show Firebase;
 import 'package:flutter/material.dart'
-    show
-        BuildContext,
-        MaterialPageRoute,
-        State,
-        StatefulWidget,
-        Widget,
-        WidgetsFlutterBinding,
-        runApp;
+    show AppBarTheme, BuildContext, MaterialPageRoute, State, StatefulWidget, ThemeData, Widget, WidgetsFlutterBinding, runApp;
 import 'package:get/get_navigation/src/root/get_material_app.dart'
     show GetMaterialApp;
 import 'package:media_kit/media_kit.dart' show MediaKit;
@@ -72,6 +65,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme:ThemeData(
+        appBarTheme: AppBarTheme(color: ColorPage.appbarcolor,elevation: 4),
+      ) ,
       getPages: router.Route,
       debugShowCheckedModeBanner: false,
       title: 'DTH LMS',
