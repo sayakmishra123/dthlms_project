@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
-import 'package:dthlms/Main/HomePage.dart';
+import 'package:dthlms/Master/HomePage.dart';
 import 'package:dthlms/TheoryExam/theoryexampage.dart';
 import 'package:dthlms/android/Drawer/Mobiledrawer.dart';
 import 'package:dthlms/android/ForgetPassword/ForgetPasswordScreen.dart';
@@ -17,7 +17,7 @@ import 'package:dthlms/android/Videodashboard/newMobileVideoPlayer.dart';
 import 'package:dthlms/android/login/dth_mob_login.dart';
 import 'package:dthlms/android/packagemobile/newPackages.dart';
 import 'package:dthlms/login/dth_login.dart';
-import 'package:dthlms/mainmobile/mainnewpackagemobiledashboard.dart';
+import 'package:dthlms/Master/mainmobile/mainnewpackagemobiledashboard.dart';
 import 'package:dthlms/mcq/ResultPage.dart';
 import 'package:dthlms/mcq/macterm&conditionpage.dart';
 import 'package:dthlms/mcq/mockTestmcqPage.dart';
@@ -90,7 +90,10 @@ class pageRouter {
       name: '/Packagescreen',
       page: () => PackageScreen(),
     ),
-    GetPage(name: '/Myclassvideocontent', page: () => MyClassVideoContent()),
+    GetPage(
+      name: '/Myclassvideocontent',
+      page: () => MyClassVideoContent(),
+    ),
     GetPage(
       name: '/Videodashboard',
       page: () => VideoDashboard(),
@@ -120,7 +123,6 @@ class pageRouter {
       // page: () => NewPackageDashboardMobile(),
       // changed by shubha
       page: () => MainNewPackageDashboardMobile(),
-
     ),
     GetPage(
       name: "/Newmobilevideoplayer",
@@ -166,6 +168,6 @@ class pageRouter {
       name: "/Practicemcqmobile",
       page: () => PracticeMcqMobile(),
     ),
-    GetPage(name: "/Homepage", page:()=> Homepagedashboard())
+    GetPage(name: "/Homepage", page: () => Homepagedashboard())
   ];
 }
