@@ -441,13 +441,14 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
               child: DefaultTabController(
                 length: 4,
                 child: Scaffold(
-                  backgroundColor: ColorPage.bgcolor,
+                  backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   appBar: AppBar(
-                    iconTheme: IconThemeData(color: ColorPage.white),
+                    iconTheme: IconThemeData(color: Color.fromARGB(255, 255, 255, 255)),
                     title: Text(
                       videoname,
-                      style: FontFamily.font5,
+                      style: FontFamily.font5.copyWith(color: ColorPage.white),
                     ),
+                    
                     backgroundColor: ColorPage.appbarcolor,
                     bottom: PreferredSize(
                       preferredSize: Size.fromHeight(80),
@@ -542,6 +543,10 @@ class _MyClassVideoContentState extends State<MyClassVideoContent>
         ],
       ),
     );
+  
+  
+  
+  
   }
 
   String filename = "encrypt_video.mp4";

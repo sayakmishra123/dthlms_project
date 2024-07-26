@@ -9,6 +9,7 @@ import 'package:dthlms/android/MCQ/mockTestRank.dart';
 import 'package:dthlms/android/MCQ/mockTestMcq.dart';
 import 'package:dthlms/android/login/dth_mob_login.dart';
 import 'package:dthlms/android/theoryexam/TheoryExamPageMobile.dart';
+import 'package:dthlms/desgine/videodashboardnew.dart';
 import 'package:dthlms/firebase_options.dart' show DefaultFirebaseOptions;
 import 'package:dthlms/login/dth_login.dart' show DthLmsLogin;
 import 'package:dthlms/mcq/macterm&conditionpage.dart';
@@ -17,7 +18,7 @@ import 'package:dthlms/routes/router.dart' show pageRouter;
 import 'package:dthlms/utctime.dart';
 import 'package:firebase_core/firebase_core.dart' show Firebase;
 import 'package:flutter/material.dart'
-    show AppBarTheme, BuildContext, MaterialPageRoute, State, StatefulWidget, ThemeData, Widget, WidgetsFlutterBinding, runApp;
+    show AppBarTheme, BuildContext, Color, MaterialPageRoute, State, StatefulWidget, ThemeData, Widget, WidgetsFlutterBinding, runApp;
 import 'package:get/get_navigation/src/root/get_material_app.dart'
     show GetMaterialApp;
 import 'package:media_kit/media_kit.dart' show MediaKit;
@@ -66,12 +67,15 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme:ThemeData(
-        appBarTheme: AppBarTheme(color: ColorPage.appbarcolor,elevation: 4),
+        appBarTheme: AppBarTheme(    surfaceTintColor: ColorPage.appbarcolor,
+          shadowColor: Color.fromARGB(255, 255, 255, 255),
+          elevation: 3,),
       ) ,
       getPages: router.Route,
       debugShowCheckedModeBanner: false,
       title: 'DTH LMS',
-      home: Platform.isAndroid ? Mobilelogin() : DthLmsLogin(),
+      home: Platform.isAndroid ? Mobilelogin() : Videod(),
+
     );
   }
 }

@@ -142,36 +142,44 @@ class _VideoDashboardState extends State<VideoDashboard>
                 appBar: AppBar(
                   iconTheme: IconThemeData(color: ColorPage.white),
                   backgroundColor: ColorPage.appbarcolor,
-                  actions: [
-                    Container(
-                      margin: EdgeInsets.only(top: 15, right: 20, bottom: 5),
-                      width: MediaQuery.of(context).size.width / 3,
-                      child: TextFormField(
-                        controller: searchController,
-                        decoration: InputDecoration(
-                          hintStyle: TextStyle(
-                              color: ColorPage.brownshade300,
-                              fontSize: ClsFontsize.ExtraSmall - 1),
-                          hintText: 'Search',
-                          fillColor: ColorPage.white,
-                          filled: true,
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.search),
-                            onPressed: () {
-                              setFilterData();
-                            },
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30),
-                              borderSide: BorderSide.none),
-                        ),
-                        style: TextStyle(color: ColorPage.colorblack),
-                        onChanged: (value) {
-                          setFilterData();
-                        },
-                      ),
-                    )
-                  ],
+                  centerTitle: false,
+                  title: 
+                   Padding(
+            padding: const EdgeInsets.only(bottom: 0, left: 20),
+            child: Container(
+              height: 40,
+              width: MediaQuery.of(context).size.width / 2.2,
+              child: TextFormField(
+                onChanged: (value) {
+                  setFilterData();
+                },
+                controller: searchController,
+                decoration: InputDecoration(
+                  hintStyle: TextStyle(
+                      color: ColorPage.brownshade300,
+                      fontSize: ClsFontsize.ExtraSmall - 3),
+                  hintText: 'Search',
+                  fillColor: Color.fromARGB(255, 255, 255, 255),
+                  filled: true,
+                  suffixIcon: IconButton(
+                    icon: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Icon(Icons.search),
+                    ),
+                    onPressed: () {
+                      setFilterData();
+                    },
+                  ),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      borderSide: BorderSide.none),
+                ),
+                style: TextStyle(color: ColorPage.colorblack),
+              ),
+            ),
+          )
+                  ,
+                  automaticallyImplyLeading: true,
                   bottom: PreferredSize(
                     preferredSize: Size.fromHeight(80),
                     child: MotionTabBar(

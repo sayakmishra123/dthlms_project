@@ -5,6 +5,7 @@ import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/getx/getxcontroller.getx.dart';
 import 'package:dthlms/package/packagedashboard/dynamicpage.dart';
+import 'package:dthlms/widget/calenderWidget.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -124,8 +125,9 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
     Colors.lightBlue,
     Colors.orange,
     Colors.pink,
+    Colors.green,
   ];
-  List content = [3, 7, 5, 6, 4, 3, 7, 2];
+  List content = [3, 7, 5, 6, 4, 3, 7, 2,6];
   int itemlength = 0;
   Getx getxController = Get.put(Getx());
   List datacontent = ['abc', 'def', 'ghi', 'jkl', 'lmo'];
@@ -244,6 +246,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
         itemlength = filteredPackage.length;
       });
       print(getxController.loading.value);
+      print(allpackage.length.toString ()+"abhoy");
     }
   }
 
@@ -320,9 +323,10 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
         backgroundColor: ColorPage.bgcolor,
         
         appBar: AppBar(
-          surfaceTintColor: Colors.white,
+          surfaceTintColor: ColorPage.appbarcolor,
           shadowColor: Color.fromARGB(255, 255, 255, 255),
           elevation: 3,
+          backgroundColor: ColorPage.appbarcolor,
           
           
           
@@ -365,7 +369,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                       color: ColorPage.brownshade300,
                       fontSize: ClsFontsize.ExtraSmall - 3),
                   hintText: 'Search',
-                  fillColor: Color.fromARGB(255, 228, 227, 227),
+                  fillColor: Color.fromARGB(255, 255, 255, 255),
                   filled: true,
                   suffixIcon: IconButton(
                     icon: Padding(
@@ -399,11 +403,11 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                 children: [
                   Text(
                     "Sayak Mishra",
-                    style: FontFamily.font4.copyWith(fontWeight: FontWeight.bold),
+                    style: FontFamily.font4.copyWith(fontWeight: FontWeight.bold,color: ColorPage.white),
                   ),
                   Text(
                     "Sayakmishra@gmail.com",
-                    style: FontFamily.font4.copyWith(fontSize: 12,color: Color.fromARGB(255, 0, 0, 0)),
+                    style: FontFamily.font4.copyWith(fontSize: 12,color: ColorPage.white),
                   )
                 ],
               ),
@@ -452,9 +456,9 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                                     height: 10,
                                   ),
                                   Container(
-                                    height: 85,
+                                    height: 55,
                                     margin: EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 20),
+                                        vertical: 5, horizontal: 10),
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                         boxShadow: [
@@ -464,7 +468,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                                                   255, 200, 196, 196))
                                         ],
                                         borderRadius: BorderRadius.all(
-                                          Radius.circular(20),
+                                          Radius.circular(10),
                                         ),
                                         color: ColorPage.white),
                                   )
@@ -539,32 +543,32 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                                   //    ]),
                                   //  ),
                                   ,
-                                  AnimatedButtonBar(
-                                    controller: AnimatedButtonController()
-                                      ..setIndex(0),
-                                    radius: 8.0,
-                                    padding: const EdgeInsets.all(10.0),
-                                    backgroundColor: ColorPage.bluegrey800,
-                                    foregroundColor: ColorPage.blue,
-                                    // foregroundColor:  Color.fromARGB(255, 37, 233, 135),
-                                    // backgroundColor:Color.fromARGB(255, 97, 228, 162),
-                                    elevation: 5,
-                                    curve: Curves.bounceIn,
-                                    borderColor: ColorPage.white,
-                                    innerVerticalPadding: 10,
-                                    children: [
-                                      ButtonBarEntry(
-                                          onTap: () {
-                                            getxController.packageshow.value =
-                                                false;
-                                            fnfindallpackage(token);
-                                          },
-                                          child: Text(
-                                            'My Package',
-                                            style: FontFamily.font2,
-                                          )),
-                                    ],
-                                  ),
+                                  // AnimatedButtonBar(
+                                  //   controller: AnimatedButtonController()
+                                  //     ..setIndex(0),
+                                  //   radius: 8.0,
+                                  //   padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 5),
+                                  //   backgroundColor: ColorPage.bluegrey800,
+                                  //   foregroundColor: ColorPage.blue,
+                                  //   // foregroundColor:  Color.fromARGB(255, 37, 233, 135),
+                                  //   // backgroundColor:Color.fromARGB(255, 97, 228, 162),
+                                  //   elevation: 5,
+                                  //   curve: Curves.bounceIn,
+                                  //   borderColor: ColorPage.white,
+                                  //   innerVerticalPadding: 10,
+                                  //   children: [
+                                  //     ButtonBarEntry(
+                                  //         onTap: () {
+                                  //           getxController.packageshow.value =
+                                  //               false;
+                                  //           fnfindallpackage(token);
+                                  //         },
+                                  //         child: Text(
+                                  //           'My Package',
+                                  //           style: FontFamily.font2,
+                                  //         )),
+                                  //   ],
+                                  // ),
                                   getxController.packageshow.value
                                       ? Expanded(
                                           child: ListView.builder(
@@ -656,6 +660,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                                                       child: Container(
                                                         decoration:
                                                             BoxDecoration(
+                                                              
                                                           boxShadow: [
                                                             BoxShadow(
                                                                 color: Colors
@@ -691,7 +696,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                                                             Radius.circular(10),
                                                           ),
                                                           color:
-                                                              ColorPage.white,
+                                                              Color.fromARGB(255, 255, 255, 255),
                                                         ),
                                                         child: ListTile(
                                                           subtitle: Text(
@@ -753,7 +758,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                       ),
                     ),
                   ),
-                Calenderwidget(),
+             ClaenderWidget(),
                 ],
               ),
               GlobalDialog(token)
@@ -766,48 +771,49 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
 
 
 
-Widget Calenderwidget(){
-  return   Expanded(
-                      child: Container(
-                    margin: EdgeInsets.all(20),
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      color: ColorPage.white,
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 3,
-                            color: Color.fromARGB(255, 192, 191, 191),
-                            offset: Offset(0, 0))
-                      ],
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    child: SfCalendar(
+// Widget Calenderwidget(){
+//   return   Expanded(
+//                       child: Container(
+//                     margin: EdgeInsets.all(20),
+//                     padding: EdgeInsets.all(20),
+//                     decoration: BoxDecoration(
+//                       color: ColorPage.white,
+//                       boxShadow: [
+//                         BoxShadow(
+//                             blurRadius: 3,
+//                             color: Color.fromARGB(255, 192, 191, 191),
+//                             offset: Offset(0, 0))
+//                       ],
+//                       borderRadius: BorderRadius.all(
+//                         Radius.circular(10),
+//                       ),
+//                     ),
+//                     child: SfCalendar(
+//                       cellBorderColor:ColorPage.colorblack ,
                     
-                      viewHeaderHeight: 50,
-                      viewHeaderStyle: ViewHeaderStyle(dayTextStyle:FontFamily.font6 ),
+//                       viewHeaderHeight: 50,
+//                       viewHeaderStyle: ViewHeaderStyle(dayTextStyle:FontFamily.font6 ),
 
-                      // allowDragAndDrop: false,
-                      // allowViewNavigation: true,
-                      // backgroundColor: ColorPage.colorgrey,
-                      headerStyle: CalendarHeaderStyle(
-                          backgroundColor: ColorPage.blue,
-                          textAlign: TextAlign.center,
-                          textStyle: FontFamily.font3),
-                      // showTodayButton: true,
-                      view: CalendarView.month,
-                      monthViewSettings: MonthViewSettings(
-                        // agendaItemHeight: 20,
-                        agendaViewHeight: 80,
-                        agendaStyle: AgendaStyle(
-                            dateTextStyle: FontFamily.font3,
-                            placeholderTextStyle: TextStyle(color: Colors.red)),
-                        showAgenda: true,
-                      ),
-                    ),
-                  ));
-}
+//                       // allowDragAndDrop: false,
+//                       // allowViewNavigation: true,
+//                       backgroundColor: Color.fromARGB(255, 230, 235, 249),
+//                       headerStyle: CalendarHeaderStyle(
+//                           backgroundColor: ColorPage.blue,
+//                           textAlign: TextAlign.center,
+//                           textStyle: FontFamily.font3),
+//                       // showTodayButton: true,
+//                       view: CalendarView.month,
+//                       monthViewSettings: MonthViewSettings(
+//                         // agendaItemHeight: 20,
+//                         agendaViewHeight: 80,
+//                         agendaStyle: AgendaStyle(
+//                             dateTextStyle: FontFamily.font3,
+//                             placeholderTextStyle: TextStyle(color: Colors.red)),
+//                         showAgenda: true,
+//                       ),
+//                     ),
+//                   ));
+// }
   void showFullImageDialog() {
     showDialog(
       context: context,

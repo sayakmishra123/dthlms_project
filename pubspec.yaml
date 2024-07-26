@@ -110,9 +110,7 @@ dependencies:
   # connectivity_plus: ^6.0.3
   intl_phone_field: ^3.1.0
   open_mail_app: ^0.4.5
- 
 
-  
   # my_screenshot_prevention_plugin:
     # path: my_screenshot_prevention_plugin
   # The following adds the Cupertino Icons font to your application.

@@ -9,6 +9,8 @@ import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/apiHandleing/apifetchall.dart';
 import 'package:dthlms/db/dbfunction/dbfunction.dart';
 import 'package:dthlms/forgotpassword/forgetscreen.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get_rx/get_rx.dart';
 
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:local_notifier/local_notifier.dart';
@@ -49,6 +51,8 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
   InputBorder border = const UnderlineInputBorder(
       borderSide: BorderSide(color: ColorPage.colorgrey));
   final bool _isVisible = true;
+  RxBool fullScreen=true.obs;
+ 
 
   @override
   void initState() {
@@ -63,7 +67,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
   AnimatedButtonController animatedButtonController =
       AnimatedButtonController();
   var key = '0';
-  Getx getx = Get.put(Getx());
+  // Getx getx = Get.put(Getx());
 
   notification() async {
     // Add in main method.
@@ -112,6 +116,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
 
   @override
   Widget build(BuildContext context) {
+     late RxDouble screenwidth=MediaQuery.of(context).size.width.obs;
     return Material(
       child: Scaffold(
           body: _isVisible && Platform.isWindows
@@ -126,29 +131,32 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                   ),
                   child: Row(
                     children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Flexible(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        fit: BoxFit.contain,
-                                        'assets/loginimg2.png',
-                                        height:
-                                            MediaQuery.sizeOf(context).height -
-                                                100,
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                      Visibility(
+                        visible:  screenwidth.value>850?true:false,
+                        child: Expanded(
+                          child: Column(
+                            children: [
+                              Flexible(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          fit: BoxFit.contain,
+                                          'assets/loginimg2.png',
+                                          height:
+                                              MediaQuery.sizeOf(context).height -
+                                                  100,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       Expanded(
