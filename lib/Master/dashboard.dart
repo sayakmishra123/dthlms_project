@@ -423,51 +423,47 @@ class _DashBoardRightState extends State<DashBoardRight> {
               ),
             ),
             Expanded(
-                child: Container(
-              margin: EdgeInsets.symmetric(vertical: 15),
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: ColorPage.white,
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 3,
-                      color: Color.fromARGB(255, 192, 191, 191),
-                      offset: Offset(0, 0))
-                ],
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 15),
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                        blurRadius: 3,
+                        color: Color.fromARGB(255, 192, 191, 191),
+                        offset: Offset(0, 0))
+                  ],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                child: SfCalendar(
+                  cellBorderColor: Colors.transparent,
+                  showCurrentTimeIndicator: true,
+                  viewHeaderHeight: 40,
+                  viewHeaderStyle: ViewHeaderStyle(
+                    dayTextStyle: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  headerStyle: CalendarHeaderStyle(
+                      backgroundColor: ColorPage.colorbutton,
+                      textAlign: TextAlign.center,
+                      textStyle: TextStyle(color: Colors.white)),
+                  view: CalendarView.month,
+                  monthViewSettings: MonthViewSettings(
+                    agendaViewHeight: 60,
+                    showTrailingAndLeadingDates: true,
+                    monthCellStyle: MonthCellStyle(),
+                    agendaStyle: AgendaStyle(
+                        dateTextStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                        placeholderTextStyle: TextStyle(color: Colors.red)),
+                    showAgenda: true,
+                  ),
                 ),
               ),
-              child: SfCalendar(
-                cellBorderColor: Colors.transparent,
-                showCurrentTimeIndicator: true,
-
-                viewHeaderHeight: 40,
-                viewHeaderStyle: ViewHeaderStyle(
-                  dayTextStyle: FontFamily.font6,
-                ),
-
-                // allowDragAndDrop: false,
-                // allowViewNavigation: true,
-                // backgroundColor: Color.fromARGB(255, 243, 245, 251),
-                headerStyle: CalendarHeaderStyle(
-                    backgroundColor: ColorPage.colorbutton,
-                    textAlign: TextAlign.center,
-                    textStyle: FontFamily.font3),
-                // showTodayButton: true,
-                view: CalendarView.month,
-
-                monthViewSettings: MonthViewSettings(
-                  monthCellStyle: MonthCellStyle(),
-                  agendaStyle: AgendaStyle(
-                      dateTextStyle: FontFamily.font3.copyWith(
-                        color: ColorPage.appbarcolor,
-                      ),
-                      placeholderTextStyle: TextStyle(color: Colors.red)),
-                  showAgenda: true,
-                ),
-              ),
-            ))
+            ),
           ],
         ),
       ),
