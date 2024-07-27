@@ -112,6 +112,12 @@ class _SlideBarState extends State<SlideBar> {
                       ),
                       child: Center(
                         child: ListTile(
+                          leading: Icon(
+                            Icons.home,
+                            color: widget.selectedIndex == -1
+                                ? Colors.white
+                                : Colors.black,
+                          ),
                           title: Text(
                             'Dashboard',
                             style: TextStyle(
