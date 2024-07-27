@@ -2,9 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/Master/videoplayer.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -16,9 +14,8 @@ class DthDashboard extends StatefulWidget {
 }
 
 class _DthDashboardState extends State<DthDashboard> {
+  int selectedIndex = -1;
 
-
-   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +23,16 @@ class _DthDashboardState extends State<DthDashboard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Expanded(flex: 1, child: SlideBar()),
+          Expanded(
+              flex: 1,
+              child: SlideBar(
+                selectedIndex: selectedIndex,
+                onItemSelected: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+              )),
           Expanded(flex: 5, child: DashBoardRight())
         ],
       ),
@@ -35,7 +41,11 @@ class _DthDashboardState extends State<DthDashboard> {
 }
 
 class SlideBar extends StatefulWidget {
-  const SlideBar({super.key});
+  final int selectedIndex;
+  final Function(int) onItemSelected;
+
+  const SlideBar(
+      {super.key, required this.selectedIndex, required this.onItemSelected});
 
   @override
   State<SlideBar> createState() => _SlideBarState();
@@ -55,7 +65,7 @@ class _SlideBarState extends State<SlideBar> {
   ];
 
   int hoverIndex = -1;
-  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,9 +84,7 @@ class _SlideBarState extends State<SlideBar> {
             ],
           ),
           child: SingleChildScrollView(
-            // Make the SlideBar scrollable
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
@@ -87,68 +95,66 @@ class _SlideBarState extends State<SlideBar> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
+                InkWell(
+                  onTap: () {
+                    widget.onItemSelected(-1);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 0.5, color: Colors.grey),
+                        color: widget.selectedIndex == -1
+                            ? ColorPage.colorbutton
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Center(
+                        child: ListTile(
+                          title: Text(
+                            'Dashboard',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: widget.selectedIndex == -1
+                                    ? Colors.white
+                                    : Colors.black),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 for (int i = 0; i < 5; i++)
-                  buttonWidget('Package 1', () {
-                    setState(() {
-                      index = i;
-                    });
-                    Get.to(() => VideoPlayer());
-                  }, index == i, hoverIndex == i, i),
-                // Spacer(),
+                  buttonWidget(
+                    'Package ${i + 1}',
+                    () {
+                      widget.onItemSelected(i);
+                      Get.to(() => VideoPlayer());
+                    },
+                    widget.selectedIndex == i,
+                    hoverIndex == i,
+                    i,
+                  ),
               ],
             ),
           ),
         ),
       ),
-      // bottomNavigationBar: Container(
-      //   height: 65,
-      //   child: MouseRegion(
-      //     onEnter: (_) {
-      //       setState(() {
-      //         hoverIndex = index;
-      //       });
-      //     },
-      //     onExit: (_) {
-      //       setState(() {
-      //         hoverIndex = -1;
-      //       });
-      //     },
-      //     child: InkWell(
-      //       onTap: () {},
-      //       child: Padding(
-      //         padding: const EdgeInsets.all(8.0),
-      //         child: Container(
-      //           decoration: BoxDecoration(
-      //             border: Border.all(width: 0.5, color: Colors.grey),
-      //             color: Colors.red,
-      //             borderRadius: BorderRadius.circular(6),
-      //           ),
-      //           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-      //           child: Center(
-      //             child: Text(
-      //               'Log Out',
-      //               style: TextStyle(
-      //                   fontWeight: FontWeight.w600, color: Colors.white),
-      //               overflow: TextOverflow.ellipsis,
-      //             ),
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // ),
     );
   }
 
   Widget buttonWidget(
       String name, void Function()? onTap, bool isActive, bool isHover, int i) {
-    Color backgroundColor = isActive ? ColorPage.colorbutton : Colors.white;
+    Color backgroundColor =
+        isActive || isHover ? ColorPage.colorbutton : Colors.white;
     Color textColor = isActive || isHover ? Colors.white : Colors.black;
 
     return MouseRegion(
       onEnter: (_) {
         setState(() {
-          hoverIndex = index;
+          hoverIndex = i;
         });
       },
       onExit: (_) {
