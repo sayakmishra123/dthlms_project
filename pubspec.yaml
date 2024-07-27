@@ -92,6 +92,8 @@ dependencies:
   flutter_secure_storage: ^9.2.2
   # flet: ^0.2.1
 
+
+
  
   flutter_windowmanager:
   # android_window:
@@ -103,10 +105,10 @@ dependencies:
   
   # awesome_dialog: ^3.2.1
   # abhoy
-  # window_manager:
-  #   git:
-  #     url: https://github.com/leanflutter/window_manager.git
-  #     ref: main
+  window_manager:
+    git:
+      url: https://github.com/leanflutter/window_manager.git
+      ref: main
   # connectivity_plus: ^6.0.3
   intl_phone_field: ^3.1.0
   open_mail_app: ^0.4.5
