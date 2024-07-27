@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/Master/videoplayer.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
@@ -285,41 +286,39 @@ class _DashBoardRightState extends State<DashBoardRight> {
                               offset: Offset(0, 0))
                         ],
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(50.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: MediaQuery.sizeOf(context).height / 6,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 50),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Flexible(
+                                child: AutoSizeText(
+                                  textScaleFactor: 2,
                                   'May 29,2024',
                                   style: FontFamily.font2,
-                                  textScaler: TextScaler.linear(2),
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
+                                  // textScaler: TextScaler.linear(2),
+                                ),
+                              ),
+                              Flexible(
+                                child: AutoSizeText(
                                   'Welcome back, Reet!',
+                                  textScaleFactor: 1.5,
                                   style: FontFamily.font2,
-                                  textScaler: TextScaler.linear(1.5),
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
+                                  // textScaler: TextScaler.linear(1.5),
+                                ),
+                              ),
+                              Flexible(
+                                child: AutoSizeText(
                                   'Always updated in your portal',
                                   style: FontFamily.font3,
-                                )
-                              ],
-                            )
-                          ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
