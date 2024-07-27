@@ -213,4 +213,6 @@ class ColorPage {
   //PdfView
 
   static var buttonColor = Color.fromRGBO(19, 23, 36, 1);
+
+  static var colorbutton = Color.fromARGB(255, 68, 76, 231);
 }
