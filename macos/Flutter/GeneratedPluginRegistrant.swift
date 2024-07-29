@@ -6,6 +6,7 @@ import FlutterMacOS
 import Foundation
 
 import animated_progress_bar
+import bitsdojo_window_macos
 import cloud_firestore
 import connectivity_plus
 import desktop_multi_window
@@ -35,6 +36,7 @@ import window_size
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   AnimatedProgressBarPlugin.register(with: registry.registrar(forPlugin: "AnimatedProgressBarPlugin"))
+  BitsdojoWindowPlugin.register(with: registry.registrar(forPlugin: "BitsdojoWindowPlugin"))
   FLTFirebaseFirestorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseFirestorePlugin"))
   ConnectivityPlusPlugin.register(with: registry.registrar(forPlugin: "ConnectivityPlusPlugin"))
   FlutterMultiWindowPlugin.register(with: registry.registrar(forPlugin: "FlutterMultiWindowPlugin"))

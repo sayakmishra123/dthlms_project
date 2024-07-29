@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/Master/videoplayer.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -25,15 +28,25 @@ class _DthDashboardState extends State<DthDashboard> {
         children: [
           Expanded(
               flex: 1,
-              child: SlideBar(
-                selectedIndex: selectedIndex,
-                onItemSelected: (index) {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                },
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                child: SlideBar(
+                  selectedIndex: selectedIndex,
+                  onItemSelected: (index) {
+                    setState(() {
+                      selectedIndex = index;
+                    });
+                  },
+                ),
               )),
-          Expanded(flex: 5, child: DashBoardRight())
+          Expanded(
+              flex: 5,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                child: DashBoardRight(),
+              ))
         ],
       ),
     );
@@ -69,33 +82,33 @@ class _SlideBarState extends State<SlideBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-        child: Container(
-          alignment: Alignment.topCenter,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: ColorPage.white,
-            boxShadow: [
-              BoxShadow(
-                  blurRadius: 3,
-                  color: Color.fromARGB(255, 192, 191, 191),
-                  offset: Offset(0, 0))
-            ],
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'DTH LMS',
-                    style: FontFamily.font,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+      body: Container(
+        alignment: Alignment.topCenter,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: ColorPage.white,
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 3,
+                color: Color.fromARGB(255, 192, 191, 191),
+                offset: Offset(0, 0))
+          ],
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'DTH LMS',
+                  style: FontFamily.font,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                InkWell(
+              ),
+              Visibility(
+                visible: Platform.isWindows,
+                child: InkWell(
                   onTap: () {
                     widget.onItemSelected(-1);
                   },
@@ -132,19 +145,19 @@ class _SlideBarState extends State<SlideBar> {
                     ),
                   ),
                 ),
-                for (int i = 0; i < 5; i++)
-                  buttonWidget(
-                    'Package ${i + 1}',
-                    () {
-                      widget.onItemSelected(i);
-                      Get.to(() => VideoPlayer());
-                    },
-                    widget.selectedIndex == i,
-                    hoverIndex == i,
-                    i,
-                  ),
-              ],
-            ),
+              ),
+              for (int i = 0; i < 5; i++)
+                buttonWidget(
+                  'Package ${i + 1}',
+                  () {
+                    widget.onItemSelected(i);
+                    Get.to(() => VideoPlayer());
+                  },
+                  widget.selectedIndex == i,
+                  hoverIndex == i,
+                  i,
+                ),
+            ],
           ),
         ),
       ),
@@ -291,7 +304,7 @@ class _DashBoardRightState extends State<DashBoardRight> {
                   Flexible(
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(10),
                         color: ColorPage.colorbutton,
                         boxShadow: [
                           BoxShadow(
@@ -351,8 +364,15 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                       context: context,
                                       builder: (context) {
                                         return Padding(
-                                          padding:  EdgeInsets.symmetric(
-                                              vertical: MediaQuery.of(context).size.width/7, horizontal:  MediaQuery.of(context).size.width/3),
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  7,
+                                              horizontal: MediaQuery.of(context)
+                                                      .size
+                                                      .width /
+                                                  3),
                                           child: Container(
                                             padding: EdgeInsets.all(16.0),
                                             decoration: BoxDecoration(
@@ -373,7 +393,8 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                               children: [
                                                 Container(
                                                   decoration: BoxDecoration(
-                                                      color: ColorPage.colorbutton,
+                                                    color:
+                                                        ColorPage.colorbutton,
                                                     borderRadius:
                                                         BorderRadius.all(
                                                       Radius.circular(7),
@@ -381,12 +402,15 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                                   ),
                                                   padding: EdgeInsets.all(15),
                                                   child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
                                                       Text(
                                                         'Flutter Certification Exam',
                                                         style: TextStyle(
-                                                          overflow:TextOverflow.ellipsis,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           fontSize: 15,
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -418,38 +442,53 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                                       MainAxisAlignment.start,
                                                   children: [
                                                     Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
-                                                       
                                                         Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
                                                                   .start,
                                                           children: [
                                                             Icon(
-                                                                Icons.video_library,
+                                                                Icons
+                                                                    .video_library,
                                                                 size: 30,
                                                                 color: Colors
                                                                     .blueAccent),
                                                             SizedBox(width: 10),
                                                             Text('10 ',
                                                                 style: TextStyle(
-                                                                    fontSize: 14,
+                                                                    fontSize:
+                                                                        14,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold)),
                                                             Text('Videos'),
                                                           ],
                                                         ),
-                                                         Padding(
-                                                           padding: const EdgeInsets.only(right: 20),
-                                                           child: Row( mainAxisAlignment: MainAxisAlignment.start, children: [Text("15 Hours")],),
-                                                         ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 20),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text("15 Hours")
+                                                            ],
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
                                                     SizedBox(height: 15),
                                                     Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
                                                         Row(
                                                           mainAxisAlignment:
@@ -465,7 +504,8 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                                             SizedBox(width: 10),
                                                             Text('5 ',
                                                                 style: TextStyle(
-                                                                    fontSize: 14,
+                                                                    fontSize:
+                                                                        14,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold)),
@@ -473,14 +513,26 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                                           ],
                                                         ),
                                                         Padding(
-                                                           padding: const EdgeInsets.only(right: 20),
-                                                           child: Row(  mainAxisAlignment: MainAxisAlignment.start, children: [Text("10 Hours")],),
-                                                         ),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 20),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text("10 Hours")
+                                                            ],
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
                                                     SizedBox(height: 15),
                                                     Row(
-                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
                                                         Row(
                                                           mainAxisAlignment:
@@ -496,7 +548,8 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                                             SizedBox(width: 10),
                                                             Text('50 ',
                                                                 style: TextStyle(
-                                                                    fontSize: 14,
+                                                                    fontSize:
+                                                                        14,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .bold)),
@@ -504,9 +557,19 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                                           ],
                                                         ),
                                                         Padding(
-                                                           padding: const EdgeInsets.only(right: 20),
-                                                           child: Row(  mainAxisAlignment: MainAxisAlignment.start, children: [Text("5 Hours")],),
-                                                         ),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  right: 20),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text("5 Hours")
+                                                            ],
+                                                          ),
+                                                        ),
                                                       ],
                                                     ),
                                                   ],
@@ -516,16 +579,17 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                                   'Total Study Time: 30 hours',
                                                   style: TextStyle(
                                                     fontSize: 16,
-                                                    color: const Color.fromARGB(255, 0, 0, 0),
+                                                    color: const Color.fromARGB(
+                                                        255, 0, 0, 0),
                                                   ),
                                                 ),
-
-                                                   SizedBox(height: 10),
+                                                SizedBox(height: 10),
                                                 Text(
                                                   'Total Remaining Day: 15',
                                                   style: TextStyle(
                                                     fontSize: 16,
-                                                    color: const Color.fromARGB(255, 0, 0, 0),
+                                                    color: const Color.fromARGB(
+                                                        255, 0, 0, 0),
                                                   ),
                                                 ),
                                                 SizedBox(height: 10),
@@ -534,11 +598,10 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                                   style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.bold,
-                                                    color: const Color.fromARGB(255, 0, 0, 0),
+                                                    color: const Color.fromARGB(
+                                                        255, 0, 0, 0),
                                                   ),
                                                 ),
-
-                                                
                                               ],
                                             ),
                                           ),
@@ -547,7 +610,6 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                 },
                                 color: ColorPage.white,
                                 elevation: 10,
-                                
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 5, vertical: 7),
@@ -568,8 +630,6 @@ class _DashBoardRightState extends State<DashBoardRight> {
                 ],
               ),
             ),
-            
-            
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               decoration: BoxDecoration(

@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   animated_progress_bar
+  bitsdojo_window_windows
   cloud_firestore
   connectivity_plus
   desktop_multi_window
