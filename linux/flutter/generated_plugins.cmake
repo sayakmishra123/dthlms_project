@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   animated_progress_bar
+  bitsdojo_window_linux
   desktop_multi_window
   file_selector_linux
   flutter_platform_alert

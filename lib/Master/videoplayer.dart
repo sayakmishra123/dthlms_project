@@ -141,7 +141,7 @@ class _VideoPlayerLeftState extends State<VideoPlayerLeft> {
                           shape: LinearBorder(),
                           backgroundColor: selectedListIndex == index
                               ? ColorPage.white.withOpacity(0.5)
-                              : Colors.white,
+                              : Color.fromARGB(255, 255, 255, 255),
                           onExpansionChanged: (isExpanded) {
                             setState(() {
                               selectedListIndex = isExpanded ? index : -1;
@@ -322,21 +322,21 @@ class _VideoPlayerRightState extends State<VideoPlayerRight> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: ColorPage.white,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 3,
-              color: Color.fromARGB(255, 192, 191, 191),
-              offset: Offset(0, 0),
-            ),
-          ],
-        ),
-        child: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: ColorPage.white,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 3,
+                color: Color.fromARGB(255, 192, 191, 191),
+                offset: Offset(0, 0),
+              ),
+            ],
+          ),
           child: Column(
             children: [
               Row(
@@ -347,8 +347,8 @@ class _VideoPlayerRightState extends State<VideoPlayerRight> {
                     child: IconButton.filled(
                         tooltip: 'Tag',
                         style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(ColorPage.colorbutton)),
+                            backgroundColor: MaterialStatePropertyAll(
+                                ColorPage.colorbutton)),
                         onPressed: () {},
                         icon: Icon(
                           Icons.edit_note,
@@ -359,8 +359,8 @@ class _VideoPlayerRightState extends State<VideoPlayerRight> {
                     child: IconButton.filled(
                         tooltip: 'Speed',
                         style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(ColorPage.colorbutton)),
+                            backgroundColor: MaterialStatePropertyAll(
+                                ColorPage.colorbutton)),
                         onPressed: () {},
                         icon: Icon(Icons.slow_motion_video)),
                   ),
@@ -369,8 +369,8 @@ class _VideoPlayerRightState extends State<VideoPlayerRight> {
                     child: IconButton.filled(
                         tooltip: 'GOTO',
                         style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll(ColorPage.colorbutton)),
+                            backgroundColor: MaterialStatePropertyAll(
+                                ColorPage.colorbutton)),
                         onPressed: () {},
                         icon: Icon(Icons.drag_indicator)),
                   )

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/Master/videoplayer.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
@@ -103,37 +105,40 @@ class _SlideBarState extends State<SlideBar> {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              InkWell(
-                onTap: () {
-                  widget.onItemSelected(-1);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    alignment: Alignment.topLeft,
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 0.5, color: Colors.grey),
-                      color: widget.selectedIndex == -1
-                          ? ColorPage.colorbutton
-                          : Colors.white,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Center(
-                      child: ListTile(
-                        leading: Icon(
-                          Icons.home,
-                          color: widget.selectedIndex == -1
-                              ? Colors.white
-                              : Colors.black,
-                        ),
-                        title: Text(
-                          'Dashboard',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: widget.selectedIndex == -1
-                                  ? Colors.white
-                                  : Colors.black),
-                          overflow: TextOverflow.ellipsis,
+              Visibility(
+                visible: Platform.isWindows,
+                child: InkWell(
+                  onTap: () {
+                    widget.onItemSelected(-1);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      alignment: Alignment.topLeft,
+                      decoration: BoxDecoration(
+                        border: Border.all(width: 0.5, color: Colors.grey),
+                        color: widget.selectedIndex == -1
+                            ? ColorPage.colorbutton
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Center(
+                        child: ListTile(
+                          leading: Icon(
+                            Icons.home,
+                            color: widget.selectedIndex == -1
+                                ? Colors.white
+                                : Colors.black,
+                          ),
+                          title: Text(
+                            'Dashboard',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                color: widget.selectedIndex == -1
+                                    ? Colors.white
+                                    : Colors.black),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ),
                     ),
@@ -145,7 +150,7 @@ class _SlideBarState extends State<SlideBar> {
                   'Package ${i + 1}',
                   () {
                     widget.onItemSelected(i);
-                    Get.to(() => VideoPlayer());
+                   Platform.isWindows?  Get.to(() => VideoPlayer()):null;
                   },
                   widget.selectedIndex == i,
                   hoverIndex == i,
@@ -248,6 +253,8 @@ class _DashBoardRightState extends State<DashBoardRight> {
                                   borderRadius: BorderRadius.circular(40))),
                         ),
                       ),
+                     
+                     
                       actions: [
                         Container(
                           padding: EdgeInsets.only(right: 20),
@@ -720,10 +727,31 @@ class _DashBoardRightState extends State<DashBoardRight> {
                 },
               ),
             ),
-            Container(
+            CalenderWidget(),
+            
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class CalenderWidget extends StatefulWidget {
+  const CalenderWidget({super.key});
+
+  @override
+  State<CalenderWidget> createState() => _CalenderWidgetState();
+}
+
+class _CalenderWidgetState extends State<CalenderWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return 
+       Container(
               constraints: BoxConstraints(maxHeight: 500),
               margin: EdgeInsets.symmetric(vertical: 15),
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.only(left:  5,right: 5,top: 20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -760,10 +788,7 @@ class _DashBoardRightState extends State<DashBoardRight> {
                   showAgenda: true,
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+            
     );
   }
 }

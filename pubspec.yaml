@@ -90,6 +90,7 @@ dependencies:
   animated_progress_bar: ^0.0.3
   desktop_multi_window: ^0.2.0
   flutter_secure_storage: ^9.2.2
+  bitsdojo_window:
   # flet: ^0.2.1
 
 
