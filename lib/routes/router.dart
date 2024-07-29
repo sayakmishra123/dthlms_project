@@ -122,7 +122,7 @@ class pageRouter {
       name: "/Newmobilepakagedashboard",
       // page: () => NewPackageDashboardMobile(),
       // changed by shubha
-      page: () => MainNewPackageDashboardMobile(),
+      page: () => DashBoardMobile(),
     ),
     GetPage(
       name: "/Newmobilevideoplayer",
