@@ -58,7 +58,7 @@ class _DynamicFolderState extends State<DynamicFolder> {
             onPressed: () {
               Get.back();
             },
-            icon: Icon(Icons.arrow_back)),
+            icon: Icon(Icons.arrow_back,color: ColorPage.white,)),
       ),
       body: Row(
         children: [
