@@ -285,7 +285,7 @@ class _DashBoardRightState extends State<DashBoardRight> {
                   Flexible(
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(15),
                         color: ColorPage.colorbutton,
                         boxShadow: [
                           BoxShadow(
