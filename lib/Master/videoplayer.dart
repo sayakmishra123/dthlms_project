@@ -215,6 +215,14 @@ class _VideoPlayerLeftState extends State<VideoPlayerLeft> {
                                         tabbarbutton('MCQ', 1),
                                         tabbarbutton('TAG', 2),
                                         tabbarbutton('Ask doubt', 3),
+                                        IconButton(
+                                            tooltip: 'Delete this video',
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.delete_forever,
+                                              color: Color.fromARGB(
+                                                  255, 253, 29, 13),
+                                            ))
                                       ],
                                     ),
                                     SizedBox(
