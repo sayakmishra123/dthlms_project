@@ -27,40 +27,17 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 //sayak mishra
 void main(List<String> args) async {
   open.overrideFor(OperatingSystem.windows, openSQLCipherOnWindows);
-  print(UtcTime().utctime());
+
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows) {
-    doWhenWindowReady(() {
-      final win = appWindow;
-      win.minSize = Size(1100, 600); // Set the minimum window size here
-      win.size = Size(1000, 800); // Initial window size
-      win.alignment = Alignment.topLeft;
-      win.show();
-    });
-    // WindowOptions windowOptions = WindowOptions(
-    //   size: Size(800, 600),
-    //   center: true,
-    //   minimumSize: Size(800, 700), // Set the minimum window size here
-    // );
-    // windowManager.waitUntilReadyToShow(windowOptions, () async {
-    //   await windowManager.show();
-    //   await windowManager.focus();
-    // });
-  }
-
-  if (Platform.isAndroid) {
+    windowsSize();
+  } else {
     cameras = await availableCameras();
   }
-
+  firbase();
+  singleInstance(args);
   // await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  await WindowsSingleInstance.ensureSingleInstance(args, "custom_identifier",
-      bringWindowToFront: true, onSecondWindow: (args) {
-    print(args);
-  });
-  print(args);
+
   MediaKit.ensureInitialized();
 
   runApp(
@@ -102,4 +79,28 @@ class _MyAppState extends State<MyApp> {
       home: Platform.isAndroid ? Mobilelogin() : DthDashboard(),
     );
   }
+}
+
+firbase() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+}
+
+singleInstance(args) async {
+  await WindowsSingleInstance.ensureSingleInstance(args, "custom_identifier",
+      bringWindowToFront: true, onSecondWindow: (args) {
+    print(args);
+  });
+  print(args);
+}
+
+windowsSize() async {
+  doWhenWindowReady(() {
+    final win = appWindow;
+    win.minSize = Size(1100, 600); // Set the minimum window size here
+    win.size = Size(1000, 800); // Initial window size
+    win.alignment = Alignment.topLeft;
+    win.show();
+  });
 }

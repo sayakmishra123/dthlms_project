@@ -151,7 +151,6 @@ class _SlideBarState extends State<SlideBar> {
                   'Package ${i + 1}',
                   () {
                     widget.onItemSelected(i);
-                    Get.to(() => VideoPlayer());
                   },
                   widget.selectedIndex == i,
                   hoverIndex == i,
