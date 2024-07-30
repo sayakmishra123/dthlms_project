@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   animated_progress_bar
+  bitsdojo_window_windows
   cloud_firestore
   connectivity_plus
   desktop_multi_window
@@ -19,10 +20,12 @@ list(APPEND FLUTTER_PLUGIN_LIST
   permission_handler_windows
   printing
   screen_brightness_windows
+  screen_retriever
   sqlite3_flutter_libs
   syncfusion_pdfviewer_windows
   url_launcher_windows
   webview_universal
+  window_manager
   window_size
   windows_single_instance
 )

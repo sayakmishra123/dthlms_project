@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   animated_progress_bar
+  bitsdojo_window_linux
   desktop_multi_window
   file_selector_linux
   flutter_platform_alert
@@ -12,9 +13,11 @@ list(APPEND FLUTTER_PLUGIN_LIST
   media_kit_libs_linux
   media_kit_video
   printing
+  screen_retriever
   sqlite3_flutter_libs
   url_launcher_linux
   webview_universal
+  window_manager
   window_size
 )
 

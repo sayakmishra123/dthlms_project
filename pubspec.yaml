@@ -90,7 +90,10 @@ dependencies:
   animated_progress_bar: ^0.0.3
   desktop_multi_window: ^0.2.0
   flutter_secure_storage: ^9.2.2
+  bitsdojo_window:
   # flet: ^0.2.1
+
+
 
  
   flutter_windowmanager:
@@ -103,16 +106,14 @@ dependencies:
   
   # awesome_dialog: ^3.2.1
   # abhoy
-  # window_manager:
-  #   git:
-  #     url: https://github.com/leanflutter/window_manager.git
-  #     ref: main
+  window_manager:
+    git:
+      url: https://github.com/leanflutter/window_manager.git
+      ref: main
   # connectivity_plus: ^6.0.3
   intl_phone_field: ^3.1.0
   open_mail_app: ^0.4.5
- 
 
-  
   # my_screenshot_prevention_plugin:
     # path: my_screenshot_prevention_plugin
   # The following adds the Cupertino Icons font to your application.
