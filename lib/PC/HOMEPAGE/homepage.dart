@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
+import 'dart:async';
 
 class DthDashboard extends StatefulWidget {
   const DthDashboard({super.key});
@@ -23,6 +23,9 @@ class DthDashboard extends StatefulWidget {
   @override
   State<DthDashboard> createState() => _DthDashboardState();
 }
+
+
+
 
 class _DthDashboardState extends State<DthDashboard> {
   int selectedIndex = -1;
@@ -316,7 +319,7 @@ class _DashBoardRightState extends State<DashBoardRight> {
                 date: 'May 29,2024',
                 title: 'Welcome back, Reet!',
                 desc: 'Always updated in your portal',
-                trailing: learningGoalButton(context)),
+                trailing: learningGoalButton()),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               decoration: BoxDecoration(
@@ -419,6 +422,31 @@ class _DashBoardRightState extends State<DashBoardRight> {
       ),
     );
   }
+
+  Widget learningGoalButton() {
+  return Padding(
+    padding: const EdgeInsets.only(right: 50, top: 10, bottom: 10),
+    child: ClipRRect(
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+      child: MaterialButton(
+        hoverColor: Color.fromARGB(255, 237, 235, 246),
+        onPressed: () {
+          learningGoals(context);
+        },
+        color: ColorPage.white,
+        elevation: 10,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 7),
+          child: Text(
+            "Learning Goal",
+            style: FontFamily.font2.copyWith(
+                color: ColorPage.colorbutton, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    ),
+  );
+}
 }
 
 class CalenderWidget extends StatefulWidget {
@@ -477,30 +505,7 @@ class _CalenderWidgetState extends State<CalenderWidget> {
   }
 }
 
-Widget learningGoalButton(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.only(right: 50, top: 10, bottom: 10),
-    child: ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-      child: MaterialButton(
-        hoverColor: Color.fromARGB(255, 237, 235, 246),
-        onPressed: () {
-          learningGoals(context);
-        },
-        color: ColorPage.white,
-        elevation: 10,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 7),
-          child: Text(
-            "Learning Goal",
-            style: FontFamily.font2.copyWith(
-                color: ColorPage.colorbutton, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-    ),
-  );
-}
+
 
 class HeadingBoxContent extends StatelessWidget {
   final String date;
@@ -584,22 +589,22 @@ class _HeadingBoxState extends State<HeadingBox> {
         date: "May 29,2024",
         title: 'Welcome back, Reet!',
         desc: 'Always updated in your portal',
-        trailing: learningGoalButton(context as BuildContext)),
+        trailing:SizedBox()),
          HeadingBoxContent(
         date: "May 29,2025",
         title: 'Welcome back, Reet!',
         desc: 'Always updated in your portal',
-        trailing: learningGoalButton(context as BuildContext)),
+        trailing: SizedBox()),
          HeadingBoxContent(
         date: "May 29,2026",
         title: 'Welcome back, Reet!',
         desc: 'Always updated in your portal',
-        trailing: learningGoalButton(context as BuildContext)),
+        trailing: SizedBox()),
          HeadingBoxContent(
         date: "May 29,2027",
         title: 'Welcome back, Reet!',
         desc: 'Always updated in your portal',
-        trailing: learningGoalButton(context as BuildContext)),
+        trailing: SizedBox()),
   ];
 
   final CarouselController carouselController = CarouselController();
