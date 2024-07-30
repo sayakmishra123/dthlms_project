@@ -1,4 +1,3 @@
-// ignore_for_file: non_constant_identifier_names, camel_case_types
 
 import 'package:dthlms/MOBILE/FORGETPASSWORD/forgetpassword_screen.dart';
 import 'package:dthlms/MOBILE/HOMEPAGE/homepage_mobile.dart';
@@ -9,22 +8,13 @@ import 'package:dthlms/MOBILE/MCQ/mockTestMcq.dart';
 import 'package:dthlms/MOBILE/MCQ/mockTestRank.dart';
 import 'package:dthlms/MOBILE/MCQ/practiceMcq.dart';
 import 'package:dthlms/MOBILE/SIGNIN_OTP/OtpScreen.dart';
-// import 'package:dthlms/MOBILE/VIDEO/mobileVideoDashboard.dart';
-// import 'package:dthlms/MOBILE/VIDEO/mobileVideoPlayer.dart';
 import 'package:dthlms/PC/HOMEPAGE/homepage.dart';
 import 'package:dthlms/PC/LOGIN/login.dart';
 import 'package:dthlms/PC/MCQ/ResultPage.dart';
 import 'package:dthlms/PC/MCQ/macterm&conditionpage.dart';
 import 'package:dthlms/PC/MCQ/mockTestmcqPage.dart';
 import 'package:dthlms/PC/MCQ/practiceMcqPage.dart';
-// import 'package:dthlms/PC/VIDEO/videocontent.dart';
 import 'package:dthlms/THEORY_EXAM/theoryexampage.dart';
-// import 'package:dthlms/package/packagedashboard/newPackageDashboard.dart';
-
-
-// import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
-// import 'package:dthlms/package/packagevideo.dart/videodashboard.dart';
-// // import 'package:dthlms/package/packagevideo.dart/videorelatetedPage.dart';
 
 
 import 'package:get/get.dart';
