@@ -4,10 +4,12 @@ import 'package:dthlms/Master/videoplayer.dart';
 import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class DashBoardMobile extends StatefulWidget {
@@ -23,66 +25,26 @@ class _DashBoardMobileState extends State<DashBoardMobile> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Icon(
+              Icons.notification_add_sharp,
+              color: Colors.black,
+              weight: 5,
+            ),
+          )
+        ],
+      ),
+      drawer: HomePageDrawer(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: const EdgeInsets.only(bottom: 10, top: 10),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                  ),
-                  child: Row(
-                    children: [
-                      Flexible(
-                        child: AppBar(
-                          backgroundColor: Colors.transparent,
-                          surfaceTintColor: Colors.transparent,
-                          actions: [
-                            Container(
-                              padding: EdgeInsets.only(right: 20),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white.withOpacity(0.1),
-                              ),
-                              child: ClipOval(
-                                child: Image.asset(
-                                  "assets/sorojda.png",
-                                  fit: BoxFit.cover,
-                                  width: 50,
-                                ),
-                              ),
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  'Reet Mishra',
-                                  style: FontFamily.font,
-                                ),
-                                Text(
-                                  'reetmishra@gmail.com',
-                                  style: TextStyle(color: Colors.grey),
-                                  textScaler: TextScaler.linear(0.9),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              child: Icon(
-                                Icons.notification_add_sharp,
-                                color: Colors.black,
-                                weight: 5,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 Container(
                   // margin: EdgeInsets.symmetric(horizontal: 15),
                   decoration: BoxDecoration(
@@ -127,13 +89,13 @@ class _DashBoardMobileState extends State<DashBoardMobile> {
                         child: Expanded(
                             flex: 1,
                             child: DashboardSlideBar(
-                              headname: 'DTH LMS',
                               selectedIndex: selectedIndex,
                               onItemSelected: (index) {
                                 setState(() {
                                   selectedIndex = index;
                                 });
                               },
+                              headname: '',
                             )),
                       ),
                     ],
@@ -211,7 +173,7 @@ class _DashBoardMobileState extends State<DashBoardMobile> {
                                   ),
                                   color: Color.fromARGB(255, 255, 255, 255),
                                   onPressed: () {
-                                    learningGoal(context);
+                                    learningGoals(context);
                                   },
                                   child: Text(
                                     'Learning goal',
@@ -336,170 +298,285 @@ class _DashBoardMobileState extends State<DashBoardMobile> {
       ),
     );
   }
+}
 
-  learningGoal(BuildContext context) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        final double width = MediaQuery.of(context).size.width;
-        final double height = MediaQuery.of(context).size.height;
-        return Padding(
-          padding: EdgeInsets.symmetric(
-            vertical: height * 0.08,
-            horizontal: width * 0.1,
-          ),
-          child: Container(
-            padding: EdgeInsets.all(16.0),
+learningGoals(context) {
+  Alert(
+    context: context,
+    type: AlertType.none,
+    buttons: [],
+    style: AlertStyle(
+      titleStyle: TextStyle(color: ColorPage.red),
+      descStyle: FontFamily.font6,
+      isButtonVisible: false,
+      isCloseButton: false,
+    ),
+    content: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
             decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(25.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 10.0,
-                  offset: Offset(0, 5),
+              color: ColorPage.colorbutton,
+              borderRadius: BorderRadius.all(
+                Radius.circular(7),
+              ),
+            ),
+            padding: EdgeInsets.all(15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    'Flutter Certification Exam',
+                    style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  '2024-08-15',
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          ),
+          SizedBox(height: 10),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: ColorPage.colorbutton,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(7),
-                      ),
-                    ),
-                    padding: EdgeInsets.all(15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            'Flutter Certification Exam',
-                            style: TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          '2024-08-15',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  Row(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.video_library,
-                                  size: 30, color: Colors.blueAccent),
-                              SizedBox(width: 10),
-                              Text('10 ',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold)),
-                              Text('Videos'),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Text("15 Hours"),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.picture_as_pdf,
-                                  size: 30, color: Colors.blueAccent),
-                              SizedBox(width: 10),
-                              Text('5 ',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold)),
-                              Text('PDFs'),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Text("10 Hours"),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Icon(Icons.question_answer,
-                                  size: 30, color: Colors.blueAccent),
-                              SizedBox(width: 10),
-                              Text('50 ',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold)),
-                              Text('MCQs'),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: Text("5 Hours"),
-                          ),
-                        ],
-                      ),
+                      Icon(Icons.video_library,
+                          size: 30, color: Colors.blueAccent),
+                      SizedBox(width: 10),
+                      Text('10 ',
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold)),
+                      Text('Videos',
+                          style: FontFamily.font3.copyWith(
+                              color: const Color.fromARGB(255, 0, 0, 0),
+                              fontSize: ClsFontsize.DoubleExtraSmall)),
                     ],
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Total Study Time: 30 hours',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 1),
+                    child: Text("15 Hours",
+                        style: FontFamily.font3.copyWith(
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            fontSize: ClsFontsize.DoubleExtraSmall)),
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Total Remaining Day: 15',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                    ),
+                ],
+              ),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.picture_as_pdf,
+                          size: 30, color: Colors.blueAccent),
+                      SizedBox(width: 10),
+                      Text('5 ',
+                          style: TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.bold)),
+                      Text('PDFs',
+                          style: FontFamily.font3.copyWith(
+                              color: const Color.fromARGB(255, 0, 0, 0),
+                              fontSize: ClsFontsize.DoubleExtraSmall)),
+                    ],
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Avg Time/Day: 2 hours',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 1),
+                    child: Text("10 Hours",
+                        style: FontFamily.font3.copyWith(
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                            fontSize: ClsFontsize.DoubleExtraSmall)),
+                  ),
+                ],
+              ),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.question_answer,
+                          size: 30, color: Colors.blueAccent),
+                      SizedBox(width: 10),
+                      Text('50 ',
+                          style: TextStyle(
+                              fontSize: 10, fontWeight: FontWeight.bold)),
+                      Text('MCQs',
+                          style: FontFamily.font3.copyWith(
+                              color: const Color.fromARGB(255, 0, 0, 0),
+                              fontSize: ClsFontsize.DoubleExtraSmall)),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 1),
+                    child: Text(
+                      "5 Hours",
+                      style: FontFamily.font3.copyWith(
+                          color: const Color.fromARGB(255, 0, 0, 0),
+                          fontSize: ClsFontsize.DoubleExtraSmall),
                     ),
                   ),
                 ],
               ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Text(
+            'Total Study Time: 30 hours',
+            style: TextStyle(
+              fontSize: 10,
+              color: Colors.black,
             ),
           ),
-        );
-      },
+          SizedBox(height: 10),
+          Text(
+            'Total Remaining Day: 15',
+            style: TextStyle(
+              fontSize: 12,
+              color: Colors.black,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            'Avg Time/Day: 2 hours',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
+    ),
+  ).show();
+}
+
+class HomePageDrawer extends StatelessWidget {
+  const HomePageDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: ColorPage.bgcolor,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Drawer header with user profile info
+          DrawerHeader(
+            decoration: BoxDecoration(color: ColorPage.colorbutton),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 33,
+                      backgroundColor: ColorPage.white,
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundImage: AssetImage(
+                            'assets/sorojda.png'), // Replace with your asset path
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'John Doe', // Replace with dynamic username
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'johndoe@example.com', // Replace with dynamic email
+                          style: TextStyle(
+                            color: Colors.white70,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          // Drawer items
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                drawerItem(
+                  title: "Profile",
+                  onTap: () {
+                    Navigator.pushNamed(context, '/profile');
+                  },
+                  leading:
+                      Icon(Icons.account_circle, color: ColorPage.colorblack),
+                ),
+                drawerItem(
+                  title: "Logout",
+                  onTap: () {
+                    Navigator.pushNamed(context, '/login');
+                  },
+                  leading: Icon(Icons.exit_to_app, color: ColorPage.colorblack),
+                ),
+                drawerItem(
+                  title: "More",
+                  onTap: () {
+                    Navigator.pushNamed(context, '/more');
+                  },
+                  leading: Icon(Icons.more_horiz, color: ColorPage.colorblack),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget drawerItem(
+      {required String title,
+      required VoidCallback onTap,
+      required Widget leading,
+      Widget? trailing}) {
+    return InkWell(
+      onTap: onTap,
+      child: ListTile(
+        leading: leading,
+        trailing: trailing,
+        title: Text(
+          title,
+          style: TextStyle(
+            color: ColorPage.colorblack,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+        dense: true,
+      ),
     );
   }
 }
