@@ -3,7 +3,7 @@ import 'package:dthlms/PC/VIDEO/scrollbarhide.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
 // import 'package:dthlms/ThemeData/color/color.dart';
 // import 'package:dthlms/ThemeData/font/font_family.dart';
-import 'package:dthlms/getx/getxcontroller.getx.dart';
+import 'package:dthlms/GETX/getxcontroller.getx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

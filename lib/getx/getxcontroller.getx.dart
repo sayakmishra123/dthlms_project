@@ -2,19 +2,25 @@ import 'dart:async' show StreamSubscription;
 import 'dart:io' show Platform;
 import 'package:connectivity_plus/connectivity_plus.dart'
     show Connectivity, ConnectivityResult;
-import 'package:dthlms/LOCAL_DATABASE/dbfunction/dbfunction.dart'
-    show DbHandler, testSQLCipherOnWindows;
-import 'package:dthlms/MOBILE/HOMEPAGE/homepage_mobile.dart';
+import 'package:dthlms/MODEL_CLASS/allPackages_model.dart';
 import 'package:dthlms/MODEL_CLASS/login_model.dart';
+// import 'package:dthlms/Master/modelclass/allpackagemodelclass.dart';
+
+// import 'package:dthlms/db/copydbfun.dart' show copyDatabase;
+// import 'package:dthlms/db/dbfunction/dbfunction.dart'
+//     show DbHandler, testSQLCipherOnWindows;
 // import 'package:dthlms/package/packagescreen.dart' show AllPackage, PackageFind;
 import 'package:flutter/material.dart'
     show Colors, Icon, Icons, Text, TextButton, TextStyle;
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:simnumber/siminfo.dart';
 // import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 // import 'package:sqflite_common_ffi/sqflite_ffi.dart'
 // show databaseFactory, databaseFactoryFfi, sqfliteFfiInit;
 
+// import '../login/loginmodel.dart' show DthloginUserDetails;
 
 class Getx extends GetxController {
   RxBool show = false.obs;
@@ -53,7 +59,11 @@ class Getx extends GetxController {
   //chat
 
   RxList<SimCard> simCardinfo = <SimCard>[].obs;
-
+  RxList<AllPackages> package = <AllPackages>[].obs;
+  // RxMap<> n = <Packagedetails>RxMap();
+  // RxList<Packagedetails> packagedetailsfoldername = <Packagedetails>[].obs;
+  RxMap packagedetailsfoldername = RxMap<String, dynamic>();
+  RxList<PackageFind> packagefind = <PackageFind>[].obs;
   RxBool packageshow = true.obs;
   RxBool forgetpasswordemailcode = false.obs;
   RxBool forgetpageshow = false.obs;

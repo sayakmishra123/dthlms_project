@@ -1,20 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
-// import 'package:dthlms/Master/dashboard.dart';
-// import 'package:dthlms/Master/videoplayer.dart';
 import 'package:dthlms/PC/HOMEPAGE/homepage.dart';
 import 'package:dthlms/THEME_DATA/FontSize/FontSize.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
-// import 'package:dthlms/ThemeData/FontSize/FontSize.dart';
-// import 'package:dthlms/ThemeData/color/color.dart';
-// import 'package:dthlms/ThemeData/font/font_family.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:path/path.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-// import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class DashBoardMobile extends StatefulWidget {
   const DashBoardMobile({super.key});
@@ -92,13 +88,14 @@ class _DashBoardMobileState extends State<DashBoardMobile> {
                         height: MediaQuery.of(context).size.height,
                         child: Expanded(
                             flex: 1,
-                            child: SlideBar(
+                            child: DashboardSlideBar(
                               selectedIndex: selectedIndex,
                               onItemSelected: (index) {
                                 setState(() {
                                   selectedIndex = index;
                                 });
                               },
+                              headname: '',
                             )),
                       ),
                     ],
@@ -470,8 +467,6 @@ learningGoals(context) {
   ).show();
 }
 
-
-
 class HomePageDrawer extends StatelessWidget {
   const HomePageDrawer({super.key});
 
@@ -484,9 +479,7 @@ class HomePageDrawer extends StatelessWidget {
         children: [
           // Drawer header with user profile info
           DrawerHeader(
-            decoration: BoxDecoration(
-              color: ColorPage.colorbutton
-            ),
+            decoration: BoxDecoration(color: ColorPage.colorbutton),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -497,7 +490,8 @@ class HomePageDrawer extends StatelessWidget {
                       backgroundColor: ColorPage.white,
                       child: CircleAvatar(
                         radius: 30,
-                        backgroundImage: AssetImage('assets/sorojda.png'), // Replace with your asset path
+                        backgroundImage: AssetImage(
+                            'assets/sorojda.png'), // Replace with your asset path
                       ),
                     ),
                     SizedBox(width: 16),
@@ -535,28 +529,24 @@ class HomePageDrawer extends StatelessWidget {
                 drawerItem(
                   title: "Profile",
                   onTap: () {
-                   
                     Navigator.pushNamed(context, '/profile');
                   },
-                  leading: Icon(Icons.account_circle, color: ColorPage.colorblack),
-                
+                  leading:
+                      Icon(Icons.account_circle, color: ColorPage.colorblack),
                 ),
                 drawerItem(
                   title: "Logout",
                   onTap: () {
-                  
                     Navigator.pushNamed(context, '/login');
                   },
                   leading: Icon(Icons.exit_to_app, color: ColorPage.colorblack),
                 ),
-                
                 drawerItem(
                   title: "More",
                   onTap: () {
-               
                     Navigator.pushNamed(context, '/more');
                   },
-                  leading: Icon(Icons.more_horiz,color: ColorPage.colorblack),
+                  leading: Icon(Icons.more_horiz, color: ColorPage.colorblack),
                 ),
               ],
             ),
@@ -566,7 +556,11 @@ class HomePageDrawer extends StatelessWidget {
     );
   }
 
-  Widget drawerItem({required String title, required VoidCallback onTap, required Widget leading, Widget? trailing} ) {
+  Widget drawerItem(
+      {required String title,
+      required VoidCallback onTap,
+      required Widget leading,
+      Widget? trailing}) {
     return InkWell(
       onTap: onTap,
       child: ListTile(
@@ -586,5 +580,3 @@ class HomePageDrawer extends StatelessWidget {
     );
   }
 }
-
-

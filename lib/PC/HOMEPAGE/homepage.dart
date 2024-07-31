@@ -1,21 +1,21 @@
 import 'dart:io';
-import 'dart:js';
+import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dthlms/ACTIVATION_WIDGET/enebelActivationcode.dart';
-import 'package:dthlms/MOBILE/HOMEPAGE/homepage_mobile.dart';
-import 'package:dthlms/MOBILE/VIDEO/mobilevideoplay.dart';
+import 'package:dthlms/API/PACKAGE_API/packageapi.dart';
+import 'package:dthlms/GETX/getxcontroller.getx.dart';
 
-import 'package:dthlms/PC/VIDEO/videoplayer.dart';
+import 'package:dthlms/PC/PACKAGEDETAILS/packagedetails.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'dart:async';
+
+// import '../getx/getxcontroller.getx.dart';
 
 class DthDashboard extends StatefulWidget {
   const DthDashboard({super.key});
@@ -24,64 +24,70 @@ class DthDashboard extends StatefulWidget {
   State<DthDashboard> createState() => _DthDashboardState();
 }
 
-
-
-
 class _DthDashboardState extends State<DthDashboard> {
+  Getx getx = Get.put(Getx());
   int selectedIndex = -1;
-  String token = '';
+  final token = Get.arguments['token'];
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      allPackage(token, context);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                  flex: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 20),
-                    child: SlideBar(
-                      selectedIndex: selectedIndex,
-                      onItemSelected: (index) {
-                        setState(() {
-                          selectedIndex = index;
-                        });
-                      },
-                    ),
-                  )),
-              Expanded(
-                  flex: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 20),
-                    child: DashBoardRight(),
-                  ))
-            ],
+          Expanded(
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              child: DashboardSlideBar(
+                selectedIndex: selectedIndex,
+                headname: 'DTH LMS',
+                onItemSelected: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+              ),
+            ),
           ),
-          GlobalDialog(token),
+          Expanded(
+              flex: 5,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                child: DashBoardRight(),
+              ))
         ],
       ),
     );
   }
 }
 
-class SlideBar extends StatefulWidget {
+class DashboardSlideBar extends StatefulWidget {
   final int selectedIndex;
   final Function(int) onItemSelected;
-
-  const SlideBar(
-      {super.key, required this.selectedIndex, required this.onItemSelected});
+  final String headname;
+  const DashboardSlideBar({
+    super.key,
+    required this.headname,
+    required this.selectedIndex,
+    required this.onItemSelected,
+  });
 
   @override
-  State<SlideBar> createState() => _SlideBarState();
+  State<DashboardSlideBar> createState() => _DashboardSlideBarState();
 }
 
-class _SlideBarState extends State<SlideBar> {
+class _DashboardSlideBarState extends State<DashboardSlideBar> {
+  Getx getx = Get.find<Getx>();
   List<Color> colors = [
     Colors.blue,
     Colors.orange,
@@ -93,90 +99,98 @@ class _SlideBarState extends State<SlideBar> {
     Colors.pink,
     Colors.green,
   ];
+  int colorchoose() {
+    return Random().nextInt(9);
+  }
 
+  final token = Get.arguments['token'];
   int hoverIndex = -1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.topCenter,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: ColorPage.white,
-          boxShadow: [
-            BoxShadow(
-                blurRadius: 3,
-                color: Color.fromARGB(255, 192, 191, 191),
-                offset: Offset(0, 0))
-          ],
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'DTH LMS',
-                  style: FontFamily.font,
-                  overflow: TextOverflow.ellipsis,
+      body: Obx(
+        () => Container(
+          alignment: Alignment.topCenter,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: ColorPage.white,
+            boxShadow: [
+              BoxShadow(
+                  blurRadius: 3,
+                  color: Color.fromARGB(255, 192, 191, 191),
+                  offset: Offset(0, 0))
+            ],
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    widget.headname,
+                    style: FontFamily.font,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-              Visibility(
-                visible: Platform.isWindows,
-                child: InkWell(
-                  onTap: () {
-                    widget.onItemSelected(-1);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      alignment: Alignment.topLeft,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 0.5, color: Colors.grey),
-                        color: widget.selectedIndex == -1
-                            ? ColorPage.colorbutton
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Center(
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.home,
-                            color: widget.selectedIndex == -1
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                          title: Text(
-                            'Dashboard',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: widget.selectedIndex == -1
-                                    ? Colors.white
-                                    : Colors.black),
-                            overflow: TextOverflow.ellipsis,
+                Visibility(
+                  visible: Platform.isWindows,
+                  child: InkWell(
+                    onTap: () {
+                      widget.onItemSelected(-1);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 0.5, color: Colors.grey),
+                          color: widget.selectedIndex == -1
+                              ? ColorPage.colorbutton
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Center(
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.home,
+                              color: widget.selectedIndex == -1
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text(
+                              'Dashboard',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: widget.selectedIndex == -1
+                                      ? Colors.white
+                                      : Colors.black),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              for (int i = 0; i < 5; i++)
-                buttonWidget(
-                  'Package ${i + 1}',
-                  () {
-                    widget.onItemSelected(i);
-                    Platform.isWindows
-                        ? Get.to(() => VideoPlayer())
-                        : Get.to(() => VideoPlayerMobile());
-                  },
-                  widget.selectedIndex == i,
-                  hoverIndex == i,
-                  i,
-                ),
-            ],
+                for (int i = 0; i < getx.package.length; i++)
+                  buttonWidget(
+                    getx.package[i].packageName,
+                    () {
+                      widget.onItemSelected(i);
+
+                      Get.to(() => PackageDetailsPage(
+                          getx.package[i].packageName,
+                          token,
+                          int.parse(getx.package[i].packageId)));
+                    },
+                    widget.selectedIndex == i,
+                    hoverIndex == i,
+                    i,
+                  ),
+              ],
+            ),
           ),
         ),
       ),
@@ -215,14 +229,14 @@ class _SlideBarState extends State<SlideBar> {
               child: ListTile(
                 leading: Icon(
                   Icons.folder,
-                  color: colors[i],
+                  color: colors[colorchoose()],
                 ),
-                subtitle: Text(
-                  "No.of content 5",
-                  style:
-                      TextStyle(fontWeight: FontWeight.w100, color: textColor),
-                  overflow: TextOverflow.ellipsis,
-                ),
+                // subtitle: Text(
+                //   getx.package[index].,
+                //   style:
+                //       TextStyle(fontWeight: FontWeight.w100, color: textColor),
+                //   overflow: TextOverflow.ellipsis,
+                // ),
                 title: Text(
                   name,
                   style:
@@ -258,6 +272,7 @@ class _DashBoardRightState extends State<DashBoardRight> {
                 children: [
                   Flexible(
                     child: AppBar(
+                      automaticallyImplyLeading:  true,
                       backgroundColor: Colors.transparent,
                       surfaceTintColor: Colors.transparent,
                       title: Container(
@@ -316,10 +331,7 @@ class _DashBoardRightState extends State<DashBoardRight> {
               ),
             ),
             HeadingBox(
-                date: 'May 29,2024',
-                title: 'Welcome back, Reet!',
-                desc: 'Always updated in your portal',
-                trailing: learningGoalButton()),
+               ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               decoration: BoxDecoration(
@@ -345,7 +357,7 @@ class _DashBoardRightState extends State<DashBoardRight> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  'Basic of tax class by Avinush Sureka',
+                                  'Basic of tax class by Avinash Sureka',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w800,
@@ -424,43 +436,36 @@ class _DashBoardRightState extends State<DashBoardRight> {
   }
 
   Widget learningGoalButton() {
-  return Padding(
-    padding: const EdgeInsets.only(right: 50, top: 10, bottom: 10),
-    child: ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-      child: MaterialButton(
-        hoverColor: Color.fromARGB(255, 237, 235, 246),
-        onPressed: () {
-          learningGoals(context);
-        },
-        color: ColorPage.white,
-        elevation: 10,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 7),
-          child: Text(
-            "Learning Goal",
-            style: FontFamily.font2.copyWith(
-                color: ColorPage.colorbutton, fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.only(right: 50, top: 10, bottom: 10),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        child: MaterialButton(
+          hoverColor: Color.fromARGB(255, 237, 235, 246),
+          onPressed: () {},
+          color: ColorPage.white,
+          elevation: 10,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 7),
+            child: Text(
+              "Learning Goal",
+              style: FontFamily.font2.copyWith(
+                  color: ColorPage.colorbutton, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 }
 
-class CalenderWidget extends StatefulWidget {
+class CalenderWidget extends StatelessWidget {
   const CalenderWidget({super.key});
 
   @override
-  State<CalenderWidget> createState() => _CalenderWidgetState();
-}
-
-class _CalenderWidgetState extends State<CalenderWidget> {
-  @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 1.5,
+      height: MediaQuery.sizeOf(context).height / 1.9,
       margin: EdgeInsets.symmetric(vertical: 15),
       padding: EdgeInsets.only(left: 5, right: 5, top: 20),
       decoration: BoxDecoration(
@@ -478,19 +483,17 @@ class _CalenderWidgetState extends State<CalenderWidget> {
       child: SfCalendar(
         cellBorderColor: Colors.transparent,
         showCurrentTimeIndicator: true,
-        viewHeaderHeight: 50,
+        viewHeaderHeight: 40,
         viewHeaderStyle: ViewHeaderStyle(
-          dayTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          dayTextStyle: TextStyle(fontWeight: FontWeight.bold),
         ),
-        // headerHeight: 50,
-        // weekNumberStyle: WeekNumberStyle(textStyle: FontFamily.font6),
         headerStyle: CalendarHeaderStyle(
             backgroundColor: ColorPage.colorbutton,
             textAlign: TextAlign.center,
             textStyle: TextStyle(color: Colors.white)),
         view: CalendarView.month,
         monthViewSettings: MonthViewSettings(
-          agendaViewHeight: 90,
+          agendaViewHeight: 60,
           showTrailingAndLeadingDates: true,
           monthCellStyle: MonthCellStyle(),
           agendaStyle: AgendaStyle(
@@ -506,78 +509,8 @@ class _CalenderWidgetState extends State<CalenderWidget> {
 }
 
 
-
-class HeadingBoxContent extends StatelessWidget {
-  final String date;
-  final String title;
-  final String desc;
-  final Widget trailing;
-  const HeadingBoxContent({
-    super.key,
-    required this.date,
-    required this.title,
-    required this.desc,
-    required this.trailing,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Container(
-          alignment: Alignment.center,
-          height: MediaQuery.sizeOf(context).height / 6,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 50),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  child: AutoSizeText(
-                    textScaleFactor: 2,
-                    date,
-                    style: FontFamily.font2,
-                    // textScaler: TextScaler.linear(2),
-                  ),
-                ),
-                Flexible(
-                  child: AutoSizeText(
-                    title,
-                    textScaleFactor: 1.5,
-                    style: FontFamily.font2,
-                    // textScaler: TextScaler.linear(1.5),
-                  ),
-                ),
-                Flexible(
-                  child: AutoSizeText(
-                    desc,
-                    style: FontFamily.font3,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        trailing,
-      ],
-    );
-  }
-}
-
 class HeadingBox extends StatefulWidget {
-  final String date;
-  final String title;
-  final String desc;
-  final Widget trailing;
-  const HeadingBox({
-    super.key,
-    required this.date,
-    required this.title,
-    required this.desc,
-    required this.trailing,
-  });
+
 
   @override
   State<HeadingBox> createState() => _HeadingBoxState();
@@ -589,22 +522,31 @@ class _HeadingBoxState extends State<HeadingBox> {
         date: "May 29,2024",
         title: 'Welcome back, Reet!',
         desc: 'Always updated in your portal',
+        isImage: false,
+        imagePath: '',
         trailing:SizedBox()),
          HeadingBoxContent(
         date: "May 29,2025",
         title: 'Welcome back, Reet!',
         desc: 'Always updated in your portal',
-        trailing: SizedBox()),
+         imagePath: 'assets/no_data_found.jpg',
+        trailing: SizedBox(),
+        isImage: true,),
+        
          HeadingBoxContent(
         date: "May 29,2026",
         title: 'Welcome back, Reet!',
         desc: 'Always updated in your portal',
-        trailing: SizedBox()),
+        trailing: SizedBox(),
+         imagePath: '',
+        isImage: false,),
          HeadingBoxContent(
         date: "May 29,2027",
         title: 'Welcome back, Reet!',
         desc: 'Always updated in your portal',
-        trailing: SizedBox()),
+        trailing: SizedBox(),
+         imagePath: '',
+        isImage: false,),
   ];
 
   final CarouselController carouselController = CarouselController();
@@ -638,7 +580,7 @@ class _HeadingBoxState extends State<HeadingBox> {
                   scrollPhysics: const BouncingScrollPhysics(),
                   autoPlay: true,
                   aspectRatio: 2,
-                  viewportFraction: 0.95,
+                  viewportFraction: 0.98,
                   onPageChanged: (index, reason) {
                     setState(() {
                       currentIndex = index;
@@ -659,11 +601,12 @@ class _HeadingBoxState extends State<HeadingBox> {
               return GestureDetector(
                 onTap: () => carouselController.animateToPage(entry.key),
                 child: Container(
-                  width: currentIndex == entry.key ? 20 : 10,
-                  height: 10,
+                  width: currentIndex == entry.key ? 18 : 10,
+                  height: 7,
                   margin: const EdgeInsets.symmetric(horizontal: 3.0),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: ColorPage.colorbutton),
+                      borderRadius: BorderRadius.circular(20),
                       color: currentIndex == entry.key
                           ? ColorPage.blue
                           : ColorPage.white),
@@ -676,3 +619,83 @@ class _HeadingBoxState extends State<HeadingBox> {
     );
   }
 }
+
+class HeadingBoxContent extends StatelessWidget {
+  final String? date;
+  final String? title;
+  final String? desc;
+  final Widget? trailing;
+  final String imagePath;
+  final bool isImage;
+  const HeadingBoxContent({
+    super.key,
+   this.date,
+     this.title,
+   this.desc,
+   this.trailing,
+    required this.isImage,
+    required this.imagePath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return  isImage?Container(
+   
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 0),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                                         
+                                            
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                           imagePath,
+                                            ),
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                    ): Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          alignment: Alignment.center,
+          height: MediaQuery.sizeOf(context).height / 6,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 50),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Flexible(
+                  child: AutoSizeText(
+                    textScaleFactor: 2,
+                    date!,
+                    style: FontFamily.font2,
+                    // textScaler: TextScaler.linear(2),
+                  ),
+                ),
+                Flexible(
+                  child: AutoSizeText(
+                    title!,
+                    textScaleFactor: 1.5,
+                    style: FontFamily.font2,
+                    // textScaler: TextScaler.linear(1.5),
+                  ),
+                ),
+                Flexible(
+                  child: AutoSizeText(
+                    desc!,
+                    style: FontFamily.font3,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+        trailing!,
+      ],
+    );
+  }
+}
+
+
