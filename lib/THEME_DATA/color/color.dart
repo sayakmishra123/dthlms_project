@@ -155,8 +155,8 @@ class ColorPage {
   //StudyMaterialPdf
   //PdfView
 
-  static var appbarcolor = Color.fromARGB(255, 6, 26, 83);
-  static var appbarcolorcopy = Color.fromARGB(255, 30, 40, 70);
+  static var appbarcolor = Color.fromARGB(255, 68, 76, 231);
+  static var appbarcolorcopy = Color.fromARGB(255, 68, 76, 231);
   // static var appbarcolor = Colors.blue;
   //used in
   //MobileHomepage

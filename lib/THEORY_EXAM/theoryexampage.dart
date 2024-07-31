@@ -144,7 +144,7 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
     }
   }
 
-  Future<void> _downloadPdf() async {
+  Future<void> _downloadPdf() async {try{
     final response = await http.get(Uri.parse(
         'https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf'));
     if (response.statusCode == 200) {
@@ -153,12 +153,15 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       final file = File(filePath);
       await file.writeAsBytes(response.bodyBytes);
       setState(() {
-        Get.back();
+        // Get.back();
         _localPdfPath = filePath;
         print(filePath);
       });
     } else {
       print('Failed to download PDF.');
+    }}
+    catch(e){
+       Get.back();
     }
   }
 

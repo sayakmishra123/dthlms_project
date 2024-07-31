@@ -7,7 +7,7 @@ import 'package:dthlms/MOBILE/LOGIN/loginpage_mobile.dart';
 import 'package:dthlms/PC/LOGIN/login.dart';
 import 'package:dthlms/firebase_options.dart';
 // import 'package:dthlms/login/dth_login.dart';
-import 'package:dthlms/routes/router.dart';
+import 'package:dthlms/ROUTES/router.dart';
 
 import 'package:dthlms/utctime.dart';
 import 'package:firebase_core/firebase_core.dart';

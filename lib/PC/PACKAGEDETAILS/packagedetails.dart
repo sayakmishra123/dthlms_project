@@ -11,6 +11,7 @@ import 'package:dthlms/THEME_DATA/font/font_family.dart';
 // import 'package:dthlms/ThemeData/color/color.dart';
 // import 'package:dthlms/ThemeData/font/font_family.dart';
 import 'package:dthlms/GETX/getxcontroller.getx.dart';
+import 'package:dthlms/THEORY_EXAM/theoryexampage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,6 +27,8 @@ class PackageDetailsPage extends StatefulWidget {
 }
 
 class _PackageDetailsPageState extends State<PackageDetailsPage> {
+
+
   Getx getx = Get.put(Getx());
   // final token = Get.arguments['token'];
   int selectedIndex = -1;
@@ -34,6 +37,7 @@ class _PackageDetailsPageState extends State<PackageDetailsPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       packagedetails(context, widget.token, widget.packageId);
     });
+   
     // TODO: implement initState
     super.initState();
   }
@@ -93,19 +97,43 @@ class _SlideBarPackageDetailsState extends State<SlideBarPackageDetails> {
   Getx getx = Get.find<Getx>();
   List<Color> colors = [
     Colors.blue,
-    Colors.orange,
+    Colors.orange.shade900,
     Colors.pink,
-    Colors.lightBlue,
-    Colors.orange,
-    Colors.lightBlue,
-    Colors.orange,
-    Colors.pink,
+    Colors.deepPurple,
+    Colors.indigo,
+    Colors.yellow,
+    Colors.green.shade900,
+    Colors.red,
     Colors.green,
   ];
   int hoverIndex = -1;
 
   int colorchoose() {
     return Random().nextInt(9);
+  }
+
+    String pagename='';
+  
+paging(String pageName){
+  switch (pageName){
+    case 'Videos':
+    null;
+    break;
+    
+    case "Theory":
+    Get.toNamed("/Theoryexampage");
+    break;
+    default :
+    print("null");
+    
+  }
+
+}
+@override
+  void initState() {
+    paging(pagename);
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -149,7 +177,9 @@ class _SlideBarPackageDetailsState extends State<SlideBarPackageDetails> {
                             return buttonWidget(
                               entry.value,
                               () {
-                                widget.onItemSelected(index);
+                               widget.onItemSelected(index);
+                               paging(entry.key);
+                             
                               },
                               widget.selectedIndex == index,
                               hoverIndex == index,
@@ -203,6 +233,7 @@ class _SlideBarPackageDetailsState extends State<SlideBarPackageDetails> {
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: ExpansionTile(
+                    
                     iconColor: ColorPage.white,
                     leading: Icon(
                           Icons.folder,

@@ -179,6 +179,9 @@ class _ExamresultState extends State<Examresult> with SingleTickerProviderStateM
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 4,
+        shadowColor: const Color.fromARGB(255, 0, 0, 0),
+        // surfaceTintColor: Colors.white,
         actions: [
           Padding(
             padding: EdgeInsets.only(right: width / 4),
