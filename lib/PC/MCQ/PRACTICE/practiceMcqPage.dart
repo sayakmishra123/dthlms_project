@@ -591,7 +591,7 @@ class _PracticeMcqState extends State<PracticeMcq> {
       ),
       title: "Are you Sure?",
       desc:
-          "If you are sure to Submit Your Exam. \n Then Click on Yes Button.  ",
+          "If you are sure to Reset Your Exam. \n Then Click on Yes Button.  ",
       buttons: [
         DialogButton(
           child: Text("Cancel",
@@ -669,31 +669,31 @@ class _PracticeMcqState extends State<PracticeMcq> {
     ).show();
   }
 
-  _ontimeUp(context) {
-    Alert(
-      context: context,
-      type: AlertType.info,
-      style: AlertStyle(
-        animationType: AnimationType.fromTop,
-        titleStyle:
-            TextStyle(color: ColorPage.red, fontWeight: FontWeight.bold),
-        descStyle: FontFamily.font6,
-        isCloseButton: false,
-      ),
-      title: "Your Time is Up !!",
-      desc:
-          "Sorry! But Your time is over. \n To Submit your Answer Clik Ok Button  ",
-      buttons: [
-        DialogButton(
-          child:
-              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
-          highlightColor: Color.fromRGBO(3, 77, 59, 1),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          color: Color.fromRGBO(9, 89, 158, 1),
-        ),
-      ],
-    ).show();
-  }
+  // _ontimeUp(context) {
+  //   Alert(
+  //     context: context,
+  //     type: AlertType.info,
+  //     style: AlertStyle(
+  //       animationType: AnimationType.fromTop,
+  //       titleStyle:
+  //           TextStyle(color: ColorPage.red, fontWeight: FontWeight.bold),
+  //       descStyle: FontFamily.font6,
+  //       isCloseButton: false,
+  //     ),
+  //     title: "Your Time is Up !!",
+  //     desc:
+  //         "Sorry! But Your time is over. \n To Submit your Answer Clik Ok Button  ",
+  //     buttons: [
+  //       DialogButton(
+  //         child:
+  //             Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+  //         highlightColor: Color.fromRGBO(3, 77, 59, 1),
+  //         onPressed: () {
+  //           Navigator.pop(context);
+  //         },
+  //         color: Color.fromRGBO(9, 89, 158, 1),
+  //       ),
+  //     ],
+  //   ).show();
+  // }
 }

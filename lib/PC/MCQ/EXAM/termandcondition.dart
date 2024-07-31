@@ -9,29 +9,32 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class McqTermAndCondition extends StatelessWidget {
+class ExamMcqTermAndCondition extends StatelessWidget {
 
 
   bool windowsddevice=Platform.isWindows?true:false;
 
-  McqTermAndCondition({super.key});
+  ExamMcqTermAndCondition({super.key});
   RxBool checkbox = false.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: true,
+        iconTheme: IconThemeData(color: ColorPage.white)
+        ,
         // toolbarHeight: 80,
         backgroundColor: ColorPage.appbarcolor,
-        leading: Image.asset(
-          'assets/2.png',
-        ),
+        // leading: Image.asset(
+        //   'assets/2.png',
+        // ),
         title: Text(
-          'Welcome xyz classes',
+          'MCQ Exam',
           style: FontFamily.font5,
         ),
         actions: [
           Text(
-            'Exam Starts in : 4.50 min  ',
+            'Exam Starts in : 4.50 pm  ',
             style: TextStyle(
                 color: ColorPage.white,
                 fontWeight: FontWeight.bold,
@@ -180,7 +183,7 @@ Row(
                   ),
                   ElevatedButton(
                     onPressed: () {
-                     checkbox.value? Get.toNamed("/Mocktestmcqexampage"):_onTermDeniey(context);
+                     checkbox.value? Get.toNamed("/Exammcq"):_onTermDeniey(context);
                     },
                     child: Text(
                       'Next',

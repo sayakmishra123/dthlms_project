@@ -4,6 +4,8 @@ import 'dart:math';
 // import 'package:dthlms/Master/dashboard.dart';
 import 'package:dthlms/API/PACKAGE_API/packageapi.dart';
 import 'package:dthlms/PC/HOMEPAGE/homepage.dart';
+import 'package:dthlms/PC/MCQ/PRACTICE/termandcondition.dart';
+// import 'package:dthlms/PC/MCQ/practiceMCQtermandcondition.dart.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
 // import 'package:dthlms/ThemeData/color/color.dart';
@@ -12,7 +14,6 @@ import 'package:dthlms/GETX/getxcontroller.getx.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class PackageDetailsPage extends StatefulWidget {
   String token;
@@ -178,6 +179,7 @@ class _SlideBarPackageDetailsState extends State<SlideBarPackageDetails> {
     Color backgroundColor =
         isActive || isHover ? ColorPage.colorbutton : Colors.white;
     Color textColor = isActive || isHover ? Colors.white : Colors.black;
+    Color mcqtextColor = Colors.black;
 
     return MouseRegion(
       onEnter: (_) {
@@ -190,34 +192,147 @@ class _SlideBarPackageDetailsState extends State<SlideBarPackageDetails> {
           hoverIndex = -1;
         });
       },
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            alignment: Alignment.topLeft,
-            decoration: BoxDecoration(
-              border: Border.all(width: 0.5, color: Colors.grey),
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: Center(
-              child: ListTile(
-                leading: Icon(
-                  Icons.folder,
-                  color: colors[colorchoose()],
-                ),
-                title: Text(
-                  foldername,
-                  style:
-                      TextStyle(fontWeight: FontWeight.w600, color: textColor),
-                  overflow: TextOverflow.ellipsis,
+      child: foldername == "MCQ"
+          ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                  alignment: Alignment.topLeft,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 0.5, color: Colors.grey),
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: ExpansionTile(
+                    iconColor: ColorPage.white,
+                    leading: Icon(
+                          Icons.folder,
+                          color: colors[colorchoose()],
+                        ),
+                    collapsedIconColor: ColorPage.white,
+                    
+                    expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                    shape: Border.all(color: Colors.transparent),
+                    title: Text(
+                      foldername,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, color: textColor),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed("/Practicetermandcondition");
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 0.5, color: Colors.grey),
+                              color: ColorPage.white,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Center(
+                              child: ListTile(
+                                
+                                title: Text(
+                                  "Practice",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: mcqtextColor),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                       InkWell(
+                        onTap: () {Get.toNamed("/Mockmcqtermandcondition");
+                        },
+                         child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 0.5, color: Colors.grey),
+                              color: ColorPage.white,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Center(
+                              child: ListTile(
+                                
+                                title: Text(
+                                  "Moct Test",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: mcqtextColor),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ),
+                                               ),
+                       ),
+                       InkWell(
+                        onTap: () {
+                          Get.toNamed("/Examtermandcondition");
+                        },
+                         child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            decoration: BoxDecoration(
+                              border: Border.all(width: 0.5, color: Colors.grey),
+                              color: ColorPage.white,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Center(
+                              child: ListTile(
+                                
+                                title: Text(
+                                  "Exam",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      color: mcqtextColor),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                            ),
+                          ),
+                                               ),
+                       ),
+                    ],
+                  )),
+            )
+          : InkWell(
+              onTap: onTap,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  alignment: Alignment.topLeft,
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 0.5, color: Colors.grey),
+                    color: backgroundColor,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Center(
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.folder,
+                        color: colors[colorchoose()],
+                      ),
+                      title: Text(
+                        foldername,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, color: textColor),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }
