@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names, camel_case_types
 
 import 'package:dthlms/Master/HomePage.dart';
+import 'package:dthlms/Master/dashboard.dart';
 import 'package:dthlms/TheoryExam/theoryexampage.dart';
 import 'package:dthlms/android/Drawer/Mobiledrawer.dart';
 import 'package:dthlms/android/ForgetPassword/ForgetPasswordScreen.dart';
@@ -122,7 +123,7 @@ class pageRouter {
       name: "/Newmobilepakagedashboard",
       // page: () => NewPackageDashboardMobile(),
       // changed by shubha
-      page: () => MainNewPackageDashboardMobile(),
+      page: () => DashBoardMobile(),
     ),
     GetPage(
       name: "/Newmobilevideoplayer",
@@ -168,6 +169,6 @@ class pageRouter {
       name: "/Practicemcqmobile",
       page: () => PracticeMcqMobile(),
     ),
-    GetPage(name: "/Homepage", page: () => Homepagedashboard())
+    GetPage(name: "/DthDashboard", page: () => DthDashboard())
   ];
 }

@@ -15,4 +15,5 @@ class ClsUrlApi {
   static const forgetpassword = '/api/auth/forgetPassword/';
   static const resetPassword = '/api/auth/resetPassword/';
   static const studentActivationkey = "/api/AuthDataGet/ExecuteJson/spAppApi/1";
+  static const tblpackage = "/api/AuthDataGet/ExecuteJson/spAppApi/5";
 }

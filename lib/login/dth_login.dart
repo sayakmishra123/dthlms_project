@@ -51,8 +51,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
   InputBorder border = const UnderlineInputBorder(
       borderSide: BorderSide(color: ColorPage.colorgrey));
   final bool _isVisible = true;
-  RxBool fullScreen=true.obs;
- 
+  RxBool fullScreen = true.obs;
 
   @override
   void initState() {
@@ -69,54 +68,54 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
   var key = '0';
   // Getx getx = Get.put(Getx());
 
-  notification() async {
-    // Add in main method.
-    await localNotifier.setup(
-      appName: 'local_notifier_example',
-      // The parameter shortcutPolicy only works on Windows
-      shortcutPolicy: ShortcutPolicy.requireCreate,
-    );
+  // notification() async {
+  //   // Add in main method.
+  //   await localNotifier.setup(
+  //     appName: '',
+  //     // The parameter shortcutPolicy only works on Windows
+  //     shortcutPolicy: ShortcutPolicy.requireCreate,
+  //   );
 
-    LocalNotification notification = LocalNotification(
-      title: "local_notifier_example",
-      body: "hello flutter!",
-    );
-    notification.onShow = () {
-      // showDialog(
-      //     context: context,
-      //     builder: (context) {
-      //       return CircularProgressIndicator();
-      //     });
-    };
-    notification.onClose = (closeReason) {
-      // Only supported on windows, other platforms closeReason is always unknown.
-      switch (closeReason) {
-        case LocalNotificationCloseReason.userCanceled:
-          // do something
-          break;
-        case LocalNotificationCloseReason.timedOut:
-          // do something
-          break;
-        default:
-      }
-      // print('onClose ${_exampleNotification?.identifier} - $closeReason');
-    };
-    notification.onClick = () {
-      print('onClick ${notification.identifier}');
-      Get.to(() => DthLmsLogin());
-      // notification.onShow!();
-    };
-    notification.onClickAction = (actionIndex) {
-      print('onClickAction ${notification.identifier} - $actionIndex');
-      Get.to(() => DthLmsLogin());
-    };
+  //   LocalNotification notification = LocalNotification(
+  //     title: "local_notifier_example",
+  //     body: "hello flutter!",
+  //   );
+  //   notification.onShow = () {
+  //     // showDialog(
+  //     //     context: context,
+  //     //     builder: (context) {
+  //     //       return CircularProgressIndicator();
+  //     //     });
+  //   };
+  //   notification.onClose = (closeReason) {
+  //     // Only supported on windows, other platforms closeReason is always unknown.
+  //     switch (closeReason) {
+  //       case LocalNotificationCloseReason.userCanceled:
+  //         // do something
+  //         break;
+  //       case LocalNotificationCloseReason.timedOut:
+  //         // do something
+  //         break;
+  //       default:
+  //     }
+  //     // print('onClose ${_exampleNotification?.identifier} - $closeReason');
+  //   };
+  //   notification.onClick = () {
+  //     print('onClick ${notification.identifier}');
+  //     Get.to(() => DthLmsLogin());
+  //     // notification.onShow!();
+  //   };
+  //   notification.onClickAction = (actionIndex) {
+  //     print('onClickAction ${notification.identifier} - $actionIndex');
+  //     Get.to(() => DthLmsLogin());
+  //   };
 
-    notification.show();
-  }
+  //   notification.show();
+  // }
 
   @override
   Widget build(BuildContext context) {
-     late RxDouble screenwidth=MediaQuery.of(context).size.width.obs;
+    late RxDouble screenwidth = MediaQuery.of(context).size.width.obs;
     return Material(
       child: Scaffold(
           body: _isVisible && Platform.isWindows
@@ -132,7 +131,7 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                   child: Row(
                     children: [
                       Visibility(
-                        visible:  screenwidth.value>850?true:false,
+                        visible: screenwidth.value > 850 ? true : false,
                         child: Expanded(
                           child: Column(
                             children: [
@@ -141,14 +140,15 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Image.asset(
                                           fit: BoxFit.contain,
                                           'assets/loginimg2.png',
-                                          height:
-                                              MediaQuery.sizeOf(context).height -
-                                                  100,
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height -
+                                              100,
                                         ),
                                       ],
                                     ),
@@ -956,7 +956,6 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                     .colorgrey,
                                                                 onPressed:
                                                                     () async {
-                                                                  notification();
                                                                   if (!desktop_key2
                                                                       .currentState!
                                                                       .validate()) {

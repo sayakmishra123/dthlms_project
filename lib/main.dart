@@ -8,6 +8,7 @@ import 'package:dthlms/Testing/cameratesting.dart';
 
 import 'package:dthlms/android/login/dth_mob_login.dart';
 import 'package:dthlms/firebase_options.dart';
+import 'package:dthlms/login/dth_login.dart';
 import 'package:dthlms/routes/router.dart';
 
 import 'package:dthlms/utctime.dart';
@@ -27,10 +28,16 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 //sayak mishra
 void main(List<String> args) async {
   open.overrideFor(OperatingSystem.windows, openSQLCipherOnWindows);
-
+  print(UtcTime().utctime());
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows) {
-    windowsSize();
+    doWhenWindowReady(() {
+      final win = appWindow;
+      win.minSize = Size(1100, 600); // Set the minimum window size here
+      // win.size = Size(1000, 800); // Initial window size
+      win.alignment = Alignment.topLeft;
+      win.show();
+    });
   } else {
     cameras = await availableCameras();
   }
@@ -76,7 +83,7 @@ class _MyAppState extends State<MyApp> {
       getPages: router.Route,
       debugShowCheckedModeBanner: false,
       title: 'DTH LMS',
-      home: Platform.isAndroid ? Mobilelogin() : DthDashboard(),
+      home: Platform.isAndroid ? Mobilelogin() : DthLmsLogin(),
     );
   }
 }
@@ -93,14 +100,4 @@ singleInstance(args) async {
     print(args);
   });
   print(args);
-}
-
-windowsSize() async {
-  doWhenWindowReady(() {
-    final win = appWindow;
-    win.minSize = Size(1100, 600); // Set the minimum window size here
-    win.size = Size(1000, 800); // Initial window size
-    win.alignment = Alignment.topLeft;
-    win.show();
-  });
 }

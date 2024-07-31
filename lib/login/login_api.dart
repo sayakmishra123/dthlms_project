@@ -79,9 +79,9 @@ Future loginApi(
 // String tk=jsondata['result']['token'];
     Get.back();
     // DbHandler().closedb();
-print(jsondata['result']['token']);
+    print(jsondata['result']['token']);
     Platform.isWindows
-        ? Get.toNamed('/Homepage',
+        ? Get.toNamed('/DthDashboard',
             arguments: {'token': jsondata['result']['token']})
         : Get.toNamed("/Newmobilepakagedashboard",
             arguments: {'token': jsondata['result']['token']});

@@ -127,7 +127,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
     Colors.pink,
     Colors.green,
   ];
-  List content = [3, 7, 5, 6, 4, 3, 7, 2,6];
+  List content = [3, 7, 5, 6, 4, 3, 7, 2, 6];
   int itemlength = 0;
   Getx getxController = Get.put(Getx());
   List datacontent = ['abc', 'def', 'ghi', 'jkl', 'lmo'];
@@ -246,7 +246,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
         itemlength = filteredPackage.length;
       });
       print(getxController.loading.value);
-      print(allpackage.length.toString ()+"abhoy");
+      print(allpackage.length.toString() + "abhoy");
     }
   }
 
@@ -321,19 +321,17 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
     return Obx(
       () => Scaffold(
         backgroundColor: ColorPage.bgcolor,
-        
+
         appBar: AppBar(
           surfaceTintColor: ColorPage.appbarcolor,
           shadowColor: Color.fromARGB(255, 255, 255, 255),
           elevation: 3,
           backgroundColor: ColorPage.appbarcolor,
-          
-          
-          
+
           // flexibleSpace: Container(decoration: BoxDecoration(boxShadow: [
           //   BoxShadow(offset: Offset(1, 1),spreadRadius: 0,blurRadius: 0,color: ColorPage.blue)
           // ]),),
-        
+
           // backgroundColor: ,
           // flexibleSpace: Container(
           //   decoration: BoxDecoration(
@@ -403,11 +401,13 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                 children: [
                   Text(
                     "Sayak Mishra",
-                    style: FontFamily.font4.copyWith(fontWeight: FontWeight.bold,color: ColorPage.white),
+                    style: FontFamily.font4.copyWith(
+                        fontWeight: FontWeight.bold, color: ColorPage.white),
                   ),
                   Text(
                     "Sayakmishra@gmail.com",
-                    style: FontFamily.font4.copyWith(fontSize: 12,color: ColorPage.white),
+                    style: FontFamily.font4
+                        .copyWith(fontSize: 12, color: ColorPage.white),
                   )
                 ],
               ),
@@ -660,7 +660,6 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                                                       child: Container(
                                                         decoration:
                                                             BoxDecoration(
-                                                              
                                                           boxShadow: [
                                                             BoxShadow(
                                                                 color: Colors
@@ -695,8 +694,11 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                                                               BorderRadius.all(
                                                             Radius.circular(10),
                                                           ),
-                                                          color:
-                                                              Color.fromARGB(255, 255, 255, 255),
+                                                          color: Color.fromARGB(
+                                                              255,
+                                                              255,
+                                                              255,
+                                                              255),
                                                         ),
                                                         child: ListTile(
                                                           subtitle: Text(
@@ -758,7 +760,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
                       ),
                     ),
                   ),
-             ClaenderWidget(),
+                  ClaenderWidget(),
                 ],
               ),
               GlobalDialog(token)
@@ -768,8 +770,6 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
       ),
     );
   }
-
-
 
 // Widget Calenderwidget(){
 //   return   Expanded(
@@ -790,7 +790,7 @@ class _HomepagedashboardState extends State<Homepagedashboard> {
 //                     ),
 //                     child: SfCalendar(
 //                       cellBorderColor:ColorPage.colorblack ,
-                    
+
 //                       viewHeaderHeight: 50,
 //                       viewHeaderStyle: ViewHeaderStyle(dayTextStyle:FontFamily.font6 ),
 

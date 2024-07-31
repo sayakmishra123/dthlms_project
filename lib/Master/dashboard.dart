@@ -1,13 +1,17 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dthlms/Master/api.dart';
+import 'package:dthlms/Master/packagedetails.dart';
 import 'package:dthlms/Master/videoplayer.dart';
 import 'package:dthlms/ThemeData/color/color.dart';
 import 'package:dthlms/ThemeData/font/font_family.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+
+import '../getx/getxcontroller.getx.dart';
 
 class DthDashboard extends StatefulWidget {
   const DthDashboard({super.key});
@@ -17,7 +21,16 @@ class DthDashboard extends StatefulWidget {
 }
 
 class _DthDashboardState extends State<DthDashboard> {
+  Getx getx = Get.put(Getx());
   int selectedIndex = -1;
+  final token = Get.arguments['token'];
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      allPackage(token, context);
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +40,20 @@ class _DthDashboardState extends State<DthDashboard> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
-              flex: 1,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                child: SlideBar(
-                  selectedIndex: selectedIndex,
-                  onItemSelected: (index) {
-                    setState(() {
-                      selectedIndex = index;
-                    });
-                  },
-                ),
-              )),
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              child: DashboardSlideBar(
+                selectedIndex: selectedIndex,
+                headname: 'DTH LMS',
+                onItemSelected: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+              ),
+            ),
+          ),
           Expanded(
               flex: 5,
               child: Padding(
@@ -53,18 +67,23 @@ class _DthDashboardState extends State<DthDashboard> {
   }
 }
 
-class SlideBar extends StatefulWidget {
+class DashboardSlideBar extends StatefulWidget {
   final int selectedIndex;
   final Function(int) onItemSelected;
-
-  const SlideBar(
-      {super.key, required this.selectedIndex, required this.onItemSelected});
+  final String headname;
+  const DashboardSlideBar({
+    super.key,
+    required this.headname,
+    required this.selectedIndex,
+    required this.onItemSelected,
+  });
 
   @override
-  State<SlideBar> createState() => _SlideBarState();
+  State<DashboardSlideBar> createState() => _DashboardSlideBarState();
 }
 
-class _SlideBarState extends State<SlideBar> {
+class _DashboardSlideBarState extends State<DashboardSlideBar> {
+  Getx getx = Get.find<Getx>();
   List<Color> colors = [
     Colors.blue,
     Colors.orange,
@@ -76,87 +95,98 @@ class _SlideBarState extends State<SlideBar> {
     Colors.pink,
     Colors.green,
   ];
+  int colorchoose() {
+    return Random().nextInt(9);
+  }
 
+  final token = Get.arguments['token'];
   int hoverIndex = -1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        alignment: Alignment.topCenter,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: ColorPage.white,
-          boxShadow: [
-            BoxShadow(
-                blurRadius: 3,
-                color: Color.fromARGB(255, 192, 191, 191),
-                offset: Offset(0, 0))
-          ],
-        ),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'DTH LMS',
-                  style: FontFamily.font,
-                  overflow: TextOverflow.ellipsis,
+      body: Obx(
+        () => Container(
+          alignment: Alignment.topCenter,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: ColorPage.white,
+            boxShadow: [
+              BoxShadow(
+                  blurRadius: 3,
+                  color: Color.fromARGB(255, 192, 191, 191),
+                  offset: Offset(0, 0))
+            ],
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    widget.headname,
+                    style: FontFamily.font,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-              Visibility(
-                visible: Platform.isWindows,
-                child: InkWell(
-                  onTap: () {
-                    widget.onItemSelected(-1);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      alignment: Alignment.topLeft,
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 0.5, color: Colors.grey),
-                        color: widget.selectedIndex == -1
-                            ? ColorPage.colorbutton
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Center(
-                        child: ListTile(
-                          leading: Icon(
-                            Icons.home,
-                            color: widget.selectedIndex == -1
-                                ? Colors.white
-                                : Colors.black,
-                          ),
-                          title: Text(
-                            'Dashboard',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: widget.selectedIndex == -1
-                                    ? Colors.white
-                                    : Colors.black),
-                            overflow: TextOverflow.ellipsis,
+                Visibility(
+                  visible: Platform.isWindows,
+                  child: InkWell(
+                    onTap: () {
+                      widget.onItemSelected(-1);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        alignment: Alignment.topLeft,
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 0.5, color: Colors.grey),
+                          color: widget.selectedIndex == -1
+                              ? ColorPage.colorbutton
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Center(
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.home,
+                              color: widget.selectedIndex == -1
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                            title: Text(
+                              'Dashboard',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: widget.selectedIndex == -1
+                                      ? Colors.white
+                                      : Colors.black),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              for (int i = 0; i < 5; i++)
-                buttonWidget(
-                  'Package ${i + 1}',
-                  () {
-                    widget.onItemSelected(i);
-                  },
-                  widget.selectedIndex == i,
-                  hoverIndex == i,
-                  i,
-                ),
-            ],
+                for (int i = 0; i < getx.package.length; i++)
+                  buttonWidget(
+                    getx.package[i].packageName,
+                    () {
+                      widget.onItemSelected(i);
+
+                      Get.to(() => PackageDetailsPage(
+                          getx.package[i].packageName,
+                          token,
+                          int.parse(getx.package[i].packageId)));
+                    },
+                    widget.selectedIndex == i,
+                    hoverIndex == i,
+                    i,
+                  ),
+              ],
+            ),
           ),
         ),
       ),
@@ -195,14 +225,14 @@ class _SlideBarState extends State<SlideBar> {
               child: ListTile(
                 leading: Icon(
                   Icons.folder,
-                  color: colors[i],
+                  color: colors[colorchoose()],
                 ),
-                subtitle: Text(
-                  "No.of content 5",
-                  style:
-                      TextStyle(fontWeight: FontWeight.w100, color: textColor),
-                  overflow: TextOverflow.ellipsis,
-                ),
+                // subtitle: Text(
+                //   getx.package[index].,
+                //   style:
+                //       TextStyle(fontWeight: FontWeight.w100, color: textColor),
+                //   overflow: TextOverflow.ellipsis,
+                // ),
                 title: Text(
                   name,
                   style:
@@ -654,7 +684,7 @@ class _DashBoardRightState extends State<DashBoardRight> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  'Basic of tax class by Avinush Sureka',
+                                  'Basic of tax class by Avinash Sureka',
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w800,
@@ -725,48 +755,57 @@ class _DashBoardRightState extends State<DashBoardRight> {
                 },
               ),
             ),
-            Container(
-              constraints: BoxConstraints(maxHeight: 500),
-              margin: EdgeInsets.symmetric(vertical: 15),
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 3,
-                      color: Color.fromARGB(255, 192, 191, 191),
-                      offset: Offset(0, 0))
-                ],
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-              ),
-              child: SfCalendar(
-                cellBorderColor: Colors.transparent,
-                showCurrentTimeIndicator: true,
-                viewHeaderHeight: 40,
-                viewHeaderStyle: ViewHeaderStyle(
-                  dayTextStyle: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                headerStyle: CalendarHeaderStyle(
-                    backgroundColor: ColorPage.colorbutton,
-                    textAlign: TextAlign.center,
-                    textStyle: TextStyle(color: Colors.white)),
-                view: CalendarView.month,
-                monthViewSettings: MonthViewSettings(
-                  agendaViewHeight: 60,
-                  showTrailingAndLeadingDates: true,
-                  monthCellStyle: MonthCellStyle(),
-                  agendaStyle: AgendaStyle(
-                      dateTextStyle: TextStyle(
-                        color: Colors.black,
-                      ),
-                      placeholderTextStyle: TextStyle(color: Colors.red)),
-                  showAgenda: true,
-                ),
-              ),
-            ),
+            CalenderWidget(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CalenderWidget extends StatelessWidget {
+  const CalenderWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.sizeOf(context).height / 1.9,
+      margin: EdgeInsets.symmetric(vertical: 15),
+      padding: EdgeInsets.only(left: 5, right: 5, top: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+              blurRadius: 3,
+              color: Color.fromARGB(255, 192, 191, 191),
+              offset: Offset(0, 0))
+        ],
+        borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        ),
+      ),
+      child: SfCalendar(
+        cellBorderColor: Colors.transparent,
+        showCurrentTimeIndicator: true,
+        viewHeaderHeight: 40,
+        viewHeaderStyle: ViewHeaderStyle(
+          dayTextStyle: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        headerStyle: CalendarHeaderStyle(
+            backgroundColor: ColorPage.colorbutton,
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(color: Colors.white)),
+        view: CalendarView.month,
+        monthViewSettings: MonthViewSettings(
+          agendaViewHeight: 60,
+          showTrailingAndLeadingDates: true,
+          monthCellStyle: MonthCellStyle(),
+          agendaStyle: AgendaStyle(
+              dateTextStyle: TextStyle(
+                color: Colors.black,
+              ),
+              placeholderTextStyle: TextStyle(color: Colors.red)),
+          showAgenda: true,
         ),
       ),
     );
