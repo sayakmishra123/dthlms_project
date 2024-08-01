@@ -517,6 +517,7 @@ class HeadingBox extends StatefulWidget {
 }
 
 class _HeadingBoxState extends State<HeadingBox> {
+  
   final List<Widget> contentList = [
     HeadingBoxContent(
         date: "May 29,2024",
@@ -557,7 +558,7 @@ class _HeadingBoxState extends State<HeadingBox> {
       children: [
         Container(
           height: 250,
-          width: MediaQuery.of(context).size.width - 200,
+          width: MediaQuery.of(context).size.width,
           child: InkWell(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 5, vertical: 20),

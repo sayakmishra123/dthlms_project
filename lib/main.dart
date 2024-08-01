@@ -7,7 +7,7 @@ import 'package:dthlms/MOBILE/LOGIN/loginpage_mobile.dart';
 import 'package:dthlms/PC/LOGIN/login.dart';
 import 'package:dthlms/firebase_options.dart';
 // import 'package:dthlms/login/dth_login.dart';
-import 'package:dthlms/ROUTES/router.dart';
+import 'package:dthlms/routes/router.dart';
 
 import 'package:dthlms/utctime.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,7 +31,7 @@ void main(List<String> args) async {
   if (Platform.isWindows) {
     doWhenWindowReady(() {
       final win = appWindow;
-      win.minSize = Size(1100, 600); // Set the minimum window size here
+      win.minSize = Size(1300, 600); // Set the minimum window size here
       // win.size = Size(1000, 800); // Initial window size
       win.alignment = Alignment.topLeft;
       win.show();

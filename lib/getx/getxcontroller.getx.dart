@@ -53,7 +53,9 @@ class Getx extends GetxController {
   RxBool passvisibility = false.obs;
   RxBool videoplaylock = false.obs;
   RxBool isPaperSubmit = false.obs;
-
+   RxBool isVideoDashBoard = false.obs;
+   RxBool isCollapsed = false.obs; 
+RxBool isFolderview = false.obs; 
   RxList name = [].obs; //chat
   RxString email = ''.obs;
   //chat
