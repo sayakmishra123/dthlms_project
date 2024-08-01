@@ -3,8 +3,10 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/API/ALL_FUTURE_FUNTIONS/all_functions.dart';
 import 'package:dthlms/API/PACKAGE_API/packageapi.dart';
+import 'package:dthlms/MOBILE/VIDEO/mobilevideoplay.dart';
 import 'package:dthlms/PC/HOMEPAGE/homepage.dart';
 import 'package:dthlms/PC/MCQ/PRACTICE/termandcondition.dart';
+import 'package:dthlms/PC/VIDEO/scrollbarhide.dart';
 import 'package:dthlms/THEME_DATA/FontSize/FontSize.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
@@ -13,6 +15,7 @@ import 'package:dthlms/THEORY_EXAM/theoryexampage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class PackageDetailsPage extends StatefulWidget {
@@ -191,74 +194,95 @@ class _VideoDashboardRightState extends State<VideoDashboardRight> {
                   ),
                   Row(
                     children: [
-                      Container(
-                        height: 38,
-                        child: Padding(
-                          padding: const EdgeInsets.all(7.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(4)),
-                            child: MaterialButton(
+                      Tooltip(
+                        message: "Folder View",
+                        child: IconButton(onPressed: ()async{
+                           final SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  await prefs.setBool("folderview", true);
+                        
+                                  getx.isFolderview.value = true;
+                        
+                        }, icon: Icon(Icons.grid_view_rounded,color: getx.isFolderview.value
+                                        ? ColorPage.colorbutton
+                                        : ColorPage.colorblack,)),
+                      ),
+                       Tooltip(
+                        message: "List View",
+                         child: IconButton(onPressed: ()async{
+                          final SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  await prefs.setBool("folderview", false);
+                                  getx.isFolderview.value = false;
+                         
+                                               }, icon: Icon(Icons.view_list,color: !getx.isFolderview.value
+                                            ? ColorPage.colorbutton
+                                            : ColorPage.colorblack,)),
+                       ),
+                      // Container(
+                      //   height: 38,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(7.0),
+                      //     child: ClipRRect(
+                      //       borderRadius: BorderRadius.all(Radius.circular(4)),
+                      //       child: MaterialButton(
                               
-                              shape: Border.all(
-                                  color: !getx.isFolderview.value
-                                      ? ColorPage.colorblack
-                                      : Colors.transparent,
-                                  width: 2),
-                              color: getx.isFolderview.value
-                                  ? ColorPage.colorbutton
-                                  : Color.fromARGB(255, 255, 255, 255),
-                              height: 20,
-                              onPressed: () async {
-                                final SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                await prefs.setBool("folderview", true);
+                      //         shape: Border.all(
+                      //             color: !getx.isFolderview.value
+                      //                 ? ColorPage.colorblack
+                      //                 : Colors.transparent,
+                      //             width: 2),
+                      //         color: getx.isFolderview.value
+                      //             ? ColorPage.colorbutton
+                      //             : Color.fromARGB(255, 255, 255, 255),
+                      //         height: 20,
+                      //         onPressed: () async {
+                      //           final SharedPreferences prefs =
+                      //               await SharedPreferences.getInstance();
+                      //           await prefs.setBool("folderview", true);
 
-                                getx.isFolderview.value = true;
-                              },
-                              child: Text(
-                                "Folder view",
-                                style: FontFamily.font4.copyWith(
-                                    color: getx.isFolderview.value
-                                        ? ColorPage.white
-                                        : ColorPage.colorblack),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 38,
-                        child: Padding(
-                          padding: const EdgeInsets.all(7.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            child: MaterialButton(
-                              shape: Border.all(
-                                  color: getx.isFolderview.value
-                                      ? ColorPage.colorblack
-                                      : Colors.transparent,
-                                  width: 2),
-                              color: !getx.isFolderview.value
-                                  ? ColorPage.colorbutton
-                                  : Color.fromARGB(255, 255, 255, 255),
-                              height: 20,
-                              onPressed: () async {
-                                final SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                await prefs.setBool("folderview", false);
-                                getx.isFolderview.value = false;
-                              },
-                              child: Text(
-                                "List view",
-                                style: FontFamily.font4.copyWith(
-                                    color: !getx.isFolderview.value
-                                        ? ColorPage.white
-                                        : ColorPage.colorblack),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      //           getx.isFolderview.value = true;
+                      //         },
+                      //         child:Icon(Icons.grid_view_rounded,color:  getx.isFolderview.value
+                      //                   ? ColorPage.white
+                      //                   : ColorPage.colorblack,)
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Container(
+                      //   height: 38,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.all(7.0),
+                      //     child: ClipRRect(
+                      //       borderRadius: BorderRadius.all(Radius.circular(5)),
+                      //       child: MaterialButton(
+                      //         shape: Border.all(
+                      //             color: getx.isFolderview.value
+                      //                 ? ColorPage.colorblack
+                      //                 : Colors.transparent,
+                      //             width: 2),
+                      //         color: !getx.isFolderview.value
+                      //             ? ColorPage.colorbutton
+                      //             : Color.fromARGB(255, 255, 255, 255),
+                      //         height: 20,
+                      //         onPressed: () async {
+                      //           final SharedPreferences prefs =
+                      //               await SharedPreferences.getInstance();
+                      //           await prefs.setBool("folderview", false);
+                      //           getx.isFolderview.value = false;
+                      //         },
+                      //         child: Text(
+                      //           "List view",
+                      //           style: FontFamily.font4.copyWith(
+                      //               color: !getx.isFolderview.value
+                      //                   ? ColorPage.white
+                      //                   : ColorPage.colorblack),
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],
@@ -286,7 +310,7 @@ class _VideoDashboardRightState extends State<VideoDashboardRight> {
                       ? Container(
                           padding: EdgeInsets.all(10),
                           child: GridView.builder(
-                            itemCount: 100,
+                            itemCount: 2,
                             scrollDirection: Axis.vertical,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
@@ -301,8 +325,8 @@ class _VideoDashboardRightState extends State<VideoDashboardRight> {
                                 child: Column(
                                   children: [
                                     Image.asset(
-                                      "assets/folder.png",
-                                      scale: 5,
+                                      "assets/folder5.png",
+                                      scale: 8,
                                     ),
                                     AutoSizeText(
                                       "Folder Name",
@@ -386,45 +410,48 @@ class _VideoDashboardRightState extends State<VideoDashboardRight> {
                       Radius.circular(10),
                     ),
                   ),
-                  child: Container(
-                    padding: EdgeInsets.all(10),
-                    child: ListView.builder(
-                        itemCount: 10,
-                        itemBuilder: (context, index) {
-                          return Container(
-                              margin: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 3,
-                                    color: Color.fromARGB(255, 192, 191, 191),
-                                    offset: Offset(0, 0),
-                                  ),
-                                ],
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                                color: Color.fromARGB(255, 255, 255, 255),
-                              ),
-                              child: MaterialButton(
-                                onPressed: () {},
-                                child: ListTile(
-                                  subtitle: Text(
-                                    "This in New Video",
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  leading: Image.asset(
-                                    "assets/video2.png",
-                                    width: 25,
-                                  ),
-                                  title: Text("Videos no - ${index + 1}",
-                                      style: FontFamily.font4.copyWith(
-                                          fontWeight: FontWeight.bold)),
-                                  trailing: Text("25:30 min"),
-                                ),
-                              ));
-                        }),
-                  ),
+
+
+                  child: VideoPlayerLeft(),
+                //   child: Container(
+                //     padding: EdgeInsets.all(10),
+                //     child: ListView.builder(
+                //         itemCount: 10,
+                //         itemBuilder: (context, index) {
+                //           return Container(
+                //               margin: EdgeInsets.all(5),
+                //               decoration: BoxDecoration(
+                //                 boxShadow: [
+                //                   BoxShadow(
+                //                     blurRadius: 3,
+                //                     color: Color.fromARGB(255, 192, 191, 191),
+                //                     offset: Offset(0, 0),
+                //                   ),
+                //                 ],
+                //                 borderRadius: BorderRadius.all(
+                //                   Radius.circular(10),
+                //                 ),
+                //                 color: Color.fromARGB(255, 255, 255, 255),
+                //               ),
+                //               child: MaterialButton(
+                //                 onPressed: () {},
+                //                 child: ListTile(
+                //                   subtitle: Text(
+                //                     "This in New Video",
+                //                     overflow: TextOverflow.ellipsis,
+                //                   ),
+                //                   leading: Image.asset(
+                //                     "assets/video2.png",
+                //                     width: 25,
+                //                   ),
+                //                   title: Text("Videos no - ${index + 1}",
+                //                       style: FontFamily.font4.copyWith(
+                //                           fontWeight: FontWeight.bold)),
+                //                   trailing: Text("25:30 min"),
+                //                 ),
+                //               ));
+                //         }),
+                //   ),
                 ),
               ),
             ),
@@ -787,3 +814,229 @@ class _SlideBarPackageDetailsState extends State<SlideBarPackageDetails> {
     );
   }
 }
+
+
+class VideoPlayerLeft extends StatefulWidget {
+  VideoPlayerLeft({
+    super.key,
+  });
+
+  @override
+  State<VideoPlayerLeft> createState() => _VideoPlayerLeftState();
+}
+
+class _VideoPlayerLeftState extends State<VideoPlayerLeft> {
+  var color = Color.fromARGB(255, 102, 112, 133);
+  List<Widget> page = [Pdf(), Mcq(), Container(), Container()];
+
+  int flag = 2;
+  int selectedIndex = 0;
+  int selectedListIndex = -1; // Track the selected list tile
+
+  @override
+  Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.sizeOf(context).width;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      child: ScrollConfiguration(
+        behavior: HideScrollbarBehavior(),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Container(
+              //   width: 400,
+              //   child: TextFormField(
+              //     decoration: InputDecoration(
+              //       hintText: 'Search',
+              //       hintStyle: TextStyle(color: ColorPage.grey),
+              //       fillColor: ColorPage.white,
+              //       filled: true,
+              //       border: OutlineInputBorder(
+              //         borderSide: BorderSide.none,
+              //         borderRadius: BorderRadius.circular(40),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: ColorPage.white,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 3,
+                      color: Color.fromARGB(255, 192, 191, 191),
+                      offset: Offset(0, 0),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return ExpansionTile(
+                        shape: LinearBorder(),
+                        backgroundColor: selectedListIndex == index
+                            ? ColorPage.white.withOpacity(0.5)
+                            : Color.fromARGB(255, 255, 255, 255),
+                        onExpansionChanged: (isExpanded) {
+                          setState(() {
+                            selectedListIndex = isExpanded ? index : -1;
+                          });
+                        },
+                        subtitle: Row(
+                          children: [
+                            Text(
+                              'Duration: 3:04',
+                              style: TextStyle(
+                                color: ColorPage.grey,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                          ],
+                        ),
+                        title: Text(
+                          'index.mp4',
+                          style: GoogleFonts.inter().copyWith(
+                            fontWeight: FontWeight.w800,
+                            fontSize: selectedListIndex == index ? 20 : null,
+                            // color: selectedListIndex == index
+                            //     ? Colors.amber[900]
+                            //     : Colors.black,
+                          ),
+                        ),
+                        trailing: SizedBox(
+                          width: 130,
+                          child: Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.download,
+                                    color: ColorPage.colorbutton,
+                                  )),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.play_circle,
+                                    color: ColorPage.colorbutton,
+                                  )),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Icon(
+                                  selectedListIndex == index
+                                      ? Icons.keyboard_arrow_up
+                                      : Icons.keyboard_arrow_down_outlined,
+                                  color: ColorPage.colorbutton,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Color.fromARGB(255, 243, 240, 240),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 20,
+                                horizontal: 10,
+                              ),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      tabbarbutton('PDF', 0),
+                                      tabbarbutton('MCQ', 1),
+                                      tabbarbutton('TAG', 2),
+                                      tabbarbutton('Ask doubt', 3),
+                                      IconButton(
+                                          tooltip: 'Delete this video',
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.delete_forever,
+                                            color: Color.fromARGB(
+                                                255, 253, 29, 13),
+                                          ))
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 800, // Fixed height for content
+                                    child: SingleChildScrollView(
+                                      child: page[selectedIndex],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget tabbarbutton(String name, int tabIndex) {
+    bool isActive = selectedIndex == tabIndex;
+    Color backgroundColor = isActive ? ColorPage.colorbutton : Colors.white;
+    Color textColor = isActive ? Colors.white : Colors.black;
+
+    return Expanded(
+      child: MouseRegion(
+        onEnter: (_) {
+          setState(() {
+            // hoverIndex = tabIndex;
+          });
+        },
+        onExit: (_) {
+          setState(() {
+            // hoverIndex = -1;
+          });
+        },
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              selectedIndex = tabIndex;
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(width: 0.5, color: Colors.grey),
+                color: backgroundColor,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Center(
+                child: Text(
+                  name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: textColor,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
