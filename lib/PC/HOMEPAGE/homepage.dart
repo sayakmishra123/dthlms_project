@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dthlms/API/ALL_FUTURE_FUNTIONS/all_functions.dart';
 import 'package:dthlms/API/PACKAGE_API/packageapi.dart';
 import 'package:dthlms/GETX/getxcontroller.getx.dart';
 
@@ -272,7 +273,13 @@ class _DashBoardRightState extends State<DashBoardRight> {
                 children: [
                   Flexible(
                     child: AppBar(
-                      automaticallyImplyLeading:  true,
+                      automaticallyImplyLeading: true,
+                      leading:   getx.isCollapsed.value
+                            ? IconButton(
+                                icon: Icon(Icons.list),
+                                onPressed:(){ getx.isCollapsed.value = !getx.isCollapsed.value;},
+                              )
+                            : SizedBox(),
                       backgroundColor: Colors.transparent,
                       surfaceTintColor: Colors.transparent,
                       title: Container(

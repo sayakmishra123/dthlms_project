@@ -15,6 +15,7 @@ import 'package:flutter/material.dart'
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/state_manager.dart';
 import 'package:simnumber/siminfo.dart';
 // import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 // import 'package:sqflite_common_ffi/sqflite_ffi.dart'
@@ -54,8 +55,18 @@ class Getx extends GetxController {
   RxBool videoplaylock = false.obs;
   RxBool isPaperSubmit = false.obs;
    RxBool isVideoDashBoard = false.obs;
+   RxBool isLiveDashBoard = false.obs;
+   RxBool isTheoryDashBoard = false.obs;
+   RxBool isBookDashBoard = false.obs;
+   RxBool isMCQDashBoard = false.obs;
+   RxBool isBackupDashBoard = false.obs;
+    RxString path1=''.obs;
+   RxString path2=''.obs;
+    RxString path3=''.obs;
+
    RxBool isCollapsed = false.obs; 
 RxBool isFolderview = false.obs; 
+RxBool isIconSideBarVisible = false.obs; 
   RxList name = [].obs; //chat
   RxString email = ''.obs;
   //chat

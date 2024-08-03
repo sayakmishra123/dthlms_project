@@ -64,12 +64,12 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
           scaffoldBackgroundColor: Color.fromARGB(255, 234, 237, 248),
           textTheme: TextTheme(
-            bodyMedium: GoogleFonts.inter().copyWith(fontSize: 12),
-            bodyLarge: GoogleFonts.inter().copyWith(fontSize: 14),
-            bodySmall: GoogleFonts.inter().copyWith(fontSize: 11),
-            displayLarge: GoogleFonts.inter().copyWith(fontSize: 14),
-            displayMedium: GoogleFonts.inter().copyWith(fontSize: 12),
-            displaySmall: GoogleFonts.inter().copyWith(fontSize: 11),
+            bodyMedium: GoogleFonts.inter().copyWith(fontSize: 10),
+            bodyLarge: GoogleFonts.inter().copyWith(fontSize: 12),
+            bodySmall: GoogleFonts.inter().copyWith(fontSize: 9),
+            displayLarge: GoogleFonts.inter().copyWith(fontSize: 12),
+            displayMedium: GoogleFonts.inter().copyWith(fontSize: 10),
+            displaySmall: GoogleFonts.inter().copyWith(fontSize: 9),
           ),
           appBarTheme: AppBarTheme(
               titleTextStyle: GoogleFonts.poppins().copyWith(
