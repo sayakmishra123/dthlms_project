@@ -3,6 +3,7 @@ import 'dart:io';
 
 
 // import 'package:dthlms/android/login/dth_mob_login.dart';
+import 'package:dthlms/MOBILE/HOMEPAGE/homepage_mobile.dart';
 import 'package:dthlms/MOBILE/LOGIN/loginpage_mobile.dart';
 import 'package:dthlms/PC/LOGIN/login.dart';
 import 'package:dthlms/firebase_options.dart';
@@ -79,7 +80,7 @@ class _MyAppState extends State<MyApp> {
       getPages: router.Route,
       debugShowCheckedModeBanner: false,
       title: 'DTH LMS',
-      home: Platform.isAndroid ? Mobilelogin() : DthLmsLogin(),
+      home: Platform.isAndroid ? HomePageMobile() : DthLmsLogin(),
     );
   }
 }

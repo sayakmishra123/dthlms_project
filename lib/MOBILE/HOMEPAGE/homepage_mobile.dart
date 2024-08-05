@@ -1,4 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:dthlms/MOBILE/PACKAGE_DASHBOARD/Package_dashboard.dart';
 import 'package:dthlms/PC/HOMEPAGE/homepage.dart';
 import 'package:dthlms/THEME_DATA/FontSize/FontSize.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
@@ -45,152 +48,156 @@ class _DashBoardMobileState extends State<DashBoardMobile> {
             padding: const EdgeInsets.only(bottom: 10, top: 10),
             child: Column(
               children: [
-                Container(
-                  // margin: EdgeInsets.symmetric(horizontal: 15),
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          blurRadius: 3,
-                          color: Color.fromARGB(255, 192, 191, 191),
-                          offset: Offset(0, 0))
-                    ],
-                    borderRadius: BorderRadius.circular(5),
-                    color: Color.fromARGB(255, 255, 255, 255),
-                  ),
-                  child: ExpansionTile(
-                    backgroundColor: Color.fromARGB(255, 234, 237, 248),
-                    shape: LinearBorder(),
-                    title: Text("Package List"),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 8),
-                        child: Container(
-                          color: Color.fromARGB(255, 234, 237, 248),
-                          height: 50,
+                // Container(
+                //   // margin: EdgeInsets.symmetric(horizontal: 15),
+                //   decoration: BoxDecoration(
+                //     boxShadow: [
+                //       BoxShadow(
+                //           blurRadius: 3,
+                //           color: Color.fromARGB(255, 192, 191, 191),
+                //           offset: Offset(0, 0))
+                //     ],
+                //     borderRadius: BorderRadius.circular(5),
+                //     color: Color.fromARGB(255, 255, 255, 255),
+                //   ),
+                //   child: ExpansionTile(
+                //     backgroundColor: Color.fromARGB(255, 234, 237, 248),
+                //     shape: LinearBorder(),
+                //     title: Text("Package List"),
+                //     children: [
+                //       Padding(
+                //         padding: const EdgeInsets.symmetric(
+                //             vertical: 10, horizontal: 8),
+                //         child: Container(
+                //           color: Color.fromARGB(255, 234, 237, 248),
+                //           height: 50,
 
-                          // height: 60,
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                hintText: 'Search',
-                                hintStyle: TextStyle(
-                                    color: ColorPage.grey,
-                                    fontSize: ClsFontsize.DoubleExtraSmall),
-                                fillColor: ColorPage.white,
-                                filled: true,
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                    borderRadius: BorderRadius.circular(40))),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height,
-                        child: Expanded(
-                            flex: 1,
-                            child: DashboardSlideBar(
-                              selectedIndex: selectedIndex,
-                              onItemSelected: (index) {
-                                setState(() {
-                                  selectedIndex = index;
-                                });
-                              },
-                              headname: '',
-                            )),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 20,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: ColorPage.colorbutton,
-                            boxShadow: [
-                              BoxShadow(
-                                  blurRadius: 3,
-                                  color: Color.fromARGB(255, 192, 191, 191),
-                                  offset: Offset(0, 0))
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                height: MediaQuery.sizeOf(context).height / 6,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Flexible(
-                                        child: AutoSizeText(
-                                          textScaleFactor: 1.3,
-                                          'May 29,2024',
-                                          style: FontFamily.font2,
-                                          // textScaler: TextScaler.linear(2),
-                                        ),
-                                      ),
-                                      Flexible(
-                                        child: AutoSizeText(
-                                          'Welcome back, Reet!',
-                                          textScaleFactor: 0.9,
-                                          style: FontFamily.font2,
-                                          // textScaler: TextScaler.linear(1.5),
-                                        ),
-                                      ),
-                                      Flexible(
-                                        child: AutoSizeText(
-                                          'Always updated in your portal',
-                                          style: FontFamily.font9,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 8, bottom: 0),
-                                child: MaterialButton(
-                                  shape: ContinuousRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5),
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        2, // Adjusted for responsiveness
-                                    vertical: 5,
-                                  ),
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                  onPressed: () {
-                                    learningGoals(context);
-                                  },
-                                  child: Text(
-                                    'Learning goal',
-                                    style: FontFamily.font2.copyWith(
-                                        fontSize:
-                                            ClsFontsize.DoubleExtraSmall - 3,
-                                        color: ColorPage.colorbutton),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                //           // height: 60,
+                //           child: TextFormField(
+                //             decoration: InputDecoration(
+                //                 hintText: 'Search',
+                //                 hintStyle: TextStyle(
+                //                     color: ColorPage.grey,
+                //                     fontSize: ClsFontsize.DoubleExtraSmall),
+                //                 fillColor: ColorPage.white,
+                //                 filled: true,
+                //                 border: OutlineInputBorder(
+                //                     borderSide: BorderSide.none,
+                //                     borderRadius: BorderRadius.circular(40))),
+                //           ),
+                //         ),
+                //       ),
+                //       Container(
+                //         height: MediaQuery.of(context).size.height,
+                //         child: Expanded(
+                //             flex: 1,
+                //             child: DashboardSlideBar(
+                //               selectedIndex: selectedIndex,
+                //               onItemSelected: (index) {
+                //                 setState(() {
+                //                   selectedIndex = index;
+                //                 });
+                //               },
+                //               headname: '',
+                //             )),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(
+                //     vertical: 20,
+                //   ),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.start,
+                //     children: [
+                //       Flexible(
+                //         child: Container(
+                //           decoration: BoxDecoration(
+                //             borderRadius: BorderRadius.circular(15),
+                //             color: ColorPage.colorbutton,
+                //             boxShadow: [
+                //               BoxShadow(
+                //                   blurRadius: 3,
+                //                   color: Color.fromARGB(255, 192, 191, 191),
+                //                   offset: Offset(0, 0))
+                //             ],
+                //           ),
+                //           child: Row(
+                //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //             children: [
+                //               Container(
+                //                 alignment: Alignment.center,
+                //                 height: MediaQuery.sizeOf(context).height / 6,
+                //                 child: Padding(
+                //                   padding: const EdgeInsets.only(left: 10),
+                //                   child: Column(
+                //                     mainAxisAlignment: MainAxisAlignment.center,
+                //                     crossAxisAlignment:
+                //                         CrossAxisAlignment.start,
+                //                     children: [
+                //                       Flexible(
+                //                         child: AutoSizeText(
+                //                           textScaleFactor: 1.3,
+                //                           'May 29,2024',
+                //                           style: FontFamily.font2,
+                //                           // textScaler: TextScaler.linear(2),
+                //                         ),
+                //                       ),
+                //                       Flexible(
+                //                         child: AutoSizeText(
+                //                           'Welcome back, Reet!',
+                //                           textScaleFactor: 0.9,
+                //                           style: FontFamily.font2,
+                //                           // textScaler: TextScaler.linear(1.5),
+                //                         ),
+                //                       ),
+                //                       Flexible(
+                //                         child: AutoSizeText(
+                //                           'Always updated in your portal',
+                //                           style: FontFamily.font9,
+                //                         ),
+                //                       )
+                //                     ],
+                //                   ),
+                //                 ),
+                //               ),
+                //               Padding(
+                //                 padding:
+                //                     const EdgeInsets.only(right: 8, bottom: 0),
+                //                 child: MaterialButton(
+                //                   shape: ContinuousRectangleBorder(
+                //                     borderRadius: BorderRadius.circular(5),
+                //                   ),
+                //                   padding: EdgeInsets.symmetric(
+                //                     horizontal:
+                //                         2, // Adjusted for responsiveness
+                //                     vertical: 5,
+                //                   ),
+                //                   color: Color.fromARGB(255, 255, 255, 255),
+                //                   onPressed: () {
+                //                     learningGoals(context);
+                //                   },
+                //                   child: Text(
+                //                     'Learning goal',
+                //                     style: FontFamily.font2.copyWith(
+                //                         fontSize:
+                //                             ClsFontsize.DoubleExtraSmall - 3,
+                //                         color: ColorPage.colorbutton),
+                //                   ),
+                //                 ),
+                //               )
+                //             ],
+                //           ),
+                //         ),
+                //       )
+                //     ],
+                //   ),
+                // ),
+
+                HeadingBoxMobile(),
+
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
                   child: Container(
@@ -578,5 +585,243 @@ class HomePageDrawer extends StatelessWidget {
         dense: true,
       ),
     );
+  }
+}
+
+class HeadingBoxMobile extends StatefulWidget {
+  @override
+  State<HeadingBoxMobile> createState() => _HeadingBoxMobileState();
+}
+
+class _HeadingBoxMobileState extends State<HeadingBoxMobile> {
+  final List<Widget> contentList = [
+    HeadingBoxMobileContent(
+        date: "May 29,2024",
+        title: 'Welcome back, Reet!',
+        desc: 'Always updated in your portal',
+        isImage: false,
+        imagePath: '',
+        trailing: SizedBox()),
+    HeadingBoxMobileContent(
+      date: "May 29,2025",
+      title: 'Welcome back, Reet!',
+      desc: 'Always updated in your portal',
+      imagePath: 'assets/no_data_found.jpg',
+      trailing: SizedBox(),
+      isImage: true,
+    ),
+    HeadingBoxMobileContent(
+      date: "May 29,2026",
+      title: 'Welcome back, Reet!',
+      desc: 'Always updated in your portal',
+      trailing: SizedBox(),
+      imagePath: '',
+      isImage: false,
+    ),
+    HeadingBoxMobileContent(
+      date: "May 29,2027",
+      title: 'Welcome back, Reet!',
+      desc: 'Always updated in your portal',
+      trailing: SizedBox(),
+      imagePath: '',
+      isImage: false,
+    ),
+  ];
+
+  final CarouselController carouselController = CarouselController();
+  int currentIndex = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(
+          height: 200,
+          width: MediaQuery.of(context).size.width,
+          child: InkWell(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 0, vertical: 20),
+              child: CarouselSlider(
+                items: contentList
+                    .map((item) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: ColorPage.colorbutton,
+                                border: Border.all(
+                                    color: ColorPage.white, width: 2)),
+                            child: item,
+                          ),
+                        ))
+                    .toList(),
+                carouselController: carouselController,
+                options: CarouselOptions(
+                  scrollPhysics: const BouncingScrollPhysics(),
+                  autoPlay: true,
+                  aspectRatio: 2,
+                  viewportFraction: 0.98,
+                  onPageChanged: (index, reason) {
+                    setState(() {
+                      currentIndex = index;
+                    });
+                  },
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 30,
+          left: 0,
+          right: 0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: contentList.asMap().entries.map((entry) {
+              return GestureDetector(
+                onTap: () => carouselController.animateToPage(entry.key),
+                child: Container(
+                  width: currentIndex == entry.key ? 18 : 10,
+                  height: 7,
+                  margin: const EdgeInsets.symmetric(horizontal: 3.0),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: ColorPage.colorbutton),
+                      borderRadius: BorderRadius.circular(20),
+                      color: currentIndex == entry.key
+                          ? ColorPage.blue
+                          : ColorPage.white),
+                ),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class HeadingBoxMobileContent extends StatelessWidget {
+  final String? date;
+  final String? title;
+  final String? desc;
+  final Widget? trailing;
+  final String imagePath;
+  final bool isImage;
+  const HeadingBoxMobileContent({
+    super.key,
+    this.date,
+    this.title,
+    this.desc,
+    this.trailing,
+    required this.isImage,
+    required this.imagePath,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return isImage
+        ? Container(
+            margin: const EdgeInsets.symmetric(horizontal: 0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+              image: DecorationImage(
+                image: AssetImage(
+                  imagePath,
+                ),
+                fit: BoxFit.contain,
+              ),
+            ),
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                height: MediaQuery.sizeOf(context).height / 6,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: AutoSizeText(
+                          // textScaleFactor: 2,
+                          date!,
+                          style:
+                              FontFamily.font.copyWith(color: ColorPage.white),
+                          // textScaler: TextScaler.linear(2),
+                        ),
+                      ),
+                      Flexible(
+                        child: AutoSizeText(
+                          title!,
+                          // textScaleFactor: 1.5,
+                          style:
+                              FontFamily.font.copyWith(color: ColorPage.white),
+                          // textScaler: TextScaler.linear(1.5),
+                        ),
+                      ),
+                      Flexible(
+                        child: AutoSizeText(
+                          desc!,
+                          style: FontFamily.font3,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              trailing!,
+            ],
+          );
+  }
+}
+
+class HomePageMobile extends StatefulWidget {
+  @override
+  _HomePageMobileState createState() => _HomePageMobileState();
+}
+
+class _HomePageMobileState extends State<HomePageMobile> {
+  int _currentIndex = 0;
+
+  final List<Widget> _children = [
+    DashBoardMobile(),
+  MobilePackageDashboard(),
+    Container(),
+  ];
+
+  final List<String> _titles = [
+    'Home',
+    'Search',
+    'Profile',
+  ];
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: _children[_currentIndex],
+        bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.transparent,
+
+        
+          color: ColorPage.colorbutton,
+          
+
+          onTap: onTabTapped,
+
+          
+          items: [
+            Icon(  Icons.home, size: 30,color: ColorPage.white,),
+            Icon(Icons.movie_filter_outlined, size: 30,color: ColorPage.white),
+            Icon(Icons.person, size: 30,color: ColorPage.white),
+          ],
+        ));
   }
 }
