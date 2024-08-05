@@ -65,6 +65,7 @@ class Getx extends GetxController {
     RxString path3=''.obs;
 
    RxBool isCollapsed = false.obs; 
+     RxBool isVideoPlaying = false.obs; 
 RxBool isFolderview = false.obs; 
 RxBool isIconSideBarVisible = false.obs; 
   RxList name = [].obs; //chat

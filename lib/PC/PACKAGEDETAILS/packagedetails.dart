@@ -878,7 +878,8 @@ class _VideoListLeftState extends State<VideoListLeft> {
   int lastTapVideoIndex = -1; // Track the last tapped item index
   DateTime lastTapvideoTime = DateTime.now();
   var color = Color.fromARGB(255, 102, 112, 133);
- 
+  Getx getx=Get.put(Getx())
+; 
 
   int flag = 2;
   int selectedVideoIndex = -1;
@@ -930,7 +931,7 @@ class _VideoListLeftState extends State<VideoListLeft> {
                       setState(() {
                         selectedVideoIndex = index;
                       });
-
+         
                       handleTap(index);
                     },
                     child: Card(
@@ -1291,6 +1292,8 @@ class _VideoDashboardVDRightState extends State<VideoDashboardVDRight> {
                                               onPressed: () {
                                                 setState(() {
                                                   selectedIndex = index;
+                                                       getx.path2.value= "Chapter-"+intToAscii(65+index);
+                                                  getx.path3.value='';
                                                 });
                                                 handleTap(index);
                                               },
@@ -1307,7 +1310,7 @@ class _VideoDashboardVDRightState extends State<VideoDashboardVDRight> {
                                                       : ColorPage.colorblack,
                                                 ),
                                                 title: Text(
-                                                  "Folder no - ${index + 1}",
+                                                  "Chapter-"+intToAscii(65+index),
                                                   style:
                                                       FontFamily.font9.copyWith(
                                                     fontWeight: FontWeight.bold,
@@ -1332,7 +1335,7 @@ class _VideoDashboardVDRightState extends State<VideoDashboardVDRight> {
                   Expanded(
                     flex: 11,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 7),
+                      padding:  EdgeInsets.only(top: 7,right: getx.isCollapsed.value?10:0),
                       child: Container(
                         decoration: BoxDecoration(
                           boxShadow: [
