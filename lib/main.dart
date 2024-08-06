@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
       getPages: router.Route,
       debugShowCheckedModeBanner: false,
       title: 'DTH LMS',
-      home: Platform.isAndroid ? HomePageMobile() : DthLmsLogin(),
+      home: Platform.isAndroid ? Mobilelogin() : DthLmsLogin(),
     );
   }
 }

@@ -46,6 +46,8 @@ class _MobileloginState extends State<Mobilelogin> {
   // final GlobalKey<FormState> desktop_key = GlobalKey();
   FocusNode focusNode = FocusNode();
 
+  List<String> courseList=["JEE","NEET","CA"];
+
   // ignore: non_constant_identifier_names
   final GlobalKey<FormState> mobile_key_login = GlobalKey();
   // ignore: non_constant_identifier_names
@@ -292,6 +294,44 @@ class _MobileloginState extends State<Mobilelogin> {
                                                 ))
                                           ],
                                         ),
+
+                                           Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: formfieldsize,
+                                                              child:
+                                                                  DropdownButtonFormField<String>(
+                                                                decoration: InputDecoration(
+                                                                    enabledBorder:
+                                                                        border,
+                                                                    focusedBorder:
+                                                                        border,
+                                                                    hintText:
+                                                                        'Select Course'),
+                                                                items: 
+                                                                courseList.map((String value) {
+                                                                  return DropdownMenuItem<String>(
+                                                                    value: value,
+                                                                    child: Text(value),
+                                                                  );
+                                                                }).toList(),
+                                                                onChanged: (newValue) {
+                                                                  setState(() {
+                                                                    // Handle dropdown value change
+                                                                  });
+                                                                },
+                                                                validator: (value) =>
+                                                                    value == null
+                                                                        ? 'Field required'
+                                                                        : null,
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
