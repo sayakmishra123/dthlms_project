@@ -1,5 +1,8 @@
 import 'package:dthlms/API/PACKAGE_API/packageapi.dart';
 import 'package:dthlms/GETX/getxcontroller.getx.dart';
+import 'package:dthlms/MOBILE/EMPTY_PAGE/emptypage.dart';
+import 'package:dthlms/MOBILE/MCQ/MCQTYPE/mcqtypepage.dart';
+import 'package:dthlms/MOBILE/PACKAGE_DASHBOARD/Package_Video_dashboard.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,6 +25,44 @@ class Mobile_Package_content extends StatefulWidget {
 
 class _Mobile_Package_contentState extends State<Mobile_Package_content> {
   Getx getx = Get.put(Getx());
+
+  paging(String pageName) {
+    switch (pageName) {
+      case 'Videos':
+        Get.to(
+          () => MobilePackageVideoDashboard(),
+        );
+
+        break;
+      case 'Live':
+        Get.to(
+          () => EmptyPage(),
+        );
+
+        break;
+      case 'VideosBackup':
+        Get.to(
+          () => EmptyPage(),
+        );
+        break;
+      case 'MCQ':
+       Get.to(
+          () => MCQtypePage(),
+        );
+        break;
+      case 'Book':
+        Get.to(
+          () => EmptyPage(),
+        );
+        break;
+
+      case "Theory":
+        break;
+      default:
+        print("null");
+    }
+  }
+
   // List packagecontentlist=[];
   @override
   void initState() {
@@ -79,7 +120,9 @@ class _Mobile_Package_contentState extends State<Mobile_Package_content> {
                             color: Color.fromARGB(255, 255, 255, 255),
                           ),
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              paging(item.key);
+                            },
                             child: ListTile(
                                 leading: Image.asset(
                                   item.key == "Videos"
@@ -95,7 +138,7 @@ class _Mobile_Package_contentState extends State<Mobile_Package_content> {
                                                       : item.key == "Book"
                                                           ? "assets/book2.png"
                                                           : "assets/folder8.png",
-                                  // color: ColorPage.colorbutton,
+                            
                                   width: 45,
                                 ),
                                 title: Text(item.key,

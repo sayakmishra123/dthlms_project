@@ -13,17 +13,16 @@ class MobilePackageVideoDashboard extends StatefulWidget {
   const MobilePackageVideoDashboard({super.key});
 
   @override
-  State<MobilePackageVideoDashboard> createState() => _MobilePackageVideoDashboardState();
+  State<MobilePackageVideoDashboard> createState() =>
+      _MobilePackageVideoDashboardState();
 }
 
-class _MobilePackageVideoDashboardState extends State<MobilePackageVideoDashboard> {
-
+class _MobilePackageVideoDashboardState
+    extends State<MobilePackageVideoDashboard> {
   late ScrollController _scrollController;
 
   @override
   void initState() {
-   
-    
     _scrollController = ScrollController();
 
     getListStructure().whenComplete(() {
@@ -35,7 +34,6 @@ class _MobilePackageVideoDashboardState extends State<MobilePackageVideoDashboar
 
   @override
   void dispose() {
-   
     _scrollController.dispose();
     super.dispose();
   }
@@ -47,37 +45,36 @@ class _MobilePackageVideoDashboardState extends State<MobilePackageVideoDashboar
     getx.isFolderview.value = prefs.getBool("folderview") ?? false;
   }
 
-void scrollGridView() {
-  // Scroll by a fixed amount (e.g., 200 pixels)
-  double scrollAmount = 300.0;
+  void scrollGridView() {
+    double scrollAmount = 300.0;
 
-  // Calculate the new scroll offset
-  double newOffset = _scrollController.offset + scrollAmount;
+    double newOffset = _scrollController.offset + scrollAmount;
 
-  // Ensure the new offset does not exceed the maximum scroll extent
-  if (newOffset > _scrollController.position.maxScrollExtent) {
-    newOffset = _scrollController.position.maxScrollExtent;
+    if (newOffset > _scrollController.position.maxScrollExtent) {
+      newOffset = _scrollController.position.maxScrollExtent;
+    }
+
+    _scrollController.animateTo(
+      newOffset,
+      duration: Duration(seconds: 1),
+      curve: Curves.easeInOut,
+    );
   }
-
-  // Scroll to the new offset
-  _scrollController.animateTo(
-    newOffset,
-    duration: Duration(seconds: 1),
-    curve: Curves.easeInOut,
-  );
-}
-
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(color: ColorPage.white),
           backgroundColor: ColorPage.appbarcolor,
-          title: Text("Packages",style: FontFamily.font2,),
+          title: Text(
+            "Packages",
+            style: FontFamily.font2,
+          ),
         ),
         body: Padding(
-          padding: const EdgeInsets.only(left: 5,right: 13),
+          padding: const EdgeInsets.only(left: 5, right: 13),
           child: Obx(
             () => Column(
               children: [
@@ -96,26 +93,32 @@ void scrollGridView() {
                             message: "Folder View",
                             child: IconButton(
                                 onPressed: () async {
-                                  final SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  final SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
                                   await prefs.setBool("folderview", true);
                                   getx.isFolderview.value = true;
                                 },
                                 icon: Icon(
                                   Icons.grid_view_rounded,
-                                  color: getx.isFolderview.value ? ColorPage.colorbutton : ColorPage.colorblack,
+                                  color: getx.isFolderview.value
+                                      ? ColorPage.colorbutton
+                                      : ColorPage.colorblack,
                                 )),
                           ),
                           Tooltip(
                             message: "List View",
                             child: IconButton(
                                 onPressed: () async {
-                                  final SharedPreferences prefs = await SharedPreferences.getInstance();
+                                  final SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
                                   await prefs.setBool("folderview", false);
                                   getx.isFolderview.value = false;
                                 },
                                 icon: Icon(
                                   Icons.view_list,
-                                  color: !getx.isFolderview.value ? ColorPage.colorbutton : ColorPage.colorblack,
+                                  color: !getx.isFolderview.value
+                                      ? ColorPage.colorbutton
+                                      : ColorPage.colorblack,
                                 )),
                           ),
                         ],
@@ -150,7 +153,8 @@ void scrollGridView() {
                                     controller: _scrollController,
                                     itemCount: 50,
                                     scrollDirection: Axis.horizontal,
-                                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       childAspectRatio: 1.0,
                                       mainAxisSpacing: 10,
@@ -168,7 +172,8 @@ void scrollGridView() {
                                             AutoSizeText(
                                               "Folder Name",
                                               overflow: TextOverflow.ellipsis,
-                                              style: FontFamily.font9.copyWith(color: ColorPage.colorblack),
+                                              style: FontFamily.font9.copyWith(
+                                                  color: ColorPage.colorblack),
                                             )
                                           ],
                                         ),
@@ -181,12 +186,14 @@ void scrollGridView() {
                                   bottom: -10,
                                   // top: 0,
                                   child: IconButton(
-                                    icon:Icon(Icons.arrow_right_alt_outlined,color: ColorPage.colorbutton,size: 50,),
+                                    icon: Icon(
+                                      Icons.arrow_right_alt_outlined,
+                                      color: ColorPage.colorbutton,
+                                      size: 50,
+                                    ),
                                     onPressed: scrollGridView,
                                   ),
                                 ),
-                                
-                                
                               ],
                             )
                           : Container(
@@ -201,14 +208,16 @@ void scrollGridView() {
                                         boxShadow: [
                                           BoxShadow(
                                             blurRadius: 3,
-                                            color: Color.fromARGB(255, 192, 191, 191),
+                                            color: Color.fromARGB(
+                                                255, 192, 191, 191),
                                             offset: Offset(0, 0),
                                           ),
                                         ],
                                         borderRadius: BorderRadius.all(
                                           Radius.circular(10),
                                         ),
-                                        color: Color.fromARGB(255, 255, 255, 255),
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
                                       ),
                                       child: MaterialButton(
                                         onPressed: () {},
@@ -217,9 +226,11 @@ void scrollGridView() {
                                             "assets/folder.png",
                                             width: 30,
                                           ),
-                                          title: Text("Folder no - ${index + 1}",
+                                          title: Text(
+                                              "Folder no - ${index + 1}",
                                               style: FontFamily.font9.copyWith(
-                                                  fontWeight: FontWeight.bold, color: ColorPage.colorblack)),
+                                                  fontWeight: FontWeight.bold,
+                                                  color: ColorPage.colorblack)),
                                         ),
                                       ));
                                 },
@@ -242,7 +253,8 @@ void scrollGridView() {
                 Expanded(
                   flex: 11,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 5),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 7, horizontal: 5),
                     child: Container(
                       decoration: BoxDecoration(
                         boxShadow: [
@@ -268,7 +280,8 @@ void scrollGridView() {
                                     boxShadow: [
                                       BoxShadow(
                                         blurRadius: 3,
-                                        color: Color.fromARGB(255, 192, 191, 191),
+                                        color:
+                                            Color.fromARGB(255, 192, 191, 191),
                                         offset: Offset(0, 0),
                                       ),
                                     ],
@@ -290,7 +303,8 @@ void scrollGridView() {
                                         width: 25,
                                       ),
                                       title: Text("Videos no - ${index + 1}",
-                                          style: FontFamily.font4.copyWith(fontWeight: FontWeight.bold)),
+                                          style: FontFamily.font4.copyWith(
+                                              fontWeight: FontWeight.bold)),
                                       trailing: Text("25:30 min"),
                                     ),
                                   ));

@@ -71,10 +71,10 @@ class pageRouter {
       name: "/Mocktestresult",
       page: () => MockTestresult(),
     ),
-    GetPage(
-      name: "/Mcqterandconditionmobile",
-      page: () => McqTermAndConditionmobile(),
-    ),
+    // GetPage(
+    //   name: "/Mcqterandconditionmobile",
+    //   page: () => McqTermAndConditionmobile(),
+    // ),
     GetPage(
       name: "/Mocktestanswermobile",
       page: () => MocktestAnswer(),

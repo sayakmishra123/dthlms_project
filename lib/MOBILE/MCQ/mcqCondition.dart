@@ -11,10 +11,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class McqTermAndConditionmobile extends StatelessWidget {
+  final type;
 
 
 
-  McqTermAndConditionmobile({super.key});
+  McqTermAndConditionmobile({super.key,required this.type});
   RxBool checkbox = false.obs;
   @override
   Widget build(BuildContext context) {
@@ -189,7 +190,15 @@ class McqTermAndConditionmobile extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      checkbox.value? Get.toNamed("/Practicemcqmobile"):_onTermDeniey(context);
+
+                      if(checkbox.value){
+                        Get.toNamed("/Practicemcqmobile");
+
+                      }
+                      else{
+                          _onTermDeniey(context);
+                      }
+                
                     },
                     child: Text(
                       'Next',

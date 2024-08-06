@@ -67,13 +67,7 @@ class _Mobile_Package_ListState extends State<Mobile_Package_List> {
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
       child: Container(
         decoration: BoxDecoration(
-          // boxShadow: [
-          //   BoxShadow(
-          //     blurRadius: 3,
-          //     color: Color.fromARGB(255, 192, 191, 191),
-          //     offset: Offset(0, 0),
-          //   ),
-          // ],
+        
       
           borderRadius: BorderRadius.all(
             Radius.circular(10),
@@ -141,7 +135,7 @@ class _Mobile_Package_ListState extends State<Mobile_Package_List> {
         child: Container(
           padding: EdgeInsets.all(10),
           child: ListView.builder(
-            itemCount: 5                                                                   ,
+            itemCount: 5,
             itemBuilder: (context, index) {
               return Container(
                 margin: EdgeInsets.all(5),
