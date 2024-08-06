@@ -1,7 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:dthlms/MOBILE/PACKAGE_DASHBOARD/Package_dashboard.dart';
+import 'package:dthlms/MOBILE/PACKAGE_DASHBOARD/Package_Video_dashboard.dart';
+import 'package:dthlms/MOBILE/PACKAGE_DASHBOARD/package_List.dart';
 import 'package:dthlms/PC/HOMEPAGE/homepage.dart';
 import 'package:dthlms/THEME_DATA/FontSize/FontSize.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
@@ -787,8 +788,8 @@ class _HomePageMobileState extends State<HomePageMobile> {
 
   final List<Widget> _children = [
     DashBoardMobile(),
-  MobilePackageDashboard(),
-    Container(),
+  Mobile_Package_List(),
+    MobilePackageVideoDashboard(),
   ];
 
   final List<String> _titles = [

@@ -1,4 +1,6 @@
+
 import 'dart:io';
+
 import 'package:animated_button_bar/animated_button_bar.dart';
 import 'package:dthlms/API/ALL_FUTURE_FUNTIONS/all_functions.dart';
 import 'package:dthlms/API/LOGIN/login_api.dart';
@@ -19,6 +21,7 @@ import 'package:local_notifier/local_notifier.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 
 class DthLmsLogin extends StatefulWidget {
   const DthLmsLogin({super.key});
@@ -42,7 +45,9 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
 
   final GlobalKey<FormState> desktop_key1 = GlobalKey();
   final GlobalKey<FormState> desktop_key2 = GlobalKey();
-
+List<String> courseList=[
+  "JEE","NEET","CA",
+];
   late double formfieldsize = 400;
   late double fontsize = ClsFontsize.DoubleExtraLarge + 2;
   Getx getxController = Get.put(Getx());
@@ -393,6 +398,59 @@ class _DthLmsLoginState extends State<DthLmsLogin> {
                                                                 ))
                                                           ],
                                                         ),
+                                                        // New Dropdown Row
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: formfieldsize,
+                                                              child: Text(
+                                                                'Course',
+                                                                style:
+                                                                    FontFamily.font,
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: formfieldsize,
+                                                              child:
+                                                                  DropdownButtonFormField<String>(
+                                                                decoration: InputDecoration(
+                                                                    enabledBorder:
+                                                                        border,
+                                                                    focusedBorder:
+                                                                        border,
+                                                                    hintText:
+                                                                        'Select Course'),
+                                                                items: 
+                                                                courseList.map((String value) {
+                                                                  return DropdownMenuItem<String>(
+                                                                    value: value,
+                                                                    child: Text(value),
+                                                                  );
+                                                                }).toList(),
+                                                                onChanged: (newValue) {
+                                                                  setState(() {
+                                                                    // Handle dropdown value change
+                                                                  });
+                                                                },
+                                                                validator: (value) =>
+                                                                    value == null
+                                                                        ? 'Field required'
+                                                                        : null,
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        // Continue with existing code...
                                                         Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
