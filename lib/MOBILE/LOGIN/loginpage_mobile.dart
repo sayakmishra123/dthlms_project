@@ -294,6 +294,21 @@ class _MobileloginState extends State<Mobilelogin> {
                                                 ))
                                           ],
                                         ),
+                                             Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: formfieldsize,
+                                                              child: Text(
+                                                                'Course',
+                                                                style:
+                                                                    FontFamily.font,
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
 
                                            Row(
                                                           mainAxisAlignment:
