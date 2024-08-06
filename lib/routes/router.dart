@@ -114,6 +114,10 @@ class pageRouter {
     GetPage(
       name: "/Mockmcqtermandcondition",
       page: () => MockMcqTermAndCondition(),
-    )
+    ),
+    GetPage(
+      name: "/Mobilehompage",
+      page: () => HomePageMobile(),
+    ),
   ];
 }

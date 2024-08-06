@@ -523,8 +523,8 @@ class _MobileloginState extends State<Mobilelogin> {
                                           ],
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5),
+                                          padding: const EdgeInsets.only(
+                                              top: 30),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -540,7 +540,7 @@ class _MobileloginState extends State<Mobilelogin> {
                                                                     .circular(
                                                                         20)),
                                                     padding: const EdgeInsets
-                                                        .symmetric(vertical: 5),
+                                                        .symmetric(vertical: 15),
                                                     color: ColorPage.colorgrey,
                                                     onPressed: () {
                                                       if (mobile_key_signup

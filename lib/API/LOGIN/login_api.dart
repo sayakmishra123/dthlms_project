@@ -84,7 +84,7 @@ print(jsondata['result']['token']);
     Platform.isWindows
         ? Get.toNamed('/Homepage',
             arguments: {'token': jsondata['result']['token']})
-        : Get.toNamed("/Newmobilepakagedashboard",
+        : Get.toNamed("/Mobilehompage",
             arguments: {'token': jsondata['result']['token']});
   } else {
     Get.back();

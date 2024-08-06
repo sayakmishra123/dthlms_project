@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:dthlms/GETX/getxcontroller.getx.dart';
 import 'package:dthlms/MOBILE/PACKAGE_DASHBOARD/Package_Video_dashboard.dart';
 import 'package:dthlms/MOBILE/PACKAGE_DASHBOARD/package_List.dart';
 import 'package:dthlms/PC/HOMEPAGE/homepage.dart';
@@ -778,6 +779,7 @@ class HeadingBoxMobileContent extends StatelessWidget {
   }
 }
 
+
 class HomePageMobile extends StatefulWidget {
   @override
   _HomePageMobileState createState() => _HomePageMobileState();
@@ -785,12 +787,22 @@ class HomePageMobile extends StatefulWidget {
 
 class _HomePageMobileState extends State<HomePageMobile> {
   int _currentIndex = 0;
+  
+  String? token;
 
-  final List<Widget> _children = [
-    DashBoardMobile(),
-  Mobile_Package_List(),
-    MobilePackageVideoDashboard(),
-  ];
+  List<Widget> _children = [];
+
+  @override
+  void initState() {
+    super.initState();
+   Getx getx = Get.put(Getx());
+    token = Get.arguments['token'];
+    _children = [
+      DashBoardMobile(),
+      Mobile_Package_List(token: token!),
+      MobilePackageVideoDashboard(),
+    ];
+  }
 
   final List<String> _titles = [
     'Home',
@@ -807,22 +819,17 @@ class _HomePageMobileState extends State<HomePageMobile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _children[_currentIndex],
-        bottomNavigationBar: CurvedNavigationBar(
-          backgroundColor: Colors.transparent,
-
-        
-          color: ColorPage.colorbutton,
-          
-
-          onTap: onTabTapped,
-
-          
-          items: [
-            Icon(  Icons.home, size: 30,color: ColorPage.white,),
-            Icon(Icons.movie_filter_outlined, size: 30,color: ColorPage.white),
-            Icon(Icons.person, size: 30,color: ColorPage.white),
-          ],
-        ));
+      body: _children[_currentIndex],
+      bottomNavigationBar: CurvedNavigationBar(
+        backgroundColor: Colors.transparent,
+        color: ColorPage.colorbutton,
+        onTap: onTabTapped,
+        items: [
+          Icon(Icons.home, size: 30, color: ColorPage.white),
+          Icon(Icons.movie_filter_outlined, size: 30, color: ColorPage.white),
+          Icon(Icons.person, size: 30, color: ColorPage.white),
+        ],
+      ),
+    );
   }
 }
