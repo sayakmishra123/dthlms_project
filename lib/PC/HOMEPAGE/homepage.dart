@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dthlms/ACTIVATION_WIDGET/enebelActivationcode.dart';
 import 'package:dthlms/API/ALL_FUTURE_FUNTIONS/all_functions.dart';
 import 'package:dthlms/API/PACKAGE_API/packageapi.dart';
 import 'package:dthlms/GETX/getxcontroller.getx.dart';
@@ -64,7 +65,7 @@ class _DthDashboardState extends State<DthDashboard> {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                child: DashBoardRight(),
+                child: DashBoardRight(token: token,),
               ))
         ],
       ),
@@ -254,7 +255,8 @@ class _DashboardSlideBarState extends State<DashboardSlideBar> {
 }
 
 class DashBoardRight extends StatefulWidget {
-  const DashBoardRight({super.key});
+  String token;
+   DashBoardRight({super.key,required this.token});
 
   @override
   State<DashBoardRight> createState() => _DashBoardRightState();
@@ -264,180 +266,186 @@ class _DashBoardRightState extends State<DashBoardRight> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Row(
-                children: [
-                  Flexible(
-                    child: AppBar(
-                      automaticallyImplyLeading: true,
-                      leading:   getx.isCollapsed.value
-                            ? IconButton(
-                                icon: Icon(Icons.list),
-                                onPressed:(){ getx.isCollapsed.value = !getx.isCollapsed.value;},
-                              )
-                            : SizedBox(),
-                      backgroundColor: Colors.transparent,
-                      surfaceTintColor: Colors.transparent,
-                      title: Container(
-                        width: 400,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              hintText: 'Search',
-                              hintStyle: TextStyle(color: ColorPage.grey),
-                              fillColor: ColorPage.white,
-                              filled: true,
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(40))),
-                        ),
-                      ),
-                      actions: [
-                        Container(
-                          padding: EdgeInsets.only(right: 20),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white.withOpacity(0.1),
-                          ),
-                          child: ClipOval(
-                            child: Image.asset(
-                              "assets/sorojda.png",
-                              fit: BoxFit.cover,
-                              width: 50,
-                            ),
-                          ),
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              'Reet Mishra',
-                              style: FontFamily.font,
-                            ),
-                            Text(
-                              'reetmishra@gmail.com',
-                              style: TextStyle(color: Colors.grey),
-                              textScaler: TextScaler.linear(0.9),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Icon(
-                            Icons.notification_add_sharp,
-                            color: Colors.black,
-                            weight: 5,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            HeadingBox(
-               ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 3,
-                      color: Color.fromARGB(255, 192, 191, 191),
-                      offset: Offset(0, 0))
-                ],
-                borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
-              ),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  double screenWidth = constraints.maxWidth;
-
-                  return Row(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  child: Row(
                     children: [
                       Flexible(
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  'Basic of tax class by Avinash Sureka',
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                                  textScaleFactor: 1.3,
-                                ),
-                              ),
-                              SizedBox(
-                                  width: screenWidth *
-                                      0.02), // Spacing between texts
-                              Text(
-                                '5:00-7:00',
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color: ColorPage.grey,
-                                ),
-                              ),
-                            ],
+                        child: AppBar(
+                          automaticallyImplyLeading: true,
+                          leading:   getx.isCollapsed.value
+                                ? IconButton(
+                                    icon: Icon(Icons.list),
+                                    onPressed:(){ getx.isCollapsed.value = !getx.isCollapsed.value;},
+                                  )
+                                : SizedBox(),
+                          backgroundColor: Colors.transparent,
+                          surfaceTintColor: Colors.transparent,
+                          title: Container(
+                            width: 400,
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                  hintText: 'Search',
+                                  hintStyle: TextStyle(color: ColorPage.grey),
+                                  fillColor: ColorPage.white,
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                      borderRadius: BorderRadius.circular(40),),),
+                            ),
                           ),
+                          actions: [
+                            Container(
+                              padding: EdgeInsets.only(right: 20),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white.withOpacity(0.1),
+                              ),
+                              child: ClipOval(
+                                child: Image.asset(
+                                  "assets/sorojda.png",
+                                  fit: BoxFit.cover,
+                                  width: 50,
+                                ),
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  'Reet Mishra',
+                                  style: FontFamily.font,
+                                ),
+                                Text(
+                                  'reetmishra@gmail.com',
+                                  style: TextStyle(color: Colors.grey),
+                                  textScaler: TextScaler.linear(0.9),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              child: Icon(
+                                Icons.notification_add_sharp,
+                                color: Colors.black,
+                                weight: 5,
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                      Flexible(
-                        child: LayoutBuilder(
-                          builder: (context, constraints) {
-                            double screenWidth = constraints.maxWidth;
-
-                            return Container(
+                    ],
+                  ),
+                ),
+                HeadingBox(
+                   ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                          blurRadius: 3,
+                          color: Color.fromARGB(255, 192, 191, 191),
+                          offset: Offset(0, 0))
+                    ],
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                  ),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      double screenWidth = constraints.maxWidth;
+          
+                      return Row(
+                        children: [
+                          Flexible(
+                            child: Container(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+                                  Expanded(
+                                    child: Text(
+                                      'Basic of tax class by Avinash Sureka',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                      textScaleFactor: 1.3,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                      width: screenWidth *
+                                          0.02), // Spacing between texts
                                   Text(
-                                    'May 30, 2024',
+                                    '5:00-7:00',
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       color: ColorPage.grey,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Icon(Icons.broadcast_on_home_sharp),
-                                  ),
-                                  MaterialButton(
-                                    shape: ContinuousRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: screenWidth *
-                                          0.05, // Adjusted for responsiveness
-                                      vertical: 15,
-                                    ),
-                                    color: Color.fromARGB(255, 253, 29, 13),
-                                    onPressed: () {},
-                                    child: Text(
-                                      'Live class',
-                                      style: FontFamily.font2,
-                                    ),
-                                  ),
                                 ],
                               ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+                            ),
+                          ),
+                          Flexible(
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                double screenWidth = constraints.maxWidth;
+          
+                                return Container(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        'May 30, 2024',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: ColorPage.grey,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10),
+                                        child: Icon(Icons.broadcast_on_home_sharp),
+                                      ),
+                                      MaterialButton(
+                                        shape: ContinuousRectangleBorder(
+                                          borderRadius: BorderRadius.circular(20),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: screenWidth *
+                                              0.05, // Adjusted for responsiveness
+                                          vertical: 15,
+                                        ),
+                                        color: Color.fromARGB(255, 253, 29, 13),
+                                        onPressed: () {},
+                                        child: Text(
+                                          'Live class',
+                                          style: FontFamily.font2,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                CalenderWidget(),
+              ],
             ),
-            CalenderWidget(),
-          ],
-        ),
+          ),
+
+          GlobalDialog(widget.token),
+        ],
       ),
     );
   }

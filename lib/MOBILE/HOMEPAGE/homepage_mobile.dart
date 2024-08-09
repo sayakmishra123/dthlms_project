@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:dthlms/ACTIVATION_WIDGET/enebelActivationcode.dart';
+import 'package:dthlms/API/ALL_FUTURE_FUNTIONS/all_functions.dart';
 import 'package:dthlms/GETX/getxcontroller.getx.dart';
 import 'package:dthlms/MOBILE/PACKAGE_DASHBOARD/Package_Video_dashboard.dart';
 import 'package:dthlms/MOBILE/PACKAGE_DASHBOARD/package_List.dart';
@@ -18,22 +20,125 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 
 class DashBoardMobile extends StatefulWidget {
-  const DashBoardMobile({super.key});
+  String token;
+   DashBoardMobile({super.key,required this.token});
 
   @override
   State<DashBoardMobile> createState() => _DashBoardMobileState();
 }
 
 class _DashBoardMobileState extends State<DashBoardMobile> {
+    TextEditingController activationfield = TextEditingController();
   int selectedIndex = -1;
+
+      enterActivationKey(context,String token) {
+        
+   
+    var alertStyle = AlertStyle(
+        animationType: AnimationType.fromTop,
+        isCloseButton: false,
+        isOverlayTapDismiss: true,
+        alertPadding: EdgeInsets.only(top: 300),
+        descStyle: TextStyle(fontWeight: FontWeight.bold),
+        animationDuration: Duration(milliseconds: 400),
+        alertBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          side: BorderSide(
+            color: Colors.grey,
+          ),
+        ),
+        titleStyle:
+            TextStyle(color: ColorPage.blue, fontWeight: FontWeight.bold),
+        constraints: BoxConstraints.expand(width: 600),
+        //First to chars "55" represents transparency of color
+        overlayColor: Color(0x55000000),
+        alertElevation: 0,
+        alertAlignment: Alignment.center);
+
+    // Alert dialog using custom alert style
+    Alert(
+      context: context,
+      style: alertStyle,
+      // type: AlertType.info,
+
+      title: "ACTIVATION CODE",
+
+      content: Form(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 13),
+                child: Text(
+                  'Please fill field *',
+                  style: TextStyle(color: ColorPage.red, fontSize: 12),
+                ),
+              ),
+            ],
+          ),
+          Obx(() => Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: TextFormField(
+                  // controller: activationfield,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'cannot blank';
+                    }
+                    return null;
+                  },
+                  obscureText: getx.passvisibility.value,
+                  obscuringCharacter: '*',
+                  decoration: InputDecoration(
+                      // prefixIcon: Icon(Icons.code),
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            getx.passvisibility.value =
+                                !getx.passvisibility.value;
+                          },
+                          icon: getx.passvisibility.value
+                              ? Icon(Icons.visibility_off)
+                              : Icon(Icons.visibility)),
+                      labelText: 'Enter Activation Code',
+                      // hintText: 'Enter Activation Code',
+
+                      filled: false,
+                      focusColor: ColorPage.white),
+                ),
+              ))
+        ],
+      )),
+      buttons: [
+        DialogButton(
+          width: MediaQuery.of(context).size.width / 1.3,
+          child: Text(
+            "OK",
+            style: TextStyle(color: Colors.white, fontSize: 15),
+          ),
+          onPressed: () {  Get.back(); packactivationKey(context, activationfield.text, token);
+            
+          },
+          color: ColorPage.colorgrey,
+          radius: BorderRadius.circular(5.0),
+        ),
+      ],
+    ).show();
+  }
+  Getx getx =Get.put(Getx());
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         actions: [
+          getx.isActivationKeySet.value? IconButton(icon: Icon(Icons.add), onPressed: () {enterActivationKey(context,widget.token);}):SizedBox(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.only(right: 20,left: 5),
             child: Icon(
               Icons.notification_add_sharp,
               color: Colors.black,
@@ -47,160 +152,13 @@ class _DashBoardMobileState extends State<DashBoardMobile> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 10, top: 10),
+            padding: const EdgeInsets.only(bottom: 10,),
             child: Column(
               children: [
-                // Container(
-                //   // margin: EdgeInsets.symmetric(horizontal: 15),
-                //   decoration: BoxDecoration(
-                //     boxShadow: [
-                //       BoxShadow(
-                //           blurRadius: 3,
-                //           color: Color.fromARGB(255, 192, 191, 191),
-                //           offset: Offset(0, 0))
-                //     ],
-                //     borderRadius: BorderRadius.circular(5),
-                //     color: Color.fromARGB(255, 255, 255, 255),
-                //   ),
-                //   child: ExpansionTile(
-                //     backgroundColor: Color.fromARGB(255, 234, 237, 248),
-                //     shape: LinearBorder(),
-                //     title: Text("Package List"),
-                //     children: [
-                //       Padding(
-                //         padding: const EdgeInsets.symmetric(
-                //             vertical: 10, horizontal: 8),
-                //         child: Container(
-                //           color: Color.fromARGB(255, 234, 237, 248),
-                //           height: 50,
-
-                //           // height: 60,
-                //           child: TextFormField(
-                //             decoration: InputDecoration(
-                //                 hintText: 'Search',
-                //                 hintStyle: TextStyle(
-                //                     color: ColorPage.grey,
-                //                     fontSize: ClsFontsize.DoubleExtraSmall),
-                //                 fillColor: ColorPage.white,
-                //                 filled: true,
-                //                 border: OutlineInputBorder(
-                //                     borderSide: BorderSide.none,
-                //                     borderRadius: BorderRadius.circular(40))),
-                //           ),
-                //         ),
-                //       ),
-                //       Container(
-                //         height: MediaQuery.of(context).size.height,
-                //         child: Expanded(
-                //             flex: 1,
-                //             child: DashboardSlideBar(
-                //               selectedIndex: selectedIndex,
-                //               onItemSelected: (index) {
-                //                 setState(() {
-                //                   selectedIndex = index;
-                //                 });
-                //               },
-                //               headname: '',
-                //             )),
-                //       ),
-                //     ],
-                //   ),
-                // ),
-
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(
-                //     vertical: 20,
-                //   ),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.start,
-                //     children: [
-                //       Flexible(
-                //         child: Container(
-                //           decoration: BoxDecoration(
-                //             borderRadius: BorderRadius.circular(15),
-                //             color: ColorPage.colorbutton,
-                //             boxShadow: [
-                //               BoxShadow(
-                //                   blurRadius: 3,
-                //                   color: Color.fromARGB(255, 192, 191, 191),
-                //                   offset: Offset(0, 0))
-                //             ],
-                //           ),
-                //           child: Row(
-                //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //             children: [
-                //               Container(
-                //                 alignment: Alignment.center,
-                //                 height: MediaQuery.sizeOf(context).height / 6,
-                //                 child: Padding(
-                //                   padding: const EdgeInsets.only(left: 10),
-                //                   child: Column(
-                //                     mainAxisAlignment: MainAxisAlignment.center,
-                //                     crossAxisAlignment:
-                //                         CrossAxisAlignment.start,
-                //                     children: [
-                //                       Flexible(
-                //                         child: AutoSizeText(
-                //                           textScaleFactor: 1.3,
-                //                           'May 29,2024',
-                //                           style: FontFamily.font2,
-                //                           // textScaler: TextScaler.linear(2),
-                //                         ),
-                //                       ),
-                //                       Flexible(
-                //                         child: AutoSizeText(
-                //                           'Welcome back, Reet!',
-                //                           textScaleFactor: 0.9,
-                //                           style: FontFamily.font2,
-                //                           // textScaler: TextScaler.linear(1.5),
-                //                         ),
-                //                       ),
-                //                       Flexible(
-                //                         child: AutoSizeText(
-                //                           'Always updated in your portal',
-                //                           style: FontFamily.font9,
-                //                         ),
-                //                       )
-                //                     ],
-                //                   ),
-                //                 ),
-                //               ),
-                //               Padding(
-                //                 padding:
-                //                     const EdgeInsets.only(right: 8, bottom: 0),
-                //                 child: MaterialButton(
-                //                   shape: ContinuousRectangleBorder(
-                //                     borderRadius: BorderRadius.circular(5),
-                //                   ),
-                //                   padding: EdgeInsets.symmetric(
-                //                     horizontal:
-                //                         2, // Adjusted for responsiveness
-                //                     vertical: 5,
-                //                   ),
-                //                   color: Color.fromARGB(255, 255, 255, 255),
-                //                   onPressed: () {
-                //                     learningGoals(context);
-                //                   },
-                //                   child: Text(
-                //                     'Learning goal',
-                //                     style: FontFamily.font2.copyWith(
-                //                         fontSize:
-                //                             ClsFontsize.DoubleExtraSmall - 3,
-                //                         color: ColorPage.colorbutton),
-                //                   ),
-                //                 ),
-                //               )
-                //             ],
-                //           ),
-                //         ),
-                //       )
-                //     ],
-                //   ),
-                // ),
-
+           
                 HeadingBoxMobile(),
 
-                Container(
+               getx.isActivationKeySet.value? Container(
                   margin: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
                   child: Container(
                     padding: const EdgeInsets.symmetric(
@@ -244,7 +202,7 @@ class _DashBoardMobileState extends State<DashBoardMobile> {
                                     ),
                                   ),
                                 ),
-                                Flexible(
+                               Flexible(
                                   child: LayoutBuilder(
                                     builder: (context, constraints) {
                                       double screenWidth = constraints.maxWidth;
@@ -293,6 +251,77 @@ class _DashBoardMobileState extends State<DashBoardMobile> {
                                 color: ColorPage.grey,
                               ),
                             ),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ):Container(
+                  margin: EdgeInsets.symmetric(horizontal: 0, vertical: 1),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10, vertical: 10),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                            blurRadius: 3,
+                            color: Color.fromARGB(255, 192, 191, 191),
+                            offset: Offset(0, 0))
+                      ],
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.white,
+                    ),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        double screenWidth = constraints.maxWidth;
+
+                        return Row(
+                          children: [
+                            Flexible(
+                              child: LayoutBuilder(
+                                builder: (context, constraints) {
+                                  double screenWidth = constraints.maxWidth;
+                        
+                                  return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                       Container(
+                             child: Text(
+                               'Get your Packages here',
+                               style: TextStyle(
+                                 fontSize: ClsFontsize.ExtraSmall,
+                                 fontWeight: FontWeight.w800,
+                               ),
+                               
+                             ),
+                           ),
+                                      MaterialButton(
+                                        shape: ContinuousRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: screenWidth *
+                                              0.05, // Adjusted for responsiveness
+                                          vertical: 5,
+                                        ),
+                                        color: ColorPage.colorbutton,
+                                        onPressed: () {enterActivationKey(context,widget.token);},
+                                        child: Text(
+                                          'Activate',
+                                          style: FontFamily.font2.copyWith(
+                                            fontSize: ClsFontsize
+                                                .DoubleExtraSmall,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ),
+                          
                           ],
                         );
                       },
@@ -798,7 +827,7 @@ class _HomePageMobileState extends State<HomePageMobile> {
    Getx getx = Get.put(Getx());
     token = Get.arguments['token'];
     _children = [
-      DashBoardMobile(),
+      DashBoardMobile(token: token!,),
       Mobile_Package_List(token: token!),
       MobilePackageVideoDashboard(),
     ];
@@ -833,4 +862,8 @@ class _HomePageMobileState extends State<HomePageMobile> {
       ),
     );
   }
+
+
+
+
 }

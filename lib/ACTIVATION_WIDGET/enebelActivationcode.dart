@@ -284,8 +284,6 @@ class CustomMessageBubble extends StatelessWidget {
     ).show();
   }
 
-
-
-
-
 }
+
+

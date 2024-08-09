@@ -82,7 +82,7 @@ class _PackageDetailsPageState extends State<PackageDetailsPage> {
                                   : getx.isBackupDashBoard.value
                                       ? SizedBox()
                                       
-                                          : DashBoardRight(),
+                                          : DashBoardRight(token: widget.token,),
                     ),
                   ), // Main content area
                 ],
@@ -193,7 +193,7 @@ class _SlideBarPackageDetailsState extends State<SlideBarPackageDetails> {
         getx.isMCQDashBoard.value = false;
         getx.isBackupDashBoard.value = false;
         break;
-      case 'VideosBackup':
+      case 'Backup':
         getx.isVideoDashBoard.value = false;
          
         getx.isLiveDashBoard.value = false;
@@ -470,6 +470,24 @@ class _SlideBarPackageDetailsState extends State<SlideBarPackageDetails> {
                   ),
                   child: Center(
                     child: ListTile(
+
+                      //  leading: Image.asset(
+                      //             foldername== "Videos"
+                      //                 ? "assets/video15.png"
+                      //                 :foldername == "Live"
+                      //                     ? "assets/live-channel.png"
+                      //                     : foldername == "VideosBackup"
+                      //                         ? "assets/video-backup.png"
+                      //                         : foldername == "MCQ"
+                      //                             ? "assets/choose2.png"
+                      //                             : foldername == "Theory"
+                      //                                 ? "assets/exam2.png"
+                      //                                 : foldername == "Book"
+                      //                                     ? "assets/book2.png"
+                      //                                     : "assets/folder8.png",
+                            
+                      //             width: 25,
+                      //           ),
                       leading: Icon(
                         Icons.folder,
                         color: colors[colorchoose()],

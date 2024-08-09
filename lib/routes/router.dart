@@ -40,12 +40,7 @@ class pageRouter {
       name: '/Mobilesigninotpscreen',
       page: () => SignInOtpScreen(),
     ),
-    GetPage(
-      name: "/Newmobilepakagedashboard",
-      // page: () => NewPackageDashboardMobile(),
-      // changed by shubha
-      page: () => DashBoardMobile(),
-    ),
+  
     GetPage(
       name: "/Theoryexampage",
       page: () => TheoryExamPage(),

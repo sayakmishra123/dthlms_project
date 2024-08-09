@@ -60,6 +60,7 @@ class Getx extends GetxController {
    RxBool isBookDashBoard = false.obs;
    RxBool isMCQDashBoard = false.obs;
    RxBool isBackupDashBoard = false.obs;
+   RxBool isActivationKeySet = false.obs;
     RxString path1=''.obs;
    RxString path2=''.obs;
     RxString path3=''.obs;

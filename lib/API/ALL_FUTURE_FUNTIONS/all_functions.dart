@@ -136,8 +136,7 @@ Future packactivationKey(
   Map data = {
     "sbAppApi": {"ActivationKey": packageactivationkey}
   };
-  print(data);
-  print(token);
+ 
   var res = await http.post(
       Uri.https(ClsUrlApi.mainurl, ClsUrlApi.studentActivationkey),
       headers: <String, String>{

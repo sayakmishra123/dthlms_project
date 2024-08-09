@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
@@ -41,8 +43,15 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
   @override
   void initState() {
     super.initState();
+ 
     _downloadPdf();
+       startTimer();
+       setState(() {
+         
+       });
   }
+
+bool isTimeOver=false;
 
   Future<void> _pickImage() async {
     if (_isFilePickerOpen) return; // Prevent multiple file pickers from opening
@@ -189,6 +198,36 @@ class _TheoryExamPageState extends State<TheoryExamPage> {
       ),
     );
   }
+   RxInt _start = 5000.obs;
+ late Timer _timer;
+  
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (_start.value == 0) {
+          timer.cancel();
+            isTimeOver=true;
+          _onTimeUp(context);
+        } else {
+          _start.value--;
+        }
+      },
+    );
+  }
+   void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
+
+  String get timerText {
+    int hours = _start.value ~/ 3600;
+    int minutes = (_start.value % 3600) ~/ 60;
+    int seconds = _start.value % 60;
+    return '$hours:${minutes.toString().padLeft(2, '0')}:${seconds.toString().padLeft(2, '0')}';
+  }
+
 
 
 void _printPdf() async {
@@ -237,20 +276,23 @@ void _printPdf() async {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(color: ColorPage.white),
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                children: [
-                  Text("Remaining Time",
-                      style: FontFamily.font3.copyWith(color: Colors.white)),
-                  SizedBox(width: 10),
-                  Icon(Icons.alarm, color: Colors.white),
-                  SizedBox(width: 5),
-                  Text("03:56:54",
-                      style: FontFamily.font3.copyWith(color: Colors.white)),
-                  SizedBox(width: 20),
-                ],
+              child: Obx(()=>
+                 Row(
+                  children: [
+                    Text("Remaining Time",
+                        style: FontFamily.font3.copyWith(color: Colors.white)),
+                    SizedBox(width: 10),
+                    Icon(Icons.alarm, color: Colors.white),
+                    SizedBox(width: 5),
+                    Text('$timerText',
+                        style: FontFamily.font3.copyWith(color: Colors.white)),
+                    SizedBox(width: 20),
+                  ],
+                ),
               ),
             ),
           ],
@@ -332,7 +374,7 @@ void _printPdf() async {
                       ],
                     ),
                   ),
-                  Expanded(
+                isTimeOver?Expanded(child: Container(child: Center(child: Text("You are too Late!!"),),)) : Expanded(
                     child: Container(
                       color: Color.fromARGB(255, 225, 253, 254),
                       child: Column(
@@ -656,6 +698,44 @@ void _printPdf() async {
             Navigator.pop(context);
           },
           color: ColorPage.green,
+        ),
+      ],
+    ).show();
+  }
+
+  _onTimeUp(context) {
+    
+   
+    Alert(
+      
+      context: context,
+      onWillPopActive: false,
+      
+      type: AlertType.info,
+      style: AlertStyle(
+        isOverlayTapDismiss: false,
+        animationType: AnimationType.fromTop,
+        titleStyle:
+            TextStyle(color: ColorPage.red, fontWeight: FontWeight.bold),
+        descStyle: FontFamily.font6,
+        isCloseButton: false,
+      ),
+      title: "Your Time is Up !!",
+      desc: "Sorry! But Your time is over. \n Your can't  submit your exam.",
+      buttons: [
+        DialogButton(
+          child:
+              Text("OK", style: TextStyle(color: Colors.white, fontSize: 18)),
+          highlightColor: Color.fromRGBO(3, 77, 59, 1),
+          onPressed: () {
+           
+          setState(() {
+          
+          });
+            Navigator.pop(context);
+     
+          },
+          color: Color.fromRGBO(9, 89, 158, 1),
         ),
       ],
     ).show();
