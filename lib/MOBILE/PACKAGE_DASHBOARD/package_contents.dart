@@ -3,6 +3,7 @@ import 'package:dthlms/GETX/getxcontroller.getx.dart';
 import 'package:dthlms/MOBILE/EMPTY_PAGE/emptypage.dart';
 import 'package:dthlms/MOBILE/MCQ/MCQTYPE/mcqtypepage.dart';
 import 'package:dthlms/MOBILE/PACKAGE_DASHBOARD/Package_Video_dashboard.dart';
+import 'package:dthlms/MOBILE/THEORY_EXAM/TheoryExamPageMobile.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
 import 'package:flutter/cupertino.dart';
@@ -57,6 +58,7 @@ class _Mobile_Package_contentState extends State<Mobile_Package_content> {
         break;
 
       case "Theory":
+      Get.to(()=>TheoryExamPageMobile());
         break;
       default:
         print("null");

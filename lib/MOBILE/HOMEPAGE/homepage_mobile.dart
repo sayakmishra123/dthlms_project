@@ -13,9 +13,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:path/path.dart';
+
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
+
 
 class DashBoardMobile extends StatefulWidget {
   const DashBoardMobile({super.key});
@@ -822,12 +822,13 @@ class _HomePageMobileState extends State<HomePageMobile> {
       body: _children[_currentIndex],
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.transparent,
-        color: ColorPage.colorbutton,
+        color: ColorPage.white,
+
         onTap: onTabTapped,
         items: [
-          Icon(Icons.home, size: 30, color: ColorPage.white),
-          Icon(Icons.movie_filter_outlined, size: 30, color: ColorPage.white),
-          Icon(Icons.person, size: 30, color: ColorPage.white),
+          Icon(Icons.home, size: 30, color: ColorPage.colorbutton),
+          Icon(Icons.movie_filter_outlined, size: 30, color: ColorPage.colorbutton),
+          Icon(Icons.person, size: 30, color: ColorPage.colorbutton),
         ],
       ),
     );

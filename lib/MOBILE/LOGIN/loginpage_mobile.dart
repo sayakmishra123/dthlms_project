@@ -15,9 +15,9 @@ import 'package:dthlms/GETX/getxcontroller.getx.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
+
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:win32/win32.dart';
+
 
 // import '../phone/siminformation.dart';
 

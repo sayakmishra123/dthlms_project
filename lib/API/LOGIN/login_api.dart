@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables, avoid_print, use_build_context_synchronously
+
 
 import 'dart:convert';
 import 'dart:io';
@@ -11,12 +11,9 @@ import 'package:dthlms/GLOBAL_WIDGET/loader.dart';
 import 'package:dthlms/MODEL_CLASS/login_model.dart';
 import 'package:dthlms/PC/LOGIN/login.dart';
 
-import 'package:dthlms/LOCAL_DATABASE/dbfunction/dbfunction.dart';
-import 'package:dthlms/GETX/getxcontroller.getx.dart';
-// import 'package:dthlms/package/packagedashboard/packagedashboard.dart';
-import 'package:dthlms/ROUTES/router.dart';
 
-// import 'package:dthlms/android/packagemobile/packages.dart';
+import 'package:dthlms/GETX/getxcontroller.getx.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_alert/flutter_platform_alert.dart';

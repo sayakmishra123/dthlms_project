@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dthlms/GETX/getxcontroller.getx.dart';
-import 'package:dthlms/PC/PACKAGEDETAILS/packagedetails.dart';
+
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MobilePackageVideoDashboard extends StatefulWidget {
@@ -20,10 +20,13 @@ class MobilePackageVideoDashboard extends StatefulWidget {
 class _MobilePackageVideoDashboardState
     extends State<MobilePackageVideoDashboard> {
   late ScrollController _scrollController;
+  bool _showLeftButton = false;
+  bool _showRightButton = true;
 
   @override
   void initState() {
     _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListener);
 
     getListStructure().whenComplete(() {
       setState(() {});
@@ -34,8 +37,32 @@ class _MobilePackageVideoDashboardState
 
   @override
   void dispose() {
+    _scrollController.removeListener(_scrollListener);
     _scrollController.dispose();
     super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset <= _scrollController.position.minScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      setState(() {
+        _showLeftButton = false;
+      });
+    } else {
+      setState(() {
+        _showLeftButton = true;
+      });
+    }
+    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      setState(() {
+        _showRightButton = false;
+      });
+    } else {
+      setState(() {
+        _showRightButton = true;
+      });
+    }
   }
 
   Getx getx = Get.put(Getx());
@@ -45,12 +72,16 @@ class _MobilePackageVideoDashboardState
     getx.isFolderview.value = prefs.getBool("folderview") ?? false;
   }
 
-  void scrollGridView() {
+  void scrollGridView(bool isLeft) {
     double scrollAmount = 300.0;
 
-    double newOffset = _scrollController.offset + scrollAmount;
+    double newOffset = isLeft
+        ? _scrollController.offset - scrollAmount
+        : _scrollController.offset + scrollAmount;
 
-    if (newOffset > _scrollController.position.maxScrollExtent) {
+    if (newOffset < _scrollController.position.minScrollExtent) {
+      newOffset = _scrollController.position.minScrollExtent;
+    } else if (newOffset > _scrollController.position.maxScrollExtent) {
       newOffset = _scrollController.position.maxScrollExtent;
     }
 
@@ -157,8 +188,8 @@ class _MobilePackageVideoDashboardState
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       childAspectRatio: 1.0,
-                                      mainAxisSpacing: 10,
-                                      crossAxisSpacing: 10,
+                                      // mainAxisSpacing: 10,
+                                      // crossAxisSpacing: 10,
                                     ),
                                     itemBuilder: (context, index) {
                                       return Padding(
@@ -181,19 +212,34 @@ class _MobilePackageVideoDashboardState
                                     },
                                   ),
                                 ),
-                                Positioned(
-                                  right: 0,
-                                  bottom: -10,
-                                  // top: 0,
-                                  child: IconButton(
-                                    icon: Icon(
-                                      Icons.arrow_right_alt_outlined,
-                                      color: ColorPage.colorbutton,
-                                      size: 50,
+                                if (_showLeftButton)
+                                  Positioned(
+                                    left: 0,
+                                    bottom: 30,
+                                    top: 0,
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.arrow_back_ios_new_sharp,
+                                        color: ColorPage.brownshade300,
+                                        size: 30,
+                                      ),
+                                      onPressed: () => scrollGridView(true),
                                     ),
-                                    onPressed: scrollGridView,
                                   ),
-                                ),
+                                if (_showRightButton)
+                                  Positioned(
+                                    right: 0,
+                                    bottom: 30,
+                                    top: 0,
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.arrow_forward_ios_sharp,
+                                        color: ColorPage.brownshade300,
+                                        size: 30,
+                                      ),
+                                      onPressed: () => scrollGridView(false),
+                                    ),
+                                  ),
                               ],
                             )
                           : Container(

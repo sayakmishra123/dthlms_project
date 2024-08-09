@@ -2,7 +2,7 @@ import 'package:dthlms/MOBILE/THEORY_EXAM/selectexampapers.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinbox/flutter_spinbox.dart';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -59,7 +59,9 @@ class _TheoryExamPageMobileState extends State<TheoryExamPageMobile> {
       final file = File(filePath);
       await file.writeAsBytes(response.bodyBytes);
       setState(() {
-        Get.back();
+
+       
+
         _localPdfPath = filePath;
         print(filePath);
       });
@@ -68,30 +70,30 @@ class _TheoryExamPageMobileState extends State<TheoryExamPageMobile> {
     }
   }
 
-  void _openFullScreenPdf(int pageNumber) {
-    final PdfViewerController fullScreenController = PdfViewerController();
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(
-            iconTheme: IconThemeData(color: ColorPage.white),
-            title: Text("Full Screen PDF",
-                style: FontFamily.font3.copyWith(color: Colors.white)),
-            backgroundColor: ColorPage.appbarcolor,
-          ),
-          body: SfPdfViewer.file(
-            File(_localPdfPath!),
-            controller: fullScreenController,
-            key: GlobalKey<SfPdfViewerState>(),
-            onDocumentLoaded: (PdfDocumentLoadedDetails details) {
-              fullScreenController.jumpToPage(pageNumber);
-            },
-          ),
-        ),
-      ),
-    );
-  }
+  // void _openFullScreenPdf(int pageNumber) {
+  //   final PdfViewerController fullScreenController = PdfViewerController();
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //       builder: (context) => Scaffold(
+  //         appBar: AppBar(
+  //           iconTheme: IconThemeData(color: ColorPage.white),
+  //           title: Text("Full Screen PDF",
+  //               style: FontFamily.font3.copyWith(color: Colors.white)),
+  //           backgroundColor: ColorPage.appbarcolor,
+  //         ),
+  //         body: SfPdfViewer.file(
+  //           File(_localPdfPath!),
+  //           controller: fullScreenController,
+  //           key: GlobalKey<SfPdfViewerState>(),
+  //           onDocumentLoaded: (PdfDocumentLoadedDetails details) {
+  //             fullScreenController.jumpToPage(pageNumber);
+  //           },
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 
   void _printPdf() async {
     try {
@@ -116,6 +118,7 @@ class _TheoryExamPageMobileState extends State<TheoryExamPageMobile> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          iconTheme: IconThemeData(color: ColorPage.white),
           actions: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),

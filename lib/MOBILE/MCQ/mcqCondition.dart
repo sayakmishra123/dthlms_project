@@ -1,9 +1,10 @@
-import 'dart:io';
+
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dthlms/MOBILE/MCQ/mockTestMcq.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
-// import 'package:dthlms/android/MCQ/practiceMcq.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class McqTermAndConditionmobile extends StatelessWidget {
-  final type;
+  final String type;
 
 
 
@@ -21,7 +22,7 @@ class McqTermAndConditionmobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // toolbarHeight: 80,
+    
         backgroundColor: ColorPage.appbarcolor,
         leading: Image.asset(
           'assets/2.png',
@@ -70,7 +71,7 @@ class McqTermAndConditionmobile extends StatelessWidget {
                     child: Text(
                       'Please read the following instructions carefully',
                       style: TextStyle(
-                        // decoration: TextDecoration.underline,
+                     
                         decorationColor: ColorPage.appbarcolor,
                         fontWeight: FontWeight.bold,
                       ),
@@ -87,7 +88,7 @@ class McqTermAndConditionmobile extends StatelessWidget {
                 children: [
                   
                   Container(
-                      // alignment: Alignment.center,
+                     
                       width: MediaQuery.sizeOf(context).width /1.2,
                       child: Text(
                         textAlign: TextAlign.justify,
@@ -163,11 +164,11 @@ class McqTermAndConditionmobile extends StatelessWidget {
                     children: [
                       Obx(
                         () => SizedBox(
-                            // width: 100,
+                         
                             child: Checkbox(
                               
                               activeColor:Color.fromARGB(255, 54, 127, 244),
-                          // fillColor: MaterialStatePropertyAll(Color.fromARGB(255, 193, 37, 214)),
+                      
                           value: checkbox.value,
                           onChanged: (v) {
                             checkbox.value = !checkbox.value;
@@ -189,10 +190,12 @@ class McqTermAndConditionmobile extends StatelessWidget {
                     ],
                   ),
                   ElevatedButton(
+
                     onPressed: () {
 
                       if(checkbox.value){
-                        Get.toNamed("/Practicemcqmobile");
+                        print(type);
+                       type=="Practice"? Get.toNamed("/Practicemcqmobile"):  type=="MockTest"?Get.to(()=>MockTestMcqExamPageMobile()):Get.toNamed("/Mocktestexampagemobile");
 
                       }
                       else{

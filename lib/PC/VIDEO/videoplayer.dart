@@ -1,16 +1,13 @@
 // import 'package:dthlms/Master/scrollbarhide.dart';
 import 'dart:io';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dthlms/API/ALL_FUTURE_FUNTIONS/all_functions.dart';
 import 'package:dthlms/PC/PACKAGEDETAILS/packagedetails.dart';
 import 'package:dthlms/PC/VIDEO/ClsVideoPlay.dart';
-import 'package:dthlms/PC/VIDEO/scrollbarhide.dart';
 import 'package:dthlms/THEME_DATA/FontSize/FontSize.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
-// import 'package:dthlms/ThemeData/color/color.dart';
-// import 'package:dthlms/ThemeData/font/font_family.dart';
+
 import 'package:dthlms/GETX/getxcontroller.getx.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,7 +20,6 @@ import 'package:media_kit_video/media_kit_video.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-import 'package:win32/win32.dart';
 
 class VideoPlayer extends StatefulWidget {
   const VideoPlayer({super.key});

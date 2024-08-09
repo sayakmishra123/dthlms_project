@@ -7,7 +7,7 @@ import 'package:dthlms/THEME_DATA/font/font_family.dart';
 // import 'package:dthlms/android/MCQ/mockTestRank.dart';
 import 'package:dthlms/GETX/getxcontroller.getx.dart';
 
-import 'package:dthlms/GLOBAL_WIDGET/mybutton.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -785,6 +785,7 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
         correctAnswers++;
       }
     });
+    print(correctAnswers.toString());
 
     Alert(
       context: context,
@@ -819,7 +820,7 @@ class _MockTestMcqExamPageMobileState extends State<MockTestMcqExamPageMobile> {
 
             isSubmitted.value = true;
             Navigator.pop(context);
-            Get.toNamed("/Mocktestrankpagemobile",arguments:{"mcqData":mcqData,"correctAnswers":answer,"userAns":userAns,"totalnomber":correctAnswers*1});
+            Get.toNamed("/Mocktestrankpagemobile",arguments:{"mcqData":mcqData,"correctAnswers":answer,"userAns":userAns,'totalnumber':correctAnswers});
           },
           color: Color.fromRGBO(9, 89, 158, 1),
         ),

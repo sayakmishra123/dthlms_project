@@ -15,7 +15,7 @@ class MCQtypePage extends StatefulWidget {
 class _MCQtypePageState extends State<MCQtypePage> {
 List<String> typelist=[
 "Practice",
-"Mock Test",
+"MockTest",
 "Exam"
 
 ];

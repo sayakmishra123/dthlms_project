@@ -5,11 +5,9 @@ import 'package:dthlms/PC/MCQ/modelclass.dart';
 import 'package:dthlms/THEME_DATA/color/color.dart';
 import 'package:dthlms/THEME_DATA/font/font_family.dart';
 import 'package:dthlms/GETX/getxcontroller.getx.dart';
-import 'package:dthlms/GLOBAL_WIDGET/mybutton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class PracticeMcq extends StatefulWidget {

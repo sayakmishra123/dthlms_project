@@ -11,7 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:win32/win32.dart';
+
 
 class MockTestMcqExamPage extends StatefulWidget {
   const MockTestMcqExamPage({super.key});

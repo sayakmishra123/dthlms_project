@@ -1,7 +1,7 @@
 import 'package:dthlms/MOBILE/FORGETPASSWORD/forgetpassword_screen.dart';
 import 'package:dthlms/MOBILE/HOMEPAGE/homepage_mobile.dart';
 import 'package:dthlms/MOBILE/LOGIN/loginpage_mobile.dart';
-import 'package:dthlms/MOBILE/MCQ/mcqCondition.dart';
+
 import 'package:dthlms/MOBILE/MCQ/mockTestAns.dart';
 import 'package:dthlms/MOBILE/MCQ/mockTestMcq.dart';
 import 'package:dthlms/MOBILE/MCQ/mockTestRank.dart';
@@ -17,12 +17,7 @@ import 'package:dthlms/PC/MCQ/MOCKTEST/mcqPage.dart';
 import 'package:dthlms/PC/MCQ/MOCKTEST/termandcondition.dart';
 import 'package:dthlms/PC/MCQ/PRACTICE/practiceMcqPage.dart';
 import 'package:dthlms/PC/MCQ/PRACTICE/termandcondition.dart';
-// import 'package:dthlms/PC/MCQ/ResultPage.dart';
-// import 'package:dthlms/PC/MCQ/mockMCQResultPage.dart';
-// import 'package:dthlms/PC/MCQ/macterm&conditionpage.dart';
-// import 'package:dthlms/PC/MCQ/mockTestmcqPage.dart';
-// import 'package:dthlms/PC/MCQ/practiceMCQtermandcondition.dart.dart';
-// import 'package:dthlms/PC/MCQ/practiceMcqPage.dart';
+
 import 'package:dthlms/THEORY_EXAM/theoryexampage.dart';
 
 import 'package:get/get.dart';

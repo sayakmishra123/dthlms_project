@@ -281,7 +281,7 @@ class _RankPageState extends State<RankPage> with SingleTickerProviderStateMixin
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: ListTile(
-                          // titleAlignment: title,
+                       
                           leading: index == 0
                               ? SizedBox(
                                   height: 35,
@@ -343,7 +343,7 @@ class _RankPageState extends State<RankPage> with SingleTickerProviderStateMixin
                             Padding(
                               padding: const EdgeInsets.only(left: 0),
                               child: Text(
-                                'Floating Container',
+                                'Shubha Kumar Maity',
                                 style: TextStyle(color: Colors.white, fontSize: 20),
                               ),
                             ),

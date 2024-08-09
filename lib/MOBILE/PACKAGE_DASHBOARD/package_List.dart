@@ -107,10 +107,10 @@ class _Mobile_Package_ListState extends State<Mobile_Package_List> {
                     ),
                     title: Text(getx.package[index].packageName,
                         style: FontFamily.font4.copyWith(fontWeight: FontWeight.bold)),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      color: ColorPage.colorbutton,
-                    ),
+                    // trailing: Icon(
+                    //   Icons.arrow_forward_ios,
+                    //   color: ColorPage.colorbutton,
+                    // ),
                   ),
                 ),
               );
@@ -166,10 +166,10 @@ class _Mobile_Package_ListState extends State<Mobile_Package_List> {
                     ),
                     title: Text("freeServices",
                         style: FontFamily.font4.copyWith(fontWeight: FontWeight.bold)),
-                    trailing: Icon(
-                      Icons.arrow_forward_ios,
-                      color: ColorPage.colorbutton,
-                    ),
+                    // trailing: Icon(
+                    //   Icons.arrow_forward_ios,
+                    //   color: ColorPage.colorbutton,
+                    // ),
                   ),
                 ),
               );
